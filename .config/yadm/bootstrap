@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Update mirror to use Kakao server
+sudo sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+
+# Add python3 ppa repository
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+
+# Add vim ppa repo
+sudo add-apt-repositry ppa:jonathonf/vim -y
+
+# Add neovim ppa repo
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+
+# Add exa ppa repo
+sudo add-apt-repository ppa:spvkgn/exa -y
+
+# Add ubuntu gcc toolchain
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+
+# Update packages
+sudo apt update && sudo apt upgrade -y
+
+# Install most softwares
+sudo apt install software-properties-common python3.9 python3-pip vim neovim exa bat gcc-11 g++-11 zsh -y
+
+# Install ripgrep
+sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep -y
+
+# Upgrade pip3
+curl https://bootstrap.pypa.io/get-pip.py -o ~/get-pip.py
+sudo python3.9 ~/get-pip.py
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install oh-my-zsh plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH/custom/plugins/zsh-vi-mode
+
+# Install powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# Set zsh as default shell
+sudo chsh -s $(which zsh)
+
