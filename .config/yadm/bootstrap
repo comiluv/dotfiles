@@ -3,6 +3,9 @@
 # Update mirror to use Kakao server
 sudo sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
+# Add git ppa repo
+sudo add-apt-repository ppa:git-core/ppa -y
+
 # Add python3 ppa repository
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 
