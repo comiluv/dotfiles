@@ -130,4 +130,3 @@ fix_wsl2_interop() {
 # ALIAS COMMANDS
 [[ ! -f /bin/exa ]] && echo "Warning: exa is not installed" || alias ls="exa --icons --group-directories-first"
 
-source ~/.aliases
