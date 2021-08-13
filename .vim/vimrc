@@ -188,7 +188,7 @@ if !has('nvim')
     if &diffopt !~# 'internal'
         set diffexpr=MyDiff()
     endif
-    function MyDiff()
+    function! MyDiff()
         let opt = '-a --binary '
         if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
         if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
@@ -253,7 +253,7 @@ endfunction
 
 function! SetUnsetQShortcut()
     if &ft == 'help'
-        unmap q:
+        silent! unmap q:
     else
         map q: :q
     endif
