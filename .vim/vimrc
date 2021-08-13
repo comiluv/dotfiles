@@ -1,0 +1,441 @@
+" Make gVim speak English
+" set langmenu=en_US.UTF-8
+" language messages en_US.UTF-8
+
+let mapleader="\<Space>"
+
+" Only needed for Windows
+if has('win32')
+    let &runtimepath.=",~/.vim,C:/Program Files/Vim/vim82"
+endif
+
+" Suppress Alt keys in Windows so it can be used as shortcuts
+set winaltkeys=no
+
+if has ("syntax")
+    syntax on
+endif
+
+" Vim's default behavior
+if &compatible
+    set nocompatible
+endif
+
+" Default font for gVim in Windows
+if has("gui_running")
+    set guifont=JetBrains_Mono:h12:cANSI:qDRAFT
+    set lines=50 columns=120
+endif
+
+" Load sensible plugin before custom settings
+runtime! plugged/vim-sensible/plugin/sensible.vim
+
+" No arrow keys --- force yourself to use the home row
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" Some settings picked up from internet
+set autoread
+set autoindent
+set smarttab
+set shiftwidth=4
+set tabstop=4 softtabstop=4
+set expandtab
+set smartindent
+filetype plugin indent on
+set number
+set nohlsearch
+set incsearch
+if has('nvim')
+    set inccommand=nosplit
+endif
+set scrolloff=8
+set hidden
+set ruler
+set fencs=ucs-bom,utf-8,euc-kr,latin1
+set encoding=utf-8
+set tenc=utf-8
+set bs=indent,eol,start
+set history=10000
+set colorcolumn=80
+set signcolumn=yes
+set laststatus=2
+set ttyfast
+set lazyredraw
+set showcmd
+set mouse=a
+set cursorline
+set title
+set completeopt=menuone,noinsert,noselect
+set splitbelow splitright
+" Better display for messages
+set cmdheight=2
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=50
+
+set formatoptions-=o " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
+" or have this run as autocmd. See autocmd section.
+set path+=**
+
+" Show invisible characters in this format
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+
+" Decent wildmenu
+set wildmenu
+set wildmode=list,longest,full
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
+set wildignore+=*.swp,*~,._*
+
+" This is needed to avoid swapfile warning when auto-reloading
+set shortmess+=A
+
+if !has('nvim')
+    " Avoids swapfiles in current directory - neovim has default
+    if &directory =~# '^\.,'
+        if !empty($HOME)
+            if has('win32')
+                let &directory = expand('$HOME/vimfiles') . '//,' . &directory
+            else
+                let &directory = expand('$HOME/.vim') . '//,' . &directory
+            endif
+        endif
+        if !empty($XDG_DATA_HOME)
+            let &directory = expand('$XDG_DATA_HOME') . '//,' . &directory
+        endif
+        if has('macunix')
+            let &directory = expand('$HOME/Library/Autosave Information') . '//,' . &directory
+        endif
+    endif
+    " Enable undofile and set undodir and backupdir for vim - neovim has default
+    " locations : https://neovim.io/doc/user/vim_diff.html#vim-differences
+    let s:dir = has('win32') ? '$HOME/vimfiles' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
+    let &backupdir = expand(s:dir) . '/backup//'
+    let &undodir = expand(s:dir) . '/undo//'
+elseif has('nvim')
+    let s:dir = has('win32') ? '$LOCALAPPDATA/nvim-data' : '$HOME/.local/share/nvim'
+    let &backupdir=expand(s:dir) . '/backup//'
+    let &undodir=expand(s:dir) . '/undo//'
+endif
+" Automatically create directories for backup and undo files.
+if !isdirectory(expand(s:dir))
+    call system("mkdir -p " . expand(s:dir) . "/{backup,undo}")
+endif
+set undofile
+set backup
+set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
+
+" Use Powershell core in Windows environment
+if has('win32') || has('win64')
+    " from :help powershell in neovim
+    let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
+    let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+    " piping output to Out-File doesn't work in vim for some reason
+    let &shellredir = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1; exit $LastExitCode'
+    let &shellpipe = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1; exit $LastExitCode'
+    set shellquote= shellxquote=
+endif
+
+" Auto install vim-plug and plugins
+let data_dir = !has('nvim') ? has('unix') ? '~/.vim' : '$HOME/vimfiles' : stdpath('data').'/site'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    if has('unix')
+        silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    elseif has('win32') || has('win64')
+        silent execute '!iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |ni '.data_dir.'/autoload/plug.vim -Force'
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
+endif
+
+" Auto install missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
+" Plugin list here
+call plug#begin('~/.vim/plugged')
+Plug 'dunstontc/vim-vscode-theme'
+Plug 'tpope/vim-sensible'
+Plug 'neoclide/coc.nvim', exists('g:vscode') ? {'on': []} : {'branch': 'release'}
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'machakann/vim-highlightedyank'
+call plug#end()
+
+" deal with colors
+if !has('gui_running')
+    set t_Co=256
+endif
+if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
+    " screen does not (yet) support truecolor
+    set termguicolors
+endif
+set background=dark
+colorscheme dark_plus
+
+" Below was added by gVim installer therefore use it for Vim not for Neovim
+if !has('nvim')
+    " Use the internal diff if available.
+    " Otherwise use the special 'diffexpr' for Windows.
+    if &diffopt !~# 'internal'
+        set diffexpr=MyDiff()
+    endif
+    function MyDiff()
+        let opt = '-a --binary '
+        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+        let arg1 = v:fname_in
+        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+        let arg1 = substitute(arg1, '!', '\!', 'g')
+        let arg2 = v:fname_new
+        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+        let arg2 = substitute(arg2, '!', '\!', 'g')
+        let arg3 = v:fname_out
+        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+        let arg3 = substitute(arg3, '!', '\!', 'g')
+        if $VIMRUNTIME =~ ' '
+            if &sh =~ '\<cmd'
+                if empty(&shellxquote)
+                    let l:shxq_sav = ''
+                    set shellxquote&
+                endif
+                let cmd = '"' . $VIMRUNTIME . '\diff"'
+            else
+                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+            endif
+        else
+            let cmd = $VIMRUNTIME . '\diff'
+        endif
+        let cmd = substitute(cmd, '!', '\!', 'g')
+        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+        if exists('l:shxq_sav')
+            let &shellxquote=l:shxq_sav
+        endif
+    endfunction
+endif
+
+
+" nVim use separately installed python3.9 when in Ubuntu 20.04 LTS
+if has('nvim')
+    " Disable Python 2 support
+    let g:loaded_python_provider = 0
+    if has('unix')
+        let g:python3_host_prog=expand('/usr/bin/python3.9')
+    else
+        let g:python3_host_prog=expand('C:\python39\python.exe')
+    endif
+endif
+
+" from https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+endif
+if executable('rg')
+    set grepprg=rg\ --no-heading\ --vimgrep
+    set grepformat=%f:%l:%c:%m
+    let g:rg_derive_root='true'
+endif
+
+" TrimWhitespace from youtube: https://youtu.be/DogKdiRx7ls
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfunction
+
+function! SetUnsetQShortcut()
+    if &ft == 'help'
+        unmap q:
+    else
+        map q: :q
+    endif
+endfunction
+
+augroup COMILUV
+    autocmd!
+    " autocmd BufWritePre * :call TrimWhitespace()
+    " Return to last edit position when opening files
+    " It's some magic I picked up somewhere, no idea how it works
+    " or what alternatives are out there
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    " Remove auto commenting when pressing o or O
+    autocmd FileType * set formatoptions-=o
+    autocmd BufEnter * :call SetUnsetQShortcut()
+    autocmd FileType help nnoremap <buffer> q :q<CR>
+    " Auto toggle cursorline
+    autocmd InsertLeave,WinEnter * set cursorline
+    autocmd InsertEnter,WinLeave * set nocursorline
+augroup END
+
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
+if has('unix') && !has('nvim') && executable(s:clip) && has('patch8.0.1394')
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+    augroup END
+    noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+end
+
+" C Compile settings. F5 to compile with GCC and F8 to execute
+let compile_cmdline='gcc % -g -Wall -Wextra -pedantic -o %<'
+if has('nvim')
+    nnoremap <F5> :w! <BAR> execute 'terminal '.compile_cmdline<CR>
+else
+    nnoremap <F5> :w! <BAR> execute '!'.compile_cmdline<CR>
+endif
+if !has("unix")
+    if has('nvim')
+        noremap <F8> :terminal ./%<<Enter>
+    else
+        noremap <F8> :!./%<<Enter>
+    endif
+elseif has("unix")
+    if has('nvim')
+        noremap <F8> :terminal ./%<<Enter>
+    else
+        noremap <F8> :!./%<<Enter>
+    endif
+endif
+
+" Remap Alt key combinations to M combinations in wsl2 / Ubuntu
+" https://github.com/vim/vim/issues/8726
+if has('unix') && !has('nvim') " Only works in unix (and not in Windows) Vim and neoVim doesn't need this
+    execute "set <M-e>=\<Esc>e"
+    execute "set <M-p>=\<Esc>p"
+    execute "set <M-n>=\<Esc>n"
+    execute "set <M-b>=\<Esc>b"
+    execute "set <M-j>=\<Esc>j"
+    execute "set <M-k>=\<Esc>k"
+endif
+
+" Don't use Ex mode, use Q for formatting.
+" Revert with ":unmap Q".
+map Q gq
+
+" Y to copy from cursor to $, as C and D
+nmap Y y$
+
+" n N J are centered
+"nnoremap n nzzzv " found these two to be actually annoying
+"nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" Undo breakpoints
+inoremap , ,<C-G>u
+inoremap . .<C-G>u
+inoremap ! !<C-G>u
+inoremap ? ?<C-G>u
+
+" Jumplist mutations for k and j
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'gk'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'gj'
+
+" Conveniently move lines up and down with ctrl+j and ctrl+k
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+
+" Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" To avoid conflict with vim-endwise, use functions - see: https://github.com/tpope/vim-endwise/issues/105
+function! SendCY()
+    call feedkeys("\<C-Y>", "t")
+    return ""
+endfunction
+function! SendCR()
+    call feedkeys("\<C-g>u\<CR>", "n")
+    return ""
+endfunction
+if has('patch8.1.1068')
+    " Use `complete_info` if your (Neo)Vim version supports it.
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? SendCY() : SendCR()
+else
+    imap <expr> <cr> pumvisible() ? SendCY() : SendCR()
+endif
+
+" delete selection and put without yanking selection
+vmap <leader>p "_dP
+
+" yank to clipboard
+nmap <leader>y "+y
+vmap <leader>y "+y
+nmap <leader>Y gg"+yG
+
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" Prevent common mistake of pressing q: instead :q
+map q: :q
+
+" Allow for easy copying and pasting
+vnoremap <silent> y y`]
+nnoremap <silent> p p`]
+nnoremap <silent> P P`]
+
+" Visually select the text that was last edited/pasted (Vimcast#26).
+noremap gV `[v`]
+
+" Allow easy navigation between wrapped lines.
+" Merged this to jumplist modification above
+"nmap j gj
+"nmap k gk
+vnoremap j gj
+vnoremap k gk
+
+" Easy window navigation
+noremap <A-h> <C-w>h
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
+noremap <A-l> <C-w>l
+
+" Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
+" help you not the other way around. : https://thoughtbot.com/upcase/vim
+command! Q q " Bind :Q to q
+command! Qall qall
+command! QA qall
+command! E e
+
+" coc config
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" add plugin vim-highlightedyank support for vim<8.0.1394
+if !exists('##TextYankPost')
+    map y <Plug>(highlightedyank)
+endif
+" modify highlight duration of the plugin
+let g:highlightedyank_highlight_duration=300
+
+" Neovim terminal mode remaps
+if has('nvim')
+    " Use Escape key like a sane person
+    tnoremap <ESC> <C-\><C-n>
+    " Remap in case ESC key input is needed
+    tnoremap <A-\> <ESC>
+    " Move out from terminal window with alt key shortcuts
+    tnoremap <A-h> <C-\><C-n><C-w>h
+    tnoremap <A-j> <C-\><C-n><C-w>j
+    tnoremap <A-k> <C-\><C-n><C-w>k
+    tnoremap <A-l> <C-\><C-n><C-w>l
+    " Paste in terminal mode
+    tnoremap <expr> <C-r> '<C-\><C-n>"'.nr2char(getchar()).'pi'
+endif
+
