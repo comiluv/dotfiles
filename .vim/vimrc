@@ -273,6 +273,8 @@ augroup COMILUV
     " Auto toggle cursorline
     autocmd InsertLeave,WinEnter * set cursorline
     autocmd InsertEnter,WinLeave * set nocursorline
+    " Auto reload if file was changed somewhere else (for autoread)
+    autocmd CursorHold * checktime
 augroup END
 
 " WSL yank support
