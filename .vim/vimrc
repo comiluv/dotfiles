@@ -407,7 +407,6 @@ noremap <A-l> <C-w>l
 command! Q q " Bind :Q to q
 command! Qall qall
 command! QA qall
-command! E e
 
 " coc config
 " Remap for rename current word
