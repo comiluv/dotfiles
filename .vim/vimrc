@@ -48,6 +48,7 @@ set expandtab
 set smartindent
 filetype plugin indent on
 set number
+set wrap linebreak nolist
 set nohlsearch
 set incsearch
 if has('nvim')
