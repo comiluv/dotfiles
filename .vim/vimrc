@@ -75,7 +75,6 @@ endif
 set showcmd
 set mouse=a
 set cursorline
-endif
 set completeopt=menuone,noinsert,noselect
 set splitbelow splitright
 " Better display for messages
