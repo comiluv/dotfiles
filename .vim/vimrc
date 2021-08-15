@@ -72,7 +72,11 @@ endif
 set showcmd
 set mouse=a
 set cursorline
-set title
+if !has('nvim')
+    set title
+else
+    set notitle
+endif
 set completeopt=menuone,noinsert,noselect
 set splitbelow splitright
 " Better display for messages
