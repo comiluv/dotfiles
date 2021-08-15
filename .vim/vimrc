@@ -66,7 +66,9 @@ set colorcolumn=80
 set signcolumn=yes
 set laststatus=2
 set ttyfast
-set lazyredraw
+if !has('nvim')
+    set lazyredraw
+endif
 set showcmd
 set mouse=a
 set cursorline
