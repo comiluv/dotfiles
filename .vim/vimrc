@@ -66,16 +66,15 @@ set colorcolumn=80
 set signcolumn=yes
 set laststatus=2
 set ttyfast
-if !has('nvim')
+if has('g:neovide')
+    set notitle
+else
     set lazyredraw
+    set title
 endif
 set showcmd
 set mouse=a
 set cursorline
-if !has('nvim')
-    set title
-else
-    set notitle
 endif
 set completeopt=menuone,noinsert,noselect
 set splitbelow splitright
@@ -147,6 +146,12 @@ if has('win32') || has('win64')
     let &shellredir = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1; exit $LastExitCode'
     let &shellpipe = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1; exit $LastExitCode'
     set shellquote= shellxquote=
+endif
+
+" Neovide https://www.github.com/neovide/neovide
+if has('g:neovide')
+    let g:neovide_refresh_rate=143
+    let g:neovide_remember_window_size=v:true
 endif
 
 " Auto install vim-plug and plugins
