@@ -137,13 +137,13 @@ set backup
 set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
 
 " Use Powershell core in Windows environment
-if has('win32') || has('win64')
+if has('nvim') && (has('win32') || has('win64'))
     " from :help powershell in neovim
     let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
     let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
     " piping output to Out-File doesn't work in vim for some reason
-    let &shellredir = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1; exit $LastExitCode'
-    let &shellpipe = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1; exit $LastExitCode'
+    let &shellredir = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1'
+    let &shellpipe = has('nvim') ? '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode' : '>%s 2>&1'
     set shellquote= shellxquote=
 endif
 
@@ -169,6 +169,7 @@ endif
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
+Plug 'Mofiqul/vscode.nvim'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'tpope/vim-sensible'
 Plug 'neoclide/coc.nvim', exists('g:vscode') ? {'on': []} : {'branch': 'release'}
@@ -190,7 +191,12 @@ if has('win32') || has('win64') || (match($TERM, "-256color") != -1) && (match($
     set termguicolors
 endif
 set background=dark
-colorscheme dark_plus
+if has('nvim')
+    let g:vscode_style = "dark"
+    colorscheme vscode
+else
+    colorscheme dark_plus
+endif
 
 " Below was added by gVim installer therefore use it for Vim not for Neovim
 if !has('nvim')
