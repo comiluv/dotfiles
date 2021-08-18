@@ -30,88 +30,90 @@ endif
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
-Plug 'Mofiqul/vscode.nvim'
-Plug 'dunstontc/vim-vscode-theme'
+Plug 'Mofiqul/vscode.nvim', exists('g:vscode') ? {'on': []} : {}
+Plug 'dunstontc/vim-vscode-theme', exists('g:vscode') ? {'on': []} : {}
 Plug 'tpope/vim-sensible'
 Plug 'neoclide/coc.nvim', exists('g:vscode') ? {'on': []} : {'branch': 'release'}
-Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs', exists('g:vscode') ? {'on': []} : {}
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary', exists('g:vscode') ? {'on': []} : {}
 Plug 'tpope/vim-repeat'
 Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
-" Below was added by gVim installer therefore use it for Vim not for Neovim
-if !has('nvim')
-    " Use the internal diff if available.
-    " Otherwise use the special 'diffexpr' for Windows.
-    if &diffopt !~# 'internal'
-        set diffexpr=MyDiff()
-    endif
-    function! MyDiff()
-        let opt = '-a --binary '
-        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-        let arg1 = v:fname_in
-        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-        let arg1 = substitute(arg1, '!', '\!', 'g')
-        let arg2 = v:fname_new
-        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-        let arg2 = substitute(arg2, '!', '\!', 'g')
-        let arg3 = v:fname_out
-        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-        let arg3 = substitute(arg3, '!', '\!', 'g')
-        if $VIMRUNTIME =~ ' '
-            if &sh =~ '\<cmd'
-                if empty(&shellxquote)
-                    let l:shxq_sav = ''
-                    set shellxquote&
+if !exists('g:vscode')
+    " Below was added by gVim installer therefore use it for Vim not for Neovim
+    if !has('nvim')
+        " Use the internal diff if available.
+        " Otherwise use the special 'diffexpr' for Windows.
+        if &diffopt !~# 'internal'
+            set diffexpr=MyDiff()
+        endif
+        function! MyDiff()
+            let opt = '-a --binary '
+            if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+            if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+            let arg1 = v:fname_in
+            if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+            let arg1 = substitute(arg1, '!', '\!', 'g')
+            let arg2 = v:fname_new
+            if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+            let arg2 = substitute(arg2, '!', '\!', 'g')
+            let arg3 = v:fname_out
+            if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+            let arg3 = substitute(arg3, '!', '\!', 'g')
+            if $VIMRUNTIME =~ ' '
+                if &sh =~ '\<cmd'
+                    if empty(&shellxquote)
+                        let l:shxq_sav = ''
+                        set shellxquote&
+                    endif
+                    let cmd = '"' . $VIMRUNTIME . '\diff"'
+                else
+                    let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
                 endif
-                let cmd = '"' . $VIMRUNTIME . '\diff"'
             else
-                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+                let cmd = $VIMRUNTIME . '\diff'
             endif
-        else
-            let cmd = $VIMRUNTIME . '\diff'
-        endif
-        let cmd = substitute(cmd, '!', '\!', 'g')
-        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-        if exists('l:shxq_sav')
-            let &shellxquote=l:shxq_sav
-        endif
-    endfunction
-endif
-
-" WSL yank support
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
-if has('unix') && !has('nvim') && executable(s:clip) && has('patch8.0.1394')
-    augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
-    augroup END
-    noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
-end
-
-" C Compile settings. F5 to compile with GCC and F8 to execute
-let compile_cmdline='gcc % -g -Wall -Wextra -pedantic -o %<'
-if has('nvim')
-    nnoremap <F5> :w! <BAR> execute 'terminal '.compile_cmdline<CR>
-else
-    nnoremap <F5> :w! <BAR> execute '!'.compile_cmdline<CR>
-endif
-if !has("unix")
-    if has('nvim')
-        noremap <F8> :terminal %<<Enter>
-    else
-        noremap <F8> :!%<<Enter>
+            let cmd = substitute(cmd, '!', '\!', 'g')
+            silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+            if exists('l:shxq_sav')
+                let &shellxquote=l:shxq_sav
+            endif
+        endfunction
     endif
-elseif has("unix")
+
+    " WSL yank support
+    let s:clip = '/mnt/c/Windows/System32/clip.exe'  " default location
+    if has('unix') && !has('nvim') && executable(s:clip) && has('patch8.0.1394')
+        augroup WSLYank
+            autocmd!
+            autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+        augroup END
+        noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+    end
+
+    " C Compile settings. F5 to compile with GCC and F8 to execute
+    let compile_cmdline='gcc % -g -Wall -Wextra -pedantic -o %<'
     if has('nvim')
-        noremap <F8> :terminal ./%<<Enter>
+        nnoremap <F5> :w! <BAR> execute 'terminal '.compile_cmdline<CR>
     else
-        noremap <F8> :!./%<<Enter>
+        nnoremap <F5> :w! <BAR> execute '!'.compile_cmdline<CR>
+    endif
+    if !has("unix")
+        if has('nvim')
+            noremap <F8> :terminal %<<Enter>
+        else
+            noremap <F8> :!%<<Enter>
+        endif
+    elseif has("unix")
+        if has('nvim')
+            noremap <F8> :terminal ./%<<Enter>
+        else
+            noremap <F8> :!./%<<Enter>
+        endif
     endif
 endif
 
