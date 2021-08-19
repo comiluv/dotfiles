@@ -2,7 +2,7 @@
 if !exists('g:vscode')
     " Default font for gVim in Windows
     if has("gui_running")
-        set guifont=JetBrains_Mono:h12:cANSI:qDRAFT
+        set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h12:cANSI:qDRAFT
         set lines=50 columns=120
     endif
 
