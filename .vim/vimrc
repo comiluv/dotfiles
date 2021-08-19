@@ -43,6 +43,7 @@ Plug 'tpope/vim-repeat'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nvim-telescope/telescope.nvim', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 Plug 'nvim-treesitter/nvim-treesitter',has('nvim') && !exists('g:vscode') ? {'do': ':TSUpdate'} : {'on': []}
+Plug 'nvim-lua/plenary.nvim', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 call plug#end()
 
 if !exists('g:vscode')
