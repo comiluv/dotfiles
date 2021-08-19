@@ -109,6 +109,10 @@ noremap <A-j> <C-w>j
 noremap <A-k> <C-w>k
 noremap <A-l> <C-w>l
 
+" Left and right can switch buffers
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
+
 " Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
 " help you not the other way around. : https://thoughtbot.com/upcase/vim
 command! Q q " Bind :Q to q
