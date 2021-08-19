@@ -44,6 +44,8 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'gj'
 " Conveniently move lines up and down with ctrl+j and ctrl+k
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
