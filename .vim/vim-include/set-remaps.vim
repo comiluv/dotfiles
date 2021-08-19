@@ -80,6 +80,11 @@ nmap <leader>Y gg"+yG
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
+" Open new file adjacent to current file
+" also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
+cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<CR>
+map <leader>e :e %%
+
 " Prevent common mistake of pressing q: instead :q
 map q: :q
 
