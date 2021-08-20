@@ -86,7 +86,7 @@ cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<CR>
 map <leader>e :e %%
 
 " Prevent common mistake of pressing q: instead :q
-map q: :q
+"map q: :q
 
 " Allow for easy copying and pasting
 vnoremap <silent> y y`]

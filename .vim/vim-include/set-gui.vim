@@ -1,7 +1,7 @@
 " All of this is pointless in vscode-neovim
 if !exists('g:vscode')
     " Default font for gVim in Windows
-    if has("gui_running")
+    if has("gui_running") || exists("g:neovide")
         set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h12
         set lines=50 columns=120
     endif
