@@ -5,7 +5,6 @@
 " set langmenu=en_US.UTF-8
 " language messages en_US.UTF-8
 
-
 " Only needed for Windows
 if has('win32')
     let &runtimepath.=",C:/Program Files/Vim/vim82,~/.vim"
@@ -17,13 +16,8 @@ runtime! plugged/vim-sensible/plugin/sensible.vim
 " Auto install vim-plug and plugins
 let data_dir = !has('nvim') ? has('unix') ? '~/.vim' : '$HOME/vimfiles' : stdpath('data').'/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    if has('unix')
-        silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-    elseif has('win32') || has('win64')
-        silent execute '!iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |ni '.data_dir.'/autoload/plug.vim -Force'
-        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-    endif
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Auto install missing plugins
