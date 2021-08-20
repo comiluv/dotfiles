@@ -53,7 +53,7 @@ set splitbelow splitright
 " Better display for messages
 set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
-"set updatetime=50
+set updatetime=300
 
 set formatoptions-=o " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 " or have this run as autocmd. See autocmd section.
