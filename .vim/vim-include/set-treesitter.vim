@@ -1,4 +1,4 @@
-if has('nvim')
+if has('nvim') && !exists("g:vscode")
     lua require'nvim-treesitter.configs'.setup {
                 \ highlight = { enable = true },
                 \ incremental_selection = { enable = true },
