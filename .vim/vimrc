@@ -95,7 +95,7 @@ if !exists('g:vscode')
             autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
         augroup END
         noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
-    end
+    endif
 
     " C Compile settings. F5 to compile with GCC and F8 to execute
     let compile_cmdline='gcc % -g -Wall -Wextra -pedantic -o %<'
