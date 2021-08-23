@@ -82,7 +82,9 @@ vnoremap <leader>d "_d
 
 " Open new file adjacent to current file
 " also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
-cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<CR>
+" also note below is taken from book Practical Vim 2nd edition which should be
+" update of this remap
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 map <leader>e :e %%
 
 " Prevent common mistake of pressing q: instead :q
