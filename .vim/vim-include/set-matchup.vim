@@ -1,4 +1,4 @@
-if has('nvim')
+if has('nvim') && !exists('g:vscode')
 lua <<EOF
 
 require'nvim-treesitter.configs'.setup {
