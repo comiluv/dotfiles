@@ -133,3 +133,6 @@ nnoremap <C-c> <silent> <C-c>
 " Use <C-L> to clear the highlighting of :set hlsearch.
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
+" fix & command Practical Vim tip 93
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
