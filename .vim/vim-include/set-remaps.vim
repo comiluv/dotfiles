@@ -1,3 +1,5 @@
+" Remaps for plugins are inside individual set-pluginname.vim files
+
 let mapleader="\<Space>"
 
 " No arrow keys --- force yourself to use the home row
@@ -36,6 +38,27 @@ inoremap , ,<C-G>u
 inoremap . .<C-G>u
 inoremap ! !<C-G>u
 inoremap ? ?<C-G>u
+
+" Undo breakpoints for C-U and C-W in insert mode
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+
+" Allow easy navigation between wrapped lines.
+" Merged this to jumplist modification below
+"nmap j gj
+"nmap k gk
+vnoremap j gj
+vnoremap k gk
+
+" Easy window navigation
+noremap <A-h> <C-w>h
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
+noremap <A-l> <C-w>l
+
+" Left and right can switch buffers
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
 
 " Jumplist mutations for k and j
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'gk'
@@ -98,23 +121,6 @@ nnoremap <silent> P P`]
 " Visually select the text that was last edited/pasted (Vimcast#26).
 noremap gV `[v`]
 
-" Allow easy navigation between wrapped lines.
-" Merged this to jumplist modification above
-"nmap j gj
-"nmap k gk
-vnoremap j gj
-vnoremap k gk
-
-" Easy window navigation
-noremap <A-h> <C-w>h
-noremap <A-j> <C-w>j
-noremap <A-k> <C-w>k
-noremap <A-l> <C-w>l
-
-" Left and right can switch buffers
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
-
 " Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
 " help you not the other way around. : https://thoughtbot.com/upcase/vim
 command! Q q " Bind :Q to q
@@ -127,5 +133,3 @@ nnoremap <C-c> <silent> <C-c>
 " Use <C-L> to clear the highlighting of :set hlsearch.
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
