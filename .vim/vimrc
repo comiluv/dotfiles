@@ -10,9 +10,6 @@ if has('win32')
     let &runtimepath.=",C:/Program Files/Vim/vim82,~/.vim"
 endif
 
-" Load sensible plugin before custom settings
-runtime! plugged/vim-sensible/plugin/sensible.vim
-
 " Auto install vim-plug and plugins
 let data_dir = !has('nvim') ? has('unix') ? '~/.vim' : '$HOME/vimfiles' : stdpath('data').'/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -26,7 +23,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'Mofiqul/vscode.nvim', exists('g:vscode') ? {'on': []} : {}
 Plug 'dunstontc/vim-vscode-theme', exists('g:vscode') ? {'on': []} : {}
-Plug 'tpope/vim-sensible'
 Plug 'neoclide/coc.nvim', exists('g:vscode') ? {'on': []} : {'branch': 'release'}
 Plug 'jiangmiao/auto-pairs', exists('g:vscode') ? {'on': []} : {}
 Plug 'tpope/vim-endwise'

@@ -1,13 +1,16 @@
 " Suppress Alt keys in Windows so it can be used as shortcuts
 set winaltkeys=no
 
-if has ("syntax")
-    syntax on
-endif
-
 " Vim's default behavior
 if &compatible
     set nocompatible
+endif
+
+if has('autocmd')
+  filetype plugin indent on
+endif
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
 endif
 
 " Some settings picked up from internet
@@ -18,8 +21,9 @@ set shiftwidth=4
 set tabstop=4 softtabstop=4
 set expandtab
 set smartindent
-filetype plugin indent on
+set complete-=i
 set number
+set nrformats-=octal
 set wrap linebreak nolist
 set nohlsearch
 set incsearch
@@ -27,23 +31,27 @@ if has('nvim')
     set inccommand=nosplit
 endif
 set scrolloff=8
+set sidescrolloff=5
+set display+=lastline
 set hidden
 set ruler
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,euc-kr,latin1
 set tenc=utf-8
-set bs=indent,eol,start
+set backspace=indent,eol,start
 set history=10000
+set tabpagemax=100
 set colorcolumn=80
 set signcolumn=yes
 set laststatus=2
 set ttyfast
+set title
+if !has('nvim')
+    set lazyredraw
+endif
 if exists('g:neovide')
     set notitle
-else
-    set lazyredraw
-    set title
 endif
 set showcmd
 set mouse=a
@@ -57,12 +65,13 @@ set updatetime=300
 
 set formatoptions-=o " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 " or have this run as autocmd. See autocmd section.
-set path+=**
+set formatoptions+=j " Delete comment character when joining commented lines
 
 " Show invisible characters in this format
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 
 " Decent wildmenu
+set path+=**
 set wildmenu
 set wildmode=list:full
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
@@ -73,6 +82,16 @@ set wildignore+=*.swp,*~,._*
 
 " This is needed to avoid swapfile warning when auto-reloading
 set shortmess+=A
+
+if has('path_extra')
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set sessionoptions-=options
+set viewoptions-=options
 
 if !has('nvim')
     " Avoids swapfiles in current directory - neovim has default
@@ -108,6 +127,11 @@ endif
 set undofile
 set backup
 set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+    runtime! macros/matchit.vim
+endif
 
 " Drop powershell and revert back to cmd for Windows because powershell is too
 " slow and most plugins assume to use cmd in Windows

@@ -124,3 +124,8 @@ command! QA qall
 " Disable 'press :qa to exit' messages
 nnoremap <C-c> <silent> <C-c>
 
+" Use <C-L> to clear the highlighting of :set hlsearch.
+nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
