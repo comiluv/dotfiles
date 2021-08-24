@@ -133,3 +133,11 @@ nnoremap <C-c> <silent> <C-c>
 " Use <C-L> to clear the highlighting of :set hlsearch.
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
+" Default to 'very magic' regex search
+" https://vim.fandom.com/wiki/Simplifying_regular_expressions_using_magic_and_no-magic
+nnoremap / /\v
+vnoremap / /\v
+cnoremap %s/ %smagic/
+cnoremap \>s/ \>smagic/
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
