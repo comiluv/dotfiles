@@ -128,11 +128,6 @@ set undofile
 set backup
 set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-    runtime! macros/matchit.vim
-endif
-
 " Drop powershell and revert back to cmd for Windows because powershell is too
 " slow and most plugins assume to use cmd in Windows
 
