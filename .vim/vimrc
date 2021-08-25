@@ -10,6 +10,34 @@ if has('win32')
     let &runtimepath.=",C:/Program Files/Vim/vim82,~/.vim"
 endif
 
+" https://github.com/janlazo/dotvim8/blob/master/shared.vim
+let tail = fnamemodify(&shell, ':t')
+if tail =~# '^cmd\.exe'
+    let &shellredir = '>%s 2>&1'
+    if has('quickfix')
+        let &shellpipe = &shellredir
+    endif
+    set shellquote= noshellslash
+    if has('nvim')
+        let &shellcmdflag = '/s /c'
+        let &shellxquote= '"'
+        set shellxescape=
+    else
+        let &shellcmdflag = '/c'
+        let &shellxquote = '('
+        let &shellxescape = '"&|<>()@^'
+    endif
+elseif (tail =~# '^sh' || tail =~# '^bash' || tail =~# '^dash')
+            \ && (!has('win32') || tail =~# '\.exe$')
+    let &shellcmdflag = '-c'
+    set shellquote= shellslash shellxescape=
+    let &shellredir = '>%s 2>&1'
+    if has('quickfix')
+        let &shellpipe = '2>&1 | tee'
+    endif
+    let &shellxquote = (!has('nvim') && has('win32')) ? '"' : ''
+endif
+
 " Auto install vim-plug and plugins
 let data_dir = !has('nvim') ? has('unix') ? '~/.vim' : '$HOME/vimfiles' : stdpath('data').'/site'
 if empty(glob(data_dir . '/autoload/plug.vim'))
