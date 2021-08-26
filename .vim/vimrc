@@ -127,11 +127,10 @@ endif
 
 " loop through subdirectory and source .vim files
 " https://johngrib.github.io/wiki/vim-configure-split/
-for include_file in uniq(sort(globpath(&rtp, 'vim-include/*.vim', 0, 1)))
+for include_file in uniq(sort(globpath(&rtp, 'vim-include/**/*.vim', 0, 1)))
     execute "source " . include_file
 endfor
 " also source .lua files because why not
-for include_file in uniq(sort(globpath(&rtp, 'vim-include/*.lua', 0, 1)))
+for include_file in uniq(sort(globpath(&rtp, 'vim-include/**/*.lua', 0, 1)))
     execute "luafile " . include_file
 endfor
-
