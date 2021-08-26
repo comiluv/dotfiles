@@ -68,8 +68,7 @@ Plug 'nvim-telescope/telescope.nvim', has('nvim') && !exists('g:vscode') ? {} : 
 Plug 'nvim-treesitter/nvim-treesitter',has('nvim') && !exists('g:vscode') ? {'do': ':TSUpdate'} : {'on': []}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 Plug 'ryanoasis/vim-devicons', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'neovim/nvim-lspconfig', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'hrsh7th/nvim-compe', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
+Plug 'neoclide/coc.nvim', has('nvim') && !exists('g:vscode') ? {} : { 'branch': 'release' }
 call plug#end()
 
 if !exists('g:vscode')
