@@ -68,7 +68,9 @@ Plug 'nvim-telescope/telescope.nvim', has('nvim') && !exists('g:vscode') ? {} : 
 Plug 'nvim-treesitter/nvim-treesitter',has('nvim') && !exists('g:vscode') ? {'do': ':TSUpdate'} : {'on': []}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 Plug 'ryanoasis/vim-devicons', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'neoclide/coc.nvim', has('nvim') && !exists('g:vscode') ? {'branch': 'release'} : {'on': []}
+Plug 'neovim/nvim-lspconfig', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
+Plug 'hrsh7th/nvim-compe', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
+Plug 'jose-elias-alvarez/null-ls.nvim', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 call plug#end()
 
 if !exists('g:vscode')
@@ -130,6 +132,8 @@ for include_file in uniq(sort(globpath(&rtp, 'vim-include/**/*.vim', 0, 1)))
     execute "source " . include_file
 endfor
 " also source .lua files because why not
-for include_file in uniq(sort(globpath(&rtp, 'vim-include/**/*.lua', 0, 1)))
-    execute "luafile " . include_file
-endfor
+if has('nvim') && !exists('g:vscode')
+    for include_file in uniq(sort(globpath(&rtp, 'vim-include/**/*.lua', 0, 1)))
+        execute "luafile " . include_file
+    endfor
+endif
