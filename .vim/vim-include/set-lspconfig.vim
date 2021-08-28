@@ -16,8 +16,5 @@ if has('nvim') && !exists('g:vscode')
         autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
         autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
         autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
-        autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-        autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync(nil, 100)
-        autocmd BufWritePre *.cpp lua vim.lsp.buf.formatting_sync(nil, 100)
     augroup END
 endif
