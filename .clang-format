@@ -1,0 +1,16 @@
+﻿---
+BasedOnStyle: WebKit
+BreakBeforeBraces: Custom
+BraceWrapping:
+  BeforeCatch: 'true'
+AlignAfterOpenBracket: Align
+AllowShortCaseLabelsOnASingleLine: 'true'
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: 'false'
+IndentCaseLabels: 'false'
+PointerAlignment: Right
+PackConstructorInitializers: NextLine
+SpaceInEmptyBlock: 'true'
+
+...
