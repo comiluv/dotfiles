@@ -21,7 +21,7 @@ augroup COMILUV
     " or what alternatives are out there
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     " Remove auto commenting when pressing o or O
-    autocmd FileType * set formatoptions-=o
+    autocmd FileType * set formatoptions-=ro
     "autocmd BufEnter * :call SetUnsetQShortcut()
     autocmd FileType help nnoremap <buffer> q :q<CR>
     " Auto toggle cursorline
