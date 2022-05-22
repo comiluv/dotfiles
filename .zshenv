@@ -6,10 +6,10 @@ alias l='ls -F -s=cr'
 # Neovim
 alias v=nvim
 
-# python 3.9.x
-alias python=python3.9
+# python 3.10.x
+alias python=python3.10
 alias py=python
-alias pip=pip3.9
+alias pip=pip3.10
 
 # gcc-11 and g++-11
 alias cc=gcc-11
