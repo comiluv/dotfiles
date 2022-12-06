@@ -59,18 +59,10 @@ Plug 'tpope/vim-commentary', exists('g:vscode') ? {'on': []} : {}
 Plug 'tpope/vim-repeat'
 Plug 'machakann/vim-highlightedyank'
 Plug 'bronson/vim-visual-star-search'
-Plug 'andymass/vim-matchup', exists('g:vscode') ? {'on': []} : {}
 Plug 'mbbill/undotree', exists('g:vscode') ? {'on': []} : {}
 Plug 'vim-airline/vim-airline', exists('g:vscode') ? {'on': []} : {}
 Plug 'vim-airline/vim-airline-themes', exists('g:vscode') ? {'on': []} : {}
-Plug 'nvim-lua/plenary.nvim', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'nvim-telescope/telescope.nvim', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'nvim-treesitter/nvim-treesitter',has('nvim') && !exists('g:vscode') ? {'do': ':TSUpdate'} : {'on': []}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 Plug 'ryanoasis/vim-devicons', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'neovim/nvim-lspconfig', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'hrsh7th/nvim-compe', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
-Plug 'jose-elias-alvarez/null-ls.nvim', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 call plug#end()
 
 if !exists('g:vscode')

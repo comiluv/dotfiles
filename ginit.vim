@@ -2,8 +2,8 @@
 GuiTabline 0
 
 " nvim-qt font settings
-GuiFont! JetBrainsMono Nerd Font Mono:h12
-let s:fontsize = 12
+GuiFont! JetBrainsMono Nerd Font Mono:h10
+let s:fontsize = 10
 
 " change font size with Ctrl + mouse-wheel
 function! AdjustFontSize(amount)

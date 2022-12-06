@@ -5,7 +5,7 @@ if has('nvim')
     if has('unix')
         let g:python3_host_prog=expand('/usr/bin/python3.9')
     else
-        let g:python3_host_prog=expand('C:\python39\python.exe')
+        let g:python3_host_prog=expand('C:\python311\python.exe')
     endif
 endif
 
