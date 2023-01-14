@@ -22,7 +22,8 @@ a zshrc file
 zsh aliases and other misc settings
 ### .p10k.zsh
 a powerlevel10k theme file
-### ginit.vim
-```cmd
-mklink /h %localappdata%\nvim\ginit.vim ginit.vim
+### nvim
+folder containing neovim configs
+```powershell
+New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
 ```

@@ -39,30 +39,30 @@ elseif (tail =~# '^sh' || tail =~# '^bash' || tail =~# '^dash')
 endif
 
 " Auto install vim-plug and plugins
-let data_dir = !has('nvim') ? has('unix') ? '~/.vim' : '$HOME/vimfiles' : stdpath('data').'/site'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+"let data_dir = !has('nvim') ? has('unix') ? '~/.vim' : '$HOME/vimfiles' : stdpath('data').'/site'
+"if empty(glob(data_dir . '/autoload/plug.vim'))
+    "silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
 
 " Auto install missing plugins
 "autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
-Plug 'Mofiqul/vscode.nvim', exists('g:vscode') ? {'on': []} : {}
-Plug 'dunstontc/vim-vscode-theme', exists('g:vscode') ? {'on': []} : {}
-Plug 'jiangmiao/auto-pairs', exists('g:vscode') ? {'on': []} : {}
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary', exists('g:vscode') ? {'on': []} : {}
-Plug 'tpope/vim-repeat'
-Plug 'machakann/vim-highlightedyank'
-Plug 'bronson/vim-visual-star-search'
-Plug 'mbbill/undotree', exists('g:vscode') ? {'on': []} : {}
-Plug 'vim-airline/vim-airline', exists('g:vscode') ? {'on': []} : {}
-Plug 'vim-airline/vim-airline-themes', exists('g:vscode') ? {'on': []} : {}
-Plug 'ryanoasis/vim-devicons', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
+"Plug 'Mofiqul/vscode.nvim', exists('g:vscode') ? {'on': []} : {}
+"Plug 'dunstontc/vim-vscode-theme', exists('g:vscode') ? {'on': []} : {}
+"Plug 'jiangmiao/auto-pairs', exists('g:vscode') ? {'on': []} : {}
+"Plug 'tpope/vim-endwise'
+"Plug 'tpope/vim-ragtag'
+"Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-commentary', exists('g:vscode') ? {'on': []} : {}
+"Plug 'tpope/vim-repeat'
+"Plug 'machakann/vim-highlightedyank'
+"Plug 'bronson/vim-visual-star-search'
+"Plug 'mbbill/undotree', exists('g:vscode') ? {'on': []} : {}
+"Plug 'vim-airline/vim-airline', exists('g:vscode') ? {'on': []} : {}
+"Plug 'vim-airline/vim-airline-themes', exists('g:vscode') ? {'on': []} : {}
+"Plug 'ryanoasis/vim-devicons', has('nvim') && !exists('g:vscode') ? {} : {'on': []}
 call plug#end()
 
 if !exists('g:vscode')
