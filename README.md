@@ -24,6 +24,7 @@ zsh aliases and other misc settings
 a powerlevel10k theme file
 ### nvim
 folder containing neovim configs
+Powershell:
 ```powershell
 New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
 ```
