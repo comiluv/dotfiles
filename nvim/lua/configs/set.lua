@@ -12,7 +12,7 @@ vim.opt.termguicolors=true
 
 vim.opt.smartindent=true
 vim.opt.number=true
-vim.opt.wrap=false
+vim.opt.wrap=true
 vim.opt.linebreak=true
 vim.opt.list=false
 vim.opt.hlsearch=false
@@ -55,7 +55,6 @@ vim.opt.wildignore:append {"*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass
 vim.opt.wildignore:append {"*.swp,*~,._*"}
 
 -- This is needed to avoid swapfile warning when auto-reloading
--- Currently below options is bugged. See https://github.com/neovim/neovim/issues/14739
 vim.opt.shortmess:append "A"
 
 vim.opt.sessionoptions:remove {"options"}

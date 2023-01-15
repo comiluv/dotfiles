@@ -32,11 +32,10 @@ vim.keymap.set("i", "<C-U>", "<C-G>u<C-U>")
 vim.keymap.set("i", "<C-W>", "<C-G>u<C-W>")
 
 -- Allow easy navigation between wrapped lines.
--- Merged this to jumplist modification below
 --nmap j gj
 --nmap k gk
-vim.keymap.set("v", "j", "gj")
-vim.keymap.set("v", "k", "gk")
+vim.keymap.set({ "n", "v" }, "j", "gj")
+vim.keymap.set({ "n", "v" }, "k", "gk")
 
 -- Easy window navigation
 vim.keymap.set("", "<A-h>", "<C-w>h")
@@ -103,7 +102,7 @@ vim.cmd([[command! QA qall]])
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Disable 'press :qa to exit' messages
-vim.keymap.set("n", "<C-c>", "<C-c>", { silent = true })
+vim.keymap.set("n", "<C-c>", "<Esc>")
 
 -- Use <C-L> to clear the highlighting of :set hlsearch.
 vim.keymap.set("n", "<C-L>", ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>", { silent = true })
