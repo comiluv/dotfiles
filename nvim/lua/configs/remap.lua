@@ -27,10 +27,6 @@ vim.keymap.set("i", ".", ".<C-G>u")
 vim.keymap.set("i", "!", "!<C-G>u")
 vim.keymap.set("i", "?", "?<C-G>u")
 
--- Undo breakpoints for C-U and C-W in insert mode
-vim.keymap.set("i", "<C-U>", "<C-G>u<C-U>")
-vim.keymap.set("i", "<C-W>", "<C-G>u<C-W>")
-
 -- Allow easy navigation between wrapped lines.
 --nmap j gj
 --nmap k gk
@@ -103,13 +99,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Disable 'press :qa to exit' messages
 vim.keymap.set("n", "<C-c>", "<Esc>")
-
--- Use <C-L> to clear the highlighting of :set hlsearch.
-vim.keymap.set("n", "<C-L>", ":nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>", { silent = true })
-
--- fix & command Practical Vim tip 93
-vim.keymap.set("n", "&", ":&&<CR>")
-vim.keymap.set("x", "&", ":&&<CR>")
 
 -- lsp format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
