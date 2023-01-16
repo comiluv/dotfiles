@@ -51,5 +51,6 @@ return require('packer').startup(function(use)
 
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
+    use('tpope/vim-surround')
     use({ 'vladdoster/remember.nvim', config = [[ require('remember') ]] })
 end)
