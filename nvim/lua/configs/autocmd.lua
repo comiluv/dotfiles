@@ -55,3 +55,10 @@ autocmd({ "InsertEnter", "WinLeave" }, {
         vim.opt.cursorline = false
     end,
 })
+
+-- enter Terminal-mode automatically
+autocmd({ "TermOpen" }, {
+    group = MyGroup,
+    pattern = "*",
+    command = "startinsert",
+})
