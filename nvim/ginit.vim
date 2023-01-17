@@ -5,8 +5,9 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont Cascadia Mono:h10
-    let s:fontsize = 10
+    GuiFont Cascadia Code:h09:l:Consolas
+    set guifontwide=D2Coding
+    let s:fontsize = 09
 endif
 
 " Disable GUI Tabline
