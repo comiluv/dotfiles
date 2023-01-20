@@ -74,10 +74,12 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("c", "%%", function()
     return vim.fn.getcmdtype() == ':' and vim.fn.expand("%:h") .. "/" or "%%"
 end, { expr = true })
-vim.keymap.set("", "<leader>e", ":e %%", { remap = true })
+vim.keymap.set("n", "<leader>e", ":e %%", { remap = true })
+vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true })
 
 -- Prevent common mistake of pressing q: instead :q
-vim.keymap.set("", "q:", ":q")
+vim.keymap.set("n", "q:", ":q")
+vim.keymap.set("v", "q:", "<Esc>:q")
 
 -- Allow for easy copying and pasting
 vim.keymap.set("v", "y", "y`]", { silent = true })
@@ -114,9 +116,9 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
-vim.keymap.set("t", "<ESC>", [[<C-\><C-n>]])
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 -- Remap in case ESC key input is needed
-vim.keymap.set("t", [[<A-\>]], "<ESC>")
+vim.keymap.set("t", [[<A-\>]], "<Esc>")
 -- Move out from terminal window with alt key shortcuts
 vim.keymap.set("t", "<A-h>", [[<C-\><C-n><C-w>h]])
 vim.keymap.set("t", "<A-j>", [[<C-\><C-n><C-w>j]])

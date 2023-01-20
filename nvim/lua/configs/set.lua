@@ -7,7 +7,6 @@ vim.opt.tabstop=4
 vim.opt.softtabstop=4
 vim.opt.expandtab=true
 
-vim.opt.guicursor=""
 vim.opt.termguicolors=true
 
 vim.opt.smartindent=true
@@ -54,8 +53,9 @@ vim.opt.wildignore:append {"*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz"}
 vim.opt.wildignore:append {"*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*"}
 vim.opt.wildignore:append {"*.swp,*~,._*"}
 
+vim.opt.shortmess=""
 -- This is needed to avoid swapfile warning when auto-reloading
-vim.opt.shortmess:append "A"
+-- vim.opt.shortmess:append "A"
 
 vim.opt.sessionoptions:remove {"options"}
 vim.opt.viewoptions:remove {"options"}
