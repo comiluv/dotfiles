@@ -31,12 +31,23 @@ autocmd({ "FileType" }, {
     end,
 })
 
--- quit help pressing just q without : to enter command mode
+-- close some filetypes with <q>
 autocmd({ "FileType" }, {
     group = MyGroup,
-    pattern = "help",
-    callback = function()
-        vim.keymap.set("n", "q", ":q<CR>", { buffer = true })
+    pattern = {
+        "qf",
+        "help",
+        "man",
+        "notify",
+        "lspinfo",
+        "spectre_panel",
+        "startuptime",
+        "tsplayground",
+        "PlenaryTestPopup",
+    },
+    callback = function(event)
+        vim.bo[event.buf].buflisted = false
+        vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
     end,
 })
 
@@ -61,4 +72,11 @@ autocmd({ "TermOpen" }, {
     group = MyGroup,
     pattern = "*",
     command = "startinsert",
+})
+
+-- Check if we need to reload the file when it changed
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+    group = MyGroup,
+    pattern = "*",
+    command = "checktime",
 })
