@@ -117,12 +117,20 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+
 -- Remap in case ESC key input is needed
 vim.keymap.set("t", [[<A-\>]], "<Esc>")
+
 -- Move out from terminal window with alt key shortcuts
 vim.keymap.set("t", "<A-h>", [[<C-\><C-n><C-w>h]])
 vim.keymap.set("t", "<A-j>", [[<C-\><C-n><C-w>j]])
 vim.keymap.set("t", "<A-k>", [[<C-\><C-n><C-w>k]])
 vim.keymap.set("t", "<A-l>", [[<C-\><C-n><C-w>l]])
+
 -- Paste in terminal mode
 vim.keymap.set("t", "<C-r>", [['<C-\><C-n>"'.nr2char(getchar()).'pi']])
+
+-- Do not mark entire buffer when :w
+vim.keymap.set("c", "w", function()
+    return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "lockmarks w" or "w") or "w"
+end, { expr = true })
