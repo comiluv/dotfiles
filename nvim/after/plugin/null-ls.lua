@@ -6,6 +6,7 @@ local sources = {
         extra_args = { "--line-length=120" }
     }),
     null_ls.builtins.formatting.isort,
+    null_ls.builtins.formatting.stylua,
 }
 
 null_ls.setup({ sources = sources })

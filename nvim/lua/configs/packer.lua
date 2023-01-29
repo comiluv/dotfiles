@@ -13,16 +13,7 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use({
-        'rose-pine/neovim',
-        as = 'rose-pine',
-        config = function()
-            vim.cmd('colorscheme rose-pine')
-        end
-    })
-
-    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-
+    use { 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } }
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
@@ -49,12 +40,18 @@ return require('packer').startup(function(use)
     use { 'jose-elias-alvarez/null-ls.nvim',
         requires = { 'nvim-lua/plenary.nvim' }, }
 
-    use('mbbill/undotree')
+    use 'mbbill/undotree'
 
-    use('tpope/vim-fugitive')
+    use 'tpope/vim-fugitive'
 
-    use('tpope/vim-surround')
+    use 'tpope/vim-surround'
 
-    use({ 'vladdoster/remember.nvim', config = [[ require('remember') ]] })
+    use 'numToStr/Comment.nvim'
+
+    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true }, }
+
+    use 'navarasu/onedark.nvim'
+
+    use { 'vladdoster/remember.nvim', config = [[ require('remember') ]] }
 
 end)
