@@ -63,12 +63,11 @@ return {
 
 	{ "lukas-reineke/indent-blankline.nvim" },
 
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
-	},
+    "windwp/nvim-autopairs",
+
+    "RRethy/nvim-treesitter-endwise",
+
+    "windwp/nvim-ts-autotag",
 
 	-- colorschemes
 	{
