@@ -38,11 +38,21 @@ return {
 
 	"tpope/vim-surround",
 
-	"numToStr/Comment.nvim",
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
 
 	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons" }, lazy = true },
 
-	{ "vladdoster/remember.nvim", config = [[ require('remember') ]] },
+	{
+		"vladdoster/remember.nvim",
+		config = function()
+			require("remember")
+		end,
+	},
 
 	-- colorschemes
 	{
