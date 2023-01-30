@@ -40,9 +40,37 @@ return {
 
 	"numToStr/Comment.nvim",
 
-	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons"}, lazy = true },
-
-	"navarasu/onedark.nvim",
+	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons" }, lazy = true },
 
 	{ "vladdoster/remember.nvim", config = [[ require('remember') ]] },
+
+	-- colorschemes
+	{
+		"tjdevries/colorbuddy.nvim",
+		lazy = false,
+	},
+
+	{
+		"navarasu/onedark.nvim",
+		lazy = true,
+	},
+	{
+		"svrana/neosolarized.nvim",
+		dependencies = { "tjdevries/colorbuddy.nvim" },
+		lazy = true,
+		config = function()
+			require("neosolarized").setup({
+				comment_italics = true,
+				background_set = true,
+			})
+		end,
+	},
+	{
+		"tamelion/neovim-molokai",
+		lazy = true,
+	},
+	{
+		"ellisonleao/gruvbox.nvim",
+		lazy = true,
+	},
 }
