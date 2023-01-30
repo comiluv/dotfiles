@@ -54,6 +54,22 @@ return {
 		end,
 	},
 
+	{
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+	},
+
+	{ "lukas-reineke/indent-blankline.nvim" },
+
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	},
+
 	-- colorschemes
 	{
 		"tjdevries/colorbuddy.nvim",
