@@ -16,6 +16,12 @@ vim.g.maplocalleader = ' '
 
 -- fix drag-n-drop functionality for neovim-qt
 -- see https://github.com/folke/lazy.nvim/issues/403
-require('lazy.core.config').defaults.performance.rtp.reset = false
+local opts = {
+    performance = {
+        rtp = {
+            reset = false
+        }
+    }
+}
 
-require('lazy').setup('plugins')
+require('lazy').setup('plugins', opts)
