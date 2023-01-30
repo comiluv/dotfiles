@@ -5,7 +5,7 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont Cascadia Mono:h09:Consolas
+    GuiFont CaskaydiaMonoPL NFM:h09:Consolas
     set guifontwide=D2Coding
     let s:fontsize = 09
 endif
@@ -34,7 +34,7 @@ snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 " change font size with Ctrl + mouse-wheel
 function! AdjustFontSize(amount)
     let s:fontsize = s:fontsize+a:amount
-    :execute "GuiFont! Cascadia Mono:h" . s:fontsize
+    :execute "GuiFont! CaskaydiaMonoPL NFM:h" . s:fontsize
 endfunction
 noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
 noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
