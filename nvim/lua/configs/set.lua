@@ -37,29 +37,29 @@ vim.opt.updatetime=50
 
 -- You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 -- or have this run as autocmd. See autocmd section.
-vim.opt.formatoptions:remove {"o"}
+vim.opt.formatoptions:remove "o"
 -- Delete comment character when joining commented lines
-vim.opt.formatoptions:append {"j"}
+vim.opt.formatoptions:append "j"
 
 -- Show invisible characters in this format
 vim.opt.listchars="tab:→ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»"
 
 -- Decent wildmenu
--- vim.opt.path:append {"**"}
+-- vim.opt.path:append "**"
 vim.opt.wildmenu=true
 vim.opt.wildmode="list:full"
 vim.opt.wildignore=".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
-vim.opt.wildignore:append {"*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem"}
-vim.opt.wildignore:append {"*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz"}
-vim.opt.wildignore:append {"*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*"}
-vim.opt.wildignore:append {"*.swp,*~,._*"}
+vim.opt.wildignore:append "*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem"
+vim.opt.wildignore:append "*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz"
+vim.opt.wildignore:append "*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*"
+vim.opt.wildignore:append "*.swp,*~,._*"
 
 vim.opt.shortmess=""
 -- This is needed to avoid swapfile warning when auto-reloading
 -- vim.opt.shortmess:append "A"
 
-vim.opt.sessionoptions:remove {"options"}
-vim.opt.viewoptions:remove {"options"}
+vim.opt.sessionoptions:remove "options"
+vim.opt.viewoptions:remove "options"
 
 vim.opt.swapfile=false
 vim.opt.backup=false
