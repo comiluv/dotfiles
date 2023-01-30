@@ -49,7 +49,6 @@ return {
 		"tjdevries/colorbuddy.nvim",
 		lazy = false,
 	},
-
 	{
 		"navarasu/onedark.nvim",
 		lazy = true,
@@ -71,6 +70,10 @@ return {
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
+		lazy = true,
+	},
+	{
+		"Mofiqul/dracula.nvim",
 		lazy = true,
 	},
 }
