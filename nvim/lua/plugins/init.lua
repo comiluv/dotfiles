@@ -69,6 +69,12 @@ return {
 
     "windwp/nvim-ts-autotag",
 
+    {
+        'lewis6991/gitsigns.nvim', config=function()
+            require("gitsigns").setup()
+        end
+    },
+
 	-- colorschemes
 	{
 		"tjdevries/colorbuddy.nvim",
