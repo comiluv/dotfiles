@@ -63,17 +63,18 @@ return {
 
 	{ "lukas-reineke/indent-blankline.nvim" },
 
-    "windwp/nvim-autopairs",
+	"windwp/nvim-autopairs",
 
-    "RRethy/nvim-treesitter-endwise",
+	"RRethy/nvim-treesitter-endwise",
 
-    "windwp/nvim-ts-autotag",
+	"windwp/nvim-ts-autotag",
 
-    {
-        'lewis6991/gitsigns.nvim', config=function()
-            require("gitsigns").setup()
-        end
-    },
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup()
+		end,
+	},
 
 	-- colorschemes
 	{
