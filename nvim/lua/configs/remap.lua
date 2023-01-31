@@ -28,8 +28,6 @@ vim.keymap.set("i", "!", "!<C-G>u")
 vim.keymap.set("i", "?", "?<C-G>u")
 
 -- Allow easy navigation between wrapped lines.
---nmap j gj
---nmap k gk
 vim.keymap.set({ "n", "v" }, "j", "gj")
 vim.keymap.set({ "n", "v" }, "k", "gk")
 
@@ -40,12 +38,10 @@ vim.keymap.set("", "<A-k>", "<C-w>k")
 vim.keymap.set("", "<A-l>", "<C-w>l")
 
 -- Left and right can switch buffers
-vim.keymap.set("n", "<left>", ":bp<CR>")
-vim.keymap.set("n", "<right>", ":bn<CR>")
+vim.keymap.set("n", "<left>", "<cmd>bp<CR>")
+vim.keymap.set("n", "<right>", "<cmd>bn<CR>")
 
 -- Conveniently move lines up and down with ctrl+j and ctrl+k
---vim.keymap.set("n", "<C-j>", ":m .+1<CR>==")
---vim.keymap.set("n", "<C-k>", ":m .-2<CR>==")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -106,10 +102,10 @@ vim.keymap.set("n", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- quickfix navigation
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-k>", ":cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", ":cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", ":lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", ":lprev<CR>zz")
 
 -- replace whatever was on the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

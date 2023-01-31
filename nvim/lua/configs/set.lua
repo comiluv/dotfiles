@@ -66,6 +66,3 @@ vim.opt.backup=false
 vim.opt.undofile=true
 
 vim.g.mapleader=" "
--- Drop powershell and revert back to cmd for Windows because powershell is too
--- slow and most plugins assume to use cmd in Windows
-
