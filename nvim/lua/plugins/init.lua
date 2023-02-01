@@ -6,7 +6,8 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	{ "nvim-treesitter/nvim-treesitter"},
+
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		dependencies = {
@@ -14,7 +15,7 @@ return {
 			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
-
+	
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-buffer" },
@@ -22,7 +23,7 @@ return {
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
-
+	
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			-- Snippet Collection (Optional)
@@ -31,59 +32,59 @@ return {
 	},
 
 	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-
+	
 	"mfussenegger/nvim-dap",
-
+	
 	"mbbill/undotree",
-
+	
 	"tpope/vim-fugitive",
-
+	
 	"tpope/vim-surround",
-
+	
 	{
 		"numToStr/Comment.nvim",
 		config = function()
 			require("Comment").setup()
 		end,
 	},
-
+	
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		lazy = true,
 	},
-
+	
 	{
 		"vladdoster/remember.nvim",
 		config = function()
 			require("remember")
 		end,
 	},
-
+	
 	{
 		"j-hui/fidget.nvim",
 		config = function()
 			require("fidget").setup({})
 		end,
 	},
-
+	
 	"lukas-reineke/indent-blankline.nvim",
-
+	
 	"windwp/nvim-autopairs",
-
+	
 	"RRethy/nvim-treesitter-endwise",
-
+	
 	"windwp/nvim-ts-autotag",
-
+	
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
 		end,
 	},
-
+	
 	"pbrisbin/vim-mkdir",
-
+	
 	-- colorschemes
 	{
 		"tjdevries/colorbuddy.nvim",
