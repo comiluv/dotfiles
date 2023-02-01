@@ -32,7 +32,7 @@ return {
 
 	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-    "mfussenegger/nvim-dap",
+	"mfussenegger/nvim-dap",
 
 	"mbbill/undotree",
 
@@ -47,7 +47,11 @@ return {
 		end,
 	},
 
-	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons" }, lazy = true },
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
+		lazy = true,
+	},
 
 	{
 		"vladdoster/remember.nvim",
@@ -78,7 +82,7 @@ return {
 		end,
 	},
 
-    "pbrisbin/vim-mkdir",
+	"pbrisbin/vim-mkdir",
 
 	-- colorschemes
 	{
