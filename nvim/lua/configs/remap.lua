@@ -127,3 +127,11 @@ vim.keymap.set("t", "<A-l>", [[<C-\><C-n><C-w>l]])
 vim.keymap.set("c", "w", function()
     return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "lockmarks w" or "w") or "w"
 end, { expr = true })
+
+-- Switch between the last two files
+vim.keymap.set("n", "<Leader><Leader>", "<C-^>")
+
+-- Remap !:cmd to terminal cmd
+vim.keymap.set("c", "!", function()
+    return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
+end, { expr = true })

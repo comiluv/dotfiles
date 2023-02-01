@@ -32,6 +32,8 @@ return {
 
 	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
+    "mfussenegger/nvim-dap",
+
 	"mbbill/undotree",
 
 	"tpope/vim-fugitive",
@@ -61,7 +63,7 @@ return {
 		end,
 	},
 
-	{ "lukas-reineke/indent-blankline.nvim" },
+	"lukas-reineke/indent-blankline.nvim",
 
 	"windwp/nvim-autopairs",
 
@@ -76,10 +78,12 @@ return {
 		end,
 	},
 
+    "pbrisbin/vim-mkdir",
+
 	-- colorschemes
 	{
 		"tjdevries/colorbuddy.nvim",
-		lazy = false,
+		lazy = true,
 	},
 	{
 		"navarasu/onedark.nvim",
