@@ -6,6 +6,7 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
+-- autopairs: add mapping `CR` on nvim-cmp setup. Check readme.md on nvim-cmp repo
 local handlers = require('nvim-autopairs.completion.handlers')
 
 cmp.event:on(

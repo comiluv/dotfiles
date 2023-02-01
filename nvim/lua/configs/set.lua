@@ -32,7 +32,7 @@ vim.opt.splitbelow=true
 vim.opt.splitright=true
 
 vim.opt.laststatus=3
-vim.opt.winbar='%f'
+vim.opt.winbar='%=%m %f'
 -- Better display for messages
 vim.opt.cmdheight=2
 -- You will have bad experience for diagnostic messages when it's default 4000.
