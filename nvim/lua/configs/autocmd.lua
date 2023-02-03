@@ -16,11 +16,11 @@ autocmd("TextYankPost", {
 })
 
 -- Trim Whitespace
-autocmd({ "BufWritePre" }, {
-    group = MyGroup,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
+-- autocmd({ "BufWritePre" }, {
+--     group = MyGroup,
+--     pattern = "*",
+--     command = [[%s/\s\+$//e]],
+-- })
 
 -- Remove autocommenting when pressing o or O on a commented line
 autocmd({ "FileType" }, {
