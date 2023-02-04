@@ -9,7 +9,7 @@ if vim.fn.has("win32") then
 end
 
 -- if I find out how to send output to terminal using :pyfile, will switch to the version below
-vim.keymap.set("n", "<F8>", ":<C-u>w!<CR>:exec 'term "..py.."' shellescape(@%)<CR>", { buffer = true })
+vim.keymap.set("n", "<F8>", ":<C-u>w!<CR>:cd %:h<CR>:exec 'term "..py.."' shellescape(@%)<CR>", { buffer = true })
 -- vim.keymap.set("n", "<F8>", ":<C-u>w!<CR>:pyfile %<CR>", { buffer = true })
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
