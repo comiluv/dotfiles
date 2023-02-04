@@ -85,6 +85,8 @@ return {
 	
 	"pbrisbin/vim-mkdir",
 
+    "David-Kunz/markid",
+
 	-- colorschemes
 	{
 		"tjdevries/colorbuddy.nvim",
