@@ -37,7 +37,7 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = {"lua",},
+    additional_vim_regex_highlighting = false,
   },
   endwise = { enable = true, }, -- "RRethy/nvim-treesitter-endwise",
   autotag = { enable = true, }, -- "windwp/nvim-ts-autotag",

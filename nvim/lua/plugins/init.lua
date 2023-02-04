@@ -84,7 +84,7 @@ return {
 	},
 	
 	"pbrisbin/vim-mkdir",
-	
+
 	-- colorschemes
 	{
 		"tjdevries/colorbuddy.nvim",
