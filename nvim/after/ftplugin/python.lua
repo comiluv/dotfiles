@@ -1,5 +1,6 @@
 if not vim.fn.has('python3') then
     vim.api.nvim_command('echomsg "python3 not found"')
+    do return end
 end
 -- pressing f8 will run the file
 local py = "python3"
