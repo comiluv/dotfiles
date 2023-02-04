@@ -9,9 +9,13 @@ vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { remap = true })
 
 -- pressing f8 will run the executable
 if vim.fn.has("win32") then
-    vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+	if vim.o.shell == "pwsh" or vim.o.shell == "powershell" then
+		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term &' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+	else
+		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+	end
 else
-    vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape('./'..expand('%<'))<CR>", { buffer = true })
+	vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape('./'..expand('%<'))<CR>", { buffer = true })
 end
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective

@@ -1,6 +1,7 @@
 -- Suppress Alt keys in Windows so it can be used as shortcuts
 vim.opt.winaltkeys="no"
 vim.g.python3_host_prog = "C:\\Python311\\python.exe"
+
 -- Some settings picked up from internet
 vim.opt.shiftwidth=4
 vim.opt.tabstop=4
