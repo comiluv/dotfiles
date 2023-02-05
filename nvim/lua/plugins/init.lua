@@ -80,6 +80,11 @@ return {
 		end,
 	},
 
+	{
+		"gaborvecsei/memento.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
+	},
+
 	"lukas-reineke/indent-blankline.nvim",
 
 	{
@@ -93,7 +98,7 @@ return {
 
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		lazy = true,
 	},
 
@@ -105,10 +110,6 @@ return {
 	},
 
 	-- colorschemes
-	{
-		"tjdevries/colorbuddy.nvim",
-		lazy = true,
-	},
 	{
 		"navarasu/onedark.nvim",
 		lazy = true,
@@ -125,15 +126,28 @@ return {
 		end,
 	},
 	{
-		"tamelion/neovim-molokai",
+		"tanvirtin/monokai.nvim",
 		lazy = true,
 	},
 	{
-		"ellisonleao/gruvbox.nvim",
+		"luisiacc/gruvbox-baby",
 		lazy = true,
 	},
 	{
 		"Mofiqul/dracula.nvim",
 		lazy = true,
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		opts = {
+			create_autocmd = false,
+            attach_navic = false,
+		},
 	},
 }

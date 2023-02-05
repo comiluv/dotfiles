@@ -23,5 +23,5 @@ end
 vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { remap = true })
 
 -- flags
-vim.fn.setenv("CFLAGS", "-Werror -Wall -Wextra -pedantic -g")
-vim.fn.setenv("CXXFLAGS", vim.fn.getenv("CFLAGS"))
+vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
+vim.env.CXXFLAGS = vim.env.CFLAGS

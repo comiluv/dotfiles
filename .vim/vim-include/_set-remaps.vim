@@ -3,6 +3,7 @@
 let mapleader="\<Space>"
 
 " No arrow keys --- force yourself to use the home row
+	"InsertLeave",
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 inoremap <up> <nop>
