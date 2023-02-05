@@ -9,10 +9,10 @@ vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { remap = true })
 
 -- pressing f8 will run the executable
 if vim.fn.has("win32") then
-    if vim.o.shell == "cmd.exe" then
-        vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+	if vim.o.shell == "cmd.exe" then
+		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
 	else
-        vim.keymap.set("n", "<f8>", ":<C-u>exec 'term &' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term &' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
 	end
 else
 	vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape('./'..expand('%<'))<CR>", { buffer = true })
@@ -23,5 +23,5 @@ end
 vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { remap = true })
 
 -- flags
-vim.cmd "let $CFLAGS='-Werror -Wall -Wextra -pedantic -g'"
-vim.cmd "let $CXXFLAGS=($CFLAGS)"
+vim.fn.setenv("CFLAGS", "-Werror -Wall -Wextra -pedantic -g")
+vim.fn.setenv("CXXFLAGS", vim.fn.getenv("CFLAGS"))
