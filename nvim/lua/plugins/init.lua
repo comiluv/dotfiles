@@ -31,15 +31,40 @@ return {
 		},
 	},
 
-	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-
 	"mfussenegger/nvim-dap",
 
-	"mbbill/undotree",
+	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+
+	"David-Kunz/markid",
+
+	{
+		"kosayoda/nvim-lightbulb",
+		dependencies = "antoinemadec/FixCursorHold.nvim",
+		config = function()
+			require("nvim-lightbulb").setup({ autocmd = { enabled = true } })
+		end,
+	},
+
+	{
+		"smjonas/inc-rename.nvim",
+		config = function()
+			require("inc_rename").setup()
+		end,
+	},
 
 	"tpope/vim-fugitive",
 
 	"tpope/vim-surround",
+
+	"windwp/nvim-autopairs",
+
+	"RRethy/nvim-treesitter-endwise",
+
+	"windwp/nvim-ts-autotag",
+
+	"mbbill/undotree",
+
+	"pbrisbin/vim-mkdir",
 
 	{
 		"numToStr/Comment.nvim",
@@ -49,32 +74,13 @@ return {
 	},
 
 	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
-		lazy = true,
-	},
-
-	{
 		"vladdoster/remember.nvim",
 		config = function()
 			require("remember")
 		end,
 	},
 
-	{
-		"j-hui/fidget.nvim",
-		config = function()
-			require("fidget").setup({})
-		end,
-	},
-
 	"lukas-reineke/indent-blankline.nvim",
-
-	"windwp/nvim-autopairs",
-
-	"RRethy/nvim-treesitter-endwise",
-
-	"windwp/nvim-ts-autotag",
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -83,11 +89,20 @@ return {
 		end,
 	},
 
-	"pbrisbin/vim-mkdir",
-
-	"David-Kunz/markid",
-
 	"Exafunction/codeium.vim",
+
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
+		lazy = true,
+	},
+
+	{
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+	},
 
 	-- colorschemes
 	{
