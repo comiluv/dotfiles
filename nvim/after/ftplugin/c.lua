@@ -8,7 +8,7 @@ vim.keymap.set("n", "<F5>", ":<C-u>w!<bar>make %<<CR>", { buffer = true })
 vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { remap = true })
 
 -- pressing f8 will run the executable
-if vim.fn.has("win32") then
+if vim.fn.has("win32") == 1 then
 	if vim.o.shell == "cmd.exe" then
 		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
 	else

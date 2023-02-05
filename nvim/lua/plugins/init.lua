@@ -80,11 +80,6 @@ return {
 		end,
 	},
 
-	{
-		"gaborvecsei/memento.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
-	},
-
 	"lukas-reineke/indent-blankline.nvim",
 
 	{
@@ -107,6 +102,30 @@ return {
 		config = function()
 			require("fidget").setup({})
 		end,
+	},
+
+	{
+		"goolord/alpha-nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("alpha").setup(require("alpha.themes.startify").config)
+		end,
+	},
+
+	{ "gaborvecsei/memento.nvim", dependencies = "nvim-lua/plenary.nvim" },
+
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		opts = {
+			create_autocmd = false,
+			attach_navic = false,
+		},
 	},
 
 	-- colorschemes
@@ -136,18 +155,5 @@ return {
 	{
 		"Mofiqul/dracula.nvim",
 		lazy = true,
-	},
-	{
-		"utilyre/barbecue.nvim",
-		name = "barbecue",
-		version = "*",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
-		},
-		opts = {
-			create_autocmd = false,
-            attach_navic = false,
-		},
 	},
 }
