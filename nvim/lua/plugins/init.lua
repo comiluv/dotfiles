@@ -142,15 +142,6 @@ return {
 		},
 	},
 
-	{ "CRAG666/code_runner.nvim", dependencies = "nvim-lua/plenary.nvim" },
-
-	{
-		"CRAG666/betterTerm.nvim",
-		config = function()
-			require("betterTerm").setup()
-		end,
-	},
-
     {
         "folke/which-key.nvim",
         config = function()
