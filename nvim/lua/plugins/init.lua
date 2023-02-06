@@ -31,16 +31,16 @@ return {
 		},
 	},
 
-    -- debug adapater protocol
+	-- debug adapater protocol
 	"mfussenegger/nvim-dap",
 
-    -- inject LSP diagnostics, code actions, formatting etc.
+	-- inject LSP diagnostics, code actions, formatting etc.
 	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-    -- semantic highlighting
+	-- semantic highlighting
 	"David-Kunz/markid",
 
-    -- show lightbulb where code action can be taken
+	-- show lightbulb where code action can be taken
 	{
 		"kosayoda/nvim-lightbulb",
 		dependencies = "antoinemadec/FixCursorHold.nvim",
@@ -49,7 +49,7 @@ return {
 		end,
 	},
 
-    -- LSP incrementally rename symbol
+	-- LSP incrementally rename symbol
 	{
 		"smjonas/inc-rename.nvim",
 		config = function()
@@ -57,23 +57,22 @@ return {
 		end,
 	},
 
-    -- git plugin
-	"tpope/vim-fugitive",
+	"kdheepak/lazygit.nvim",
 
 	"tpope/vim-surround",
 
-    -- auto close parentheses
+	-- auto close parentheses
 	"windwp/nvim-autopairs",
 
-    -- auto close block with end
+	-- auto close block with end
 	"RRethy/nvim-treesitter-endwise",
 
-    -- auto clost tags
+	-- auto clost tags
 	"windwp/nvim-ts-autotag",
 
 	"mbbill/undotree",
 
-    -- automatically crease any non-existent directories
+	-- automatically create any non-existent directories
 	"pbrisbin/vim-mkdir",
 
 	{
@@ -83,7 +82,7 @@ return {
 		end,
 	},
 
-    -- auto locate last location in the file
+	-- auto locate last location in the file
 	{
 		"vladdoster/remember.nvim",
 		config = function()
@@ -93,7 +92,7 @@ return {
 
 	"lukas-reineke/indent-blankline.nvim",
 
-    -- display git signs in the gutter
+	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -107,7 +106,7 @@ return {
 		lazy = true,
 	},
 
-    -- LSP progress
+	-- LSP progress
 	{
 		"j-hui/fidget.nvim",
 		config = function()
@@ -115,7 +114,7 @@ return {
 		end,
 	},
 
-    -- dashboard
+	-- dashboard
 	{
 		"goolord/alpha-nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -124,10 +123,10 @@ return {
 		end,
 	},
 
-    -- history
+	-- history
 	{ "gaborvecsei/memento.nvim", dependencies = "nvim-lua/plenary.nvim" },
 
-    -- winbar plugin
+	-- winbar plugin
 	{
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
@@ -142,45 +141,46 @@ return {
 		},
 	},
 
-    {
-        "folke/which-key.nvim",
-        config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            require("which-key").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
-        end,
-    },
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
 
-    -- colorschemes
-    {
-        "navarasu/onedark.nvim",
-        lazy = true,
-    },
-    {
-        "svrana/neosolarized.nvim",
-        dependencies = { "tjdevries/colorbuddy.nvim" },
-        lazy = true,
-        config = function()
-            require("neosolarized").setup({
-                comment_italics = true,
-                background_set = true,
-            })
-        end,
-    },
-    {
-        "tanvirtin/monokai.nvim",
-        lazy = true,
-    },
-    {
-        "luisiacc/gruvbox-baby",
-        lazy = true,
-    },
-    {
-        "Mofiqul/dracula.nvim",
-        lazy = true,
-    },
+	-- colorschemes
+	{
+		"navarasu/onedark.nvim",
+		lazy = true,
+	},
+	{
+		"svrana/neosolarized.nvim",
+		dependencies = { "tjdevries/colorbuddy.nvim" },
+		lazy = true,
+		config = function()
+			require("neosolarized").setup({
+				comment_italics = true,
+				background_set = true,
+			})
+		end,
+	},
+	{
+		"tanvirtin/monokai.nvim",
+		lazy = true,
+	},
+	{
+		"luisiacc/gruvbox-baby",
+		lazy = true,
+	},
+	{
+		"Mofiqul/dracula.nvim",
+		lazy = true,
+	},
 }
+
