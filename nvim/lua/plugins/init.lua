@@ -101,9 +101,6 @@ return {
 		end,
 	},
 
-    -- AI assisted code completion
-	"Exafunction/codeium.vim",
-
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
