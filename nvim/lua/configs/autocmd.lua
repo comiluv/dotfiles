@@ -89,7 +89,9 @@ autocmd("BufWritePre",{
     callback = function()
         local register = vim.fn.getreg('/')
         local save_pos = vim.fn.getpos('.')
-        vim.cmd[[silent keeppatterns keepjumps %s/\s\+$//e|0;/^\%(\_s*\S\)\@!/,$d|$put _]]
+        vim.cmd[[keeppatterns keepjumps %s/\s\+$//e]]   -- trim right
+        vim.cmd[[keeppatterns keepjumps silent! 0;/^\%(\_s*\S\)\@!/,$d]]   -- trim below
+        vim.cmd[[keeppatterns keepjumps $put _]]    -- add one blank line
         vim.fn.setreg('/', register)
         vim.fn.setpos('.', save_pos)
     end
