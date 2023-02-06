@@ -128,6 +128,15 @@ return {
 		},
 	},
 
+	{ "CRAG666/code_runner.nvim", dependencies = "nvim-lua/plenary.nvim" },
+
+	{
+		"CRAG666/betterTerm.nvim",
+		config = function()
+			require("betterTerm").setup()
+		end,
+	},
+
 	-- colorschemes
 	{
 		"navarasu/onedark.nvim",
