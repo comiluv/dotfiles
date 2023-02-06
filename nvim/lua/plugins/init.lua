@@ -164,14 +164,6 @@ return {
         end,
     },
 
-    -- trim whitespace
-    {
-        "mcauley-penney/tidy.nvim",
-        config = function()
-            require("tidy").setup()
-        end
-    },
-
     -- colorschemes
     {
         "navarasu/onedark.nvim",

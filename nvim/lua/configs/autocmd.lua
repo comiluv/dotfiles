@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local MyGroup = augroup('MyGroup', {})
+local TrimGroup = augroup('TrimGroup', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -77,3 +78,20 @@ autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
     pattern = "*",
     command = "checktime",
 })
+
+-- trim whitespace and put one blank line at the end
+-- source 1: https://stackoverflow.com/questions/7495932/how-can-i-trim-blank-lines-at-the-end-of-file-in-vim/7501902#7501902
+-- source 2: https://vim.fandom.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
+-- source 3: https://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file
+autocmd("BufWritePre",{
+    group = TrimGroup,
+    pattern ="*",
+    callback = function()
+        local register = vim.fn.getreg('/')
+        local save_pos = vim.fn.getpos('.')
+        vim.cmd[[silent keeppatterns keepjumps %s/\s\+$//e|0;/^\%(\_s*\S\)\@!/,$d|$put _]]
+        vim.fn.setreg('/', register)
+        vim.fn.setpos('.', save_pos)
+    end
+})
+
