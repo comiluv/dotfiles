@@ -61,7 +61,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {desc="Yank to clipboard"})
 vim.keymap.set("n", "<leader>Y", [["+Y]], {desc="Yank to clipboard"})
 
 -- delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {desc="Delete"})
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {desc="Delete to blackhole"})
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
@@ -70,8 +70,8 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {desc="Delete"})
 vim.keymap.set("c", "%%", function()
     return vim.fn.getcmdtype() == ':' and vim.fn.expand("%:h") .. "/" or "%%"
 end, { expr = true })
-vim.keymap.set("n", "<leader>e", ":e %%", { remap = true }, {desc = "Open adjacent file"})
-vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true }, {desc = "Open adjacent file"})
+vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file"})
+vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file"})
 
 -- Allow for easy copying and pasting
 vim.keymap.set("v", "y", "y`]", { silent = true })
