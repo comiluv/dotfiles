@@ -34,6 +34,8 @@ vim.opt.splitright=true
 
 vim.opt.laststatus=3
 vim.opt.winbar='%=%m %f'
+
+vim.opt.fileformats="unix,dos"
 -- Better display for messages
 vim.opt.cmdheight=2
 -- You will have bad experience for diagnostic messages when it's default 4000.
@@ -70,3 +72,4 @@ vim.opt.backup=false
 vim.opt.undofile=true
 
 vim.g.mapleader=" "
+
