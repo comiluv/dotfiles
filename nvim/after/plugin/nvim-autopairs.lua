@@ -42,7 +42,7 @@ end
 
 -- auto addspace on =
 npairs.add_rules({
-	Rule("=", "")
+	Rule("=", "", "-gitattributes")
 		:with_pair(cond.not_inside_quote())
 		:with_pair(function(opts)
 			local last_char = opts.line:sub(opts.col - 1, opts.col - 1)
@@ -125,3 +125,4 @@ npairs.add_rule(Rule("[%(%{%[]", "")
 		-- Do not endwise if there is no closing
 		return get_closing_for_line(opts.line) ~= ""
 	end))
+
