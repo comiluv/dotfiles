@@ -1,5 +1,7 @@
+local ok, cmp_autopairs = pcall(require,'nvim-autopairs.completion.cmp')
+if not ok then return end
+
 -- If you want insert `(` after select function or method item
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 local cmp = require('cmp')
 cmp.event:on(
   'confirm_done',
@@ -44,3 +46,4 @@ cmp.event:on(
     }
   })
 )
+

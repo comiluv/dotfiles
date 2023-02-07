@@ -1,3 +1,6 @@
+local ok, barbecue_ui = pcall(require, "barbecue.ui")
+if not ok then return end
+
 local events = {
 	"BufWinEnter",
 	"CursorHold",
@@ -11,6 +14,7 @@ end
 vim.api.nvim_create_autocmd(events, {
 	group = vim.api.nvim_create_augroup("barbecue.updater", {}),
 	callback = function()
-		require("barbecue.ui").update()
+		barbecue_ui.update()
 	end,
 })
+

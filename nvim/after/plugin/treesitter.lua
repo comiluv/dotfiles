@@ -1,4 +1,7 @@
-require'nvim-treesitter.configs'.setup {
+local ok, tsc = pcall(require, "nvim-treesitter.configs")
+if not ok then return end
+
+tsc.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
   ensure_installed = { "pascal", "python", "help", "javascript", "typescript", "cpp", "c", "lua", "rust", "vim" },
 
@@ -43,3 +46,4 @@ require'nvim-treesitter.configs'.setup {
   autotag = { enable = true, }, -- "windwp/nvim-ts-autotag",
   markid = { enable = true, }, -- "windwp/nvim-ts-autotag",
 }
+
