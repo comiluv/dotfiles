@@ -1,3 +1,5 @@
+-- Powershell fortune: https://www.bgreco.net/fortune
+-- fortune.txt.dat is produced in WSL
 local handle = assert(io.popen("fortune.ps1|cowsay -W 120 --random", "r"))
 local fortune_raw = assert(handle:read("*a"))
 handle:close()
