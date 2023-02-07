@@ -31,6 +31,9 @@ return {
 		},
 	},
 
+    -- AI completion
+    "Exafunction/codeium.vim",
+
 	-- debug adapater protocol
 	"mfussenegger/nvim-dap",
 
