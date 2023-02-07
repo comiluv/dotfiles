@@ -108,10 +108,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
-
--- Remap in case ESC key input is needed
-vim.keymap.set("t", [[<A-\>]], "<Esc>")
+vim.keymap.set("t", [[<A-\>]], [[<C-\><C-n>]])
 
 -- Move out from terminal window with alt key shortcuts
 vim.keymap.set("t", "<A-h>", [[<C-\><C-n><C-w>h]])
@@ -131,3 +128,4 @@ vim.keymap.set("n", "<Leader><Leader>", "<C-^>", {desc = "Switch buffer"})
 vim.keymap.set("c", "!", function()
     return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
 end, { expr = true })
+
