@@ -4,7 +4,12 @@ if not ok then return end
 local startify = require("alpha.themes.startify")
 -- Powershell fortune: https://www.bgreco.net/fortune
 -- fortune.txt.dat is produced in WSL
-local handle = assert(io.popen("fortune.ps1|cowsay -W 120 --random", "r"))
+local handle
+if vim.fn.has('win32') == 1 then
+    handle = assert(io.popen("fortune.ps1|cowsay -W 120 --random", "r"))
+else
+    handle = assert(io.popen("fortune|cowsay -W 120 --random", "r"))
+end
 local fortune_raw = assert(handle:read("*a"))
 handle:close()
 
