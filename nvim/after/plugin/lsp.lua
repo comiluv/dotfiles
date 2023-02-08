@@ -44,7 +44,7 @@ cmp_mappings['<S-Tab>'] = nil
 
 -- fix lsp-zero auto selecting first item: https://stackoverflow.com/questions/74688630/make-nvim-cmp-not-autoselect-the-1st-option
 lsp.setup_nvim_cmp({
-    preselect = 'none',
+    preselect = cmp.PreselectMode.None,
     mapping = cmp_mappings,
     completion = {
         completeopt = 'menu,menuone,noinsert,noselect',
