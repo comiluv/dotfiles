@@ -1,7 +1,35 @@
-#!/bin/sh
+#!/usr/bin/bash
+
+# make sure to run this script as user
+cd ~
+
+# install locale
+sudo locale-gen "en_US.UTF-8"
+sudo dpkg-reconfigure locales
+sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
 
 # Update mirror to use Kakao server
 sudo sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+
+# make some dirs
+mkdir -p ~/.local/bin
+mkdir ~/.config
+
+# setup git
+echo Input git username
+read gitname
+echo Input git email
+read gitemail
+git config --global user.name $gitname
+git config --global user.email $gitemail
+git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"
+
+# setup vim
+git clone https://github.com/comiluv/dotfiles ~/dotfiles
+ln -s ~/dotfiles/.vim ~/.config/.vim
+ln -s ~/dotfiles/nvim ~/.config/nvim
+touch ~/.vimrc
+echo 'source ~/.config/.vim/vimrc' >> ~/.vimrc
 
 # Add git ppa repo
 sudo add-apt-repository ppa:git-core/ppa -y
@@ -15,35 +43,37 @@ sudo add-apt-repositry ppa:jonathonf/vim -y
 # Add neovim ppa repo
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 
-# Add exa ppa repo
-sudo add-apt-repository ppa:spvkgn/exa -y
-
-# Add ubuntu gcc toolchain
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-
 # Update packages
 sudo apt update && sudo apt upgrade -y
 
 # Install most softwares
-sudo apt install software-properties-common python3.9 python3-pip vim neovim exa bat gcc-11 g++-11 zsh -y
+sudo apt install gcc gdb neovim zsh fd-find ripgrep fortune-mod -y
 
-# Install ripgrep
-sudo apt install -o Dpkg::Options::="--force-overwrite" bat ripgrep -y
+# Install neo-cowsay
+wget https://github.com/Code-Hex/Neo-cowsay/releases/download/v2.0.4/Neo-cowsay_2.0.4_linux_amd64.deb
+sudo apt install ./Neo-cowsay_2.0.4_linux_amd64.deb
+rm Neo-cowsay_2.0.4_linux_amd64.deb
 
-# Upgrade pip3
-curl https://bootstrap.pypa.io/get-pip.py -o ~/get-pip.py
-sudo python3.9 ~/get-pip.py
+# Install fd
+ln -s $(which fdfind) ~/.local/bin/fd
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install oh-my-zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/jeffreytse/zsh-vi-mode $ZSH/custom/plugins/zsh-vi-mode
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Set zsh as default shell
-sudo chsh -s $(which zsh)
+chsh -s $(which zsh)
+
+print "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
+
+sed -i 's/plugins=\(git\)/plugins=\(git zsh-autosugesstions\)/g' ~/.zshrc
+
+exec zsh
+
+p10k configure
 
