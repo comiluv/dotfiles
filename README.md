@@ -16,3 +16,5 @@ Powershell:
 ```powershell
 New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
 ```
+### setup.sh
+Useful Ubuntu bootstrap commands in case I reinstall wsl
