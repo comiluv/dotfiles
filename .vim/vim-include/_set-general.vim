@@ -23,6 +23,7 @@ set expandtab
 set smartindent
 set complete-=i
 set number
+set relativenumber
 set nrformats-=octal
 set wrap linebreak nolist
 set hlsearch
