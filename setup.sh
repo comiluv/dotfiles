@@ -71,5 +71,5 @@ chsh -s $(which zsh)
 
 # configure .zshrc
 printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
-sed -i 's/plugins=\(git\)/plugins=\(git zsh-autosugesstions\)/g' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git zsh-autosugesstions)/g' ~/.zshrc
 
