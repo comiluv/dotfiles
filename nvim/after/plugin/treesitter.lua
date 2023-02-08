@@ -3,7 +3,7 @@ if not ok then return end
 
 tsc.setup {
   -- A list of parser names, or "all" (the four listed parsers should always be installed)
-  ensure_installed = { "pascal", "python", "help", "javascript", "typescript", "cpp", "c", "lua", "rust", "vim" },
+  ensure_installed = { "help", "c", "lua", "vim" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
