@@ -1,8 +1,12 @@
-" TrimWhitespace from youtube: https://youtu.be/DogKdiRx7ls
 function! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
+	if &ft =~ 'markdown\|ruby\|javascript\|perl'
+		return
+	end
+	let l:save = winsaveview()
+	keepjumps keeppatterns %s/\s\+$//e
+    keepjumps keeppatterns silent! 0;/^\%(\_s*\S\)\@!/,$d
+    keepjumps keeppatterns $put _
+	call winrestview(l:save)
 endfunction
 
 function! SetUnsetQShortcut()
@@ -15,7 +19,7 @@ endfunction
 
 augroup COMILUV
     autocmd!
-    "autocmd BufWritePre * :call TrimWhitespace()
+    autocmd BufWritePre * :call TrimWhitespace()
     " Return to last edit position when opening files
     " It's some magic I picked up somewhere, no idea how it works
     " or what alternatives are out there
@@ -23,7 +27,7 @@ augroup COMILUV
     " Remove auto commenting when pressing o or O
     autocmd FileType * set formatoptions-=ro
     "autocmd BufEnter * :call SetUnsetQShortcut()
-    autocmd FileType help nnoremap <buffer> q :q<CR>
+    autocmd FileType help,qf,man,notify,fugitive nnoremap <buffer> q :q<CR>
     " Auto toggle cursorline
     autocmd InsertLeave,WinEnter * set cursorline
     autocmd InsertEnter,WinLeave * set nocursorline

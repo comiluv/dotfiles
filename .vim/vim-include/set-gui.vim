@@ -79,10 +79,5 @@ if !exists('g:vscode')
         set termguicolors
     endif
     set background=dark
-    if has('nvim')
-        let g:vscode_style = "dark"
-        colorscheme vscode
-    else
-        colorscheme dark_plus
-    endif
+    colorscheme dark_plus
 endif

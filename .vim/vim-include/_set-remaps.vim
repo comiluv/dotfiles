@@ -1,6 +1,7 @@
 " Remaps for plugins are inside individual set-pluginname.vim files
 
 let mapleader="\<Space>"
+nnoremap <leader>pv :Ex<CR>
 
 " No arrow keys --- force yourself to use the home row
 	"InsertLeave",
@@ -46,8 +47,8 @@ inoremap <C-W> <C-G>u<C-W>
 
 " Allow easy navigation between wrapped lines.
 " Merged this to jumplist modification below
-"nmap j gj
-"nmap k gk
+nmap j gj
+nmap k gk
 vnoremap j gj
 vnoremap k gk
 
@@ -68,8 +69,6 @@ nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'gk'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'gj'
 
 " Conveniently move lines up and down with ctrl+j and ctrl+k
-"nnoremap <C-j> :m .+1<CR>==
-"nnoremap <C-k> :m .-2<CR>==
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -139,3 +138,15 @@ nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR
 " fix & command Practical Vim tip 93
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
+
+" replace whatever was on the cursor
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" open help about word on cursor by pressing <F1>
+nnoremap <F1> :help <C-R><C-W><CR>
+cmap <F1> <ESC><F1>
+imap <F1> <ESC><F1>
+vmap <F1> <ESC><F1>
+
+" do not mark entire buffer when :w
+cnoremap <expr>w getcmdtype() == ':' ? (getcmdpos() == 1 ? 'lockmarks w' : 'w') : 'w'

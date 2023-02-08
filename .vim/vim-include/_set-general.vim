@@ -25,15 +25,12 @@ set complete-=i
 set number
 set nrformats-=octal
 set wrap linebreak nolist
-set nohlsearch
+set hlsearch
 set incsearch
 set ignorecase
 set smartcase
-if has('nvim')
-    set inccommand=nosplit
-endif
-set scrolloff=8
-set sidescrolloff=5
+set scrolloff=4
+set sidescrolloff=4
 set display+=lastline
 set hidden
 set ruler
@@ -49,12 +46,7 @@ set signcolumn=yes
 set laststatus=2
 set ttyfast
 set title
-if !has('nvim')
-    set lazyredraw
-endif
-if exists('g:neovide')
-    set notitle
-endif
+set lazyredraw
 set showcmd
 set mouse=a
 set cursorline
