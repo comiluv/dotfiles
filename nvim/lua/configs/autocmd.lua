@@ -90,6 +90,7 @@ autocmd("BufWritePre",{
     group = TrimGroup,
     pattern ="*",
     callback = function()
+        if vim.bo.filetype == "markdown" then return end
         local register = vim.fn.getreg('/')
         local save_pos = vim.fn.getpos('.')
         vim.cmd[[keeppatterns keepjumps %s/\s\+$//e]]   -- trim right

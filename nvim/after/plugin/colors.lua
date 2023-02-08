@@ -1,4 +1,4 @@
-local ok, onedark = pcall(require, "onedark")
+local ok, _ = pcall(require, "onedark")
 if not ok then return end
 
 function ColorMyPencils(color)
@@ -7,3 +7,4 @@ function ColorMyPencils(color)
 end
 
 ColorMyPencils()
+
