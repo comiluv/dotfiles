@@ -48,7 +48,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update && sudo apt upgrade -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb python3-pip neovim unzip fd-find ripgrep zsh fortune-mod -y
+sudo apt install gcc g++ gdb python3-pip python3-venv neovim unzip fd-find ripgrep zsh fortune-mod -y
 
 # Install neo-cowsay
 wget https://github.com/Code-Hex/Neo-cowsay/releases/download/v2.0.4/Neo-cowsay_2.0.4_linux_amd64.deb
@@ -72,7 +72,7 @@ sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.zshrc
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
-# install npm
+# install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 # restart shell
