@@ -1,6 +1,6 @@
-#!/usr/bin/bash
+#!/usr/bin/bash -x
 
-# make sure to run this script as user
+# make sure to run this script as user after doing chmod +x filename
 cd ~
 
 # install locale
@@ -38,7 +38,7 @@ sudo add-apt-repository ppa:git-core/ppa -y
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 
 # Add vim ppa repo
-sudo add-apt-repositry ppa:jonathonf/vim -y
+sudo add-apt-repository ppa:jonathonf/vim -y
 
 # Add neovim ppa repo
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
@@ -69,11 +69,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # Set zsh as default shell
 chsh -s $(which zsh)
 
-print "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
-
+# configure .zshrc
+printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
 sed -i 's/plugins=\(git\)/plugins=\(git zsh-autosugesstions\)/g' ~/.zshrc
-
-exec zsh
-
-p10k configure
 
