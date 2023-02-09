@@ -48,7 +48,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update && sudo apt upgrade -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb python3-pip python3-venv neovim unzip fd-find ripgrep zsh jq fortune-mod -y
+sudo apt install gcc g++ gdb python3-pip python3-venv neovim unzip fd-find ripgrep silversearcher-ag bat zsh jq fortune-mod -y
 
 # Install neo-cowsay
 wget https://github.com/Code-Hex/Neo-cowsay/releases/download/v2.0.4/Neo-cowsay_2.0.4_linux_amd64.deb
