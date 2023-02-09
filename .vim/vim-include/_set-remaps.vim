@@ -14,7 +14,7 @@ inoremap <right> <nop>
 
 " Remap Alt key combinations to M combinations in wsl2 / Ubuntu
 " https://github.com/vim/vim/issues/8726
-if has('unix') && !has('nvim') " Only works in unix (and not in Windows) Vim and neoVim doesn't need this
+if has('unix') && !has('nvim') " Only works in unix Vim (and not in Windows) and neoVim doesn't need this
     execute "set <M-e>=\<Esc>e"
     execute "set <M-p>=\<Esc>p"
     execute "set <M-n>=\<Esc>n"
@@ -25,10 +25,10 @@ endif
 
 " Don't use Ex mode, use Q for formatting.
 " Revert with ":unmap Q".
-map Q gq
+nnoremap Q gq
 
 " Y to copy from cursor to $, as C and D
-nmap Y y$
+nnoremap Y y$
 
 " n N J are centered
 "nnoremap n nzzzv " found these two to be actually annoying
@@ -47,8 +47,8 @@ inoremap <C-W> <C-G>u<C-W>
 
 " Allow easy navigation between wrapped lines.
 " Merged this to jumplist modification below
-nmap j gj
-nmap k gk
+nnoremap j gj
+nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
@@ -110,7 +110,7 @@ vnoremap <leader>d "_d
 " also note below is taken from book Practical Vim 2nd edition which should be
 " update of this remap
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-map <leader>e :e %%
+noremap <leader>e :e %%
 
 " Prevent common mistake of pressing q: instead :q
 "map q: :q
@@ -150,3 +150,4 @@ vmap <F1> <ESC><F1>
 
 " do not mark entire buffer when :w
 cnoremap <expr>w getcmdtype() == ':' ? (getcmdpos() == 1 ? 'lockmarks w' : 'w') : 'w'
+
