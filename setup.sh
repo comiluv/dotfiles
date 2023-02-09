@@ -75,19 +75,18 @@ sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 # use Windows Explorer with ii
 ln -s /mnt/c/Windows/explorer.exe ~/.local/bin/ii
 
-# make a tempfile to run zsh and install nvm in it
-tempfile=$(mktemp)
 # temporarily remove Windows path from wsl
 # see https://stackoverflow.com/questions/51336147/how-to-remove-the-win10s-path-from-wsl
-cat > $tempfile <<EOF
-#!/usr/bin/zsh
 PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mnt\/[a-z]/ } split(/:/));')
 
 # install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-EOF
 
-chmod +x $tempfile
-$tempfile
-rm $tempfile
+# copy paste NVM environment vars to .zshrc
+cat >> ~/.zshrc << EOF
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+EOF
 
