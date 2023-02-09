@@ -7,3 +7,6 @@ vim.keymap.set('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end, {desc = "Grep string"})
 
+require'telescope'.setup{}
+require'telescope'.load_extension('fzf')
+
