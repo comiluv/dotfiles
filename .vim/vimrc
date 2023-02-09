@@ -51,8 +51,8 @@ endif
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
-Plug 'jungunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'jungunn/fzf.vim',
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim',
 Plug 'dunstontc/vim-vscode-theme',
 Plug 'jiangmiao/auto-pairs',
 Plug 'tpope/vim-endwise'

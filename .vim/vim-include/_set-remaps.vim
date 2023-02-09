@@ -3,15 +3,6 @@
 let mapleader="\<Space>"
 nnoremap <leader>pv :Ex<CR>
 
-" No arrow keys --- force yourself to use the home row
-	"InsertLeave",
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-
 " Remap Alt key combinations to M combinations in wsl2 / Ubuntu
 " https://github.com/vim/vim/issues/8726
 if has('unix') && !has('nvim') " Only works in unix Vim (and not in Windows) and neoVim doesn't need this
@@ -110,7 +101,7 @@ vnoremap <leader>d "_d
 " also note below is taken from book Practical Vim 2nd edition which should be
 " update of this remap
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-noremap <leader>e :e %%
+map <leader>e :e %%
 
 " Prevent common mistake of pressing q: instead :q
 "map q: :q
