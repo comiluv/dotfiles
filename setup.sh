@@ -65,13 +65,29 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # configure .zshrc
-printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
+printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n\nalias v='nvim'\n" >> ~/.zshrc
 sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.zshrc
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
+# use Windows Explorer with ii
+ln -s /mnt/c/Windows/explorer.exe ~/.local/bin/ii
+
+# make a tempfile to run zsh and install nvm in it
+tempfile=$(mktemp)
+# temporarily remove Windows path from wsl
+# see https://stackoverflow.com/questions/51336147/how-to-remove-the-win10s-path-from-wsl
+cat > $tempfile <<EOF
+#!/usr/bin/zsh
+PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mnt\/[a-z]/ } split(/:/));')
+
 # install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+EOF
+
+chmod +x $tempfile
+$tempfile
+rm $tempfile
 
