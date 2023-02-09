@@ -1,7 +1,11 @@
 -- it'll also be used for C++
 
 -- pressing F5 will call make to compile it
-vim.keymap.set("n", "<F5>", ":<C-u>w!<bar>make %<<CR>", { buffer = true })
+if vim.fn.has("win32") == 1 then
+    vim.keymap.set("n", "<F5>", ":<C-u>w<bar>te nmake %<.exe<CR>", { buffer = true })
+else
+    vim.keymap.set("n", "<F5>", ":<C-u>w<bar>make %<<CR>", { buffer = true })
+end
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
 -- and press F5 in normal mode
