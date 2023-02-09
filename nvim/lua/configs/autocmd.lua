@@ -95,7 +95,7 @@ autocmd("BufWritePre",{
         local save_pos = vim.fn.getpos('.')
         vim.cmd[[keeppatterns keepjumps %s/\s\+$//e]]   -- trim right
         vim.cmd[[keeppatterns keepjumps silent! 0;/^\%(\_s*\S\)\@!/,$d]]   -- trim below
-        vim.cmd[[undojoin | keeppatterns keepjumps $put _]]    -- add one blank line
+        vim.cmd[[keeppatterns keepjumps $put _]]    -- add one blank line
         vim.fn.setreg('/', register)
         vim.fn.setpos('.', save_pos)
     end
