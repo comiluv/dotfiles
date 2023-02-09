@@ -42,7 +42,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
--- fix lsp-zero auto selecting first item: https://stackoverflow.com/questions/74688630/make-nvim-cmp-not-autoselect-the-1st-option
+-- fix lsp-zero auto selecting first item: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/advance-usage.md#dont-preselect-first-match
 lsp.setup_nvim_cmp({
     preselect = cmp.PreselectMode.None,
     mapping = cmp_mappings,
