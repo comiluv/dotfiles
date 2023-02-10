@@ -78,7 +78,7 @@ vim.opt.foldexpr="nvim_treesitter#foldexpr()"
 vim.opt.foldlevel=99
 
 -- Default path for MSVS 2002 Community Edition
-if vim.fn.has("win32") then
+if vim.fn.has("win32")==1 then
     vim.env.CC = "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe"
 end
 
