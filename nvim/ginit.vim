@@ -5,8 +5,8 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont CaskaydiaMono NFM:h09:Consolas:h09
-    set guifontwide=consolas
+    GuiFont CaskaydiaMono NFM:h09
+    set guifontwide=Noto\ Sans\ Mono\ CJK\ KR
     let s:fontsize = 09
 endif
 
