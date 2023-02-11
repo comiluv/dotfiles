@@ -2,14 +2,14 @@
 
 -- pressing F5 will call make to compile it
 if vim.fn.has("win32") == 1 then
-    vim.keymap.set("n", "<F5>", ":<C-u>w<bar>te nmake %<.exe<CR>", { buffer = true })
+	vim.keymap.set("n", "<F5>", ":<C-u>w<bar>te nmake %<.exe<CR>", { buffer = true })
 else
-    vim.keymap.set("n", "<F5>", ":<C-u>w<bar>make %<<CR>", { buffer = true })
+	vim.keymap.set("n", "<F5>", ":<C-u>w<bar>make %<<CR>", { buffer = true })
 end
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
 -- and press F5 in normal mode
-vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { buffer =true, remap = true })
+vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true })
 
 -- pressing f8 will run the executable
 if vim.fn.has("win32") == 1 then
@@ -24,9 +24,16 @@ end
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
 -- mode and press F8
-vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer =true, remap = true })
+vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
 
 -- flags
-vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
-vim.env.CXXFLAGS = vim.env.CFLAGS
+if vim.fn.has("unix")==1 then
+    -- gcc flags
+	vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
+	vim.env.CXXFLAGS = "-Werror -Wall -Wextra -pedantic -g -std=c++17"
+else
+    -- cl flags
+	vim.env.CFLAGS = "/WX /Wall /Zi"
+	vim.env.CXXFLAGS = "/WX /Wall /Zi /std:c++latest"
+end
 
