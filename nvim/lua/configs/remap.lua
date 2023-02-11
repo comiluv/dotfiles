@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, {desc = "Open Netrw"})
-
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open Netrw" })
 
 -- No arrow keys --- force yourself to use the home row
 vim.keymap.set("n", "<up>", "<nop>")
@@ -54,24 +53,24 @@ vim.keymap.set("i", "<S-Tab>", function()
 end, { expr = true })
 
 -- delete selection and put without yanking selection
-vim.keymap.set("x", "<leader>p", [["_dP"]], {desc = "Delete selection"})
+vim.keymap.set("x", "<leader>p", [["_dP"]], { desc = "Delete selection" })
 
 -- yank to clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {desc="Yank to clipboard"})
-vim.keymap.set("n", "<leader>Y", [["+Y]], {desc="Yank to clipboard"})
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank to clipboard" })
 
 -- delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], {desc="Delete to blackhole"})
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole" })
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
 -- also note below is taken from book Practical Vim 2nd edition which should be
 -- update of this remap
 vim.keymap.set("c", "%%", function()
-    return vim.fn.getcmdtype() == ':' and vim.fn.expand("%:h") .. "/" or "%%"
+    return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
 end, { expr = true })
-vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file"})
-vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file"})
+vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file" })
+vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
 
 -- Allow for easy copying and pasting
 vim.keymap.set("v", "y", "y`]", { silent = true })
@@ -95,16 +94,16 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-c>", "<Esc>")
 
 -- lsp format
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {desc = "Format buffer"})
+vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ timeout_ms = 10000 }) end, { desc = "Format buffer" })
 
 -- quickfix navigation
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")
-vim.keymap.set("n", "<leader>j", ":lnext<CR>zz", {desc = "Next Location"})
-vim.keymap.set("n", "<leader>k", ":lprev<CR>zz", {desc = "Previous Location"})
+vim.keymap.set("n", "<leader>j", ":lnext<CR>zz", { desc = "Next Location" })
+vim.keymap.set("n", "<leader>k", ":lprev<CR>zz", { desc = "Previous Location" })
 
 -- replace whatever was on the cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = "Replace cursor"})
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace cursor" })
 
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
@@ -122,7 +121,7 @@ vim.keymap.set("c", "w", function()
 end, { expr = true })
 
 -- Switch between the last two files
-vim.keymap.set("n", "<Leader><Leader>", "<C-^>", {desc = "Switch buffer"})
+vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { desc = "Switch buffer" })
 
 -- Remap !:cmd to terminal cmd
 vim.keymap.set("c", "!", function()
@@ -130,6 +129,6 @@ vim.keymap.set("c", "!", function()
 end, { expr = true })
 
 -- open help about word on cursor by pressing <F1>
-vim.keymap.set("n", "<F1>", ":help <C-R><C-W><CR>", {silent = true,})
-vim.keymap.set({"c","i","v"}, "<F1>", "<ESC><F1>", {silent = true, remap = true,})
+vim.keymap.set("n", "<F1>", ":help <C-R><C-W><CR>", { silent = true })
+vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = true })
 
