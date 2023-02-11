@@ -79,7 +79,7 @@ vim.keymap.set("n", "p", "p`]", { silent = true })
 vim.keymap.set("n", "P", "P`]", { silent = true })
 
 -- Visually select the text that was last edited/pasted (Vimcast#26).
-vim.keymap.set("", "gV", "`[v`]")
+vim.keymap.set("n", "gV", "`[v`]")
 
 -- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
 -- help you not the other way around. : https://thoughtbot.com/upcase/vim
