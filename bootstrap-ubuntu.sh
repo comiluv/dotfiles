@@ -58,6 +58,10 @@ rm Neo-cowsay_2.0.4_linux_amd64.deb
 # Install fd
 ln -s $(which fdfind) ~/.local/bin/fd
 
+# setup some symlinks
+ln -s /usr/bin/nvim ~/.local/bin/v
+ln -s /bin/batcat ~/.local/bin/bat
+
 # use Windows Explorer with ii
 ln -s /mnt/c/Windows/explorer.exe ~/.local/bin/ii
 
@@ -82,7 +86,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 # configure .zshrc
-printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n\nalias v='nvim'\n" >> ~/.zshrc
+printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k

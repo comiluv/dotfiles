@@ -6,6 +6,7 @@ set mouse=a
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
     GuiFont CaskaydiaMono NFM:h09
+    " Fallback font for CJK characters
     set guifontwide=Noto\ Sans\ Mono\ CJK\ KR
     let s:fontsize = 09
 endif
@@ -34,7 +35,7 @@ snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 " change font size with Ctrl + mouse-wheel
 function! AdjustFontSize(amount)
     let s:fontsize = s:fontsize+a:amount
-    :execute "GuiFont! CaskaydiaMonoPL NFM:h" . s:fontsize
+    :execute "GuiFont! CaskaydiaMono NFM:h" . s:fontsize
 endfunction
 noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
 noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
