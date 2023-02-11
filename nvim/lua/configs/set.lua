@@ -1,6 +1,10 @@
 -- Suppress Alt keys in Windows so it can be used as shortcuts
 vim.opt.winaltkeys="no"
-vim.g.python3_host_prog = "C:\\Python311\\python.exe"
+if vim.fn.has('unix') == 1 then
+    vim.g.python3_host_prog = "/usr/bin/python3"
+else
+    vim.g.python3_host_prog = "C:\\Python311\\python.exe"
+end
 
 -- Some settings picked up from internet
 vim.opt.shiftwidth=4
