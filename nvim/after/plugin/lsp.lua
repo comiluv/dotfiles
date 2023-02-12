@@ -40,11 +40,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-Space>'] = cmp.mapping.complete(),
 })
 
--- disable completion with tab
--- this helps with copilot setup
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
 local luasnip = require'luasnip'
 cmp_mappings['<Tab>'] = cmp.mapping(function(fallback)
@@ -54,9 +49,6 @@ cmp_mappings['<Tab>'] = cmp.mapping(function(fallback)
         -- they way you will only jump inside the snippet region
     elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-        -- check if codeium is enabled and try to use codeium data
-    elseif vim.g.codeium_enabled == true then
-        vim.api.nvim_feedkeys(fn['codeium#Accept'](), 'i', true)
     else
         fallback()
     end
