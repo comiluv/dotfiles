@@ -40,12 +40,9 @@ return {
     'mfussenegger/nvim-jdtls',
 
 	-- AI completion
-    {
-        "Exafunction/codeium.vim",
-        config = function()
-            vim.g.codeium_enabled = false
-        end,
-    },
+	{
+        -- "Exafunction/codeium.vim",
+	},
 
 	-- debug adapater protocol
 	"mfussenegger/nvim-dap",
