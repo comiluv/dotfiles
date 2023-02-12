@@ -10,8 +10,8 @@ end
 
 -- pressing f8 will run the file
 -- if I find out how to send output to terminal using :pyfile, will switch to the version below
-vim.keymap.set("n", "<F8>", ":<C-u>w!<CR>:cd %:p:h<CR>:exec 'term " .. py .. "' shellescape(@%)<CR>", { buffer = true })
--- vim.keymap.set("n", "<F8>", ":<C-u>w!<CR>:cd %:h<CR>:pyfile %<CR>", { buffer = true })
+vim.keymap.set("n", "<F8>", ":<C-u>w!<BAR>:cd %:p:h<BAR>:exec 'term " .. py .. "' shellescape(@%)<CR>", { buffer = true })
+-- vim.keymap.set("n", "<F8>", ":<C-u>w!<BAR>:cd %:h<BAR>:pyfile %<CR>", { buffer = true })
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
 -- mode and press F8
