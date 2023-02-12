@@ -2,9 +2,9 @@
 
 -- pressing F5 will call make to compile it
 if vim.fn.has("win32") == 1 then
-	vim.keymap.set("n", "<F5>", ":<C-u>w<bar>te nmake %<.exe<CR>", { buffer = true })
+	vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<Cr>:<C-u>w<bar>te nmake %<.exe<CR>", { buffer = true })
 else
-	vim.keymap.set("n", "<F5>", ":<C-u>w<bar>make %<<CR>", { buffer = true })
+	vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<Cr>:<C-u>w<bar>make %<<CR>", { buffer = true })
 end
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
@@ -14,12 +14,12 @@ vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true 
 -- pressing f8 will run the executable
 if vim.fn.has("win32") == 1 then
 	if vim.o.shell == "cmd.exe" then
-		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+		vim.keymap.set("n", "<f8>", ":<C-u>cd %:p:h<Cr>:<C-u>exec 'term' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
 	else
-		vim.keymap.set("n", "<f8>", ":<C-u>exec 'term &' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
+		vim.keymap.set("n", "<f8>", ":<C-u>cd %:p:h<Cr>:<C-u>exec 'term &' shellescape(expand('%<')..'.exe')<CR>", { buffer = true })
 	end
 else
-	vim.keymap.set("n", "<f8>", ":<C-u>exec 'term' shellescape('./'..expand('%<'))<CR>", { buffer = true })
+	vim.keymap.set("n", "<f8>", ":<C-u>cd %:p:h<Cr>:<C-u>exec 'term' shellescape('./'..expand('%<'))<CR>", { buffer = true })
 end
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
