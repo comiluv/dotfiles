@@ -24,6 +24,7 @@ read gitemail
 git config --global user.name $gitname
 git config --global user.email $gitemail
 git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager-core.exe"
+git config --global core.editor "nvim"
 
 # setup vim
 git clone https://github.com/comiluv/dotfiles ~/dotfiles
@@ -45,7 +46,7 @@ sudo add-apt-repository ppa:jonathonf/vim -y
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 
 # Update packages
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt dist-upgrade -y
 
 # Install most softwares
 sudo apt install gcc g++ gdb python3-pip python3-venv neovim unzip fd-find ripgrep silversearcher-ag bat zsh jq fortune-mod -y
