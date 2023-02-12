@@ -41,7 +41,10 @@ return {
 
 	-- AI completion
 	{
-        -- "Exafunction/codeium.vim",
+	    "Exafunction/codeium.vim",
+	    config = function()
+	    	vim.g.codeium_enabled = false
+	    end,
 	},
 
 	-- debug adapater protocol
