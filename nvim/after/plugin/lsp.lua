@@ -26,6 +26,8 @@ lsp.configure('grammarly',{
     filetypes = {"markdown", "text"},
 })
 
+lsp.skip_server_setup({'jdtls',})
+
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -106,6 +108,6 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = false,
+    virtual_text = true,
 })
 

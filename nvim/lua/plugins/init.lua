@@ -36,6 +36,9 @@ return {
 		},
 	},
 
+    -- java language server because lsp-zero (and lspconfig to extent) doesn't work
+    'mfussenegger/nvim-jdtls',
+
 	-- AI completion
     {
         "Exafunction/codeium.vim",
