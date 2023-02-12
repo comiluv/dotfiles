@@ -1,5 +1,6 @@
+local ok, types = pcall(require, 'luasnip.util.types')
+if not ok then return end
 -- https://github.com/L3MON4D3/LuaSnip/wiki/Nice-Configs
-local types = require("luasnip.util.types")
 
 require'luasnip'.config.setup({
 	ext_opts = {
