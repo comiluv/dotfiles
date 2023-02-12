@@ -26,6 +26,7 @@ lsp.configure('grammarly',{
     filetypes = {"markdown", "text"},
 })
 
+-- Have to do this or lsp-zero won't let nvim-jdtls handle jdtls
 lsp.skip_server_setup({'jdtls',})
 
 local cmp = require('cmp')

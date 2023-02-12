@@ -9,6 +9,8 @@ vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = 'C:\\code\\java_headfirst\\' .. project_name
 
+-- https://github.com/mfussenegger/nvim-jdtls#Configuration-verbose
+-- Only verbose config version works. Quickstart doens't work
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
     -- The command that starts the language server
@@ -70,6 +72,7 @@ local config = {
     },
 }
 
+-- Manually copy pasted remaps from lsp.lua because lsp-zero doesn't run jdtls
 config['on_attach'] = function(client, bufnr)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
         { buffer = bufnr, desc = "Go to definition" })
