@@ -1,11 +1,11 @@
 " it'll also be used for C++
-nnoremap <buffer> <F5> :<C-u>w!<bar>!make %<<CR>
+nnoremap <buffer> <F5> :<C-u>cd %:p:h<CR>:w!<CR>!make %<<CR>
 imap <F5> <ESC><F5>
 vmap <F5> <ESC><F5>
 if has('win32')
-    nnoremap <buffer> <F8> :<C-u>term %<<CR>
+    nnoremap <buffer> <F8> :<C-u>cd %:p:h<CR>:term %<<CR>
 else
-    nnoremap <buffer> <F8> :<C-u>term ./%<<CR>
+    nnoremap <buffer> <F8> :<C-u>cd %:p:h<CR>:term ./%<<CR>
 endif
 imap <F8> <ESC><F8>
 vmap <F8> <ESC><F8>
@@ -18,3 +18,4 @@ let $CFLAGS='-g -W -Wall -Wextra -pedantic'
 
 " C++ header folder for the book PPAPUCPP
 let $CPLUS_INCLUDE_PATH.=expand('$HOME/ppapucpp/Programming-_Principles_and_Practice_Using_Cpp')
+
