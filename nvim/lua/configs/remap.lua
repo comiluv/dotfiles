@@ -97,10 +97,10 @@ vim.keymap.set("n", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ timeout_ms = 10000 }) end, { desc = "Format buffer" })
 
 -- quickfix navigation
-vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
-vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")
-vim.keymap.set("n", "<leader>j", ":lnext<CR>zz", { desc = "Next Location" })
-vim.keymap.set("n", "<leader>k", ":lprev<CR>zz", { desc = "Previous Location" })
+vim.keymap.set("n", "<C-k>", ":cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", ":cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", ":lnext<CR>zz", { desc = "Next Location" })
+vim.keymap.set("n", "<leader>j", ":lprev<CR>zz", { desc = "Previous Location" })
 
 -- replace whatever was on the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace cursor" })
