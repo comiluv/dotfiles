@@ -87,7 +87,7 @@ lsp.on_attach(function(client, bufnr)
     { buffer = bufnr, desc = "Go to definition"})
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
     { buffer = bufnr, desc = "Go to implementation"})
-    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references(),
+    vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references,
     { buffer = bufnr, desc = "Go to references"})
     vim.keymap.set("n", "K", vim.lsp.buf.hover,
     { buffer = bufnr, })
