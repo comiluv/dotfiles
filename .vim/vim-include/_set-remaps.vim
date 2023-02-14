@@ -81,7 +81,7 @@ if has('patch8.1.1068')
     " Use `complete_info` if your (Neo)Vim version supports it.
     inoremap <expr> <cr> complete_info()["selected"] != "-1" ? SendCY() : SendCR()
 else
-    imap <expr> <cr> pumvisible() ? SendCY() : SendCR()
+    inoremap <expr> <cr> pumvisible() ? SendCY() : SendCR()
 endif
 
 " delete selection and put without yanking selection

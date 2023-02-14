@@ -16,10 +16,10 @@ endif
 " Some settings picked up from internet
 set autoread
 set autoindent
-set smarttab
-set shiftwidth=4
 set tabstop=4 softtabstop=4
-set expandtab
+set shiftwidth=4
+set noexpandtab
+set smarttab
 set smartindent
 set complete-=i
 set number
@@ -45,6 +45,7 @@ set tabpagemax=100
 set colorcolumn=80
 set signcolumn=yes
 set laststatus=2
+set termguicolors
 set ttyfast
 set title
 set lazyredraw
@@ -120,7 +121,7 @@ if !isdirectory(expand(s:dir))
     call system("mkdir -p " . expand(s:dir) . "/{backup,undo}")
 endif
 set undofile
-set backup
+set nobackup
 set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
 
 " Drop powershell and revert back to cmd for Windows because powershell is too
