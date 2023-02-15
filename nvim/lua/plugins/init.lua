@@ -112,9 +112,14 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
+			-- https://github.com/lukas-reineke/indent-blankline.nvim/issues/539
 			require("indent_blankline").setup({
+				enabled = true,
+				char_blankline = '┆',
 				show_current_context = true,
 				show_current_context_start = true,
+				use_treesitter = false,	-- false because treesitter indentation is still buggy in some languages
+				use_treesitter_scope = true,
 			})
 		end,
 	},
@@ -182,6 +187,14 @@ return {
 	{
 		"navarasu/onedark.nvim",
 		lazy = true,
+		config = function()
+			require("onedark").setup({
+				highlights = {
+					IndentBlanklineContextChar = { fg = "$light_grey", fmt = "nocombine" },
+					IndentBlanklineContextStart = { sp = "$light_grey", fmt = "nocombine,underline" },
+				}
+			})
+		end,
 	},
 	{
 		"svrana/neosolarized.nvim",
