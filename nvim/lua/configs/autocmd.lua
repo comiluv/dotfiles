@@ -93,7 +93,7 @@ autocmd("BufWritePre",{
         if vim.bo.filetype == "markdown" then return end
         local register = vim.fn.getreg('/')
         local save_pos = vim.fn.getpos('.')
-        vim.cmd[[try|undojoin|%s/\s\+$//e|$put _|$put _|$;?\(^\s*$\)\@!?+2,$d|endtry]]
+        vim.cmd[[try|silent! undojoin|%s/\s\+$//e|$put _|$put _|$;?\(^\s*$\)\@!?+2,$d|endtry]]
         vim.fn.setreg('/', register)
         vim.fn.setpos('.', save_pos)
     end
