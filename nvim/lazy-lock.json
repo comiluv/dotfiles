@@ -17,7 +17,7 @@
   "gruvbox-baby": { "branch": "main", "commit": "03c525c6462d51a8b593e4aa3dcd2be2aa8b59ac" },
   "inc-rename.nvim": { "branch": "main", "commit": "21c23c379342a731a0c90f226601ec0434627b26" },
   "indent-blankline.nvim": { "branch": "master", "commit": "8299fe7703dfff4b1752aeed271c3b95281a952d" },
-  "lazy.nvim": { "branch": "main", "commit": "4a0857cc232ddb31f64d1e5f42fd19e09a490f83" },
+  "lazy.nvim": { "branch": "main", "commit": "e916f41df26e33b01f1b3ebe28881090da3a7281" },
   "lazygit.nvim": { "branch": "main", "commit": "32bffdebe273e571588f25c8a708ca7297928617" },
   "lsp-zero.nvim": { "branch": "main", "commit": "d6af8aebb8b64877323f859d842eabdd79d021c3" },
   "lualine.nvim": { "branch": "master", "commit": "e99d733e0213ceb8f548ae6551b04ae32e590c80" },

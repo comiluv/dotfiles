@@ -13,6 +13,18 @@ return {
 
 	{ "nvim-treesitter/nvim-treesitter" },
 
+	-- semantic highlighting
+	"David-Kunz/markid",
+
+	-- auto close parentheses
+	"windwp/nvim-autopairs",
+
+	-- auto close block with end
+	"RRethy/nvim-treesitter-endwise",
+
+	-- auto clost tags
+	"windwp/nvim-ts-autotag",
+
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		dependencies = {
@@ -53,9 +65,6 @@ return {
 	-- inject LSP diagnostics, code actions, formatting etc.
 	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-	-- semantic highlighting
-	"David-Kunz/markid",
-
 	-- show lightbulb where code action can be taken
 	{
 		"kosayoda/nvim-lightbulb",
@@ -75,15 +84,6 @@ return {
 	"kdheepak/lazygit.nvim",
 
 	"tpope/vim-surround",
-
-	-- auto close parentheses
-	"windwp/nvim-autopairs",
-
-	-- auto close block with end
-	"RRethy/nvim-treesitter-endwise",
-
-	-- auto clost tags
-	"windwp/nvim-ts-autotag",
 
 	"mbbill/undotree",
 
