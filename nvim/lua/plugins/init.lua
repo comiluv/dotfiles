@@ -83,7 +83,15 @@ return {
 
 	"kdheepak/lazygit.nvim",
 
-	"tpope/vim-surround",
+	{
+		"kylechui/nvim-surround",
+		version = "*",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
 
 	"mbbill/undotree",
 
@@ -182,6 +190,9 @@ return {
 			})
 		end,
 	},
+
+	-- case preserving replace with :%S command, case-rename-snakecase commands
+	"tpope/vim-abolish",
 
 	-- colorschemes
 	{

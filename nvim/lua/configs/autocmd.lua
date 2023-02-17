@@ -30,13 +30,12 @@ autocmd("TextYankPost", {
     end,
 })
 
--- Remove autocommenting when pressing o or O on a commented line
+-- Remove inserting comment marker the cursor is on a comment and open a new line
 autocmd({ "FileType" }, {
     group = MyGroup,
     pattern = "*",
     callback = function()
-        -- remove auto commenting when pressing <o> or <O> in normal mode
-        vim.opt.formatoptions:remove "o"
+		vim.opt.formatoptions:remove { "r", "o" }
         -- auto remove comment when joining lines with <J> key
         vim.opt.formatoptions:append "j"
     end,

@@ -1,11 +1,7 @@
 -- it'll also be used for C++
 
 -- pressing F5 will call make to compile it
-if vim.fn.has("win32") == 1 then
-	vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<BAR>:w<BAR>te nmake %<.exe<CR>", { buffer = true })
-else
-	vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<BAR>:w<BAR>make %<<CR>", { buffer = true })
-end
+vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<BAR>:w<BAR>make %<<CR>", { buffer = true })
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
 -- and press F5 in normal mode
@@ -27,13 +23,10 @@ end
 vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
 
 -- flags
-if vim.fn.has("unix")==1 then
-    -- gcc flags
-	vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
-	vim.env.CXXFLAGS = "-Werror -Wall -Wextra -pedantic -g -std=c++17"
-else
-    -- cl flags
-	vim.env.CFLAGS = "/WX /Wall /Zi"
-	vim.env.CXXFLAGS = "/WX /Wall /Zi /std:c++latest"
-end
+-- gcc flags
+vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
+vim.env.CXXFLAGS = "-Werror -Wall -Wextra -pedantic -g -std=c++17"
+--    -- cl flags
+-- vim.env.CFLAGS = "/WX /Wall /Zi"
+-- vim.env.CXXFLAGS = "/WX /Wall /Zi /std:c++latest"
 

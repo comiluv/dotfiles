@@ -26,10 +26,6 @@ vim.keymap.set("i", ".", ".<C-G>u")
 vim.keymap.set("i", "!", "!<C-G>u")
 vim.keymap.set("i", "?", "?<C-G>u")
 
--- Allow easy navigation between wrapped lines.
-vim.keymap.set({ "n", "v" }, "j", "gj")
-vim.keymap.set({ "n", "v" }, "k", "gk")
-
 -- Easy window navigation
 vim.keymap.set("", "<A-h>", "<C-w>h")
 vim.keymap.set("", "<A-j>", "<C-w>j")
@@ -115,11 +111,6 @@ vim.keymap.set("t", "<A-j>", [[<C-\><C-n><C-w>j]])
 vim.keymap.set("t", "<A-k>", [[<C-\><C-n><C-w>k]])
 vim.keymap.set("t", "<A-l>", [[<C-\><C-n><C-w>l]])
 
--- Do not mark entire buffer when :w
-vim.keymap.set("c", "w", function()
-    return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "lockmarks w" or "w") or "w"
-end, { expr = true })
-
 -- Switch between the last two files
 vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { desc = "Switch buffer" })
 
@@ -128,7 +119,7 @@ vim.keymap.set("c", "!", function()
     return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
 end, { expr = true })
 
--- open help about word on cursor by pressing <F1>
+-- open help about the word on cursor by pressing <F1>
 vim.keymap.set("n", "<F1>", ":help <C-R><C-W><CR>", { silent = true })
 vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = true })
 

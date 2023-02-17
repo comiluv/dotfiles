@@ -47,7 +47,7 @@ vim.opt.updatetime=50
 
 -- You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 -- or have this run as autocmd. See autocmd section.
-vim.opt.formatoptions:remove "o"
+vim.opt.formatoptions:remove { "r", "o" }
 -- Delete comment character when joining commented lines
 vim.opt.formatoptions:append "j"
 
