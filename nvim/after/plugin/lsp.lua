@@ -108,20 +108,6 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
     { buffer = bufnr, desc = "Signature help"})
 
-    vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function()
-            local options = {
-                focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                border = 'rounded',
-                source = 'always',
-                prefix = ' ',
-                scope = 'cursor',
-            }
-            vim.diagnostic.open_float(nil, options)
-        end
-    })
     -- get nvim-navic working with multiple tabs
     if client.server_capabilities["documentSymbolProvider"] then
         require("nvim-navic").attach(client, bufnr)
