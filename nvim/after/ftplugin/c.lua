@@ -30,9 +30,6 @@ vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 -- gcc flags
 vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
 vim.env.CXXFLAGS = "-Werror -Wall -Wextra -pedantic -g -std=c++17"
-if vim.fn.has("win32")==1 then
-	vim.env.CC = "gcc"
-end
 --    -- cl flags
 -- vim.env.CFLAGS = "/WX /Wall /Zi"
 -- vim.env.CXXFLAGS = "/WX /Wall /Zi /std:c++latest"
