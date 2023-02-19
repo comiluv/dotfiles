@@ -48,15 +48,15 @@ return {
 		},
 	},
 
-    -- java language server because lsp-zero (and lspconfig to extent) doesn't work
-    'mfussenegger/nvim-jdtls',
+	-- java language server because lsp-zero (and lspconfig to extent) doesn't work
+	'mfussenegger/nvim-jdtls',
 
 	-- AI completion
 	{
-	    "Exafunction/codeium.vim",
-	    config = function()
-	    	vim.g.codeium_enabled = false
-	    end,
+		"Exafunction/codeium.vim",
+		config = function()
+			vim.g.codeium_enabled = false
+		end,
 	},
 
 	-- debug adapater protocol

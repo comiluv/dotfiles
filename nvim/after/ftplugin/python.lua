@@ -5,13 +5,13 @@ vim.bo.softtabstop = 4
 vim.bo.expandtab = true
 
 if vim.fn.has('python3') == 0 then
-    vim.api.nvim_command('echomsg "python3 not found"')
-    do return end
+	vim.api.nvim_command('echomsg "python3 not found"')
+	do return end
 end
 
 local py = "python3"
 if vim.fn.has("win32") == 1 then
-    py = "python"
+	py = "python"
 end
 
 -- pressing f8 will run the file

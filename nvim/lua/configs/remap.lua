@@ -42,10 +42,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
 vim.keymap.set("i", "<Tab>", function()
-    return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
 end, { expr = true })
 vim.keymap.set("i", "<S-Tab>", function()
-    return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
 end, { expr = true })
 
 -- delete selection and put without yanking selection
@@ -63,7 +63,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole
 -- also note below is taken from book Practical Vim 2nd edition which should be
 -- update of this remap
 vim.keymap.set("c", "%%", function()
-    return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
+	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
 end, { expr = true })
 vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file" })
 vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
@@ -116,7 +116,7 @@ vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { desc = "Switch buffer" })
 
 -- Remap !:cmd to terminal cmd
 vim.keymap.set("c", "!", function()
-    return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
+	return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
 end, { expr = true })
 
 -- open help about the word on cursor by pressing <F1>
