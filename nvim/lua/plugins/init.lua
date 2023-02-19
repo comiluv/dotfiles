@@ -132,6 +132,13 @@ return {
 		end,
 	},
 
+	{
+		'Darazaki/indent-o-matic',
+		config = function()
+			require("indent-o-matic").setup({ })
+		end,
+	},
+
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",

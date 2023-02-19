@@ -1,3 +1,4 @@
+setlocal tabstop=8 shiftwidth=2 softtabstop=2 expandtab
 " it'll also be used for C++
 nnoremap <buffer> <F5> :<C-u>cd %:p:h<BAR>:w!<BAR>!make %<<CR>
 imap <F5> <ESC><F5>
