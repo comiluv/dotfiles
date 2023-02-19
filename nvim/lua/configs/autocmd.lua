@@ -107,11 +107,3 @@ autocmd({ "FileType" }, {
 	end,
 })
 
--- automatically close netrw
-autocmd("FileType", {
-	group = MyGroup,
-	pattern = "netrw",
-	command = "setl bufhidden=wipe",
-})
-vim.g.netrw_fastbrowse = 0
-
