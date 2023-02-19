@@ -109,6 +109,14 @@ lsp.on_attach(function(client, bufnr)
 	{ buffer = bufnr, desc = "Rename symbol"})
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
 	{ buffer = bufnr, desc = "Signature help"})
+	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder,
+	{ buffer = bufnr, desc = "Workspace Add folder" })
+	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder,
+	{ buffer = bufnr, desc = "Worksapce Remove folder" })
+	vim.keymap.set("n", "<space>wl", function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end,
+	{ buffer = bufnr, desc = "Workspace List folders" })
 
 	-- get nvim-navic working with multiple tabs
 	if client.server_capabilities["documentSymbolProvider"] then
