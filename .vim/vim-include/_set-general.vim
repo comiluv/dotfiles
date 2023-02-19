@@ -16,7 +16,10 @@ endif
 " Some settings picked up from internet
 set autoread
 set autoindent
-set tabstop=8 shiftwidt=8 softtabstop=0 noexpandtab
+set tabstop=8
+set shiftwidt=8
+set softtabstop=0
+set noexpandtab
 set smarttab
 set smartindent
 set complete-=i
@@ -57,7 +60,7 @@ set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
-set formatoptions-=o " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
+set formatoptions-=ro " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 " or have this run as autocmd. See autocmd section.
 set formatoptions+=j " Delete comment character when joining commented lines
 

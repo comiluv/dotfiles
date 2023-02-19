@@ -1,4 +1,4 @@
-" backup .vimrc file
+" .vimrc file meant to be sourced by other IDE's vim-plugins (VSCode, etc.)
 " Vim's default behavior
 if &compatible
     set nocompatible
@@ -6,8 +6,9 @@ endif
 " Some settings picked up from internet
 set autoread
 set autoindent
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set tabstop=8
+set shiftwidth=8
+set softtabstop=0
 set noexpandtab
 set smarttab
 set smartindent
@@ -15,7 +16,10 @@ set complete-=i
 set number
 set relativenumber
 set nrformats-=octal
-set wrap linebreak nolist
+set wrap
+set linebreak
+set breakindent
+set nolist
 set hlsearch
 set incsearch
 set ignorecase
@@ -49,7 +53,7 @@ set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=50
 
-set formatoptions-=o " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
+set formatoptions-=ro " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 " or have this run as autocmd. See autocmd section.
 set formatoptions+=j " Delete comment character when joining commented lines
 
@@ -58,8 +62,8 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:�
 
 let s:dir = has('win32') ? '$HOME/vimfiles' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
 let &undodir=expand(s:dir) . '/undo//'
-set noswapfile
 set undofile
+set noswapfile
 set nobackup
 
 " remaps
@@ -87,13 +91,6 @@ inoremap ? ?<C-G>u
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 
-" Allow easy navigation between wrapped lines.
-" Merged this to jumplist modification below
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-
 " Easy window navigation
 noremap <A-h> <C-w>h
 noremap <A-j> <C-w>j
@@ -110,7 +107,7 @@ endif
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'gk'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'gj'
 
-" Conveniently move lines up and down with ctrl+j and ctrl+k
+" Move selected lines up and down in Visual mode
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -138,7 +135,6 @@ endif
 " delete selection and put without yanking selection
 vmap <leader>p "_dP
 
-
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
@@ -150,9 +146,6 @@ vnoremap <leader>d "_d
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 map <leader>e :e %%
 
-" Prevent common mistake of pressing q: instead :q
-"map q: :q
-
 " Allow for easy copying and pasting
 vnoremap <silent> y y`]
 nnoremap <silent> p p`]
@@ -160,7 +153,6 @@ nnoremap <silent> P P`]
 
 " Visually select the text that was last edited/pasted (Vimcast#26).
 noremap gV `[v`]
-
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
@@ -171,4 +163,8 @@ xnoremap & :&&<CR>
 
 " replace whatever was on the cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" 'around document' text object
+onoremap ad <CMD>normal! ggVG<CR>
+xnoremap ad gg0oG$
 

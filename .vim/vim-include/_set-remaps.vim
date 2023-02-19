@@ -36,13 +36,6 @@ inoremap ? ?<C-G>u
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 
-" Allow easy navigation between wrapped lines.
-" Merged this to jumplist modification below
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-
 " Easy window navigation
 noremap <A-h> <C-w>h
 noremap <A-j> <C-w>j
@@ -59,7 +52,7 @@ endif
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'gk'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'gj'
 
-" Conveniently move lines up and down with ctrl+j and ctrl+k
+" Move selected lines up and down in Visual mode
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -103,9 +96,6 @@ vnoremap <leader>d "_d
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 map <leader>e :e %%
 
-" Prevent common mistake of pressing q: instead :q
-"map q: :q
-
 " Allow for easy copying and pasting
 vnoremap <silent> y y`]
 nnoremap <silent> p p`]
@@ -138,9 +128,6 @@ nnoremap <F1> :help <C-R><C-W><CR>
 cmap <F1> <ESC><F1>
 imap <F1> <ESC><F1>
 vmap <F1> <ESC><F1>
-
-" do not mark entire buffer when :w
-cnoremap <expr>w getcmdtype() == ':' ? (getcmdpos() == 1 ? 'lockmarks w' : 'w') : 'w'
 
 " 'around document' text object
 onoremap ad <CMD>normal! ggVG<CR>
