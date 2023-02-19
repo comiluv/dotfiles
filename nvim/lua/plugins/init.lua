@@ -26,6 +26,18 @@ return {
 	"windwp/nvim-ts-autotag",
 
 	{
+		"danymat/neogen",
+		version = "*",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("neogen").setup({
+				snippet_engine = "luasnip"
+			})
+			vim.keymap.set("n", "<leader>gc", function() require("neogen").generate() end, {desc = "Generate comment", silent = true})
+		end,
+	},
+
+	{
 		"VonHeikemen/lsp-zero.nvim",
 		dependencies = {
 			-- LSP Support
@@ -76,9 +88,7 @@ return {
 	-- LSP incrementally rename symbol
 	{
 		"smjonas/inc-rename.nvim",
-		config = function()
-			require("inc_rename").setup()
-		end,
+		config = true,
 	},
 
 	"kdheepak/lazygit.nvim",
@@ -86,11 +96,7 @@ return {
 	{
 		"kylechui/nvim-surround",
 		version = "*",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end,
+		config = true,
 	},
 
 	"mbbill/undotree",
@@ -112,9 +118,7 @@ return {
 	-- auto locate last location in the file
 	{
 		"vladdoster/remember.nvim",
-		config = function()
-			require("remember")
-		end,
+		config = true,
 	},
 
 	{
@@ -134,17 +138,13 @@ return {
 
 	{
 		'Darazaki/indent-o-matic',
-		config = function()
-			require("indent-o-matic").setup({ })
-		end,
+		config = true,
 	},
 
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
+		config = true,
 	},
 
 	{
@@ -156,9 +156,7 @@ return {
 	-- LSP progress
 	{
 		"j-hui/fidget.nvim",
-		config = function()
-			require("fidget").setup({})
-		end,
+		config = true,
 	},
 
 	-- dashboard
