@@ -7,9 +7,9 @@ else
 end
 
 -- Some settings picked up from internet
-vim.opt.tabstop=4
-vim.opt.shiftwidth=4
-vim.opt.softtabstop=4
+vim.opt.tabstop=8
+vim.opt.shiftwidth=8
+vim.opt.softtabstop=0
 vim.opt.expandtab=false
 
 vim.opt.termguicolors=true
@@ -80,4 +80,7 @@ vim.g.mapleader=" "
 vim.opt.foldmethod="expr"
 vim.opt.foldexpr="nvim_treesitter#foldexpr()"
 vim.opt.foldlevel=99
+
+-- Turn off lsp logging because the file size grows beyond control
+vim.lsp.set_log_level("off")
 

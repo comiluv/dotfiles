@@ -1,3 +1,9 @@
+-- As suggested by PEP8
+vim.bo.tabstop = 8
+vim.bo.shiftwidth = 4
+vim.bo.softtabstop = 4
+vim.bo.expandtab = true
+
 if vim.fn.has('python3') == 0 then
     vim.api.nvim_command('echomsg "python3 not found"')
     do return end
