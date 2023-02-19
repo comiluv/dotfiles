@@ -16,16 +16,14 @@ endif
 " Some settings picked up from internet
 set autoread
 set autoindent
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set noexpandtab
+set tabstop=8 shiftwidt=8 softtabstop=0 noexpandtab
 set smarttab
 set smartindent
 set complete-=i
 set number
 set relativenumber
 set nrformats-=octal
-set wrap linebreak nolist
+set wrap linebreak breakindent nolist
 set hlsearch
 set incsearch
 set ignorecase
@@ -121,6 +119,7 @@ if !isdirectory(expand(s:dir))
     call system("mkdir -p " . expand(s:dir) . "/{backup,undo}")
 endif
 set undofile
+set noswapfile
 set nobackup
 set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
 

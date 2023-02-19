@@ -142,3 +142,7 @@ vmap <F1> <ESC><F1>
 " do not mark entire buffer when :w
 cnoremap <expr>w getcmdtype() == ':' ? (getcmdpos() == 1 ? 'lockmarks w' : 'w') : 'w'
 
+" 'around document' text object
+onoremap ad <CMD>normal! ggVG<CR>
+xnoremap ad gg0oG$
+

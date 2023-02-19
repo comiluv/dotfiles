@@ -123,3 +123,7 @@ end, { expr = true })
 vim.keymap.set("n", "<F1>", ":help <C-R><C-W><CR>", { silent = true })
 vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = true })
 
+-- "around document" text object
+vim.keymap.set("o", "ad", "<CMD>normal! ggVG<CR>", {noremap = true})
+vim.keymap.set("x", "ad", "gg0oG$", {noremap = true})
+
