@@ -83,6 +83,8 @@ lsp.set_preferences({
 })
 
 lsp.on_attach(function(client, bufnr)
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
+	{ buffer = bufnr, desc = "Go to declaration"})
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition,
 	{ buffer = bufnr, desc = "Go to definition"})
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
