@@ -25,6 +25,7 @@ return {
 	-- auto clost tags
 	"windwp/nvim-ts-autotag",
 
+	-- auto generate comments on a hotkey
 	{
 		"danymat/neogen",
 		version = "*",
