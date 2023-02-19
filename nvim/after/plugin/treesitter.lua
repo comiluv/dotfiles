@@ -45,5 +45,6 @@ tsc.setup {
 	endwise = { enable = true, }, -- "RRethy/nvim-treesitter-endwise",
 	autotag = { enable = true, }, -- "windwp/nvim-ts-autotag",
 	markid = { enable = true, }, -- "windwp/nvim-ts-autotag",
+	matchup = { enable = true, }, -- "andymass/vim-matchup",
 }
 

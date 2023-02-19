@@ -25,6 +25,14 @@ return {
 	-- auto clost tags
 	"windwp/nvim-ts-autotag",
 
+	-- jump to matching parens
+	{
+		"andymass/vim-matchup",
+		config = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
+	},
+
 	-- auto generate comments on a hotkey
 	{
 		"danymat/neogen",
