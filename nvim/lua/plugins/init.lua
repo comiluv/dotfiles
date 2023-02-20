@@ -1,9 +1,14 @@
 --[[
 	List of plugins that Neovim version is desired:
 {
+	www.github.com/mbbill/undotree : Lua could be faster
+	: https://github.com/debugloop/telescope-undo.nvim but not equivalent
 	www.github.com/tpope/vim-abolish : No preview, lua could be faster
+	: https://github.com/smjonas/live-command.nvim doesn't work due to https://github.com/smjonas/live-command.nvim/issues/24
+	: https://github.com/johmsalas/text-case.nvim is buggy
 	www.github.com/andymass/vim-matchup : lua could be faster
 	www.github.com/Exafunction/codeium.vim : lua could be faster
+	: there is https://github.com/jcdickinson/codeium.nvim but Windows is not supported
 	www.github.com/pbrisbin/vim-mkdir : lua could be faster
 	www.github.com/junegunn/vim-easy-align : lua could be faster
 }
