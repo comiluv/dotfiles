@@ -1,5 +1,5 @@
 --[[
-	List of plugins that Neovim version is desired:
+	List of plugins that Neovim version is desired
 {
 	www.github.com/mbbill/undotree         : Lua could be faster
                                            : https://github.com/debugloop/telescope-undo.nvim but not equivalent
