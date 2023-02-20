@@ -1,3 +1,13 @@
+--[[
+	List of plugins that Neovim version is desired:
+{
+	www.github.com/tpope/vim-abolish : No preview, lua could be faster
+	www.github.com/andymass/vim-matchup : lua could be faster
+	www.github.com/Exafunction/codeium.vim : lua could be faster
+	www.github.com/pbrisbin/vim-mkdir : lua could be faster
+	www.github.com/junegunn/vim-easy-align : lua could be faster
+}
+]]--
 return {
 	{
 		"nvim-telescope/telescope.nvim",
