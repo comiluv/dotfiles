@@ -2,7 +2,7 @@
 	List of plugins that Neovim version is desired
 {
 	www.github.com/mbbill/undotree         : Lua could be faster
-                                           : https://github.com/debugloop/telescope-undo.nvim but not equivalent
+                                           : http://github.com/debugloop/telescope-undo.nvim but not equivalent
 	www.github.com/tpope/vim-abolish       : No preview, lua could be faster
                                            : https://github.com/smjonas/live-command.nvim doesn't work due to https://github.com/smjonas/live-command.nvim/issues/24
                                            : https://github.com/johmsalas/text-case.nvim is buggy
@@ -16,8 +16,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.0",
-		-- or                            , branch = '0.1.x',
+		branch = '0.1.x',
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
