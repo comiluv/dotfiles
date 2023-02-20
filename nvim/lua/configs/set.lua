@@ -14,37 +14,41 @@ vim.opt.expandtab=false
 
 vim.opt.termguicolors=true
 
-vim.opt.smartindent=true
+vim.opt.ruler=true
 vim.opt.number=true
 vim.opt.relativenumber=true
+
+vim.opt.smartindent=true
 vim.opt.wrap=true
 vim.opt.linebreak=true
 vim.opt.breakindent=true
 vim.opt.list=false
+
 vim.opt.hlsearch=true
 vim.opt.ignorecase=true
 vim.opt.smartcase=true
+
 vim.opt.scrolloff=4
 vim.opt.sidescrolloff=4
+
 vim.opt.signcolumn="yes"
-vim.opt.ruler=true
-vim.opt.fileencodings="ucs-bom,utf-8,euc-kr,default,latin1"
-vim.opt.tabpagemax=100
 vim.opt.colorcolumn="80"
-vim.opt.title=true
 vim.opt.cursorline=true
-vim.opt.completeopt="menuone,noinsert,noselect"
-vim.opt.splitbelow=true
-vim.opt.splitright=true
-
-vim.opt.laststatus=3
+vim.opt.title=true
 vim.opt.winbar='%=%m %f'
-
-vim.opt.fileformats="unix,dos"
+vim.opt.laststatus=3
 -- Better display for messages
 vim.opt.cmdheight=2
 -- You will have bad experience for diagnostic messages when it's default 4000.
-vim.opt.updatetime=50
+vim.opt.updatetime=4000
+
+vim.opt.fileformats="unix,dos"
+vim.opt.fileencodings="ucs-bom,utf-8,euc-kr,default,latin1"
+vim.opt.tabpagemax=100
+vim.opt.completeopt="menuone,noinsert,noselect"
+
+vim.opt.splitbelow=true
+vim.opt.splitright=true
 
 -- You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 -- or have this run as autocmd. See autocmd section.
