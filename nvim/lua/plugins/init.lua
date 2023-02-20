@@ -149,6 +149,9 @@ return {
 		config = true,
 	},
 
+	-- easy align comments
+	"junegunn/vim-easy-align",
+
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
