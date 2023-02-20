@@ -13,7 +13,7 @@ return {
 		"nvim-telescope/telescope.nvim",
 		version = "0.1.0",
 		-- or                            , branch = '0.1.x',
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" },
 	},
 
 	{
@@ -116,8 +116,6 @@ return {
 		version = "*",
 		config = true,
 	},
-
-	"mbbill/undotree",
 
 	-- automatically create any non-existent directories
 	"pbrisbin/vim-mkdir",
