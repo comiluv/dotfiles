@@ -150,7 +150,13 @@ return {
 	},
 
 	-- easy align comments
-	"junegunn/vim-easy-align",
+	{
+		"junegunn/vim-easy-align",
+		config = function()
+			vim.keymap.set({"x", "n"}, "ga", "<Plug>(EasyAlign)")
+			vim.g.easy_align_delimiters = { ["/"]= { pattern= "//\\+", delimiter_align= "l", ignore_groups= "!Comment" } }
+		end
+	},
 
 	-- display git signs in the gutter
 	{
