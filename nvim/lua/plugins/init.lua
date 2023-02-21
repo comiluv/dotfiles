@@ -233,7 +233,6 @@ return {
 	-- colorschemes
 	{
 		"navarasu/onedark.nvim",
-		lazy = true,
 		config = function()
 			require("onedark").setup({
 				highlights = {
@@ -241,6 +240,7 @@ return {
 					IndentBlanklineContextStart = { sp = "$light_grey", fmt = "nocombine,underline" },
 				}
 			})
+			require("onedark").load()
 		end,
 	},
 	{
