@@ -111,8 +111,7 @@ return {
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
 			config = function()
-				local ok, npairs = pcall(require, "nvim-autopairs")
-				if ok then
+				local npairs =require("nvim-autopairs")
 					-- use tree-sitter for nvim-autopairs
 					local Rule = require("nvim-autopairs.rule")
 					local cond = require("nvim-autopairs.conds")
@@ -236,10 +235,8 @@ return {
 						-- Do not endwise if there is no closing
 						return get_closing_for_line(opts.line) ~= ""
 					end))
-				end
 
-				local ok, cmp = pcall(require,'cmp')
-				if ok then
+					local cmp =require("cmp")
 					local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 					-- If you want insert `(` after select function or method item
@@ -250,41 +247,39 @@ return {
 
 					cmp.event:on(
 					'confirm_done',
-					cmp_autopairs.on_confirm_done({
-						filetypes = {
-							-- "*" is a alias to all filetypes
-							["*"] = {
-								["("] = {
-									kind = {
-										cmp.lsp.CompletionItemKind.Function,
-										cmp.lsp.CompletionItemKind.Method,
-									},
-									handler = handlers["*"]
-								}
-							},
-							lua = {
-								["("] = {
-									kind = {
-										cmp.lsp.CompletionItemKind.Function,
-										cmp.lsp.CompletionItemKind.Method
-									},
-									---@param char string
-									---@param item table item completion
-									---@param bufnr number buffer number
-									---@param rules table
-									---@param commit_character table<string>
-									handler = function(char, item, bufnr, rules, commit_character)
-										-- Your handler function. Inpect with print(vim.inspect{char, item, bufnr, rules, commit_character})
-									end
-								}
-							},
-							-- Disable for tex
-							tex = false
-						}
-					})
+						cmp_autopairs.on_confirm_done({
+							filetypes = {
+								-- "*" is a alias to all filetypes
+								["*"] = {
+									["("] = {
+										kind = {
+											cmp.lsp.CompletionItemKind.Function,
+											cmp.lsp.CompletionItemKind.Method,
+										},
+										handler = handlers["*"]
+									}
+								},
+								lua = {
+									["("] = {
+										kind = {
+											cmp.lsp.CompletionItemKind.Function,
+											cmp.lsp.CompletionItemKind.Method
+										},
+										---@param char string
+										---@param item table item completion
+										---@param bufnr number buffer number
+										---@param rules table
+										---@param commit_character table<string>
+										handler = function(char, item, bufnr, rules, commit_character)
+											-- Your handler function. Inpect with print(vim.inspect{char, item, bufnr, rules, commit_character})
+										end
+									}
+								},
+								-- Disable for tex
+								tex = false
+							}
+						})
 					)
-				end
-
 			end
 		},
 
@@ -351,8 +346,7 @@ return {
 					},
 				})
 
-				local ok, lsp = pcall(require,'lsp-zero')
-				if not ok then return end
+				local lsp =require("lsp-zero")
 				-- Learn the keybindings, see :help lsp-zero-keybindings
 				-- Learn to configure LSP servers, see :help lsp-zero-api-showcase
 				lsp.preset('recommended')
@@ -482,8 +476,6 @@ return {
 				vim.diagnostic.config({
 					virtual_text = false,
 				})
-
-
 			end,
 		},
 
@@ -515,8 +507,6 @@ return {
 			event = OpenedBuffer,
 			dependencies = { "nvim-lua/plenary.nvim" } ,
 			config = function()
-				-- local ok, null_ls = pcall(require, "null-ls")
-				-- if not ok then return end
 				local sources = {
 					-- python
 					require("null-ls").builtins.formatting.black.with({
@@ -526,10 +516,8 @@ return {
 					require("null-ls").builtins.formatting.stylua,
 					require("null-ls").builtins.formatting.google_java_format,
 				}
-
 				require("null-ls").setup({ sources = sources })
-
-			end
+			end,
 		},
 
 		-- show lightbulb where code action can be taken
@@ -552,7 +540,7 @@ return {
 			"kdheepak/lazygit.nvim",
 			cmd = "LazyGit",
 			keys = {
-				{"<leader>gs", "<cmd>LazyGit<cr>", {silent = true, desc = [[Open LazyGit (A-\ is ESC)]]}},
+				{"<leader>gs", "<cmd>LazyGit<cr>", silent = true, desc = [[Open LazyGit (A-\ is ESC)]]},
 			},
 		},
 
@@ -594,7 +582,9 @@ return {
 		{
 			'FooSoft/vim-argwrap',
 			cmd = "ArgWrap",
-			keys = {{"<leader>a", "mz<CMD>ArgWrap<Cr>`z", desc = "Wrap/unwrap arguments"}},
+			keys = {
+				{"<leader>a", "mz<CMD>ArgWrap<Cr>`z", desc = "Wrap/unwrap arguments"},
+			},
 		},
 
 		-- auto locate last location in the file
@@ -636,7 +626,7 @@ return {
 			},
 			config = function()
 				vim.g.easy_align_delimiters = { ["/"]= { pattern= "//\\+", delimiter_align= "l", ignore_groups= "!Comment" } }
-			end
+			end,
 		},
 
 		-- display git signs in the gutter
@@ -666,9 +656,7 @@ return {
 			"goolord/alpha-nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			config = function()
-				local ok, alpha = pcall(require,"alpha")
-				if not ok then return end
-
+				local alpha =require("alpha")
 				local startify = require("alpha.themes.startify")
 				-- Powershell fortune: https://www.bgreco.net/fortune
 				-- fortune.txt.dat is produced in WSL
@@ -688,7 +676,7 @@ return {
 
 				startify.section.header.val = fortune ]]
 				alpha.setup(startify.config)
-			end
+			end,
 		},
 
 		-- history
@@ -696,8 +684,8 @@ return {
 			"gaborvecsei/memento.nvim",
 			lazy = false,
 			keys = {
-				{"<leader>ho", function() require("memento").toggle() end, {desc = "Open history"}},
-				{"<leader>hc", function() require("memento").clear() end, {desc = "Clear history"}},
+				{"<leader>ho", function() require("memento").toggle() end, desc = "Open history"},
+				{"<leader>hc", function() require("memento").clear() end, desc = "Clear history"},
 			},
 			dependencies = "nvim-lua/plenary.nvim" ,
 			config = function()

@@ -38,6 +38,10 @@ end
 
 vim.g.mapleader=" "
 vim.g.maplocalleader = " "
+
+vim.g.netrw_browse_split = 0
+vim.g.netrw_winsize = 25
+
 -- Suppress Alt keys in Windows so it can be used as shortcuts
 vim.opt.winaltkeys="no"
 if vim.fn.has('unix') == 1 then
