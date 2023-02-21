@@ -313,7 +313,7 @@ return {
 
 	{
 		"VonHeikemen/lsp-zero.nvim",
-		event = "InsertEnter",
+		event = OpenedBuffer,
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
