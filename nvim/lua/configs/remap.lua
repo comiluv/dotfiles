@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open Netrw" })
 
 -- No arrow keys --- force yourself to use the home row

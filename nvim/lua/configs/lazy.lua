@@ -12,9 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- fix drag-n-drop functionality for neovim-qt
 -- see https://github.com/folke/lazy.nvim/issues/403
 local opts = {
@@ -26,3 +23,4 @@ local opts = {
 }
 
 require("lazy").setup("plugins", opts)
+

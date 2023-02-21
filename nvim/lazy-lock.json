@@ -1,6 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "6821b3ae27a57f1f3cf8ed030e4a55d70d0c4e43" },
-  "LuaSnip": { "branch": "master", "commit": "2cdb06d28befc1d562aec72e4170881217e98d5f" },
+  "LuaSnip": { "branch": "master", "commit": "92276ba735056dab04b0508e421a6a5d729e3f81" },
   "alpha-nvim": { "branch": "main", "commit": "b3eef69e95674905bf26c7740dd4bbb09b355494" },
   "barbecue": { "branch": "main", "commit": "39a6c2970bc6b5d2d61e36e95002c43bc27450b8" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
@@ -28,7 +28,7 @@
   "monokai.nvim": { "branch": "master", "commit": "b8bd44d5796503173627d7a1fc51f77ec3a08a63" },
   "neogen": { "branch": "main", "commit": "fbc3952024d2c0d57b92a3802e9e29c789abcd18" },
   "neosolarized.nvim": { "branch": "main", "commit": "bfdbbf1f9b02bd06648df6bdc7f3ec0b153cc69e" },
-  "null-ls.nvim": { "branch": "main", "commit": "a82aa08c0063843926947f3688b0e61fd71db680" },
+  "null-ls.nvim": { "branch": "main", "commit": "689cdd78f70af20a37b5309ebc287ac645ae4f76" },
   "nvim-autopairs": { "branch": "master", "commit": "bde7a1b4534e0a4c2451a738379cd628ba65eba7" },
   "nvim-cmp": { "branch": "main", "commit": "8202df9561b90102b41dbc1ad71945534ef4ea39" },
   "nvim-dap": { "branch": "master", "commit": "049eebe3a1609547a5d2db5ba99585212836adf5" },

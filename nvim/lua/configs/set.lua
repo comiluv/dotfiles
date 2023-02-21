@@ -1,3 +1,5 @@
+vim.g.mapleader=" "
+vim.g.maplocalleader = " "
 -- Suppress Alt keys in Windows so it can be used as shortcuts
 vim.opt.winaltkeys="no"
 if vim.fn.has('unix') == 1 then
@@ -79,8 +81,6 @@ vim.opt.viewoptions:remove "options"
 vim.opt.swapfile=false
 vim.opt.backup=false
 vim.opt.undofile=true
-
-vim.g.mapleader=" "
 
 vim.opt.foldmethod="expr"
 vim.opt.foldexpr="nvim_treesitter#foldexpr()"
