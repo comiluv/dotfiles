@@ -13,7 +13,7 @@ List of plugins that Neovim version is desired
 	www.github.com/junegunn/vim-easy-align : lua could be faster
 }
 ]]--
-local OpenedBuffer = { "BufRead", "BufNewFile" }
+local OpenedBuffer = { "BufRead", "BufNewFile", "BufAdd" }
 
 return {
 	{
@@ -494,6 +494,7 @@ return {
 	-- AI completion
 	{
 		"Exafunction/codeium.vim",
+		lazy = false,	-- lazy loading broke tab completion and fallback
 		cmd = "Codeium",
 		event = "InsertEnter",
 		config = function()

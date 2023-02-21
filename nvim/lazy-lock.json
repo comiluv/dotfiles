@@ -1,6 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "6821b3ae27a57f1f3cf8ed030e4a55d70d0c4e43" },
-  "LuaSnip": { "branch": "master", "commit": "92276ba735056dab04b0508e421a6a5d729e3f81" },
+  "LuaSnip": { "branch": "master", "commit": "d33cf7de14eea209b8ed4a7edaed72f0b8cedb30" },
   "NeoSolarized.nvim": { "branch": "master", "commit": "d28e79c3be31a8e2554278d40780a268184bb365" },
   "alpha-nvim": { "branch": "main", "commit": "b3eef69e95674905bf26c7740dd4bbb09b355494" },
   "barbecue": { "branch": "main", "commit": "39a6c2970bc6b5d2d61e36e95002c43bc27450b8" },
@@ -23,7 +23,7 @@
   "lualine.nvim": { "branch": "master", "commit": "e99d733e0213ceb8f548ae6551b04ae32e590c80" },
   "markid": { "branch": "main", "commit": "248a785900c29ee52ddf42aa096e9e3478739cb1" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "93e58e100f37ef4fb0f897deeed20599dae9d128" },
-  "mason.nvim": { "branch": "main", "commit": "d9ceb5f4822f3cc8a1b7cf554c67111f1f28c9b5" },
+  "mason.nvim": { "branch": "main", "commit": "4b82b711cb58e7f2dae75963cc960f5bbddcad8b" },
   "memento.nvim": { "branch": "master", "commit": "7e5e5a86ccaec2892fc2d8197fc01a25d1cf8951" },
   "monokai.nvim": { "branch": "master", "commit": "b8bd44d5796503173627d7a1fc51f77ec3a08a63" },
   "neogen": { "branch": "main", "commit": "349121d8694b991376a9cff6958918aaba89f66c" },
