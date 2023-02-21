@@ -35,6 +35,7 @@ local disabled_built_ins={
 for _, plugin in pairs(disabled_built_ins) do
     vim.g['loaded_' .. plugin]=1
 end
+
 vim.g.mapleader=" "
 vim.g.maplocalleader = " "
 -- Suppress Alt keys in Windows so it can be used as shortcuts
@@ -45,6 +46,8 @@ else
 	vim.g.python3_host_prog = "C:\\Python311\\python.exe"
 end
 
+vim.opt.clipboard="unnamedplus"
+
 -- Some settings picked up from internet
 vim.opt.tabstop=8
 vim.opt.shiftwidth=8
@@ -53,6 +56,7 @@ vim.opt.expandtab=false
 
 vim.opt.termguicolors=true
 vim.opt.lazyredraw=true
+vim.opt.redrawtime=1500
 
 vim.opt.ruler=true
 vim.opt.number=true
@@ -103,11 +107,8 @@ vim.opt.listchars="tab:→ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,exten
 -- vim.opt.path:append "**"
 vim.opt.wildmenu=true
 vim.opt.wildmode="list:full"
-vim.opt.wildignore=".hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor"
-vim.opt.wildignore:append "*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem"
-vim.opt.wildignore:append "*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz"
-vim.opt.wildignore:append "*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*"
-vim.opt.wildignore:append "*.swp,*~,._*"
+vim.opt.wildignorecase=true
+vim.opt.wildignore="*.7z,*.aux,*.avi,*.bak,*.bib,*.class,*.cls,*.cmi,*.cmo,*.doc,*.docx,*.dvi,*.flac,*.flv,*.gem,*.gif,*.hi,*.ico,*.jpeg,*.jpg,*.log,*.min*.js,*.min.js,*.mov,*.mp3,*.mp4,*.mpg,*.nav,*.o,*.obj,*.ods,*.odt,*.ogg,*.opus,*.out,*.pdf,*.pem,*.png,*.rar,*.rbc,*.rbo,*.settings,*.sty,*.svg,*.swp,*.swp*.,*.tar,*.tar.bz2,*.tar.gz,*.tar.xz,*.tgz,*.toc,*.wav,*.webm,*.xcf,*.xls,*.xlsx,*.zip,*/.bundle/*,*/.sass-cache/*,*/vendor/cache/*,*/vendor/gems/*,*~,._*,.git,.hg,.svn,Thumbs.db,Zend,intermediate/*,publish/*,vendor"
 
 vim.opt.shortmess=""
 -- This is needed to avoid swapfile warning when auto-reloading
@@ -126,4 +127,6 @@ vim.opt.foldlevel=99
 
 -- Turn off lsp logging because the file size grows beyond control
 vim.lsp.set_log_level("off")
+
+vim.opt.more=false
 

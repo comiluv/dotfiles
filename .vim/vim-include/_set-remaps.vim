@@ -96,6 +96,9 @@ vnoremap <leader>d "_d
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 map <leader>e :e %%
 
+" prevent common mistake of pressing q: instead of :q
+nnoremap q: :q
+
 " Allow for easy copying and pasting
 vnoremap <silent> y y`]
 nnoremap <silent> p p`]

@@ -27,7 +27,7 @@ augroup COMILUV
     " Remove auto commenting when pressing o or O
     autocmd FileType * set formatoptions-=ro
     "autocmd BufEnter * :call SetUnsetQShortcut()
-    autocmd FileType help,qf,man,notify,fugitive nnoremap <buffer> q :q<CR>
+    autocmd FileType help,qf,man,notify,fugitive nnoremap <buffer><nowait> q :q<CR>
     " Auto toggle cursorline
     autocmd InsertLeave,WinEnter * set cursorline
     autocmd InsertEnter,WinLeave * set nocursorline

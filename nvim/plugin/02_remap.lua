@@ -67,6 +67,9 @@ end, { expr = true })
 vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file" })
 vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
 
+-- prevent common mistake of pressing q: instead of :q
+vim.keymap.set("n", "q:", ":q")
+
 -- Allow for easy copying and pasting
 vim.keymap.set("v", "y", "y`]", { silent = true })
 vim.keymap.set("n", "p", "p`]", { silent = true })
@@ -74,13 +77,6 @@ vim.keymap.set("n", "P", "P`]", { silent = true })
 
 -- Visually select the text that was last edited/pasted (Vimcast#26).
 vim.keymap.set("n", "gV", "`[v`]")
-
--- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
--- help you not the other way around. : https://thoughtbot.com/upcase/vim
--- Bind :Q to q
-vim.cmd([[command! Q q]])
-vim.cmd([[command! Qall qall]])
-vim.cmd([[command! QA qall]])
 
 -- Easy Ctrl-C to Esc insert mode
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -125,4 +121,11 @@ vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = 
 -- "around document" text object
 vim.keymap.set("o", "ad", "<CMD>normal! ggVG<CR>", {noremap = true, desc = "around document"})
 vim.keymap.set("x", "ad", "gg0oG$", {noremap = true, desc = "around document"})
+
+-- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
+-- help you not the other way around. : https://thoughtbot.com/upcase/vim
+-- Bind :Q to q
+vim.cmd([[command! Q q]])
+vim.cmd([[command! Qall qall]])
+vim.cmd([[command! QA qall]])
 

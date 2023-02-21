@@ -16,6 +16,12 @@ List of plugins that Neovim version is desired
 local OpenedBuffer = {"BufRead", "BufNewFile"}
 
 return {
+	-- faster startup filetype
+	{
+		"nathom/filetype.nvim",
+		config = true,
+	},
+
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = '0.1.x',
@@ -39,6 +45,7 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		cmd = "TSUpdate",
 		event = OpenedBuffer,
 		build = "<CMD>TSUpdate<Cr>",
 		config = function()
@@ -308,7 +315,7 @@ return {
 
 		{
 			"VonHeikemen/lsp-zero.nvim",
-			event = OpenedBuffer,
+			event = "InsertEnter",
 			dependencies = {
 				-- LSP Support
 				{ "neovim/nvim-lspconfig" },
@@ -567,9 +574,10 @@ return {
 		-- automatically create any non-existent directories
 		{
 			"pbrisbin/vim-mkdir",
-			event = "CmdlineEnter",
+			event = "BufWritePre",
 		},
 
+		-- comment/uncomment hotkeys
 		{
 			"numToStr/Comment.nvim",
 			event = OpenedBuffer,
@@ -582,6 +590,13 @@ return {
 			end,
 		},
 
+		-- vim arg wrapper
+		{
+			'FooSoft/vim-argwrap',
+			cmd = "ArgWrap",
+			keys = {{"<leader>a", "mz<CMD>ArgWrap<Cr>`z", desc = "Wrap/unwrap arguments"}},
+		},
+
 		-- auto locate last location in the file
 		{
 			"vladdoster/remember.nvim",
@@ -589,6 +604,7 @@ return {
 			config = true,
 		},
 
+		-- show indent lines
 		{
 			"lukas-reineke/indent-blankline.nvim",
 			event = OpenedBuffer,
@@ -605,6 +621,7 @@ return {
 			end,
 		},
 
+		-- auto detect indentation
 		{
 			'Darazaki/indent-o-matic',
 			event = OpenedBuffer,
@@ -614,9 +631,10 @@ return {
 		-- easy align comments
 		{
 			"junegunn/vim-easy-align",
-			event = OpenedBuffer,
+			keys = {
+				{"ga", "<Plug>(EasyAlign)", mode = {"x", "n"}, desc = "Easy Align"},
+			},
 			config = function()
-				vim.keymap.set({"x", "n"}, "ga", "<Plug>(EasyAlign)")
 				vim.g.easy_align_delimiters = { ["/"]= { pattern= "//\\+", delimiter_align= "l", ignore_groups= "!Comment" } }
 			end
 		},
@@ -628,6 +646,7 @@ return {
 			config = true,
 		},
 
+		-- statusline written in lua
 		{
 			"nvim-lualine/lualine.nvim",
 			event = OpenedBuffer,
@@ -756,15 +775,13 @@ return {
 			end,
 		},
 		{
-			"svrana/neosolarized.nvim",
-			dependencies = { "tjdevries/colorbuddy.nvim" },
+			"Tsuzat/NeoSolarized.nvim",
 			lazy = true,
 			config = function()
-				require("neosolarized").setup({
-					comment_italics = true,
-					background_set = true,
+				require("NeoSolarized").setup({
+					transparent = false,
 				})
-			end,
+			end
 		},
 		{
 			"tanvirtin/monokai.nvim",
