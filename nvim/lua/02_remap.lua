@@ -85,7 +85,8 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-c>", "<Esc>")
 
 -- lsp format
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true, timeout_ms = 10000 }) end, { desc = "Format buffer" })
+vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = true, timeout_ms = 10000 }) end,
+	{ desc = "Format buffer" })
 
 -- quickfix navigation
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
@@ -119,8 +120,8 @@ vim.keymap.set("n", "<F1>", ":help <C-R><C-W><CR>", { silent = true })
 vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = true })
 
 -- "around document" text object
-vim.keymap.set("o", "ad", "<CMD>normal! ggVG<CR>", {noremap = true, desc = "around document"})
-vim.keymap.set("x", "ad", "gg0oG$", {noremap = true, desc = "around document"})
+vim.keymap.set("o", "ad", "<CMD>normal! ggVG<CR>", { noremap = true, desc = "around document" })
+vim.keymap.set("x", "ad", "gg0oG$", { noremap = true, desc = "around document" })
 
 -- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
 -- help you not the other way around. : https://thoughtbot.com/upcase/vim
