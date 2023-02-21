@@ -309,6 +309,7 @@ return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		event = OpenedBuffer,
+		cmd = "Mason",
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
