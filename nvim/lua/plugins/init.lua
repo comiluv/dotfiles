@@ -16,12 +16,6 @@ List of plugins that Neovim version is desired
 local OpenedBuffer = { "BufRead", "BufNewFile" }
 
 return {
-	-- faster startup filetype
-	{
-		"nathom/filetype.nvim",
-		config = true,
-	},
-
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
