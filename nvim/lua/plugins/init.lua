@@ -175,13 +175,17 @@ return {
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
+		event = "BufWinEnter",
+		lazy = true,
 		config = true,
 	},
 
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "BufWinEnter",
 		lazy = true,
+		config = true,
 	},
 
 	-- LSP progress
