@@ -1,3 +1,5 @@
+-- note placing files in /plugin directory did NOT improve start up time
+-- this structure is about 10 ms faster in hyperfine results
 require("01_set")
 require("02_remap")
 require("03_autocmd")
