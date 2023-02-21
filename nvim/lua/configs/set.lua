@@ -1,3 +1,40 @@
+-- Disable built-in plugins
+-- https://github.com/neg-serg/dotfiles/blob/master/dev/.config/nvim/lua/00-settings.lua
+-- https://www.reddit.com/r/neovim/comments/opipij/guide_tips_and_tricks_to_reduce_startup_and/
+local disabled_built_ins={
+    "2html_plugin",
+    "bugreport",
+    "compiler",
+    "did_load_filetypes",
+    "ftplugin",
+    "getscript",
+    "getscriptPlugin",
+    "gzip",
+    "logipat",
+    "man",
+    "matchit",
+    "matchparen",
+    "optwin",
+    "perl_provider",
+    "rplugin",
+    "rrhelper",
+    "ruby_provider",
+    "spellfile",
+    "spellfile_plugin",
+    "synmenu",
+    "syntax",
+    "tar",
+    "tarPlugin",
+    "tohtml",
+    "tutor",
+    "vimball",
+    "vimballPlugin",
+    "zip",
+    "zipPlugin",
+}
+for _, plugin in pairs(disabled_built_ins) do
+    vim.g['loaded_' .. plugin]=1
+end
 vim.g.mapleader=" "
 vim.g.maplocalleader = " "
 -- Suppress Alt keys in Windows so it can be used as shortcuts
@@ -15,6 +52,7 @@ vim.opt.softtabstop=0
 vim.opt.expandtab=false
 
 vim.opt.termguicolors=true
+vim.opt.lazyredraw=true
 
 vim.opt.ruler=true
 vim.opt.number=true
