@@ -13,7 +13,8 @@ List of plugins that Neovim version is desired
 	www.github.com/junegunn/vim-easy-align : lua could be faster
 }
 ]]--
-local OpenedBuffer = { "BufRead", "BufNewFile", "BufAdd" }
+local OpenedBuffer = { "BufRead", "BufNewFile", } -- note new buffer opened by :enew
+                                                  -- doesn't trigger neighther of the events
 
 return {
 	{
