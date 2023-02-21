@@ -102,7 +102,7 @@ return {
 		-- auto close parentheses
 		{
 			"windwp/nvim-autopairs",
-			event = OpenedBuffer,
+			event = "InsertEnter",
 			config = function()
 				local ok, npairs = pcall(require, "nvim-autopairs")
 				if ok then
@@ -489,7 +489,8 @@ return {
 		-- AI completion
 		{
 			"Exafunction/codeium.vim",
-			event = OpenedBuffer,
+			cmd = "Codeium",
+			event = "InsertEnter",
 			config = function()
 				vim.g.codeium_enabled = false
 			end,
@@ -564,7 +565,10 @@ return {
 		},
 
 		-- automatically create any non-existent directories
-		"pbrisbin/vim-mkdir",
+		{
+			"pbrisbin/vim-mkdir",
+			event = "CmdlineEnter",
+		},
 
 		{
 			"numToStr/Comment.nvim",
@@ -693,6 +697,11 @@ return {
 				"nvim-tree/nvim-web-devicons", -- optional dependency
 			},
 			config = function()
+				require("barbecue").setup({
+					create_autocmd = false,
+					attach_navic = false,
+				})
+
 				local events = {
 					"BufWinEnter",
 					"CursorHold",
@@ -709,16 +718,12 @@ return {
 						require("barbecue.ui").update()
 					end,
 				})
-
-				require("barbecue").setup({
-					create_autocmd = false,
-					attach_navic = false,
-				})
 			end,
 		},
 
 		{
 			"folke/which-key.nvim",
+			event = OpenedBuffer,
 			config = function()
 				vim.o.timeout = true
 				vim.o.timeoutlen = 300
