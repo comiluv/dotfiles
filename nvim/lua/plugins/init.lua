@@ -83,7 +83,7 @@ return {
 				},
 				endwise = { enable = true }, -- "RRethy/nvim-treesitter-endwise",
 				autotag = { enable = true }, -- "windwp/nvim-ts-autotag",
-				markid = { enable = true }, -- "David-Kunz/markid",
+				-- markid = { enable = true }, -- "David-Kunz/markid",
 				matchup = { enable = true }, -- "andymass/vim-matchup",
 			})
 		end,
@@ -110,11 +110,8 @@ return {
 			npairs.setup({
 				check_ts = true,
 				ts_config = {},
-				enable_check_bracket_line = false,
 				fast_wrap = {},
 			})
-
-			local ts_conds = require("nvim-autopairs.ts-conds")
 
 			-- Add spaces between parentheses
 			local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
@@ -172,105 +169,10 @@ return {
 				:with_del(cond.none()),
 			})
 
-			-- Expand multiple pairs on enter key
-			-- https://github.com/rstacruz/vim-closer/blob/master/autoload/closer.vim
-			local get_closing_for_line = function(line)
-				local i = -1
-				local clo = ""
-
-				while true do
-					i, _ = string.find(line, "[%(%)%{%}%[%]]", i + 1)
-					if i == nil then
-						break
-					end
-					local ch = string.sub(line, i, i)
-					local st = string.sub(clo, 1, 1)
-
-					if ch == "{" then
-						clo = "}" .. clo
-					elseif ch == "}" then
-						if st ~= "}" then
-							return ""
-						end
-						clo = string.sub(clo, 2)
-					elseif ch == "(" then
-						clo = ")" .. clo
-					elseif ch == ")" then
-						if st ~= ")" then
-							return ""
-						end
-						clo = string.sub(clo, 2)
-					elseif ch == "[" then
-						clo = "]" .. clo
-					elseif ch == "]" then
-						if st ~= "]" then
-							return ""
-						end
-						clo = string.sub(clo, 2)
-					end
-				end
-
-				return clo
-			end
-
-			-- npairs.remove_rule('(')
-			-- npairs.remove_rule('{')
-			-- npairs.remove_rule('[')
-
-			npairs.add_rule(Rule("[%(%{%[]", "")
-			:use_regex(true)
-			:replace_endpair(function(opts)
-				return get_closing_for_line(opts.line)
-			end)
-			:end_wise(function(opts)
-				-- Do not endwise if there is no closing
-				return get_closing_for_line(opts.line) ~= ""
-			end))
-
-			local cmp = require("cmp")
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
 			-- If you want insert `(` after select function or method item
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			local cmp = require("cmp")
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-			-- autopairs: add mapping `CR` on nvim-cmp setup. Check readme.md on nvim-cmp repo
-			local handlers = require("nvim-autopairs.completion.handlers")
-
-			cmp.event:on(
-				"confirm_done",
-				cmp_autopairs.on_confirm_done({
-					filetypes = {
-						-- "*" is a alias to all filetypes
-						["*"] = {
-							["("] = {
-								kind = {
-									cmp.lsp.CompletionItemKind.Function,
-									cmp.lsp.CompletionItemKind.Method,
-								},
-								handler = handlers["*"],
-							},
-						},
-						lua = {
-							["("] = {
-								kind = {
-									cmp.lsp.CompletionItemKind.Function,
-									cmp.lsp.CompletionItemKind.Method,
-								},
-								---@param char string
-								---@param item table item completion
-								---@param bufnr number buffer number
-								---@param rules table
-								---@param commit_character table<string>
-								handler = function(char, item, bufnr, rules, commit_character)
-									-- Your handler function. Inpect with print(vim.inspect{char, item, bufnr, rules, commit_character})
-								end,
-							},
-						},
-						-- Disable for tex
-						tex = false,
-					},
-				})
-			)
 		end,
 	},
 
@@ -587,6 +489,7 @@ return {
 		end,
 	},
 
+	-- wrap/unwrap arguments
 	{
 		'Wansmer/treesj',
 		dependencies = { 'nvim-treesitter' },
