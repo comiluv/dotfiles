@@ -587,13 +587,18 @@ return {
 		end,
 	},
 
-	-- vim arg wrapper
 	{
-		"FooSoft/vim-argwrap",
-		cmd = "ArgWrap",
+		'Wansmer/treesj',
+		dependencies = { 'nvim-treesitter' },
+		cmd = {"TSJToggle", "TSJSplit", "TSJJoin"},
 		keys = {
-			{ "<leader>a", "mz<CMD>ArgWrap<Cr>`z", desc = "Wrap/unwrap arguments" },
+			{ "<leader>m", "<cmd>TSJToggle<Cr>", desc = "Wrap/unwrap arguments" },
 		},
+		config = function()
+			require('treesj').setup({
+				use_default_keymaps = false,
+			})
+		end,
 	},
 
 	-- auto locate last location in the file
@@ -630,6 +635,7 @@ return {
 	-- easy align comments
 	{
 		"junegunn/vim-easy-align",
+		cmd = "EasyAlign",
 		keys = {
 			{ "ga", "<Plug>(EasyAlign)", mode = { "x", "n" }, desc = "Easy Align" },
 		},
