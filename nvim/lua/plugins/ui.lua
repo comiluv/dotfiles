@@ -13,7 +13,14 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		opts = {
 			enabled = true,
-			filetype_exclude = { "help", "alpha", "dashboard", "lazy", "Trouble" },
+			filetype_exclude = {
+				"help",
+				"alpha",
+				"dashboard",
+				"lazy",
+				"Trouble",
+				"memento-menu",
+			},
 			char_blankline = "┆",
 			show_current_context = true,
 			show_current_context_start = true,
@@ -62,7 +69,7 @@ return {
 	-- history
 	{
 		"gaborvecsei/memento.nvim",
-		lazy = false,
+		event = "VimEnter",	-- lazy=true or "VeryLazy" didn't work
 		keys = {
 			{
 				"<leader>ho",

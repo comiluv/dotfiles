@@ -17,6 +17,7 @@ local info_file_pattern = {
 	"PlenaryTestPopup",
 	"fugitive",
 	"checkhealth",
+	"memento-menu",
 }
 
 autocmd("TextYankPost", {

@@ -32,9 +32,8 @@ return {
 	-- AI completion
 	{
 		"Exafunction/codeium.vim",
-		lazy = false, -- lazy loading broke tab completion and fallback
+		event = "VimEnter", -- lazy=true, "VeryLazy" didn't work
 		cmd = "Codeium",
-		event = "InsertEnter",
 		config = function()
 			vim.g.codeium_enabled = false
 		end,
