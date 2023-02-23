@@ -71,11 +71,7 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:�
 set path+=**
 set wildmenu
 set wildmode=list:full
-set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
-set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
-set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
-set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
-set wildignore+=*.swp,*~,._*
+set wildignore=*.7z,*.aux,*.avi,*.bak,*.bib,*.class,*.cls,*.cmi,*.cmo,*.doc,*.docx,*.dvi,*.flac,*.flv,*.gem,*.gif,*.hi,*.ico,*.jpeg,*.jpg,*.log,*.min*.js,*.min.js,*.mov,*.mp3,*.mp4,*.mpg,*.nav,*.o,*.obj,*.ods,*.odt,*.ogg,*.opus,*.out,*.pdf,*.pem,*.png,*.rar,*.rbc,*.rbo,*.settings,*.sty,*.svg,*.swp,*.swp*.,*.tar,*.tar.bz2,*.tar.gz,*.tar.xz,*.tgz,*.toc,*.wav,*.webm,*.xcf,*.xls,*.xlsx,*.zip,*/.bundle/*,*/.sass-cache/*,*/vendor/cache/*,*/vendor/gems/*,*~,._*,.git,.hg,.svn,Thumbs.db,Zend,intermediate/*,publish/*,vendor
 
 " This is needed to avoid swapfile warning when auto-reloading
 set shortmess+=A
