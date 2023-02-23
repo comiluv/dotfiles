@@ -19,7 +19,7 @@ return {
 				"dashboard",
 				"lazy",
 				"Trouble",
-				"memento-menu",
+				"memento",
 			},
 			char_blankline = "┆",
 			show_current_context = true,
