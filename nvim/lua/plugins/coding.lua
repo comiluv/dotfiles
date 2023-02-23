@@ -117,7 +117,7 @@ return {
 	{
 		"tpope/vim-abolish",
 		cmd = { "Abolish", "Subvert", "S" },
-		keys = { "crs", "cr_", "crm", "crc", "cru", "crU", "cr-", "crk", "cr.", "cr<space>", "crt" },
+		keys = "cr",
 	},
 
 	-- LSP incrementally rename symbol
