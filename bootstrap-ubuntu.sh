@@ -46,7 +46,7 @@ sudo add-apt-repository ppa:jonathonf/vim -y
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 
 # Update packages
-sudo apt update && sudo apt dist-upgrade -y
+sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
 sudo apt install gcc g++ gdb python3-pip python3-venv neovim unzip fd-find ripgrep silversearcher-ag bat zsh jq fortune-mod -y
