@@ -1,5 +1,5 @@
 --[[
-List of plugins that Neovim version is desired
+List of plugins that Neovim(lua) version is desired
 {
 	www.github.com/mbbill/undotree         : Vimscript
                                            : http://github.com/debugloop/telescope-undo.nvim but not equivalent
