@@ -11,9 +11,10 @@ return {
 		},
 		cmd = "Telescope",
 		keys = {
-			{ "<leader>pf", "<CMD>Telescope find_files<Cr>", desc = "Find files" },
-			{ "<C-p>", "<CMD>Telescope git_files<Cr>", desc = "Find git files" },
-			{ "<leader>ps", "<CMD>Telescope live_grep<Cr>", desc = "Live grep" },
+			{ "<leader>pf", "<CMD>Telescope find_files<Cr>", desc = "Telescope find files" },
+			{ "<C-p>", "<CMD>Telescope git_files<Cr>", desc = "Telescope find git files" },
+			{ "<leader>ps", "<CMD>Telescope live_grep<Cr>", desc = "Telescope Live Grep" },
+			{ "<leader>pb", "<CMD>Telescope buffers<Cr>", desc = "Telescope buffers" },
 		},
 		config = function()
 			require("telescope").setup({})

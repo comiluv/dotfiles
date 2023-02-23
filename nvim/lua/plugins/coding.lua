@@ -22,11 +22,7 @@ return {
 				desc = "Generate comment",
 			},
 		},
-		config = function()
-			require("neogen").setup({
-				snippet_engine = "luasnip",
-			})
-		end,
+		opts = { snippet_engine = "luasnip" },
 	},
 
 	-- AI completion
@@ -69,13 +65,13 @@ return {
 			for _, bracket in pairs(brackets) do
 				npairs.add_rules({
 					Rule(bracket[1] .. " ", " " .. bracket[2])
-					:with_pair(function()
-						return false
-					end)
-					:with_move(function(opts)
-						return opts.prev_char:match(".%" .. bracket[2]) ~= nil
-					end)
-					:use_key(bracket[2]),
+						:with_pair(function()
+							return false
+						end)
+						:with_move(function(opts)
+							return opts.prev_char:match(".%" .. bracket[2]) ~= nil
+						end)
+						:use_key(bracket[2]),
 				})
 			end
 
@@ -90,13 +86,7 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		event = { "BufRead", "BufNewFile" },
-		config = function()
-			require("Comment").setup({
-				toggler = {
-					block = "gbb",
-				},
-			})
-		end,
+		opts = { toggler = { block = "gbb" } },
 	},
 
 	-- wrap/unwrap arguments
@@ -107,11 +97,7 @@ return {
 		keys = {
 			{ "<leader>m", "<cmd>TSJToggle<Cr>", desc = "Wrap/unwrap arguments" },
 		},
-		config = function()
-			require("treesj").setup({
-				use_default_keymaps = false,
-			})
-		end,
+		opts = { use_default_keymaps = false },
 	},
 
 	-- easy align comments
@@ -127,10 +113,11 @@ return {
 		end,
 	},
 
-	-- case preserving replace with :%S command, case-rename-snakecase commands
+	-- search for, substitute, coerce, and abbreviate variants of a word
 	{
 		"tpope/vim-abolish",
-		cmd = "S",
+		cmd = { "Abolish", "Subvert", "S" },
+		keys = { "crs", "cr_", "crm", "crc", "cru", "crU", "cr-", "crk", "cr.", "cr<space>", "crt" },
 	},
 
 	-- LSP incrementally rename symbol

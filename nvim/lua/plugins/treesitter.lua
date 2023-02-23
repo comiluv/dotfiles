@@ -5,6 +5,22 @@ return {
 		cmd = "TSUpdate",
 		event = { "BufRead", "BufNewFile" },
 		build = ":TSUpdate",
+		dependencies = {
+			-- semantic highlighting
+			"David-Kunz/markid",
+			-- auto close block with end
+			"RRethy/nvim-treesitter-endwise",
+			-- auto close tags
+			"windwp/nvim-ts-autotag",
+			-- jump to matching parens
+			{
+				"andymass/vim-matchup",
+				event = { "BufRead", "BufNewFile" },
+				config = function()
+					vim.g.matchup_matchparen_offscreen = { method = "popup" }
+				end,
+			},
+		},
 		opts = {
 			ensure_installed = { "help", "c", "lua" },
 			sync_install = false,
@@ -24,22 +40,6 @@ return {
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
 		end,
-		dependencies = {
-			-- semantic highlighting
-			"David-Kunz/markid",
-			-- auto close block with end
-			"RRethy/nvim-treesitter-endwise",
-			-- auto close tags
-			"windwp/nvim-ts-autotag",
-			-- jump to matching parens
-			{
-				"andymass/vim-matchup",
-				event = { "BufRead", "BufNewFile" },
-				config = function()
-					vim.g.matchup_matchparen_offscreen = { method = "popup" }
-				end,
-			},
-		},
 	},
 }
 
