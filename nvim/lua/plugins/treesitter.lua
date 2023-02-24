@@ -6,9 +6,6 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		build = ":TSUpdate",
 		dependencies = {
-			-- semantic highlighting
-			"David-Kunz/markid",
-
 			-- auto close block with end
 			"RRethy/nvim-treesitter-endwise",
 
@@ -37,7 +34,6 @@ return {
 			indent = { enable = true, disable = { "python" } },
 			endwise = { enable = true }, -- "RRethy/nvim-treesitter-endwise",
 			autotag = { enable = true }, -- "windwp/nvim-ts-autotag",
-			-- markid = { enable = true }, -- "David-Kunz/markid",
 			matchup = { enable = true }, -- "andymass/vim-matchup",
 		},
 		config = function(_, opts)
