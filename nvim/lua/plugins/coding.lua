@@ -118,6 +118,24 @@ return {
 		"tpope/vim-abolish",
 		cmd = { "Abolish", "Subvert", "S" },
 		keys = "cr",
+		config = function()
+			require("which-key").register({
+				cr = {
+					name = "+coercion",
+					s = { desc = "snake_case" },
+					_ = { desc = "snake_case" },
+					m = { desc = "MixedCase" },
+					c = { desc = "camelCase" },
+					u = { desc = "SNAKE_UPPER_CASE" },
+					U = { desc = "SNAKE_UPPER_CASE" },
+					k = { desc = "kebab-case" },
+					t = { desc = "Title Case (not reversible)" },
+					["-"] = { desc = "kebab-case (not reversible)" },
+					["."] = { desc = "dot.case (not reversible)" },
+					["<space>"] = { desc = "space case (not reversible)" },
+				}
+			})
+		end
 	},
 
 	-- LSP incrementally rename symbol
