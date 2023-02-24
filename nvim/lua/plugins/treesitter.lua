@@ -8,6 +8,13 @@ return {
 		dependencies = {
 			-- semantic highlighting
 			"David-Kunz/markid",
+
+			-- auto close block with end
+			"RRethy/nvim-treesitter-endwise",
+
+			-- auto close tags
+			"windwp/nvim-ts-autotag",
+
 			-- jump to matching parens
 			{
 				"andymass/vim-matchup",
@@ -36,18 +43,6 @@ return {
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
 		end,
-	},
-
-	{
-		-- auto close block with end
-		"RRethy/nvim-treesitter-endwise",
-		event = "InsertEnter",
-	},
-
-	{
-		-- auto close tags
-		"windwp/nvim-ts-autotag",
-		event = "InsertEnter",
 	},
 }
 
