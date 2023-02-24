@@ -116,8 +116,8 @@ return {
 	-- search for, substitute, coerce, and abbreviate variants of a word
 	{
 		"tpope/vim-abolish",
+		event = "CursorHold",
 		cmd = { "Abolish", "Subvert", "S" },
-		keys = "cr",
 		config = function()
 			require("which-key").register({
 				cr = {
