@@ -127,7 +127,7 @@ xnoremap & :&&<CR>
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " open help about word on cursor by pressing <F1>
-nnoremap <F1> :help <C-R><C-W><CR>
+nnoremap <F1> :help <C-r><C-w><CR>
 cmap <F1> <ESC><F1>
 imap <F1> <ESC><F1>
 vmap <F1> <ESC><F1>
