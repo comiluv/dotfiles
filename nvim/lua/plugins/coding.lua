@@ -125,6 +125,7 @@ return {
 					s = { desc = "snake_case" },
 					_ = { desc = "snake_case" },
 					m = { desc = "MixedCase" },
+					p = { desc = "PascalCase" },
 					c = { desc = "camelCase" },
 					u = { desc = "SNAKE_UPPER_CASE" },
 					U = { desc = "SNAKE_UPPER_CASE" },
