@@ -133,5 +133,3 @@ vim.opt.foldlevel = 99
 -- Turn off lsp logging because the file size grows beyond control
 vim.lsp.set_log_level("off")
 
-vim.opt.more = false
-
