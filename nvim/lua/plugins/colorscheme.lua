@@ -1,14 +1,8 @@
 return {
 	{
 		"navarasu/onedark.nvim",
-		opts = {
-			highlights = {
-				IndentBlanklineContextChar = { fg = "$light_grey", fmt = "nocombine" },
-				IndentBlanklineContextStart = { sp = "$light_grey", fmt = "nocombine,underline" },
-			},
-		},
-		config = function(_, opts)
-			require("onedark").setup(opts)
+		config = function()
+			require("onedark").setup()
 			require("onedark").load()
 		end,
 	},
