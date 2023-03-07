@@ -1,9 +1,9 @@
 local augroup = vim.api.nvim_create_augroup
-local MyGroup = augroup('MyGroup', {})
-local TrimGroup = augroup('TrimGroup', {})
+local MyGroup = augroup("MyGroup", {})
+local TrimGroup = augroup("TrimGroup", {})
 
 local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup('HighlightYank', {})
+local yank_group = augroup("HighlightYank", {})
 
 local info_file_pattern = {
 	"qf",
@@ -20,12 +20,16 @@ local info_file_pattern = {
 	"memento",
 }
 
+local trim_exclusions = {
+	"markdown",
+}
+
 autocmd("TextYankPost", {
 	group = yank_group,
-	pattern = '*',
+	pattern = "*",
 	callback = function()
 		vim.highlight.on_yank({
-			higroup = 'IncSearch',
+			higroup = "IncSearch",
 			timeout = 40,
 		})
 	end,
@@ -36,9 +40,9 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = "*",
 	callback = function()
-		vim.opt.formatoptions:remove { "r", "o" }
+		vim.opt.formatoptions:remove({ "r", "o" })
 		-- auto remove comment when joining lines with <J> key
-		vim.opt.formatoptions:append "j"
+		vim.opt.formatoptions:append("j")
 	end,
 })
 
@@ -90,13 +94,17 @@ autocmd("BufWritePre", {
 	group = TrimGroup,
 	pattern = "*",
 	callback = function()
-		if vim.bo.filetype == "markdown" then return end
-		local register = vim.fn.getreg('/')
-		local save_pos = vim.fn.getpos('.')
-		vim.cmd [[silent! undojoin|keeppattern %s/\s\+$//e|$put _|$put _|keeppattern $;?\(^\s*$\)\@!?+2,$d]]
-		vim.fn.setreg('/', register)
-		vim.fn.setpos('.', save_pos)
-	end
+		for _, filetype in ipairs(trim_exclusions) do
+			if vim.bo.filetype == filetype then
+				return
+			end
+		end
+		local register = vim.fn.getreg("/")
+		local save_pos = vim.fn.getpos(".")
+		vim.cmd([[silent! undojoin|keeppattern %s/\s\+$//e|$put _|$put _|keeppattern $;?\(^\s*$\)\@!?+2,$d]])
+		vim.fn.setreg("/", register)
+		vim.fn.setpos(".", save_pos)
+	end,
 })
 
 -- disable lsp for filetypes
