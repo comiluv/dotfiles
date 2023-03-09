@@ -31,7 +31,7 @@ return {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 			},
-			indent = { enable = true, disable = { "python" } },
+			indent = { enable = false },
 			endwise = { enable = true }, -- "RRethy/nvim-treesitter-endwise",
 			autotag = { enable = true }, -- "windwp/nvim-ts-autotag",
 			matchup = { enable = true }, -- "andymass/vim-matchup",
