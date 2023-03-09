@@ -114,22 +114,13 @@ vnoremap K :m '<-2<CR>gv=gv
 " Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" To avoid conflict with vim-endwise, use functions - see: https://github.com/tpope/vim-endwise/issues/105
-function! SendCY()
-    call feedkeys("\<C-Y>", "t")
-    return ""
-endfunction
-function! SendCR()
-    call feedkeys("\<C-g>u\<CR>", "n")
-    return ""
-endfunction
+
+" Use <cr> to confirm completion,
 if has('patch8.1.1068')
     " Use `complete_info` if your (Neo)Vim version supports it.
-    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? SendCY() : SendCR()
+    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<CR>"
 else
-    inoremap <expr> <cr> pumvisible() ? SendCY() : SendCR()
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 endif
 
 " delete selection and put without yanking selection
