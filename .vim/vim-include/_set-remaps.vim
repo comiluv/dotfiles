@@ -49,8 +49,8 @@ if !exists("g:vscode")
 endif
 
 " Jumplist mutations for k and j
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'gk'
-nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'gj'
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 " Move selected lines up and down in Visual mode
 vnoremap J :m '>+1<CR>gv=gv
