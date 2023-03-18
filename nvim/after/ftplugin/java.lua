@@ -81,41 +81,6 @@ local config = {
 
 -- Manually copy pasted remaps from lsp.lua because lsp-zero doesn't run jdtls
 config['on_attach'] = function(client, bufnr)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
-	{ buffer = bufnr, desc = "Go to declaration"})
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-	{ buffer = bufnr, desc = "Go to definition" })
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
-	{ buffer = bufnr, desc = "Go to implementation"})
-	vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references,
-	{ buffer = bufnr, desc = "Go to references"})
-	vim.keymap.set("n", "K", vim.lsp.buf.hover,
-	{ buffer = bufnr, })
-	vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol,
-	{ buffer = bufnr, desc = "Workspace symbol" })
-	vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float,
-	{ buffer = bufnr, desc = "View diagnostic" })
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
-	{ buffer = bufnr, desc = "Next diagnostic" })
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
-	{ buffer = bufnr, desc = "Previous diagnostic" })
-	vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action,
-	{ buffer = bufnr, desc = "Code action" })
-	vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references,
-	{ buffer = bufnr, desc = "Open references" })
-	vim.keymap.set("n", "<leader>vrn", ":IncRename <C-r><C-w>",
-	{ buffer = bufnr, desc = "Rename symbol" })
-	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help,
-	{ buffer = bufnr, desc = "Signature help" })
-	vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder,
-	{ buffer = bufnr, desc = "Workspace Add folder" })
-	vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder,
-	{ buffer = bufnr, desc = "Worksapce Remove folder" })
-	vim.keymap.set("n", "<space>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end,
-	{ buffer = bufnr, desc = "Workspace List folders" })
-
 	-- get nvim-navic working with multiple tabs
 	if client.server_capabilities["documentSymbolProvider"] then
 		require("nvim-navic").attach(client, bufnr)

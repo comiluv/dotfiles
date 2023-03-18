@@ -103,8 +103,8 @@ return {
 			cmp_mappings["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
-				elseif luasnip.jumpable( -1) then
-					luasnip.jump( -1)
+				elseif luasnip.jumpable(-1) then
+					luasnip.jump(-1)
 				else
 					fallback()
 				end
@@ -129,51 +129,86 @@ return {
 				},
 			})
 
-			lsp.on_attach(function(client, bufnr)
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
-				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
-				vim.keymap.set(
-					"n",
-					"gr",
-					require("telescope.builtin").lsp_references,
-					{ buffer = bufnr, desc = "Go to references" }
-				)
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-				vim.keymap.set(
-					"n",
-					"<leader>vws",
-					vim.lsp.buf.workspace_symbol,
-					{ buffer = bufnr, desc = "Workspace symbol" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>vd",
-					vim.diagnostic.open_float,
-					{ buffer = bufnr, desc = "View diagnostic" }
-				)
-				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Next diagnostic" })
-				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Previous diagnostic" })
-				vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
-				vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, { buffer = bufnr, desc = "Open references" })
-				vim.keymap.set("n", "<leader>vrn", ":IncRename <C-r><C-w>", { buffer = bufnr, desc = "Rename symbol" })
-				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
-				vim.keymap.set(
-					"n",
-					"<space>wa",
-					vim.lsp.buf.add_workspace_folder,
-					{ buffer = bufnr, desc = "Workspace Add folder" }
-				)
-				vim.keymap.set(
-					"n",
-					"<space>wr",
-					vim.lsp.buf.remove_workspace_folder,
-					{ buffer = bufnr, desc = "Worksapce Remove folder" }
-				)
-				vim.keymap.set("n", "<space>wl", function()
-					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-				end, { buffer = bufnr, desc = "Workspace List folders" })
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				callback = function(ev)
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
+					vim.keymap.set(
+						"n",
+						"gi",
+						vim.lsp.buf.implementation,
+						{ buffer = ev.buf, desc = "Go to implementation" }
+					)
+					vim.keymap.set(
+						"n",
+						"gr",
+						require("telescope.builtin").lsp_references,
+						{ buffer = ev.buf, desc = "Go to references" }
+					)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf })
+					vim.keymap.set(
+						"n",
+						"<leader>vws",
+						vim.lsp.buf.workspace_symbol,
+						{ buffer = ev.buf, desc = "Workspace symbol" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>vd",
+						vim.diagnostic.open_float,
+						{ buffer = ev.buf, desc = "View diagnostic" }
+					)
+					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = ev.buf, desc = "Next diagnostic" })
+					vim.keymap.set(
+						"n",
+						"[d",
+						vim.diagnostic.goto_prev,
+						{ buffer = ev.buf, desc = "Previous diagnostic" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>vca",
+						vim.lsp.buf.code_action,
+						{ buffer = ev.buf, desc = "Code action" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>vrr",
+						vim.lsp.buf.references,
+						{ buffer = ev.buf, desc = "Open references" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>vrn",
+						":IncRename <C-r><C-w>",
+						{ buffer = ev.buf, desc = "Rename symbol" }
+					)
+					vim.keymap.set(
+						"i",
+						"<C-h>",
+						vim.lsp.buf.signature_help,
+						{ buffer = ev.buf, desc = "Signature help" }
+					)
+					vim.keymap.set(
+						"n",
+						"<space>wa",
+						vim.lsp.buf.add_workspace_folder,
+						{ buffer = ev.buf, desc = "Workspace Add folder" }
+					)
+					vim.keymap.set(
+						"n",
+						"<space>wr",
+						vim.lsp.buf.remove_workspace_folder,
+						{ buffer = ev.buf, desc = "Worksapce Remove folder" }
+					)
+					vim.keymap.set("n", "<space>wl", function()
+						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+					end, { buffer = ev.buf, desc = "Workspace List folders" })
+				end,
+			})
 
+			lsp.on_attach(function(client, bufnr)
 				-- get nvim-navic working with multiple tabs
 				if client.server_capabilities["documentSymbolProvider"] then
 					require("nvim-navic").attach(client, bufnr)
