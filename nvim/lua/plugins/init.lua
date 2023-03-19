@@ -23,6 +23,8 @@ List of plugins that Neovim(lua) version is desired
                                 -- Telescope triggers "InsertEnter" event and I want to
                                 -- seperate plugin loading into "BufRead" and "InsertEnter"
 
+-- many of the config code in this folder was taken from https://github.com/LazyVim/LazyVim
+
 return {
 	{ "folke/lazy.nvim", version = "*" },
 }
