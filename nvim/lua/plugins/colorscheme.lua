@@ -23,5 +23,15 @@ return {
 		"Mofiqul/dracula.nvim",
 		lazy = true,
 	},
+	{
+		"Mofiqul/vscode.nvim",
+		lazy = true,
+		config = function()
+			require("vscode").setup({
+				transparent = false,
+			})
+			require("vscode").load()
+		end
+	},
 }
 
