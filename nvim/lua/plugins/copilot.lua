@@ -6,14 +6,26 @@ return {
 		build = ":Copilot auth",
 		opts = {
 			panel = {
-				enabled = true,
+				enabled = false,
 			},
 			suggestion = {
-				enabled = true,
-				auto_trigger = false,
+				enabled = false,
+				auto_trigger = true,
 				keymap = {
 					accept = "<Tab>",
 				},
+			},
+			filetypes = {
+				qf = false,
+				notify = false,
+				lspinfo = false,
+				spectre_panel = false,
+				startuptime = false,
+				tsplayground = false,
+				PlenaryTestPopup = false,
+				fugitive = false,
+				checkhealth = false,
+				memento = false,
 			},
 		},
 	},
