@@ -37,7 +37,7 @@
   "nvim-treesitter-endwise": { "branch": "master", "commit": "0cf4601c330cf724769a2394df555a57d5fd3f34" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "582cbb5a4cb50f6161cac8cc01f55aeaff6d836a" },
   "nvim-ts-autotag": { "branch": "main", "commit": "25698e4033cd6cd3745454bfc837dd670eba0480" },
-  "nvim-web-devicons": { "branch": "master", "commit": "585dbc29315ca60be67d18ae6175771c3fb6791e" },
+  "nvim-web-devicons": { "branch": "master", "commit": "467d135bbefa6fbe8380c8b6498228f8b21244a6" },
   "onedark.nvim": { "branch": "master", "commit": "4497678c6b1847b663c4b23000d55f28a2f846ce" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "remember.nvim": { "branch": "master", "commit": "6b4176330a25c42597ac3dba0cdce9aa8b22d60e" },
@@ -49,5 +49,6 @@
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
   "vim-matchup": { "branch": "master", "commit": "f69d1ac5bd3c4e6ad349f64317000cc9a4a895cf" },
   "vim-mkdir": { "branch": "master", "commit": "f0ba7a7dc190a0cedf1d827958c99f3718109cf0" },
+  "vscode.nvim": { "branch": "main", "commit": "51520c4cce13a969101fbcc4eb2435214c3f5794" },
   "which-key.nvim": { "branch": "main", "commit": "d1afcd48f309af58fdb43adc4581bf4b5684768b" }
 }
