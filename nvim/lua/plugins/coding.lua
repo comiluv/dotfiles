@@ -25,16 +25,6 @@ return {
 		opts = { snippet_engine = "luasnip" },
 	},
 
-	-- AI completion
-	{
-		"Exafunction/codeium.vim",
-		event = "VimEnter", -- lazy=true, "VeryLazy" didn't work
-		cmd = "Codeium",
-		config = function()
-			vim.g.codeium_enabled = false
-		end,
-	},
-
 	-- auto close parentheses
 	{
 		"windwp/nvim-autopairs",

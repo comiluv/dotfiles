@@ -7,8 +7,6 @@ List of plugins that Neovim(lua) version is desired
                                            : https://github.com/smjonas/live-command.nvim doesn't work due to https://github.com/smjonas/live-command.nvim/issues/24
                                            : https://github.com/johmsalas/text-case.nvim is buggy
 	www.github.com/andymass/vim-matchup    : Vimscript
-	www.github.com/Exafunction/codeium.vim : Vimscript
-                                           : there is https://github.com/jcdickinson/codeium.nvim but Windows is not supported
 	www.github.com/pbrisbin/vim-mkdir      : Vimscript
 	www.github.com/junegunn/vim-easy-align : Vimscript
 }
