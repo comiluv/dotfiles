@@ -1,7 +1,6 @@
 return {
 	{
 		"navarasu/onedark.nvim",
-		lazy = true,
 		config = function()
 			require("onedark").setup()
 			require("onedark").load()
@@ -24,14 +23,5 @@ return {
 		"Mofiqul/dracula.nvim",
 		lazy = true,
 	},
-	{
-		"Mofiqul/vscode.nvim",
-		config = function()
-			require("vscode").setup({
-				transparent = false,
-			})
-			require("vscode").load()
-		end
-	}
 }
 

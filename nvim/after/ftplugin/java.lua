@@ -18,6 +18,13 @@ vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = 'C:\\code\\java_headfirst\\' .. project_name
 
+local jdtls_dir = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
+local config_dir = jdtls_dir .. '/config_win'
+local plugins_dir = jdtls_dir .. '/plugins'
+local path_to_jar = plugins_dir .. '/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar'
+local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
+local root_dir = require("jdtls.setup").find_root(root_markers)
+
 local config = {
 	-- The command that starts the language server
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -38,14 +45,14 @@ local config = {
 		'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
 		-- 💀
-		'-jar', 'C:\\Users\\choij\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\plugins\\org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+		'-jar', path_to_jar,
 		-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
 		-- Must point to the                                                     Change this to
 		-- eclipse.jdt.ls installation                                           the actual version
 
 
 		-- 💀
-		'-configuration', 'C:\\\\Users\\choij\\AppData\\Local\\nvim-data\\mason\\packages\\jdtls\\config_win',
+		'-configuration', config_dir,
 		-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
 		-- Must point to the                      Change to one of `linux`, `win` or `mac`
 		-- eclipse.jdt.ls installation            Depending on your system.
@@ -58,13 +65,13 @@ local config = {
 	-- 💀
 	-- This is the default if not provided, you can remove it. Or adjust as needed.
 	-- One dedicated LSP server & client will be started per unique root_dir
-	root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
+	root_dir = root_dir,
 	-- Here you can configure eclipse.jdt.ls specific settings
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 	-- for a list of options
 	settings = {
 		java = {
-			signatureHelp = {enabled = true},
+			signatureHelp = { enabled = true },
 		}
 	},
 	-- Language server `initializationOptions`
@@ -79,7 +86,7 @@ local config = {
 	},
 }
 
--- Manually copy pasted remaps from lsp.lua because lsp-zero doesn't run jdtls
+-- remaps are handled globally by LspAttach autocmd
 config['on_attach'] = function(client, bufnr)
 	-- get nvim-navic working with multiple tabs
 	if client.server_capabilities["documentSymbolProvider"] then
