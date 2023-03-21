@@ -23,6 +23,7 @@ return {
 					fugitive = false,
 					checkhealth = false,
 					memento = false,
+					tsplaground = false,
 				},
 			})
 			vim.cmd("Copilot disable")

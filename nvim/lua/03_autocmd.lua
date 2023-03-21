@@ -18,6 +18,7 @@ local info_file_pattern = {
 	"fugitive",
 	"checkhealth",
 	"memento",
+	"tsplayground",
 }
 
 local trim_exclusions = {
@@ -82,7 +83,6 @@ autocmd({ "TermOpen" }, {
 -- Check if we need to reload the file when it changed
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = MyGroup,
-	pattern = "*",
 	command = "checktime",
 })
 
