@@ -29,5 +29,20 @@ return {
 			vim.cmd("Copilot disable")
 		end,
 	},
+	-- Packer
+	{
+		"jackMort/ChatGPT.nvim",
+		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
+		config = function()
+			require("chatgpt").setup({
+				-- setups
+			})
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	},
 }
 
