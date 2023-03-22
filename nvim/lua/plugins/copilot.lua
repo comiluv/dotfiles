@@ -31,11 +31,14 @@ return {
 	},
 	-- Packer
 	{
-		"jackMort/ChatGPT.nvim",
+		"comiluv/ChatGPT.nvim",
 		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
 		config = function()
+			local submit = vim.fn.has("win32") == 1 and "<C-Enter>" or "<C-\\>"
 			require("chatgpt").setup({
-				-- setups
+				keymaps = {
+					submit = submit,
+				}
 			})
 		end,
 		dependencies = {
