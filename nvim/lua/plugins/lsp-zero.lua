@@ -333,16 +333,18 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
+			local null_ls = require("null-ls")
 			local sources = {
 				-- python
-				require("null-ls").builtins.formatting.black.with({
+				null_ls.builtins.formatting.black.with({
 					extra_args = { "--line-length=120" },
 				}),
-				require("null-ls").builtins.formatting.isort,
-				require("null-ls").builtins.formatting.stylua,
-				require("null-ls").builtins.formatting.google_java_format,
+				null_ls.builtins.formatting.isort,
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.formatting.google_java_format,
+				null_ls.builtins.formatting.prettierd,
 			}
-			require("null-ls").setup({ sources = sources })
+			null_ls.setup({ sources = sources })
 		end,
 	},
 	{
