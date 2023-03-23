@@ -39,7 +39,7 @@ return {
 	-- history
 	{
 		"gaborvecsei/memento.nvim",
-		event = "VimEnter",	-- lazy=true or "VeryLazy" didn't work
+		event = "VimEnter", -- lazy=true or "VeryLazy" didn't work
 		keys = {
 			{
 				"<leader>ho",
@@ -111,6 +111,18 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		opts = {
 			autocmd = { enabled = true },
+		},
+	},
+
+	{
+		"NvChad/nvim-colorizer.lua",
+		ft = { "css", "html", "javascript" },
+		opts = {
+			filetypes = { "css", "html", "javascript" },
+			user_default_options = {
+				css = true,
+				css_fn = true,
+			},
 		},
 	},
 }
