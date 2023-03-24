@@ -116,13 +116,10 @@ return {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		ft = { "css", "html", "javascript" },
+		ft = { "css" },
 		opts = {
-			filetypes = { "css", "html", "javascript" },
-			user_default_options = {
-				css = true,
-				css_fn = true,
-			},
+			filetypes = { "css" },
+			user_default_options = { css = true },
 		},
 	},
 }
