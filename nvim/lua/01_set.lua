@@ -133,3 +133,6 @@ vim.opt.foldlevel = 99
 -- Turn off lsp logging because the file size grows beyond control
 vim.lsp.set_log_level("off")
 
+-- Delete netrw buffer after entering a file
+vim.g.netrw_fastbrowse = 0
+
