@@ -58,7 +58,7 @@ return {
 		"comiluv/ChatGPT.nvim",
 		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
 		config = function()
-			require("chatgpt").setup({})
+			require("chatgpt").setup()
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",

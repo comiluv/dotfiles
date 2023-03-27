@@ -40,3 +40,6 @@ vim.env.CXXFLAGS = "-Werror -Wall -Wextra -pedantic -g -std=c++17"
 -- vim.env.CFLAGS = "/WX /Wall /Zi"
 -- vim.env.CXXFLAGS = "/WX /Wall /Zi /std:c++latest"
 
+vim.env.CC = "clang"
+vim.env.CXX = "clang++"
+
