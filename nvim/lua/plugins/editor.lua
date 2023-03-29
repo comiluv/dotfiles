@@ -6,18 +6,35 @@ return {
 			"nvim-lua/plenary.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+				build = "make",
 			},
 		},
 		cmd = "Telescope",
 		keys = {
 			{ "<leader>pf", "<CMD>Telescope find_files<Cr>", desc = "Telescope find files" },
-			{ "<C-p>", "<CMD>Telescope git_files<Cr>", desc = "Telescope find git files" },
-			{ "<leader>ps", "<CMD>Telescope live_grep<Cr>", desc = "Telescope Live Grep" },
+			{
+				"<C-p>",
+				function()
+					vim.fn.system("git rev-parse --is-inside-work-tree")
+					if vim.v.shell_error == 0 then
+						require("telescope.builtin").git_files()
+					else
+						require("telescope.builtin").find_files()
+					end
+				end,
+				desc = "Telescope find git files",
+			},
+			{ "<leader>ps", function()
+				require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > "), use_regex = true, })
+			end
+
+			, desc = "Telescope Live Grep" },
 			{ "<leader>pb", "<CMD>Telescope buffers<Cr>", desc = "Telescope buffers" },
 		},
 		config = function()
-			require("telescope").setup({})
+			require("telescope").setup({
+				defaults = { file_ignore_patterns = { "%.class", }, },
+			})
 			require("telescope").load_extension("fzf")
 		end,
 	},
