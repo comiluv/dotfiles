@@ -55,7 +55,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole
 -- update of this remap
 vim.keymap.set("c", "%%", function()
 	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
-end, { expr = true })
+end, { expr = true, desc = "expand to path" })
 vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file" })
 vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
 
