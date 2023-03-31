@@ -321,12 +321,6 @@ return {
 		lazy = true,
 	},
 
-	-- debug adapater protocol
-	{
-		"mfussenegger/nvim-dap",
-		event = { "BufRead", "BufNewFile" },
-	},
-
 	-- inject LSP diagnostics, code actions, formatting etc.
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -347,6 +341,7 @@ return {
 			null_ls.setup({ sources = sources })
 		end,
 	},
+
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
