@@ -40,10 +40,6 @@ return {
 					end
 				end,
 			},
-			{
-				"nvim-treesitter/nvim-treesitter-context",
-				config = true,
-			},
 		},
 		opts = {
 			ensure_installed = { "help", "c", "lua" },
