@@ -344,7 +344,7 @@ return {
 
 	{
 		"williamboman/mason.nvim",
-		cmd = "Mason",
+		cmd = { "Mason", "MasonUpdate" },
 		config = true,
 	},
 }
