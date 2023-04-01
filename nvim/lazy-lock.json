@@ -1,5 +1,5 @@
 {
-  "ChatGPT.nvim": { "branch": "main", "commit": "f4c7c90c21659cf9d632916af89495ec5fe53ca6" },
+  "ChatGPT.nvim": { "branch": "main", "commit": "5cda5a10fcd312339266717cbb8e5eec653856eb" },
   "Comment.nvim": { "branch": "master", "commit": "8d3aa5c22c2d45e788c7a5fe13ad77368b783c20" },
   "LuaSnip": { "branch": "master", "commit": "bc8ec05022743d3f08bda7a76c6bb5e9a9024581" },
   "NeoSolarized.nvim": { "branch": "master", "commit": "06bbc31b3f2753b1cca615e6d590faa288cc9e6e" },
@@ -35,7 +35,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "94291c924f0efdbc16ac625cf77ae7d3a7fa5821" },
   "nvim-navic": { "branch": "master", "commit": "5b37ffc213f37acb529eda2b319deee4c5b8c55b" },
   "nvim-surround": { "branch": "main", "commit": "50f667861fac75592fc9e482472c12672e1cd723" },
-  "nvim-treesitter": { "branch": "master", "commit": "2f3113ff6d554e3fe4da3610135c2f404f7aa270" },
+  "nvim-treesitter": { "branch": "master", "commit": "ee1d6182801204c397534ac69c37f83283ba69e3" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "0cf4601c330cf724769a2394df555a57d5fd3f34" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "b55fe6175f0001347a433c9df358c8cbf8a4e90f" },
   "nvim-ts-autotag": { "branch": "main", "commit": "25698e4033cd6cd3745454bfc837dd670eba0480" },
