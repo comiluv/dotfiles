@@ -87,6 +87,8 @@ return {
 
 			if vim.fn.has("nvim-0.9") == 1 then
 				table.insert(events, "WinResized")
+			else
+				table.insert(events, "WinScrolled")
 			end
 
 			vim.api.nvim_create_autocmd(events, {

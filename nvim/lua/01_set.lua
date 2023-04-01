@@ -88,7 +88,7 @@ vim.opt.laststatus = 3
 -- Better display for messages
 vim.opt.cmdheight = 2
 -- You will have bad experience for diagnostic messages when it's default 4000.
-vim.opt.updatetime = 300
+vim.opt.updatetime = 200
 
 vim.opt.fileformats = "unix,dos"
 vim.opt.fileencodings = "ucs-bom,utf-8,euc-kr,default,latin1"
