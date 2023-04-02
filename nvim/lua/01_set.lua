@@ -72,7 +72,7 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.list = false
 
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
