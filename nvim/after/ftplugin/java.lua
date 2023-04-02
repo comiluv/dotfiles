@@ -48,12 +48,6 @@ local capabilities = {
 }
 
 -- remaps are handled globally by LspAttach autocmd
-local lsp_onattach = function(client, bufnr)
-	-- get nvim-navic working with multiple tabs
-	if client.server_capabilities["documentSymbolProvider"] then
-		require("nvim-navic").attach(client, bufnr)
-	end
-end
 
 local config = {
 	-- The command that starts the language server

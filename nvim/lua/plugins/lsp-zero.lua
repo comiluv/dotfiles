@@ -162,16 +162,10 @@ return {
 			local servers = opts.servers
 			local lsp_capabilities =
 				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-			local lsp_attach = function(client, bufnr)
-				if client.server_capabilities["documentSymbolProvider"] then
-					require("nvim-navic").attach(client, bufnr)
-				end
-			end
 
 			local function setup(server)
 				local server_opts = vim.tbl_deep_extend("force", {
 					capabilities = vim.deepcopy(lsp_capabilities),
-					on_attach = lsp_attach,
 				}, servers[server] or {})
 
 				if opts.skip_server_setup[server] then

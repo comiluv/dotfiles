@@ -21,17 +21,11 @@ local match = vim.fs.find(root_markers, { path = vim.api.nvim_buf_get_name(0), u
 local root_dir = match and vim.fn.fnamemodify(match, ":p:h") or nil
 local settings = vim.empty_dict()
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local lsp_attach = function(client, bufnr)
-	if client.server_capabilities["documentSymbolProvider"] then
-		require("nvim-navic").attach(client, bufnr)
-	end
-end
 vim.lsp.start({
 	name = "vscode-autohotkey",
 	cmd = cmd,
 	root_dir = root_dir,
 	settings = settings,
 	capabilities = lsp_capabilities,
-	on_attach = lsp_attach,
 })
 
