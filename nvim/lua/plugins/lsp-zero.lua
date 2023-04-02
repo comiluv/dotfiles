@@ -65,6 +65,7 @@ return {
 					-- Specify * to use this function as a fallback for any server
 					-- ["*"] = function(server, opts) end,
 				},
+				ensure_installed = {},
 			}
 		end,
 		---@param opts PluginLspOpts
@@ -184,21 +185,18 @@ return {
 
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
 			local available = have_mason and mlsp.get_available_servers() or {}
-			local ensure_installed = {}
 
 			for server, server_opts in pairs(servers) do
 				if server_opts then
 					server_opts = server_opts == true and {} or server_opts
 					if server_opts.mason == false or not vim.tbl_contains(available, server) then
 						setup(server)
-					else
-						ensure_installed[#ensure_installed + 1] = server
 					end
 				end
 			end
 
 			if have_mason then
-				mlsp.setup({ ensure_installed = ensure_installed })
+				mlsp.setup({ ensure_installed = opts.ensure_installed })
 				mlsp.setup_handlers({ setup })
 			end
 		end,
