@@ -24,18 +24,21 @@ return {
 				end,
 				desc = "Telescope find git files",
 			},
-			{ "<leader>ps", function()
-				require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > "), use_regex = true, })
-			end
-
-			, desc = "Telescope Live Grep" },
+			{
+				"<leader>ps",
+				function()
+					require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > "), use_regex = true })
+				end,
+				desc = "Telescope Live Grep",
+			},
 			{ "<leader>pb", "<CMD>Telescope buffers<Cr>", desc = "Telescope buffers" },
 		},
 		config = function()
+			-- stylua: ignore
 			local file_ignore_patterns =
 {"^.*%.7z$","^.*%.aux$","^.*%.avi$","^.*%.bak$","^.*%.bib$","^.*%.class$","^.*%.cls$","^.*%.cmi$","^.*%.cmo$","^.*%.doc$","^.*%.docx$","^.*%.dvi$","^.*%.flac$","^.*%.flv$","^.*%.gem$","^.*%.gif$","^.*%.hi$","^.*%.ico$","^.*%.jpeg$","^.*%.jpg$","^.*%.log$","^.*%.min.*%.js$","^.*%.min%.js$","^.*%.mov$","^.*%.mp3$","^.*%.mp4$","^.*%.mpg$","^.*%.nav$","^.*%.o$","^.*%.obj$","^.*%.ods$","^.*%.odt$","^.*%.ogg$","^.*%.opus$","^.*%.out$","^.*%.pdf$","^.*%.pem$","^.*%.png$","^.*%.rar$","^.*%.rbc$","^.*%.rbo$","^.*%.settings$","^.*%.sty$","^.*%.svg$","^.*%.swp$","^.*%.swp.*%.$","^.*%.tar$","^.*%.tar%.bz2$","^.*%.tar%.gz$","^.*%.tar%.xz$","^.*%.tgz$","^.*%.toc$","^.*%.wav$","^.*%.webm$","^.*%.xcf$","^.*%.xls$","^.*%.xlsx$","^.*%.zip$","^.*/%.bundle/.*$","^.*/%.sass%-cache/.*$","^.*/vendor/cache/.*$","^.*/vendor/gems/.*$","^.*%~$","^%._.*$","^%.git$","^%.hg$","^%.svn$","^Thumbs%.db$","^Zend$","^intermediate/.*$","^publish/.*$","^vendor$"}
 			require("telescope").setup({
-				defaults = { file_ignore_patterns = file_ignore_patterns, },
+				defaults = { file_ignore_patterns = file_ignore_patterns },
 			})
 			require("telescope").load_extension("fzf")
 		end,
@@ -75,7 +78,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			vim.o.timeout = true
-			vim.o.timeoutlen = 300
+			vim.o.timeoutlen = 500
 			require("which-key").setup({
 				-- your configuration comes here
 				-- or leave it empty to use the default settings
