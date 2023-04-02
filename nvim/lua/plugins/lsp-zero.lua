@@ -38,6 +38,9 @@ return {
 								telemetry = {
 									enable = false,
 								},
+								format = {
+									enable = false,
+								},
 							},
 						},
 					},
