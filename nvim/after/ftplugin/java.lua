@@ -5,7 +5,7 @@ vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
 -- press F5 to cd to directory, javac %
-vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<BAR>:w<BAR>te javac %<CR>", { buffer = true })
+vim.keymap.set("n", "<F5>", ":<C-u>cd %:p:h<BAR>:update<BAR>te javac %<CR>", { buffer = true })
 vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true })
 
 -- press F8 to cd to directory, java %<
