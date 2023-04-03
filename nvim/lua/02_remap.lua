@@ -77,8 +77,9 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<C-c>", "<Esc>")
 
 -- lsp format
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end,
-	{ desc = "Format buffer" })
+vim.keymap.set("n", "<leader>f", function()
+	vim.lsp.buf.format({ timeout_ms = 10000 })
+end, { desc = "Format buffer" })
 
 -- quickfix navigation
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
@@ -121,4 +122,3 @@ vim.keymap.set("x", "ad", "gg0oG$", { noremap = true, desc = "around document" }
 vim.cmd([[command! Q q]])
 vim.cmd([[command! Qall qall]])
 vim.cmd([[command! QA qall]])
-

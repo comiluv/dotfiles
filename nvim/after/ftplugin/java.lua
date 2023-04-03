@@ -17,7 +17,6 @@ vim.keymap.set("n", "<leader>f", function()
 		filter = function(client)
 			return client.name ~= "jdtls"
 		end,
-		async = true,
 		timeout_ms = 10000,
 	})
 end, { buffer = true, desc = "Format buffer" })

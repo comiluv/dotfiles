@@ -137,7 +137,7 @@ autocmd("LspAttach", {
 				group = augroup("LspFormatOnSave" .. buf, { clear = false }),
 				buffer = buf,
 				callback = function()
-					vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+					vim.lsp.buf.format({ timeout_ms = 10000 })
 					print("buffer auto format with " .. client.name)
 				end,
 			})
