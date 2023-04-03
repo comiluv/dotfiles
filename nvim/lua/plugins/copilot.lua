@@ -18,6 +18,8 @@ return {
 					markdown = true,
 					yaml = true,
 					qf = false,
+					help = false,
+					man = false,
 					notify = false,
 					lspinfo = false,
 					spectre_panel = false,
@@ -28,6 +30,8 @@ return {
 					checkhealth = false,
 					memento = false,
 					tsplaground = false,
+					lazy = false,
+					Trouble = false,
 				},
 			})
 			-- detach Copilot for big files
@@ -67,4 +71,3 @@ return {
 		},
 	},
 }
-

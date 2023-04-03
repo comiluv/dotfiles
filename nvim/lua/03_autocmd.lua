@@ -19,6 +19,8 @@ local info_file_pattern = {
 	"checkhealth",
 	"memento",
 	"tsplayground",
+	"lazy",
+	"Trouble",
 }
 
 local trim_exclusions = {

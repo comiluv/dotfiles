@@ -14,11 +14,21 @@ return {
 		opts = {
 			enabled = true,
 			filetype_exclude = {
+				"qf",
 				"help",
-				"dashboard",
+				"man",
+				"notify",
+				"lspinfo",
+				"spectre_panel",
+				"startuptime",
+				"tsplayground",
+				"PlenaryTestPopup",
+				"fugitive",
+				"checkhealth",
+				"memento",
+				"tsplayground",
 				"lazy",
 				"Trouble",
-				"memento",
 			},
 			char_blankline = "┆",
 			show_current_context = true,
@@ -126,13 +136,12 @@ return {
 	},
 
 	{
-			"SmiteshP/nvim-navic",
-			lazy = true,
-			opts = {
-				lsp = {
-					auto_attach = true,
-				},
+		"SmiteshP/nvim-navic",
+		lazy = true,
+		opts = {
+			lsp = {
+				auto_attach = true,
 			},
-	}
+		},
+	},
 }
-
