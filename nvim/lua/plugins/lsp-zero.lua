@@ -43,6 +43,9 @@ return {
 								},
 							},
 						},
+						capabilities = {
+							documentFormattingProvider = false,
+						},
 					},
 					grammarly = {
 						filetypes = { "markdown", "text" },
@@ -343,4 +346,3 @@ return {
 		config = true,
 	},
 }
-

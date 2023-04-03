@@ -132,7 +132,7 @@ autocmd("LspAttach", {
 		local buf = args.buf
 		if client.supports_method("textDocument/formatting") then
 			autocmd("BufWritePre", {
-				group = augroup("LspFormatOnSave" .. buf, {}),
+				group = augroup("LspFormatOnSave" .. buf, { clear = false }),
 				buffer = buf,
 				callback = function()
 					vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
@@ -141,4 +141,3 @@ autocmd("LspAttach", {
 		end
 	end,
 })
-
