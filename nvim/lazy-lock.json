@@ -1,5 +1,5 @@
 {
-  "ChatGPT.nvim": { "branch": "main", "commit": "5cda5a10fcd312339266717cbb8e5eec653856eb" },
+  "ChatGPT.nvim": { "branch": "main", "commit": "99ec8c346d46b285d14bda9e5ffb0daf4d6b8e97" },
   "Comment.nvim": { "branch": "master", "commit": "8d3aa5c22c2d45e788c7a5fe13ad77368b783c20" },
   "LuaSnip": { "branch": "master", "commit": "bc8ec05022743d3f08bda7a76c6bb5e9a9024581" },
   "NeoSolarized.nvim": { "branch": "master", "commit": "06bbc31b3f2753b1cca615e6d590faa288cc9e6e" },
@@ -22,7 +22,7 @@
   "lazygit.nvim": { "branch": "main", "commit": "32bffdebe273e571588f25c8a708ca7297928617" },
   "lualine.nvim": { "branch": "master", "commit": "9170434aa100f3967b43d5d34bb9adc56fae1986" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "b64fdede85fd5e0b720ce722919e0a9b95ed6547" },
-  "mason.nvim": { "branch": "main", "commit": "bd5f5924e99eb20effc3199710ab754e89f7a7b3" },
+  "mason.nvim": { "branch": "main", "commit": "46abd3ff86c74294fed9a530ec872ec7a4680bef" },
   "memento.nvim": { "branch": "master", "commit": "7e5e5a86ccaec2892fc2d8197fc01a25d1cf8951" },
   "monokai.nvim": { "branch": "master", "commit": "b8bd44d5796503173627d7a1fc51f77ec3a08a63" },
   "neogen": { "branch": "main", "commit": "353c5ef8e51c14445cc85666d4d09e4cf98598b2" },

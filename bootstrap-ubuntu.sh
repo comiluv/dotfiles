@@ -36,12 +36,6 @@ echo 'source ~/.config/.vim/vimrc' >> ~/.vimrc
 # Add git ppa repo
 sudo add-apt-repository ppa:git-core/ppa -y
 
-# Add python3 ppa repository
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-
-# Add vim ppa repo
-sudo add-apt-repository ppa:jonathonf/vim -y
-
 # Add neovim ppa repo
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 
@@ -49,17 +43,10 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb python3-pip python3-venv neovim unzip fd-find ripgrep silversearcher-ag bat zsh jq fortune-mod -y
-
-# Install neo-cowsay
-wget https://github.com/Code-Hex/Neo-cowsay/releases/download/v2.0.4/Neo-cowsay_2.0.4_linux_amd64.deb
-sudo apt install ./Neo-cowsay_2.0.4_linux_amd64.deb
-rm Neo-cowsay_2.0.4_linux_amd64.deb
-
-# Install fd
-ln -s $(which fdfind) ~/.local/bin/fd
+sudo apt install gcc g++ gdb neovim unzip fd-find ripgrep bat zsh jq -y
 
 # setup some symlinks
+ln -s $(which fdfind) ~/.local/bin/fd
 ln -s /usr/bin/nvim ~/.local/bin/v
 ln -s /bin/batcat ~/.local/bin/bat
 
