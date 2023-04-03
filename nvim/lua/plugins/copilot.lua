@@ -32,6 +32,7 @@ return {
 					tsplaground = false,
 					lazy = false,
 					Trouble = false,
+					chatgpt = false,
 				},
 			})
 			-- detach Copilot for big files
@@ -61,9 +62,13 @@ return {
 		-- to use C-Enter in Windows Terminal
 		"comiluv/ChatGPT.nvim",
 		cmd = { "ChatGPT", "ChatGPTActAs", "ChatGPTEditWithInstructions" },
-		config = function()
-			require("chatgpt").setup()
-		end,
+		opts = {
+			question_sign = "🙂",
+			answer_sign = "🤖",
+			openai_params = {
+				max_tokens = 1000,
+			},
+		},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",

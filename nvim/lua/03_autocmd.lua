@@ -21,6 +21,7 @@ local info_file_pattern = {
 	"tsplayground",
 	"lazy",
 	"Trouble",
+	"chatgpt",
 }
 
 local trim_exclusions = {

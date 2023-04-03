@@ -29,6 +29,7 @@ return {
 				"tsplayground",
 				"lazy",
 				"Trouble",
+				"chatgpt",
 			},
 			char_blankline = "┆",
 			show_current_context = true,
