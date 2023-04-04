@@ -1,7 +1,7 @@
 return {
 	{
 		"navarasu/onedark.nvim",
-		lazy=true,
+		lazy = true,
 		config = function()
 			require("onedark").setup()
 			require("onedark").load()
@@ -19,7 +19,7 @@ return {
 	{
 		"luisiacc/gruvbox-baby",
 		config = function()
-			vim.cmd("colorscheme gruvbox-baby")
+			vim.cmd.colorscheme("gruvbox-baby")
 		end,
 	},
 	{
@@ -34,7 +34,6 @@ return {
 				transparent = false,
 			})
 			require("vscode").load()
-		end
+		end,
 	},
 }
-

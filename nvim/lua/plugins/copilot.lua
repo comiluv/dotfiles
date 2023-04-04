@@ -40,14 +40,14 @@ return {
 						local file_size = vim.fn.getfsize(args.file)
 						if file_size > 100000 or file_size == -2 then
 							vim.defer_fn(function()
-								vim.cmd("silent Copilot detach")
+								vim.cmd.Copilot("detach")
 							end, 0)
 						end
 					end
 				end,
 			})
 			-- start Copilot disabled
-			vim.cmd("silent Copilot disable")
+			vim.cmd.Copilot("disable")
 		end,
 	},
 
