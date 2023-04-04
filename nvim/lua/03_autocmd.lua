@@ -5,7 +5,7 @@ local TrimGroup = augroup("TrimGroup", {})
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 
-local info_file_pattern = {
+vim.g.info_file_pattern = {
 	"qf",
 	"help",
 	"man",
@@ -53,7 +53,7 @@ autocmd({ "FileType" }, {
 -- close some filetypes with <q>
 autocmd({ "FileType" }, {
 	group = MyGroup,
-	pattern = info_file_pattern,
+	pattern = vim.g.info_file_pattern,
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, nowait = true })
@@ -113,7 +113,7 @@ autocmd("BufWritePre", {
 -- disable lsp for filetypes
 autocmd({ "FileType" }, {
 	group = MyGroup,
-	pattern = info_file_pattern,
+	pattern = vim.g.info_file_pattern,
 	callback = function()
 		vim.diagnostic.disable(0)
 	end,

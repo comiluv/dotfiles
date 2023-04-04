@@ -5,6 +5,23 @@ return {
 		cmd = "Copilot",
 		build = ":Copilot auth",
 		config = function()
+			local function array_to_table(arr)
+				local tbl = {}
+				for _, v in ipairs(arr) do
+					tbl[v] = false
+				end
+				return tbl
+			end
+			-- https://codeinthehole.com/tips/vim-and-github-copilot/
+			local copilot_enabled_filetypes = {
+				gitcommit = true,
+				markdown = true,
+				yaml = true,
+			}
+			local filetypes = array_to_table(vim.g.info_file_pattern)
+			for k, v in pairs(copilot_enabled_filetypes) do
+				filetypes[k] = v
+			end
 			require("copilot").setup({
 				suggestion = {
 					auto_trigger = true,
@@ -12,28 +29,7 @@ return {
 						accept = "<Tab>",
 					},
 				},
-				filetypes = {
-					-- https://codeinthehole.com/tips/vim-and-github-copilot/
-					gitcommit = true,
-					markdown = true,
-					yaml = true,
-					qf = false,
-					help = false,
-					man = false,
-					notify = false,
-					lspinfo = false,
-					spectre_panel = false,
-					startuptime = false,
-					tsplayground = false,
-					PlenaryTestPopup = false,
-					fugitive = false,
-					checkhealth = false,
-					memento = false,
-					tsplaground = false,
-					lazy = false,
-					Trouble = false,
-					chatgpt = false,
-				},
+				filetypes = filetypes,
 			})
 			-- detach Copilot for big files
 			vim.api.nvim_create_autocmd("LspAttach", {
