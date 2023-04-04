@@ -35,7 +35,6 @@ local capabilities = {
 			},
 		},
 	},
-	documentFormattingProvider = false,
 }
 
 -- remaps are handled globally by LspAttach autocmd
