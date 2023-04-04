@@ -124,24 +124,17 @@ autocmd("LspAttach", {
 	group = augroup("LspFormatOnSave", {}),
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if
-			client.config
-			and client.config.capabilities
-			and client.config.capabilities.documentFormattingProvider == false
-		then
+		if client.name ~= "null-ls" then
 			return
 		end
 
 		local buf = args.buf
-		if client.supports_method("textDocument/formatting") then
-			autocmd("BufWritePre", {
-				group = augroup("LspFormatOnSave" .. buf, { clear = false }),
-				buffer = buf,
-				callback = function()
-					vim.lsp.buf.format({ timeout_ms = 10000 })
-					print("buffer auto format with " .. client.name)
-				end,
-			})
-		end
+		autocmd("BufWritePre", {
+			group = augroup("LspFormatOnSave" .. buf, {}),
+			buffer = buf,
+			callback = function()
+				vim.lsp.buf.format({ timeout_ms = 10000, name = "null-ls" })
+			end,
+		})
 	end,
 })

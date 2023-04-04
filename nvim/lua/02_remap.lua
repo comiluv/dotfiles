@@ -78,7 +78,7 @@ vim.keymap.set("n", "<C-c>", "<Esc>")
 
 -- lsp format
 vim.keymap.set("n", "<leader>f", function()
-	vim.lsp.buf.format({ timeout_ms = 10000 })
+	vim.lsp.buf.format({ timeout_ms = 10000, name = "null-ls" })
 end, { desc = "Format buffer" })
 
 -- quickfix navigation

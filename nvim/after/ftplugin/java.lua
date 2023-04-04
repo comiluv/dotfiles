@@ -12,15 +12,6 @@ vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true 
 vim.keymap.set("n", "<F8>", ":<C-u>cd %:p:h<BAR>exec 'term java' shellescape(expand('%<'))<CR>", { buffer = true })
 vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
 
-vim.keymap.set("n", "<leader>f", function()
-	vim.lsp.buf.format({
-		filter = function(client)
-			return client.name ~= "jdtls"
-		end,
-		timeout_ms = 10000,
-	})
-end, { buffer = true, desc = "Format buffer" })
-
 -- https://github.com/mfussenegger/nvim-jdtls#Configuration-verbose
 -- Only verbose config version works. Quickstart doens't work
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
