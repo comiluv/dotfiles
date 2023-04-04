@@ -6,6 +6,7 @@ vim.bo.expandtab = true
 
 -- it'll also be used for C++
 
+-- use msys2 make
 if vim.fn.has("win32") == 1 then
 	vim.bo.makeprg = "mingw32-make.exe"
 end

@@ -24,7 +24,7 @@ vim.keymap.set(
 	":<C-u>update<BAR>:cd %:p:h<BAR>:exec 'term " .. py .. "' shellescape(@%)<CR>",
 	{ buffer = true }
 )
--- vim.keymap.set("n", "<F8>", ":<C-u>update<BAR>:cd %:h<BAR>:pyfile %<CR>", { buffer = true })
+-- vim.keymap.set("n", "<F8>", ":<C-u>update<BAR>:cd %:h<BAR>:exec 'pyfile' shellescape(@%)<CR>", { buffer = true })
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
 -- mode and press F8

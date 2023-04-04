@@ -1,4 +1,4 @@
--- reuse same vscode-autohotkey lsp client
+-- reuse vscode-autohotkey lsp client
 local lsp_clients = vim.lsp.get_active_clients()
 for _, client in ipairs(lsp_clients) do
 	if client.name == "vscode_autohotkey" and vim.lsp.buf_is_attached(0, client.id) == false then
@@ -28,4 +28,3 @@ vim.lsp.start({
 	settings = settings,
 	capabilities = lsp_capabilities,
 })
-
