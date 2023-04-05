@@ -11,15 +11,15 @@ return {
 		},
 		cmd = "Telescope",
 		keys = {
-			{ "<leader>pf", require("telescope.builtin").find_files, desc = "Telescope find files" },
+			{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
 			{
 				"<C-p>",
 				function()
 					vim.fn.system("git rev-parse --is-inside-work-tree")
 					if vim.v.shell_error == 0 then
-						require("telescope.builtin").git_files()
+						vim.api.nvim_exec2("Telescope git_files", {})
 					else
-						require("telescope.builtin").find_files()
+						vim.api.nvim_exec2("Telescope find_files", {})
 					end
 				end,
 				desc = "Telescope find git files",
@@ -31,7 +31,7 @@ return {
 				end,
 				desc = "Telescope grep string",
 			},
-			{ "<leader>pb", require("telescope.builtin").buffers, desc = "Telescope buffers" },
+			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 		},
 		config = function()
 			-- stylua: ignore
