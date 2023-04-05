@@ -83,12 +83,14 @@ return {
 						vim.lsp.buf.implementation,
 						{ buffer = ev.buf, desc = "Go to implementation" }
 					)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "List references" })
 					vim.keymap.set(
 						"n",
-						"gr",
-						require("telescope.builtin").lsp_references,
-						{ buffer = ev.buf, desc = "Go to references" }
+						"go",
+						vim.lsp.buf.type_definition,
+						{ buffer = ev.buf, desc = "Go to type definition" }
 					)
+					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature help" })
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf })
 					vim.keymap.set(
 						"n",
@@ -96,6 +98,7 @@ return {
 						vim.lsp.buf.workspace_symbol,
 						{ buffer = ev.buf, desc = "Workspace symbol" }
 					)
+					vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = ev.buf, desc = "Show diagnostic" })
 					vim.keymap.set(
 						"n",
 						"<leader>vd",
@@ -118,9 +121,10 @@ return {
 					vim.keymap.set(
 						"n",
 						"<leader>vrr",
-						vim.lsp.buf.references,
+						"<cmd>Telescope lsp_references<cr>",
 						{ buffer = ev.buf, desc = "Open references" }
 					)
+					vim.keymap.set("n", "<f2>", ":IncRename <C-r><C-w>", { buffer = ev.buf, desc = "Rename symbol" })
 					vim.keymap.set(
 						"n",
 						"<leader>vrn",
