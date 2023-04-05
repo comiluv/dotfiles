@@ -24,7 +24,8 @@ local plugins_dir = jdtls_dir .. "/plugins"
 local path_to_jar = plugins_dir .. "/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
-local capabilities = {
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local jdtls_capabilities = {
 	workspace = {
 		configuration = true,
 	},
@@ -36,6 +37,7 @@ local capabilities = {
 		},
 	},
 }
+local capabilities = vim.tbl_deep_extend("force", lsp_capabilities, jdtls_capabilities)
 
 -- remaps are handled globally by LspAttach autocmd
 

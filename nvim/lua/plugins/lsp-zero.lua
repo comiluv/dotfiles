@@ -51,7 +51,8 @@ return {
 				---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 				setup = {
 					clangd = function(_, opts)
-						local clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
+						local clangd_capabilities =
+							require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 						clangd_capabilities.offsetEncoding = { "utf-16" }
 						opts.capabilities = clangd_capabilities
 						require("lspconfig").clangd.setup(opts)
