@@ -91,7 +91,7 @@ vim.keymap.set("n", "<leader>k", ":lprev<CR>zz", { desc = "Previous Location" })
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace cursor" })
 
 -- replace visually selected
-vim.keymap.set("v", "<leader>s", [["Ly:%s/\<<C-r>L\>/<C-r>L/gI<Left><Left><Left>]], { desc = "Replace selected" })
+vim.keymap.set("v", "<leader>s", [["ly:%s/\<<C-r>l\>/<C-r>l/gI<Left><Left><Left>]], { desc = "Replace selected" })
 
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
