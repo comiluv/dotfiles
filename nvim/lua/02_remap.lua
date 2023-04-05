@@ -24,8 +24,8 @@ vim.keymap.set("", "<A-k>", "<C-w>k")
 vim.keymap.set("", "<A-l>", "<C-w>l")
 
 -- Left and right can switch buffers
-vim.keymap.set("n", "<left>", "<cmd>bp<CR>")
-vim.keymap.set("n", "<right>", "<cmd>bn<CR>")
+vim.keymap.set("n", "<left>", vim.cmd.bprevious)
+vim.keymap.set("n", "<right>", vim.cmd.bNext)
 
 -- Conveniently move lines up and down with ctrl+j and ctrl+k
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -90,6 +90,9 @@ vim.keymap.set("n", "<leader>k", ":lprev<CR>zz", { desc = "Previous Location" })
 -- replace whatever was on the cursor
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace cursor" })
 
+-- replace visually selected
+vim.keymap.set("v", "<leader>s", [["1y:%s/\<<C-r>1\>/<C-r>1/gI<Left><Left><Left>]], { desc = "Replace selected" })
+
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
 vim.keymap.set("t", [[<A-\>]], [[<C-\><C-n>]])
@@ -113,7 +116,7 @@ vim.keymap.set("n", "<F1>", ":help <C-r><C-w><CR>", { silent = true })
 vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = true })
 
 -- "around document" text object
-vim.keymap.set("o", "ad", "<CMD>normal! ggVG<CR>", { noremap = true, desc = "around document" })
+vim.keymap.set("o", "ad", "<cmd>normal! ggVG<cr>", { noremap = true, desc = "around document" })
 vim.keymap.set("x", "ad", "gg0oG$", { noremap = true, desc = "around document" })
 
 -- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to

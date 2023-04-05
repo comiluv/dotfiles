@@ -11,7 +11,7 @@ return {
 		},
 		cmd = "Telescope",
 		keys = {
-			{ "<leader>pf", "<CMD>Telescope find_files<Cr>", desc = "Telescope find files" },
+			{ "<leader>pf", require("telescope.builtin").find_files, desc = "Telescope find files" },
 			{
 				"<C-p>",
 				function()
@@ -29,9 +29,9 @@ return {
 				function()
 					require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > "), use_regex = true })
 				end,
-				desc = "Telescope Live Grep",
+				desc = "Telescope grep string",
 			},
-			{ "<leader>pb", "<CMD>Telescope buffers<Cr>", desc = "Telescope buffers" },
+			{ "<leader>pb", require("telescope.builtin").buffers, desc = "Telescope buffers" },
 		},
 		config = function()
 			-- stylua: ignore
@@ -116,21 +116,16 @@ return {
 
 			local hcn = require("highlight_current_n")
 			local feedkeys = vim.api.nvim_feedkeys
-			vim.keymap.set("n", "n",
-			function()
+			vim.keymap.set("n", "n", function()
 				hcn.n()
 				return feedkeys("zzzv", "n", false)
-			end,
-			{ expr = true, remap = false, })
-			vim.keymap.set("n", "N",
-			function()
+			end, { expr = true, remap = false })
+			vim.keymap.set("n", "N", function()
 				hcn.N()
 				return feedkeys("zzzv", "n", false)
-			end,
-			{ expr = true, remap = false, })
-			vim.keymap.set("n", "*", "*N", { remap = true, })
-			vim.keymap.set("n", "#", "#N", { remap = true, })
+			end, { expr = true, remap = false })
+			vim.keymap.set("n", "*", "*N", { remap = true })
+			vim.keymap.set("n", "#", "#N", { remap = true })
 		end,
 	},
 }
-

@@ -85,7 +85,7 @@ return {
 		dependencies = { "nvim-treesitter" },
 		cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
 		keys = {
-			{ "<leader>m", "<cmd>TSJToggle<Cr>", desc = "Wrap/unwrap arguments" },
+			{ "<leader>m", vim.cmd.TSJToggle, desc = "Wrap/unwrap arguments" },
 		},
 		opts = { use_default_keymaps = false },
 	},
@@ -99,7 +99,7 @@ return {
 		},
 		config = function()
 			vim.g.easy_align_delimiters =
-			{ ["/"] = { pattern = "//\\+", delimiter_align = "l", ignore_groups = "!Comment" } }
+				{ ["/"] = { pattern = "//\\+", delimiter_align = "l", ignore_groups = "!Comment" } }
 		end,
 	},
 
@@ -124,9 +124,9 @@ return {
 					["-"] = { desc = "kebab-case (not reversible)" },
 					["."] = { desc = "dot.case (not reversible)" },
 					["<space>"] = { desc = "space case (not reversible)" },
-				}
+				},
 			})
-		end
+		end,
 	},
 
 	-- LSP incrementally rename symbol
@@ -136,4 +136,3 @@ return {
 		config = true,
 	},
 }
-

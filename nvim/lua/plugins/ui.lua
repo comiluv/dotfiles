@@ -3,7 +3,7 @@ return {
 		"kdheepak/lazygit.nvim",
 		cmd = "LazyGit",
 		keys = {
-			{ "<leader>gs", "<cmd>LazyGit<cr>", silent = true, desc = [[Open LazyGit (A-\ is ESC)]] },
+			{ "<leader>gs", vim.cmd.LazyGit, silent = true, desc = [[Open LazyGit (A-\ is ESC)]] },
 		},
 	},
 
