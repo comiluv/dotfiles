@@ -38,9 +38,6 @@ return {
 								telemetry = {
 									enable = false,
 								},
-								format = {
-									enable = false,
-								},
 							},
 						},
 					},
@@ -75,7 +72,7 @@ return {
 		config = function(_, opts)
 			-- create remaps
 			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+				group = vim.api.nvim_create_augroup("LspRemaps", {}),
 				callback = function(ev)
 					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
