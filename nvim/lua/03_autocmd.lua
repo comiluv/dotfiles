@@ -6,23 +6,22 @@ local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 
 vim.g.info_file_pattern = {
-	"qf",
+	"PlenaryTestPopup",
+	"Trouble",
+	"chatgpt",
+	"checkhealth",
+	"fugitive",
 	"help",
-	"man",
-	"notify",
+	"lazy",
 	"lspinfo",
+	"man",
+	"memento",
+	"netrw",
+	"notify",
+	"qf",
 	"spectre_panel",
 	"startuptime",
 	"tsplayground",
-	"PlenaryTestPopup",
-	"fugitive",
-	"checkhealth",
-	"memento",
-	"tsplayground",
-	"lazy",
-	"Trouble",
-	"chatgpt",
-	"netrw",
 }
 
 local trim_exclusions = {
