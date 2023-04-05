@@ -22,6 +22,7 @@ vim.g.info_file_pattern = {
 	"lazy",
 	"Trouble",
 	"chatgpt",
+	"netrw",
 }
 
 local trim_exclusions = {
