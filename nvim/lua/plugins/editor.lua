@@ -86,21 +86,21 @@ return {
 			local clear_search_hl_group = vim.api.nvim_create_augroup("ClearSearchHL", {})
 			vim.api.nvim_create_autocmd("CmdlineEnter", {
 				group = clear_search_hl_group,
-				pattern = { "/", "?" },
+				pattern = { "/", "\\?" },
 				callback = function()
 					vim.opt.hlsearch = true
 				end,
 			})
 			vim.api.nvim_create_autocmd("CmdlineLeave", {
 				group = clear_search_hl_group,
-				pattern = { "/", "?" },
+				pattern = { "/", "\\?" },
 				callback = function()
 					vim.opt.hlsearch = false
 				end,
 			})
 			vim.api.nvim_create_autocmd("CmdlineLeave", {
 				group = clear_search_hl_group,
-				pattern = { "/", "?" },
+				pattern = { "/", "\\?" },
 				callback = function()
 					require("highlight_current_n")["/,?"]()
 				end,
