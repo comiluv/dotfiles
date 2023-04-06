@@ -56,7 +56,7 @@ return {
 		-- https://zshchun.github.io/posts/windows-terminal-wsl2-%EC%97%90%EC%84%9C-shift-enter-%EC%9E%85%EB%A0%A5%EB%B0%A9%EB%B2%95/
 		-- https://en.wikipedia.org/wiki/ANSI_escape_code
 		-- to use C-Enter in Windows Terminal
-		"jackMort/ChatGPT.nvim",
+		"comiluv/ChatGPT.nvim",
 		cmd = {
 			"ChatGPT",
 			"ChatGPTActAs",
