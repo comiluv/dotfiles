@@ -23,9 +23,9 @@ vim.keymap.set("", "<A-j>", "<C-w>j")
 vim.keymap.set("", "<A-k>", "<C-w>k")
 vim.keymap.set("", "<A-l>", "<C-w>l")
 
--- Left and right can switch buffers
+-- Left and right can run buffers
 vim.keymap.set("n", "<left>", vim.cmd.bprevious)
-vim.keymap.set("n", "<right>", vim.cmd.bNext)
+vim.keymap.set("n", "<right>", vim.cmd.bnext)
 
 -- Conveniently move lines up and down with ctrl+j and ctrl+k
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
