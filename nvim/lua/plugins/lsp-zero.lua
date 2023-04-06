@@ -324,7 +324,6 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			local clang_format_command = vim.fn.has("win32") == 1 and "clang-format.exe" or "clang-format"
 			local null_ls = require("null-ls")
 			local sources = {
 				-- python
@@ -335,10 +334,17 @@ return {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.google_java_format,
 				null_ls.builtins.formatting.prettierd,
-				null_ls.builtins.formatting.clang_format.with({
-					command = clang_format_command,
-				}),
 			}
+			if vim.fn.has("win32") == 1 then
+				table.insert(
+					sources,
+					null_ls.builtins.formatting.clang_format.with({
+						command = "clang-format.exe",
+					})
+				)
+			else
+				table.insert(sources, null_ls.builtins.formatting.clang_format)
+			end
 			null_ls.setup({ sources = sources })
 		end,
 	},

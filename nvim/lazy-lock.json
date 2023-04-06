@@ -1,5 +1,5 @@
 {
-  "ChatGPT.nvim": { "branch": "main", "commit": "3ea19ba666e226ac33c8e00c7bf99e81931d7c86" },
+  "ChatGPT.nvim": { "branch": "main", "commit": "f61f5106ec88b1fa0788b12af196363a402c4eca" },
   "Comment.nvim": { "branch": "master", "commit": "8d3aa5c22c2d45e788c7a5fe13ad77368b783c20" },
   "LuaSnip": { "branch": "master", "commit": "bc8ec05022743d3f08bda7a76c6bb5e9a9024581" },
   "NeoSolarized.nvim": { "branch": "master", "commit": "efa8cad15f4d877b0565fa53b644f2bf23c973a6" },
