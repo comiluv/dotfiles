@@ -75,7 +75,7 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		event = "VeryLazy",
+		event = { "BufRead", "BufNewFile" },
 		config = true,
 	},
 
