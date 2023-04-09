@@ -68,7 +68,7 @@ return {
 			question_sign = "🙂",
 			answer_sign = "🤖",
 			openai_params = {
-				max_tokens = 1000,
+				max_tokens = 2000,
 			},
 		},
 		dependencies = {
