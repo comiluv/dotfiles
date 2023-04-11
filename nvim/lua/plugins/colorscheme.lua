@@ -7,25 +7,30 @@ return {
 			require("onedark").load()
 		end,
 	},
+
 	{
 		"Tsuzat/NeoSolarized.nvim",
 		lazy = true,
 		opts = { transparent = false },
 	},
+
 	{
 		"tanvirtin/monokai.nvim",
 		lazy = true,
 	},
+
 	{
 		"luisiacc/gruvbox-baby",
 		config = function()
 			vim.cmd.colorscheme("gruvbox-baby")
 		end,
 	},
+
 	{
 		"Mofiqul/dracula.nvim",
 		lazy = true,
 	},
+
 	{
 		"Mofiqul/vscode.nvim",
 		lazy = true,
