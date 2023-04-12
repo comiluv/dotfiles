@@ -354,4 +354,20 @@ return {
 		cmd = { "Mason", "MasonUpdate" },
 		config = true,
 	},
+
+	-- enable LSP to use fzf
+	{
+		"ojroques/nvim-lspfuzzy",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{
+				"junegunn/fzf",
+				lazy = true,
+				build = function()
+					vim.cmd.call("fzf#install()")
+				end,
+			},
+		},
+		config = true,
+	},
 }
