@@ -1,8 +1,7 @@
 return {
 	-- automatically create any non-existent directories
 	{
-		"pbrisbin/vim-mkdir",
-		event = "VeryLazy",	-- "BufWritePre", "FileWritePre", "BufWriteCmd", "BufModifiedSet", didnt work
+		"jghauser/mkdir.nvim",
+		event = "VeryLazy", -- "BufWritePre", "FileWritePre", "BufWriteCmd", "BufModifiedSet", didnt work
 	},
 }
-
