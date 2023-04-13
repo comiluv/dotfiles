@@ -87,7 +87,7 @@ return {
 		keys = {
 			{ "<leader>m", vim.cmd.TSJToggle, desc = "Wrap/unwrap arguments" },
 		},
-		opts = { use_default_keymaps = false },
+		opts = { use_default_keymaps = false, max_join_length = 480 },
 	},
 
 	-- easy align comments
