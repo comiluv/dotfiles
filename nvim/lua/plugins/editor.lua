@@ -32,6 +32,7 @@ return {
 				desc = "Telescope grep string",
 			},
 			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
+			{ "<leader>ho", "<cmd>Telescope oldfiles<cr>" },
 		},
 		config = function()
 			-- stylua: ignore

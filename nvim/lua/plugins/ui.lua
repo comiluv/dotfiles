@@ -30,32 +30,6 @@ return {
 		config = true,
 	},
 
-	-- history
-	{
-		"gaborvecsei/memento.nvim",
-		event = "VimEnter", -- lazy=true or "VeryLazy" didn't work
-		keys = {
-			{
-				"<leader>ho",
-				function()
-					require("memento").toggle()
-				end,
-				desc = "Open history",
-			},
-			{
-				"<leader>hc",
-				function()
-					require("memento").clear_history()
-				end,
-				desc = "Clear history",
-			},
-		},
-		dependencies = "nvim-lua/plenary.nvim",
-		config = function()
-			vim.g.memento_shorten_path = false
-		end,
-	},
-
 	-- winbar plugin
 	{
 		"utilyre/barbecue.nvim",
