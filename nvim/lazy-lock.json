@@ -12,7 +12,6 @@
   "dracula.nvim": { "branch": "main", "commit": "ce99c0b68edca27caa1701c0e79cf461b484d501" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "friendly-snippets": { "branch": "main", "commit": "8d91ba2dc2421a54981115f61b914974f938fa77" },
-  "fzf": { "branch": "master", "commit": "96670d5f16dcf23d590eb1d83d1de351b2e8fb15" },
   "gitsigns.nvim": { "branch": "main", "commit": "372d5cb485f2062ac74abc5b33054abac21d8b58" },
   "gruvbox-baby": { "branch": "main", "commit": "7a3f1142ec3dc380f4d4af0df32bda3a85f959a3" },
   "highlight-current-n.nvim": { "branch": "master", "commit": "bac803d821d06d5f1e58b31af1cf2e5f9a5fb4ad" },
@@ -36,7 +35,6 @@
   "nvim-jdtls": { "branch": "master", "commit": "a2dd26c1c089fcd70dcf9ee5b691cad09cc8c200" },
   "nvim-lightbulb": { "branch": "master", "commit": "56b9ce31ec9d09d560fe8787c0920f76bc208297" },
   "nvim-lspconfig": { "branch": "master", "commit": "6fe69025b8825029ea9bf291ab3b1750f9bcb39e" },
-  "nvim-lspfuzzy": { "branch": "main", "commit": "7c9f861fdf0adc4a4361355f892c4a3f7431bfa9" },
   "nvim-navic": { "branch": "master", "commit": "27124a773d362628b114cd12016e743dab4ccf3e" },
   "nvim-surround": { "branch": "main", "commit": "e6047128e57c1aff1566fb9f627521d2887fc77a" },
   "nvim-treesitter": { "branch": "master", "commit": "18f9e1a47fc25272836a84aa8adb03925c73b33d" },
@@ -52,7 +50,7 @@
   "treesj": { "branch": "main", "commit": "12fc4074a7dee23faabeb1f5dfd3af41d2aa04f1" },
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-easy-align": { "branch": "master", "commit": "12dd6316974f71ce333e360c0260b4e1f81169c3" },
-  "vim-matchup": { "branch": "master", "commit": "03ebc3b7dbf8f17f2d45d9b5619b48a030e1bf88" },
+  "vim-matchup": { "branch": "master", "commit": "57499f5ca9a66f233efa4faeb04571e5194863a6" },
   "vscode.nvim": { "branch": "main", "commit": "34d1ec135319cd260940ce380f1fb73c047920ea" },
   "which-key.nvim": { "branch": "main", "commit": "4b73390eec680b4c061ea175eb32c0ff3412271d" }
 }
