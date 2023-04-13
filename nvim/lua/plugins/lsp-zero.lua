@@ -76,18 +76,28 @@ return {
 				group = vim.api.nvim_create_augroup("LspRemaps", {}),
 				callback = function(ev)
 					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
-					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
+					vim.keymap.set(
+						"n",
+						"gd",
+						"<cmd>Telescope lsp_definitions<cr>",
+						{ buffer = ev.buf, desc = "Go to definition" }
+					)
 					vim.keymap.set(
 						"n",
 						"gi",
-						vim.lsp.buf.implementation,
+						"<cmd>Telescope lsp_implementations<cr>",
 						{ buffer = ev.buf, desc = "Go to implementation" }
 					)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "List references" })
+					vim.keymap.set(
+						"n",
+						"gr",
+						"<cmd>Telescope lsp_references<cr>",
+						{ buffer = ev.buf, desc = "List references" }
+					)
 					vim.keymap.set(
 						"n",
 						"go",
-						vim.lsp.buf.type_definition,
+						"<cmd>Telescope lsp_type_definitions<cr>",
 						{ buffer = ev.buf, desc = "Go to type definition" }
 					)
 					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature help" })
@@ -124,6 +134,38 @@ return {
 						"<cmd>Telescope lsp_references<cr>",
 						{ buffer = ev.buf, desc = "Open references" }
 					)
+					vim.keymap.set("n", "<leader>ss", function()
+						require("telescope.builtin").lsp_document_symbols({
+							symbols = {
+								"Class",
+								"Function",
+								"Method",
+								"Constructor",
+								"Interface",
+								"Module",
+								"Struct",
+								"Trait",
+								"Field",
+								"Property",
+							},
+						})
+					end, { buffer = ev.buf, desc = "Goto Symbol" })
+					vim.keymap.set("n", "<leader>sS", function()
+						require("telescope.builtin").lsp_workspace_symbols({
+							symbols = {
+								"Class",
+								"Function",
+								"Method",
+								"Constructor",
+								"Interface",
+								"Module",
+								"Struct",
+								"Trait",
+								"Field",
+								"Property",
+							},
+						})
+					end, { buffer = ev.buf, desc = "Goto Symbol (Workspace)" })
 					vim.keymap.set("n", "<f2>", ":IncRename <C-r><C-w>", { buffer = ev.buf, desc = "Rename symbol" })
 					vim.keymap.set(
 						"n",
