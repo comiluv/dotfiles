@@ -1,7 +1,7 @@
--- Google java format indentation
-vim.bo.tabstop = 8
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
+-- clang-format default
+vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.softtabstop = 4
 vim.bo.expandtab = true
 
 -- it'll also be used for C++
