@@ -76,11 +76,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- Disable 'press :qa to exit' messages
 vim.keymap.set("n", "<C-c>", "<Esc>")
 
--- lsp format
-vim.keymap.set("n", "<leader>f", function()
-	vim.lsp.buf.format({ timeout_ms = 10000, name = "null-ls" })
-end, { desc = "Format buffer" })
-
 -- quickfix navigation
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")

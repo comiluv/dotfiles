@@ -377,16 +377,6 @@ return {
 				null_ls.builtins.formatting.google_java_format,
 				null_ls.builtins.formatting.prettierd,
 			}
-			if vim.fn.has("win32") == 1 then
-				table.insert(
-					sources,
-					null_ls.builtins.formatting.clang_format.with({
-						command = "clang-format.exe",
-					})
-				)
-			else
-				table.insert(sources, null_ls.builtins.formatting.clang_format)
-			end
 			null_ls.setup({ sources = sources })
 		end,
 	},
