@@ -82,16 +82,6 @@ nnoremap Y y$
 "nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-" Undo breakpoints
-inoremap , ,<C-G>u
-inoremap . .<C-G>u
-inoremap ! !<C-G>u
-inoremap ? ?<C-G>u
-
-" Undo breakpoints for C-U and C-W in insert mode
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
-
 " Easy window navigation
 noremap <A-h> <C-w>h
 noremap <A-j> <C-w>j
@@ -143,8 +133,4 @@ xnoremap & :&&<CR>
 
 " replace whatever was on the cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
-
-" 'around document' text object
-onoremap ad <CMD>normal! ggVG<CR>
-xnoremap ad gg0oG$
 
