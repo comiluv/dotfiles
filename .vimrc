@@ -111,18 +111,6 @@ nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-" Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
-inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Use <cr> to confirm completion,
-if has('patch8.1.1068')
-    " Use `complete_info` if your (Neo)Vim version supports it.
-    inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<CR>"
-else
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-endif
-
 " delete selection and put without yanking selection
 vmap <leader>p "_dP
 
