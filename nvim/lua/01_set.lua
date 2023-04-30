@@ -117,14 +117,9 @@ vim.opt.wildignorecase = true
 -- stylua: ignore
 vim.opt.wildignore = "*.7z,*.aux,*.avi,*.bak,*.bib,*.class,*.cls,*.cmi,*.cmo,*.doc,*.docx,*.dvi,*.flac,*.flv,*.gem,*.gif,*.hi,*.ico,*.jpeg,*.jpg,*.log,*.min*.js,*.min.js,*.mov,*.mp3,*.mp4,*.mpg,*.nav,*.o,*.obj,*.ods,*.odt,*.ogg,*.opus,*.out,*.pdf,*.pem,*.png,*.rar,*.rbc,*.rbo,*.settings,*.sty,*.svg,*.swp,*.swp*.,*.tar,*.tar.bz2,*.tar.gz,*.tar.xz,*.tgz,*.toc,*.wav,*.webm,*.xcf,*.xls,*.xlsx,*.zip,*/.bundle/*,*/.sass-cache/*,*/vendor/cache/*,*/vendor/gems/*,*~,._*,.git,.hg,.svn,Thumbs.db,Zend,intermediate/*,publish/*,vendor"
 
-vim.opt.shortmess = ""
--- This is needed to avoid swapfile warning when auto-reloading
--- vim.opt.shortmess:append "A"
-
 vim.opt.sessionoptions:remove("options")
 vim.opt.viewoptions:remove("options")
 
-vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
 
