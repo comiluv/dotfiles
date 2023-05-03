@@ -109,4 +109,30 @@ return {
 		event = { "BufRead", "BufNewFile" },
 		config = true,
 	},
+
+	-- better quickfix list
+	{
+		"kevinhwang91/nvim-bqf",
+		event = "VeryLazy",
+		opts = {},
+	},
+
+	-- pretty list of diagnostics, references or Telescope results
+	{
+		"folke/trouble.nvim",
+		cmd = { "TroubleToggle", "Trouble" },
+		keys = {
+			{ "<leader>x", desc = "Trouble" },
+			{ "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
+			{ "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics" },
+			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+		},
+		opts = {
+			use_diagnostic_signs = true,
+			action_keys = {
+				close = { "q", "<esc>" },
+				cancel = "<c-e>",
+			},
+		},
+	},
 }
