@@ -95,7 +95,6 @@ vim.opt.updatetime = 200
 vim.opt.fileformats = "unix,dos"
 vim.opt.fileencodings = "ucs-bom,utf-8,euc-kr,default,latin1"
 vim.opt.tabpagemax = 100
-vim.opt.completeopt = "menuone,noinsert,noselect"
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
