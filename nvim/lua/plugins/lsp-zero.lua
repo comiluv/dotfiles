@@ -124,6 +124,12 @@ return {
 					)
 					vim.keymap.set(
 						"n",
+						"<leader>x",
+						"<cmd>Telescope diagnostics<cr>",
+						{ buffer = ev.buf, desc = "Diagnostics Quickfix" }
+					)
+					vim.keymap.set(
+						"n",
 						"<leader>vca",
 						vim.lsp.buf.code_action,
 						{ buffer = ev.buf, desc = "Code action" }
@@ -309,7 +315,7 @@ return {
 						else
 							fallback()
 						end
-					end, { "i", "s", "c" }),
+					end, { "i", "s" }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item(cmp_select)
@@ -318,7 +324,7 @@ return {
 						else
 							fallback()
 						end
-					end, { "i", "s", "c" }),
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "luasnip" },
