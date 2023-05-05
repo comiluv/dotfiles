@@ -50,8 +50,8 @@ vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 
 -- flags
 -- gcc flags
-vim.env.CFLAGS = "-Werror -Wall -Wextra -pedantic -g"
-vim.env.CXXFLAGS = "-Werror -Wall -Wextra -pedantic -g -std=c++17"
+vim.env.CFLAGS = "-Wall -Wextra -pedantic -g"
+vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++17"
 --    -- cl flags
 -- vim.env.CFLAGS = "/WX /Wall /Zi"
 -- vim.env.CXXFLAGS = "/WX /Wall /Zi /std:c++latest"
