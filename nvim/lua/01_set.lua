@@ -49,7 +49,7 @@ vim.opt.winaltkeys = "no"
 if vim.fn.has("unix") == 1 then
 	vim.g.python3_host_prog = "/usr/bin/python3"
 else
-	vim.g.python3_host_prog = "C:\\Python311\\python.exe"
+	vim.g.python3_host_prog = "C:\\Windows\\py.exe"
 end
 
 vim.opt.clipboard = "unnamedplus"
