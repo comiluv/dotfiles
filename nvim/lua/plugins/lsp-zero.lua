@@ -130,6 +130,12 @@ return {
 					)
 					vim.keymap.set(
 						"n",
+						"<A-6>",
+						"<cmd>Telescope diagnostics<cr>",
+						{ buffer = ev.buf, desc = "Diagnostics Quickfix" }
+					)
+					vim.keymap.set(
+						"n",
 						"<leader>vca",
 						vim.lsp.buf.code_action,
 						{ buffer = ev.buf, desc = "Code action" }
