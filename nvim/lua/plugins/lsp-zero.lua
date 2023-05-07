@@ -201,7 +201,7 @@ return {
 						"n",
 						"<space>wr",
 						vim.lsp.buf.remove_workspace_folder,
-						{ buffer = ev.buf, desc = "Worksapce Remove folder" }
+						{ buffer = ev.buf, desc = "Workspace Remove folder" }
 					)
 					vim.keymap.set("n", "<space>wl", function()
 						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
