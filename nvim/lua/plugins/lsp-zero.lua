@@ -122,18 +122,12 @@ return {
 						vim.diagnostic.goto_prev,
 						{ buffer = ev.buf, desc = "Previous diagnostic" }
 					)
-					vim.keymap.set(
-						"n",
-						"<leader>x",
-						"<cmd>Telescope diagnostics<cr>",
-						{ buffer = ev.buf, desc = "Diagnostics Quickfix" }
-					)
-					vim.keymap.set(
-						"n",
-						"<A-6>",
-						"<cmd>Telescope diagnostics<cr>",
-						{ buffer = ev.buf, desc = "Diagnostics Quickfix" }
-					)
+					vim.keymap.set("n", "<leader>x", function()
+						require("telescope.builtin").diagnostics({ bufnr = 0 })
+					end, { buffer = ev.buf, desc = "Diagnostics Quickfix" })
+					vim.keymap.set("n", "<A-6>", function()
+						require("telescope.builtin").diagnostics({ bufnr = 0 })
+					end, { buffer = ev.buf, desc = "Diagnostics Quickfix" })
 					vim.keymap.set(
 						"n",
 						"<leader>vca",
