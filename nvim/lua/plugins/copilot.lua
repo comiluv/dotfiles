@@ -65,8 +65,11 @@ return {
 			"ChatGPTRunCustomCodeAction",
 		},
 		opts = {
-			question_sign = "🙂",
-			answer_sign = "🤖",
+			api_key_cmd = "gpg --decrypt C:\\tools\\openai_api.txt.gpg 2>nul",
+			chat = {
+				question_sign = "🙂",
+				answer_sign = "🤖",
+			},
 			openai_params = {
 				max_tokens = 2000,
 			},
