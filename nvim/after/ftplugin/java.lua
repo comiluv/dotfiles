@@ -38,6 +38,8 @@ local jdtls_capabilities = {
 	},
 }
 local capabilities = vim.tbl_deep_extend("force", lsp_capabilities, jdtls_capabilities)
+local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
 -- remaps are handled globally by LspAttach autocmd
 
@@ -91,6 +93,7 @@ local config = {
 	settings = {
 		java = {
 			signatureHelp = { enabled = true },
+			contentProvider = { preferred = "fernflower" },
 			format = { enabled = false },
 		},
 	},
@@ -103,6 +106,7 @@ local config = {
 	-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
 	init_options = {
 		bundles = {},
+		extendedClientCapabilities = extendedClientCapabilities,
 	},
 	capabilities = capabilities,
 }
