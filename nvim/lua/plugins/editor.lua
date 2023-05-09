@@ -48,21 +48,21 @@ return {
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
 	-- auto detect indentation
 	{
 		"Darazaki/indent-o-matic",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
 	-- auto locate last location in the file
 	{
 		"vladdoster/remember.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
@@ -76,13 +76,13 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
 	{
 		"rktjmp/highlight-current-n.nvim",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		config = function()
 			local clear_search_hl_group = vim.api.nvim_create_augroup("ClearSearchHL", {})
 			vim.api.nvim_create_autocmd("CmdlineEnter", {

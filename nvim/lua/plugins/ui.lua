@@ -10,7 +10,7 @@ return {
 	-- show indent lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufEnter", "BufNewFile" },
+		event = { "BufEnter", "BufNewFile", "InsertEnter" },
 		opts = {
 			enabled = true,
 			filetype_exclude = vim.g.info_file_pattern,
@@ -25,7 +25,7 @@ return {
 	-- statusline written in lua
 	{
 		"nvim-lualine/lualine.nvim",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true,
 	},
@@ -33,7 +33,7 @@ return {
 	-- winbar plugin
 	{
 		"utilyre/barbecue.nvim",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		name = "barbecue",
 		version = "*",
 		opts = {
@@ -71,14 +71,14 @@ return {
 	-- LSP progress
 	{
 		"j-hui/fidget.nvim",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
 	-- show lightbulb where code action can be taken
 	{
 		"kosayoda/nvim-lightbulb",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		opts = {
 			autocmd = { enabled = true },
 		},

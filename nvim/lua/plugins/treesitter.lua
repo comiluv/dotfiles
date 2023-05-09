@@ -3,7 +3,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		cmd = "TSUpdate",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		build = ":TSUpdate",
 		dependencies = {
 			-- auto close block with end
@@ -15,7 +15,7 @@ return {
 			-- jump to matching parens
 			{
 				"andymass/vim-matchup",
-				event = { "BufRead", "BufNewFile" },
+				event = { "BufRead", "BufNewFile", "InsertEnter" },
 				config = function()
 					vim.g.matchup_matchparen_offscreen = { method = "popup" }
 				end,
@@ -61,4 +61,3 @@ return {
 		end,
 	},
 }
-

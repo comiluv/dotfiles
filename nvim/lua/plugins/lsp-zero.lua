@@ -2,7 +2,7 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -383,7 +383,7 @@ return {
 	-- inject LSP diagnostics, code actions, formatting etc.
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local null_ls = require("null-ls")
