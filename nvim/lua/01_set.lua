@@ -52,6 +52,10 @@ else
 	vim.g.python3_host_prog = "C:\\Windows\\py.exe"
 end
 
+if vim.fn.executable("rg") then
+	vim.opt.grepprg = "rg --no-heading --color never --vimgrep --hidden --iglob !/.git/"
+end
+
 vim.opt.clipboard = "unnamedplus"
 
 -- Some settings picked up from internet
