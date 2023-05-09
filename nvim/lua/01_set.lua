@@ -56,7 +56,7 @@ if vim.fn.executable("rg") then
 	vim.opt.grepprg = "rg --no-heading --color never --vimgrep --hidden --iglob !/.git/"
 end
 
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard:append("unnamedplus")
 
 -- Some settings picked up from internet
 vim.opt.tabstop = 8

@@ -42,10 +42,6 @@ end, { expr = true })
 -- delete selection and put without yanking selection
 vim.keymap.set("x", "<leader>p", [["_dP"]], { desc = "Delete selection" })
 
--- yank to clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank to clipboard" })
-
 -- delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole" })
 

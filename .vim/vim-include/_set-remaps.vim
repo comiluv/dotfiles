@@ -71,11 +71,6 @@ endif
 " delete selection and put without yanking selection
 vmap <leader>p "_dP
 
-" yank to clipboard
-nmap <leader>y "+y
-vmap <leader>y "+y
-nmap <leader>Y gg"+yG
-
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
