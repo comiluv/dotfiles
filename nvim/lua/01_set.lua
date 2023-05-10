@@ -135,3 +135,5 @@ vim.lsp.set_log_level("off")
 
 vim.o.timeout = true
 vim.o.timeoutlen = 500
+
+vim.env.PATH = vim.env.PATH .. ";C:\\tools\\msys64\\usr\\bin"
