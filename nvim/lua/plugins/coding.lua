@@ -116,4 +116,16 @@ return {
 		event = "VeryLazy",
 		opts = {},
 	},
+
+	-- tab out from parentheses, quotes, similar contexts
+	{
+		"abecodes/tabout.nvim",
+		event = "InsertEnter",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp", "zbirenbaum/copilot.lua" },
+		config = function()
+			require("tabout").setup({})
+			vim.keymap.set("i", "<tab>", require("tabout").taboutMulti, { silent = true })
+			vim.keymap.set("i", "<s-tab>", require("tabout").taboutBackMulti, { silent = true })
+		end,
+	},
 }
