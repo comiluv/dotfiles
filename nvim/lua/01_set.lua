@@ -54,6 +54,7 @@ end
 
 if vim.fn.executable("rg") then
 	vim.opt.grepprg = "rg --no-heading --color never --vimgrep --hidden --iglob !/.git/"
+	vim.opt.grepformat = "%f:%l:%c:%m"
 end
 
 vim.opt.clipboard:append("unnamedplus")
