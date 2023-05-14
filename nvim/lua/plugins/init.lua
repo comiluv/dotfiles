@@ -3,9 +3,6 @@ List of plugins that Neovim(lua) version is desired
 {
 	www.github.com/mbbill/undotree         : Vimscript
                                            : http://github.com/debugloop/telescope-undo.nvim but not equivalent
-	www.github.com/tpope/vim-abolish       : No preview, Vimscript
-                                           : https://github.com/smjonas/live-command.nvim doesn't work due to https://github.com/smjonas/live-command.nvim/issues/24
-                                           : https://github.com/johmsalas/text-case.nvim is buggy
 	www.github.com/andymass/vim-matchup    : Vimscript
 	www.github.com/junegunn/vim-easy-align : Vimscript
 }
