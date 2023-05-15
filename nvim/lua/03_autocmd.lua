@@ -22,6 +22,8 @@ vim.g.info_file_pattern = {
 	"spectre_panel",
 	"startuptime",
 	"tsplayground",
+	"undotree",
+	"diff",
 }
 
 local trim_exclusions = {
