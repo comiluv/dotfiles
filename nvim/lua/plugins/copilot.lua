@@ -65,7 +65,6 @@ return {
 			"ChatGPTRunCustomCodeAction",
 		},
 		opts = {
-			api_key_cmd = "gpg --decrypt C:\\tools\\openai_api.txt.gpg 2>nul",
 			chat = {
 				question_sign = "🙂",
 				answer_sign = "🤖",
