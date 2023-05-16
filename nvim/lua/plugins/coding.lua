@@ -123,7 +123,9 @@ return {
 		event = "InsertEnter",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp", "zbirenbaum/copilot.lua" },
 		config = function()
-			require("tabout").setup({})
+			require("tabout").setup({
+				completion = false,
+			})
 			vim.keymap.set("i", "<tab>", require("tabout").taboutMulti, { silent = true })
 			vim.keymap.set("i", "<s-tab>", require("tabout").taboutBackMulti, { silent = true })
 		end,
