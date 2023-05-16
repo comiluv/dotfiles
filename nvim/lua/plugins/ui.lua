@@ -102,16 +102,4 @@ return {
 			},
 		},
 	},
-
-	-- Center the currently focused buffer to the middle of the screen
-	{
-		"shortcuts/no-neck-pain.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
-		version = "*",
-		opts = {
-			autocmds = {
-				enableOnVimEnter = true,
-			},
-		},
-	},
 }
