@@ -124,6 +124,8 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp", "zbirenbaum/copilot.lua" },
 		config = function()
 			require("tabout").setup({
+				tabkey = "",
+				backwards_tabkey = "",
 				completion = false,
 			})
 			vim.keymap.set("i", "<tab>", require("tabout").taboutMulti, { silent = true })
