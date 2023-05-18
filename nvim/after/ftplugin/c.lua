@@ -53,8 +53,8 @@ vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 -- vim.env.CFLAGS = "-Wall -Wextra -pedantic -g"
 -- vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++17"
 -- cl flags
-vim.env.CFLAGS = "/Zi /std:c17"
-vim.env.CXXFLAGS = "/EHsc /Zi /std:c++latest"
+vim.env.CFLAGS = "/Wall /Zi /Za"
+vim.env.CXXFLAGS = "/EHsc /Wall /wd4668 /Zi /std:c++20"
 
 vim.env.CC = "cl.exe"
 vim.env.CXX = "cl.exe"
