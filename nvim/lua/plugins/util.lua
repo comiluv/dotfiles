@@ -30,10 +30,10 @@ return {
 			-- refernce: https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
 			vim.cmd([[
 			let vcvars_dict = vcvars#get(vcvars#list()[-1])
-			let $PATH = join(vcvars_dict.path, ';') .';'. $PATH
-			let $INCLUDE = join(vcvars_dict.include, ';') .';'. $INCLUDE
-			let $LIB = join(vcvars_dict.lib, ';') .';'. $LIB
-			let $LIBPATH = join(vcvars_dict.libpath, ';') .';'. $LIBPATH
+			let $PATH = join(vcvars_dict.path, ';') .. ';' .. $PATH
+			let $INCLUDE = join(vcvars_dict.include, ';') .. ';' .. $INCLUDE
+			let $LIB = join(vcvars_dict.lib, ';') .. ';' .. $LIB
+			let $LIBPATH = join(vcvars_dict.libpath, ';') .. ';' .. $LIBPATH
 			]])
 		end,
 	},
