@@ -65,7 +65,7 @@ let &undodir=expand(s:dir) . '/undo//'
 set undofile
 set noswapfile
 set nobackup
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 
 " remaps
 let mapleader="\<Space>"

@@ -57,7 +57,7 @@ if vim.fn.executable("rg") then
 	vim.opt.grepformat = "%f:%l:%c:%m"
 end
 
-vim.opt.clipboard:append("unnamedplus")
+vim.opt.clipboard = "unnamedplus"
 
 -- Some settings picked up from internet
 vim.opt.tabstop = 8
