@@ -70,7 +70,7 @@ return {
 				answer_sign = "🤖",
 			},
 			openai_params = {
-				max_tokens = 9999,
+				max_tokens = 2048,
 			},
 		},
 		dependencies = {
