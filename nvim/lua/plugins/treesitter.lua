@@ -42,7 +42,7 @@ return {
 			},
 		},
 		opts = {
-			ensure_installed = { "vimdoc", "c", "lua" },
+			ensure_installed = {},
 			sync_install = false,
 			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 			auto_install = true,
