@@ -388,7 +388,6 @@ return {
 		config = function()
 			local null_ls = require("null-ls")
 			local sources = {
-				-- python
 				null_ls.builtins.formatting.black.with({
 					extra_args = { "--line-length=120" },
 				}),
@@ -396,6 +395,8 @@ return {
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.google_java_format,
 				null_ls.builtins.formatting.prettierd,
+				null_ls.builtins.diagnostics.mypy,
+				null_ls.builtins.diagnostics.ruff,
 			}
 			null_ls.setup({ sources = sources })
 		end,
@@ -407,5 +408,57 @@ return {
 		cmd = { "Mason", "MasonUpdate" },
 		build = ":MasonUpdate",
 		config = true,
+	},
+
+	{
+		"mfussenegger/nvim-dap",
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		keys = {
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", mode = "n", desc = "DAP Toggle Breakpoint" },
+		},
+	},
+
+	{
+		"mfussenegger/nvim-dap-python",
+		ft = "python",
+		keys = {
+			{
+				"<leader>dpr",
+				function()
+					require("dap-python").test_method()
+				end,
+				mode = "n",
+				desc = "Debug Python",
+			},
+		},
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+		config = function(_, opts)
+			local debugpy_path = os.getenv("LocalAppData")
+				.. "/nvim-data/mason/packages/debugpy/venv/Scripts/python.exe"
+			require("dap-python").setup(debugpy_path)
+		end,
+	},
+
+	{
+		"rcarriga/nvim-dap-ui",
+		lazy = true,
+		dependencies = { "mfussenegger/nvim-dap" },
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+			dapui.setup()
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.after.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.after.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
+		end,
 	},
 }
