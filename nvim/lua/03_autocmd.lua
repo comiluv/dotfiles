@@ -106,7 +106,7 @@ autocmd("BufWritePre", {
 		end
 		local register = vim.fn.getreg("/")
 		local save_pos = vim.fn.getpos(".")
-		vim.cmd([[silent! undojoin|keeppattern %s/\s\+$//e|$put_|$put_|keeppattern $;?\(^\s*$\)\@!?+2,$d]])
+		vim.cmd([[silent! undojoin|keeppattern %s/\s\+$//e|$put_|$put_|silent! $;?\(^\s*$\)\@!?+2,$d]])
 		vim.fn.setreg("/", register)
 		vim.fn.setpos(".", save_pos)
 	end,
