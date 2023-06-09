@@ -18,6 +18,7 @@ return {
 					update_in_insert = false,
 					virtual_text = { spacing = 4, prefix = "●" },
 					severity_sort = true,
+					float = { source = "always", border = "rounded" },
 				},
 				sign_icons = {
 					error = "✘",
