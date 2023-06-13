@@ -71,6 +71,7 @@ return {
 	-- LSP progress
 	{
 		"j-hui/fidget.nvim",
+		tag = "legacy",
 		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
