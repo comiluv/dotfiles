@@ -11,10 +11,7 @@ if vim.fn.has("python3") == 0 then
 	end
 end
 
-local py = "python3"
-if vim.fn.has("win32") == 1 then
-	py = "python"
-end
+local py = vim.g.python3_host_prog
 
 -- pressing f8 will run the file
 -- if I find out how to send output to terminal using :pyfile, will switch to the version below
