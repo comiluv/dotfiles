@@ -137,4 +137,8 @@ vim.lsp.set_log_level("off")
 vim.o.timeout = true
 vim.o.timeoutlen = 500
 
+-- include msys64 usr/bin to use its utils such as gzip, tar, etc.
 vim.env.PATH = vim.env.PATH .. ";C:\\tools\\msys64\\usr\\bin"
+
+-- modeline enabled causes errors when parsing Python file
+vim.o.modeline = false
