@@ -46,7 +46,7 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = "*",
 	callback = function()
-		vim.opt.formatoptions:remove({ "r", "o" })
+		vim.opt.formatoptions:remove({ "o" })
 		-- auto remove comment when joining lines with <J> key
 		vim.opt.formatoptions:append("j")
 	end,

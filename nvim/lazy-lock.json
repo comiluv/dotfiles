@@ -9,7 +9,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "copilot.lua": { "branch": "master", "commit": "77e3a4907928f0813024e573b882dc879dfc0c6b" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
-  "friendly-snippets": { "branch": "main", "commit": "70b727d3454cceb3a818b1746be09786568b7e33" },
+  "friendly-snippets": { "branch": "main", "commit": "3a55f5caf60ebf157fbcb81a952d2784ff3f0edb" },
   "gitsigns.nvim": { "branch": "main", "commit": "3ef12dfdc293969fac736a7a580d6ae1f57ea406" },
   "gruvbox-baby": { "branch": "main", "commit": "71cbfd16f721a0119425786085e418eb7c7d6dac" },
   "highlight-current-n.nvim": { "branch": "master", "commit": "bac803d821d06d5f1e58b31af1cf2e5f9a5fb4ad" },

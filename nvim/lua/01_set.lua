@@ -106,7 +106,7 @@ vim.opt.splitright = true
 
 -- You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 -- or have this run as autocmd. See autocmd section.
-vim.opt.formatoptions:remove({ "r", "o" })
+vim.opt.formatoptions:remove({ "o" })
 -- Delete comment character when joining commented lines
 vim.opt.formatoptions:append("j")
 
