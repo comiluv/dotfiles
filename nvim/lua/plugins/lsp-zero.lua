@@ -399,7 +399,9 @@ return {
 				null_ls.builtins.diagnostics.mypy.with({
 					extra_args = { "--ignore-missing-imports" },
 				}),
-				null_ls.builtins.diagnostics.ruff,
+				null_ls.builtins.diagnostics.ruff.with({
+					extra_args = { "--line-length=120" },
+				}),
 			}
 			null_ls.setup({ sources = sources })
 		end,
