@@ -402,6 +402,7 @@ return {
 				null_ls.builtins.diagnostics.ruff.with({
 					extra_args = { "--line-length=120" },
 				}),
+				null_ls.builtins.formatting.djlint,
 			}
 			null_ls.setup({ sources = sources })
 		end,
