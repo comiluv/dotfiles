@@ -55,9 +55,6 @@ end, { expr = true, desc = "expand to path" })
 vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file" })
 vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
 
--- prevent common mistake of pressing q: instead of :q
-vim.keymap.set("n", "q:", ":q")
-
 -- Allow for easy copying and pasting
 vim.keymap.set("v", "y", "y`]", { silent = true })
 vim.keymap.set("n", "p", "p`]", { silent = true })
