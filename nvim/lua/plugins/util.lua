@@ -51,6 +51,7 @@ return {
 		"tpope/vim-abolish",
 		event = { "CmdlineEnter", "BufEnter", "BufNewFile" },
 		cmd = { "Subvert", "S", "Abolish" },
+		dependencies = { "smjonas/live-command.nvim" },
 		config = function()
 			require("which-key").register({
 				cr = {
@@ -67,6 +68,19 @@ return {
 					["-"] = { desc = "kebab-case (not reversible)" },
 					["."] = { desc = "dot.case (not reversible)" },
 					["<space>"] = { desc = "space case (not reversible)" },
+				},
+			})
+		end,
+	},
+	{
+		"smjonas/live-command.nvim",
+		version = false,
+		event = { "CmdlineEnter" },
+		config = function()
+			require("live-command").setup({
+				Norm = { cmd = "norm" },
+				commands = {
+					S = { cmd = "Subvert" },
 				},
 			})
 		end,
