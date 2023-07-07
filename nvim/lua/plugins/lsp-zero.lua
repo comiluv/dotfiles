@@ -403,6 +403,10 @@ return {
 					extra_args = { "--line-length=120" },
 				}),
 				null_ls.builtins.formatting.djlint,
+				null_ls.builtins.diagnostics.php.with({
+					command = "C:\\MAMP\\bin\\php\\php8.0.1\\php.exe",
+				}),
+				null_ls.builtins.formatting.phpcsfixer,
 			}
 			null_ls.setup({ sources = sources })
 		end,
