@@ -406,7 +406,9 @@ return {
 				null_ls.builtins.diagnostics.php.with({
 					command = "C:\\MAMP\\bin\\php\\php8.1.0\\php.exe",
 				}),
-				null_ls.builtins.formatting.phpcsfixer,
+				null_ls.builtins.formatting.pint.with({
+					command = "C:\\Users\\choij\\AppData\\Local\\nvim-data\\mason\\packages\\pint\\vendor\\bin\\pint.bat",
+				}),
 			}
 			null_ls.setup({ sources = sources })
 		end,
