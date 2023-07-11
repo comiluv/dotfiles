@@ -56,6 +56,11 @@ return {
 							require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 						clangd_capabilities.offsetEncoding = { "utf-16" }
 						opts.capabilities = clangd_capabilities
+						local on_attach = opts.on_attach
+						opts.on_attach = function(client, bufnr)
+							client.server_capabilities.signatureHelpProvider = false
+							on_attach(client, bufnr)
+						end
 						require("lspconfig").clangd.setup(opts)
 						return true
 					end,
