@@ -431,7 +431,8 @@ return {
 		"mfussenegger/nvim-dap",
 		event = { "BufRead", "BufNewFile", "InsertEnter" },
 		keys = {
-			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", mode = "n", desc = "DAP Toggle Breakpoint" },
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", mode = "n", desc = "Toggle Debugger Breakpoint" },
+			{ "<leader>dr", "<cmd>DapContinue<cr>", mode = "n", desc = "Start or continue the debugger" },
 		},
 	},
 
@@ -477,5 +478,18 @@ return {
 				dapui.close()
 			end
 		end,
+	},
+
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+		opts = {
+			handlers = {},
+		},
 	},
 }
