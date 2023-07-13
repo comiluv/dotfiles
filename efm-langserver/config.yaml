@@ -42,6 +42,7 @@ tools:
       - "%f=%l:%c: %tote: %m"
       - "%f:%l:%c: %m"
 
+  # FIXME
   djlint: &djlint
     lint-command: "djlint --check -"
     lint-stdin: true
@@ -58,11 +59,6 @@ tools:
       - "%m in %.%# line %l"
     root-markers:
       - "composer.json"
-
-  # FIXME
-  pint: &pint
-    format-command: "pint --no-interaction --quiet ${INPUT}"
-    format-stdin: false
 
 languages:
   python:
@@ -114,4 +110,3 @@ languages:
     - <<: *djlint
   php:
     - <<: *php-lint
-    # - <<: *pint
