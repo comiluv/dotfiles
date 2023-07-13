@@ -99,8 +99,8 @@ return {
 							"htmldjango",
 							"php",
 						}
-						require("lspconfig").efm.setup(opts)
-						return true
+						-- require("lspconfig").efm.setup(opts)
+						return false
 					end,
 					-- example to setup with typescript.nvim
 					-- tsserver = function(_, opts)
@@ -110,7 +110,7 @@ return {
 					-- Specify * to use this function as a fallback for any server
 					-- ["*"] = function(server, opts) end,
 				},
-				ensure_installed = { "efm" },
+				ensure_installed = {},
 			}
 		end,
 		---@param opts PluginLspOpts
@@ -428,7 +428,6 @@ return {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		event = { "BufRead", "BufNewFile", "InsertEnter" },
-		enabled = false,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			local null_ls = require("null-ls")
@@ -449,6 +448,9 @@ return {
 				null_ls.builtins.formatting.djlint,
 				null_ls.builtins.diagnostics.php.with({
 					command = "C:\\MAMP\\bin\\php\\php8.1.0\\php.exe",
+				}),
+				null_ls.builtins.formatting.pint.with({
+					command = "pint",
 				}),
 			}
 			null_ls.setup({ sources = sources })

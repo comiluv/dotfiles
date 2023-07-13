@@ -134,7 +134,7 @@ local function lspFormatter(client)
 		return false
 	end
 
-	local formatters = { "efm", "clangd" }
+	local formatters = { "null-ls", "clangd" }
 	for _, v in ipairs(formatters) do
 		if v == client.name then
 			return true
@@ -175,7 +175,7 @@ autocmd("LspAttach", {
 			return
 		end
 
-		if client_name == "efm" then
+		if client_name == "null-ls" then
 			local buffer_clients = vim.lsp.get_active_clients({ bufnr = 0 })
 			for _, buffer_client in ipairs(buffer_clients) do
 				if buffer_client.name == "clangd" then
