@@ -60,6 +60,24 @@ tools:
     root-markers:
       - "composer.json"
 
+  phpcs: &phpcs
+    prefix: linter
+    lint-command: "phpcs --no-colors --report=emacs -"
+    lint-stdin: true
+    lint-formats:
+      - "%.%#:%l:%c: %trror - %m"
+      - "%.%#:%l:%c: %tarning - %m"
+    root-markers:
+      - ".phpcs.xml"
+      - "phpcs.xml"
+      - ".phpcs.xml.dist"
+      - "phpcs.xml.dist"
+      - "composer.json"
+
+  phpcbf: &phpcbf
+    format-command: "phpcbf -"
+    format-stdin: true
+
 languages:
   python:
     - <<: *black-action-format
@@ -109,4 +127,5 @@ languages:
   htmldjango:
     - <<: *djlint
   php:
-    - <<: *php-lint
+    - <<: *phpcs
+    - <<: *phpcbf
