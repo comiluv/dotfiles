@@ -64,6 +64,44 @@ return {
 						require("lspconfig").clangd.setup(opts)
 						return true
 					end,
+					efm = function(_, opts)
+						opts.capabilities =
+							require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+						local on_attach = opts.on_attach
+						opts.on_attach = function(client, bufnr)
+							client.server_capabilities.documentFormattingProvider = true
+							client.server_capabilities.documentFormattingRangeProvider = true
+							on_attach(client, bufnr)
+						end
+						opts.init_options = { documentFormatting = true }
+						opts.filetypes = {
+							"python",
+							"java",
+							"javascript",
+							"typescript",
+							"javascriptreact",
+							"typescriptreact",
+							"yaml",
+							"json",
+							"jsonc",
+							"html",
+							"vue",
+							"scss",
+							"css",
+							"less",
+							"markdown",
+							"markdown.mdx",
+							"graphql",
+							"handlebars",
+							"lua",
+							"django",
+							"jinja.html",
+							"htmldjango",
+							"php",
+						}
+						require("lspconfig").efm.setup(opts)
+						return true
+					end,
 					-- example to setup with typescript.nvim
 					-- tsserver = function(_, opts)
 					--   require("typescript").setup({ server = opts })
@@ -72,7 +110,7 @@ return {
 					-- Specify * to use this function as a fallback for any server
 					-- ["*"] = function(server, opts) end,
 				},
-				ensure_installed = {},
+				ensure_installed = { "efm" },
 			}
 		end,
 		---@param opts PluginLspOpts
