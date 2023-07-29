@@ -16,7 +16,7 @@ vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 -- Only verbose config version works. Quickstart doens't work
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = "C:\\code\\java_headfirst\\" .. project_name
+local workspace_dir = "C:\\code\\java\\" .. project_name
 
 local jdtls_dir = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
 local config_dir = jdtls_dir .. "/config_win"
