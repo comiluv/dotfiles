@@ -26,7 +26,7 @@ return {
 				suggestion = {
 					auto_trigger = true,
 					keymap = {
-						accept = "<Tab>",
+						accept = false,
 					},
 				},
 				filetypes = filetypes,

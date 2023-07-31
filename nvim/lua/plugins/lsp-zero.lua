@@ -315,6 +315,8 @@ return {
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 			local luasnip = require("luasnip")
+			local neogen = require("neogen")
+			local copilot = require("copilot.suggestion")
 			return {
 				preselect = cmp.PreselectMode.None,
 				snippet = {
@@ -356,6 +358,10 @@ return {
 							-- they way you will only jump inside the snippet region
 						elseif luasnip.jumpable(1) then
 							luasnip.jump(1)
+						elseif neogen.jumpable() then
+							neogen.jump_next()
+						elseif copilot.is_visible() then
+							copilot.accept()
 						else
 							fallback()
 						end
@@ -365,6 +371,8 @@ return {
 							cmp.select_prev_item(cmp_select)
 						elseif luasnip.jumpable(-1) then
 							luasnip.jump(-1)
+						elseif neogen.jumpable(true) then
+							neogen.jump_prev()
 						else
 							fallback()
 						end
@@ -380,6 +388,16 @@ return {
 					ghost_text = false,
 				},
 			}
+		end,
+		config = function(_, opts)
+			local cmp = require("cmp")
+			cmp.setup(opts)
+			cmp.event:on("menu_opened", function()
+				vim.b.copilot_suggestion_hidden = true
+			end)
+			cmp.event:on("menu_closed", function()
+				vim.b.copilot_suggestion_hidden = false
+			end)
 		end,
 	},
 
