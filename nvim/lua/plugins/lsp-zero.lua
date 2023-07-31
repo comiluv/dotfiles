@@ -396,7 +396,10 @@ return {
 				vim.b.copilot_suggestion_hidden = true
 			end)
 			cmp.event:on("menu_closed", function()
-				vim.b.copilot_suggestion_hidden = false
+				local luasnip = require("luasnip")
+				if not (luasnip.jumpable(1) or luasnip.jumpable(-1)) then
+					vim.b.copilot_suggestion_hidden = false
+				end
 			end)
 		end,
 	},
@@ -442,6 +445,12 @@ return {
 			})
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "LuasnipInsertNodeLeave",
+				group = luasnip_group,
+				callback = function()
+					vim.b.copilot_suggestion_hidden = false
+				end,
+			})
+			vim.api.nvim_create_autocmd("InsertLeave", {
 				group = luasnip_group,
 				callback = function()
 					vim.b.copilot_suggestion_hidden = false
