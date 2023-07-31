@@ -432,6 +432,21 @@ return {
 				},
 			})
 			require("luasnip").setup(opts)
+			local luasnip_group = vim.api.nvim_create_augroup("LuaSnipCopilotGroup", {})
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "LuasnipInsertNodeEnter",
+				group = luasnip_group,
+				callback = function()
+					vim.b.copilot_suggestion_hidden = true
+				end,
+			})
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "LuasnipInsertNodeLeave",
+				group = luasnip_group,
+				callback = function()
+					vim.b.copilot_suggestion_hidden = false
+				end,
+			})
 		end,
 	},
 
