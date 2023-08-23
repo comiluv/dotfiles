@@ -487,13 +487,6 @@ return {
 				null_ls.builtins.diagnostics.ruff.with({
 					extra_args = { "--line-length=120" },
 				}),
-				null_ls.builtins.formatting.djlint,
-				null_ls.builtins.diagnostics.php.with({
-					command = "C:\\MAMP\\bin\\php\\php8.1.0\\php.exe",
-				}),
-				null_ls.builtins.formatting.pint.with({
-					command = "pint",
-				}),
 			}
 			null_ls.setup({ sources = sources })
 		end,
