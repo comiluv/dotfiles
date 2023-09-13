@@ -142,8 +142,3 @@ vim.env.PATH = vim.env.PATH .. ";C:\\tools\\msys64\\usr\\bin"
 
 -- modeline enabled causes errors when parsing Python file
 vim.o.modeline = false
-
--- fix nvim-treesitter path issue in Windows
-if vim.fn.has("win32") == 1 then
-	vim.opt.shellslash = true
-end

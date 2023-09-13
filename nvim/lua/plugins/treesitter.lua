@@ -82,6 +82,7 @@ return {
 			matchup = { enable = true }, -- "andymass/vim-matchup",
 		},
 		config = function(_, opts)
+			require("nvim-treesitter.install").compilers = { "zig" }
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},
