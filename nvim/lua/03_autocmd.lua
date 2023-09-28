@@ -24,6 +24,11 @@ vim.g.info_file_pattern = {
 	"tsplayground",
 	"undotree",
 	"diff",
+	"packer",
+	"gitcommit",
+	"TelescopePrompt",
+	"TelescopeResults",
+	"''",
 }
 
 local trim_exclusions = {

@@ -11,14 +11,11 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufEnter", "BufNewFile", "InsertEnter" },
+		main = "ibl",
 		opts = {
 			enabled = true,
-			filetype_exclude = vim.g.info_file_pattern,
-			char_blankline = "┆",
-			show_current_context = true,
-			show_current_context_start = true,
-			use_treesitter = false, -- false because treesitter indentation is still buggy in some languages
-			use_treesitter_scope = true,
+			exclude = { filetypes = vim.g.info_file_pattern },
+			indent = { char = "┆" },
 		},
 	},
 
