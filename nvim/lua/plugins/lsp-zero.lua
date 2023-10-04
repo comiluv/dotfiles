@@ -314,6 +314,7 @@ return {
 		opts = function()
 			local cmp = require("cmp")
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
+			local cmp_select_page = { behavior = cmp.SelectBehavior.Select, count = 8 }
 			local luasnip = require("luasnip")
 			local neogen = require("neogen")
 			local copilot = require("copilot.suggestion")
@@ -327,6 +328,8 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 					["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+					["<C-u>"] = cmp.mapping.select_prev_item(cmp_select_page),
+					["<C-d>"] = cmp.mapping.select_next_item(cmp_select_page),
 					["<up>"] = cmp.mapping.select_prev_item(cmp_select),
 					["<down>"] = cmp.mapping.select_next_item(cmp_select),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
