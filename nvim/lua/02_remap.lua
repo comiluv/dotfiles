@@ -42,9 +42,6 @@ end, { expr = true })
 -- delete selection and put without yanking selection
 vim.keymap.set("x", "<leader>p", [["_dP"]], { desc = "Delete selection" })
 
--- delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to blackhole" })
-
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
 -- also note below is taken from book Practical Vim 2nd edition which should be
