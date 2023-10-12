@@ -488,7 +488,11 @@ return {
 					extra_args = { "--ignore-missing-imports" },
 				}),
 				null_ls.builtins.diagnostics.ruff.with({
-					extra_args = { "--line-length=120" },
+					extra_args = {
+						"--line-length=120",
+						"--ignore",
+						"E741",
+					},
 				}),
 			}
 			null_ls.setup({ sources = sources })
