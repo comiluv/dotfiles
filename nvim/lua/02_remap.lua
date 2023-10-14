@@ -40,7 +40,7 @@ vim.keymap.set("i", "<S-Tab>", function()
 end, { expr = true })
 
 -- delete selection and put without yanking selection
-vim.keymap.set("x", "<leader>p", [["_dP"]], { desc = "Delete selection" })
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Delete selection" })
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
