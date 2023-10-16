@@ -1,8 +1,12 @@
 return {
 	{
-		"luisiacc/gruvbox-baby",
+		"Mofiqul/vscode.nvim",
 		config = function()
-			vim.cmd.colorscheme("gruvbox-baby")
+			vim.o.background = "light"
+			require("vscode").setup({
+				transparent = false,
+			})
+			require("vscode").load()
 		end,
 	},
 }
