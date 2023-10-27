@@ -50,35 +50,4 @@ return {
 			vim.cmd.Copilot("disable")
 		end,
 	},
-
-	{
-		-- to use C-Enter in Windows Terminal:
-		-- see https://github.com/microsoft/terminal/issues/530#issuecomment-755917602
-		-- https://zshchun.github.io/posts/windows-terminal-wsl2-%EC%97%90%EC%84%9C-shift-enter-%EC%9E%85%EB%A0%A5%EB%B0%A9%EB%B2%95/
-		-- https://en.wikipedia.org/wiki/ANSI_escape_code
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		cmd = {
-			"ChatGPT",
-			"ChatGPTActAs",
-			"ChatGPTEditWithInstructions",
-			"ChatGPTRun",
-			"ChatGPTRunCustomCodeAction",
-		},
-		opts = {
-			chat = {
-				question_sign = "🙂",
-				answer_sign = "🤖",
-			},
-			openai_params = {
-				max_tokens = 2048,
-			},
-			api_key_cmd = "gpg -d C:\\tools\\openai_api_key.txt.gpg",
-		},
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
 }
