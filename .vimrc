@@ -101,10 +101,6 @@ vnoremap K :m '<-2<CR>gv=gv
 " delete selection and put without yanking selection
 vmap <leader>p "_dP
 
-" delete without yanking
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
 " Open new file adjacent to current file
 " also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
 " also note below is taken from book Practical Vim 2nd edition which should be
