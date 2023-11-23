@@ -104,6 +104,10 @@ autocmd("BufWritePre", {
 	group = TrimGroup,
 	pattern = "*",
 	callback = function()
+		-- Only trim when there's no formatter attached
+		if #(require("conform").list_formatters()) > 0 then
+			return
+		end
 		for _, filetype in ipairs(trim_exclusions) do
 			if vim.bo.filetype == filetype then
 				return
@@ -123,74 +127,5 @@ autocmd({ "FileType" }, {
 	pattern = vim.g.info_file_pattern,
 	callback = function()
 		vim.diagnostic.disable(0)
-	end,
-})
-
-local function lspFormatter(client)
-	if
-		client.config
-		and client.config.capabilities
-		and client.config.capabilities.documentFormattingProvider == false
-	then
-		return false
-	end
-
-	if not client.supports_method("textDocument/formatting") then
-		return false
-	end
-
-	local formatters = { "null-ls", "clangd" }
-	for _, v in ipairs(formatters) do
-		if v == client.name then
-			return true
-		end
-	end
-	return false
-end
-
--- autoformat on save
-autocmd("LspAttach", {
-	group = augroup("LspFormatOnSave", {}),
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-		if not lspFormatter(client) then
-			return
-		end
-
-		local buf = ev.buf
-		autocmd("BufWritePre", {
-			group = augroup("LspFormatOnSave" .. buf, {}),
-			buffer = buf,
-			callback = function()
-				vim.lsp.buf.format({ timeout_ms = 10000, name = client.name })
-			end,
-		})
-	end,
-})
-
--- lsp format
-autocmd("LspAttach", {
-	group = augroup("LspFormatHotkey", {}),
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		local client_name = client.name
-
-		if not lspFormatter(client) then
-			return
-		end
-
-		if client_name == "null-ls" then
-			local buffer_clients = vim.lsp.get_active_clients({ bufnr = 0 })
-			for _, buffer_client in ipairs(buffer_clients) do
-				if buffer_client.name == "clangd" then
-					return
-				end
-			end
-		end
-
-		vim.keymap.set("n", "<leader>f", function()
-			vim.lsp.buf.format({ timeout_ms = 10000, name = client_name })
-		end, { buffer = true, desc = "Format buffer" })
 	end,
 })

@@ -2,7 +2,7 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -110,7 +110,11 @@ return {
 					-- Specify * to use this function as a fallback for any server
 					-- ["*"] = function(server, opts) end,
 				},
-				ensure_installed = {},
+				ensure_installed = {
+					"lua_ls",
+					"pyright",
+					"tsserver",
+				},
 			}
 		end,
 		---@param opts PluginLspOpts
@@ -469,33 +473,62 @@ return {
 		lazy = true,
 	},
 
-	-- inject LSP diagnostics, code actions, formatting etc.
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
-		dependencies = { "nvim-lua/plenary.nvim" },
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		keys = {
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ timeout_ms = 10000, lsp_fallback = true })
+				end,
+				mode = { "n", "v" },
+				desc = "Format Buffer",
+			},
+		},
 		config = function()
-			local null_ls = require("null-ls")
-			local sources = {
-				null_ls.builtins.formatting.black.with({
-					extra_args = { "--line-length=120" },
-				}),
-				null_ls.builtins.formatting.isort,
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.google_java_format,
-				null_ls.builtins.formatting.prettierd,
-				null_ls.builtins.diagnostics.mypy.with({
-					extra_args = { "--ignore-missing-imports" },
-				}),
-				null_ls.builtins.diagnostics.ruff.with({
-					extra_args = {
-						"--line-length=120",
-						"--ignore",
-						"E741",
-					},
-				}),
+			local cf = require("conform")
+			cf.setup({
+				formatters_by_ft = {
+					javascript = { "prettierd" },
+					css = { "prettierd" },
+					html = { "prettierd" },
+					json = { "prettierd" },
+					yaml = { "prettierd" },
+					markdown = { "prettierd" },
+					python = { "isort", "black" },
+					lua = { "stylua" },
+					java = { "google_java_format" },
+				},
+				format_on_save = {
+					timeout_ms = 10000,
+					lsp_fallback = true,
+				},
+			})
+		end,
+	},
+
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		config = function()
+			local lint = require("lint")
+			table.insert(lint.linters.mypy.args, "--ignore-missing-imports")
+			local new_ruff_args = { "--ignore", "E741" }
+			for i = 1, #new_ruff_args do
+				lint.linters.ruff.args[#lint.linters.ruff.args + 1] = new_ruff_args[i]
+			end
+
+			lint.linters_by_ft = {
+				python = { "mypy", "ruff" },
 			}
-			null_ls.setup({ sources = sources })
+
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "TextChanged" }, {
+				group = vim.api.nvim_create_augroup("lint", { clear = true }),
+				callback = function()
+					lint.try_lint()
+				end,
+			})
 		end,
 	},
 
@@ -509,7 +542,7 @@ return {
 
 	{
 		"mfussenegger/nvim-dap",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		keys = {
 			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", mode = "n", desc = "Toggle Debugger Breakpoint" },
 			{ "<leader>dr", "<cmd>DapContinue<cr>", mode = "n", desc = "Start or continue the debugger" },
@@ -562,7 +595,7 @@ return {
 
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",
