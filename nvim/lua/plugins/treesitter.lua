@@ -3,7 +3,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		cmd = "TSUpdate",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		build = ":TSUpdate",
 		dependencies = {
 			-- auto close block with end
@@ -15,7 +15,7 @@ return {
 			-- jump to matching parens
 			{
 				"andymass/vim-matchup",
-				event = { "BufRead", "BufNewFile", "InsertEnter" },
+				event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 				config = function()
 					vim.g.matchup_matchparen_offscreen = { method = "popup" }
 				end,
@@ -82,8 +82,9 @@ return {
 			matchup = { enable = true }, -- "andymass/vim-matchup",
 		},
 		config = function(_, opts)
-			require("nvim-treesitter.install").compilers = { "zig" }
+			-- require("nvim-treesitter.install").compilers = { "zig" }
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},
 }
+

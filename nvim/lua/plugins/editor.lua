@@ -86,13 +86,13 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
 	{
 		"rktjmp/highlight-current-n.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = function()
 			local clear_search_hl_group = vim.api.nvim_create_augroup("ClearSearchHL", {})
 			vim.api.nvim_create_autocmd("CmdlineEnter", {
@@ -132,3 +132,4 @@ return {
 		end,
 	},
 }
+

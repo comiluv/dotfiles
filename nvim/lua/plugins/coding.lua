@@ -1,7 +1,7 @@
 return {
 	{
 		"kylechui/nvim-surround",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		version = "*",
 		config = true,
 	},
@@ -75,7 +75,7 @@ return {
 	-- comment/uncomment hotkeys
 	{
 		"numToStr/Comment.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		opts = { toggler = { block = "gbb" } },
 	},
 
@@ -106,7 +106,7 @@ return {
 	-- LSP incrementally rename symbol
 	{
 		"smjonas/inc-rename.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
@@ -133,3 +133,4 @@ return {
 		end,
 	},
 }
+

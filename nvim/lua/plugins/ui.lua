@@ -22,7 +22,7 @@ return {
 	-- statusline written in lua
 	{
 		"nvim-lualine/lualine.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = true,
 	},
@@ -30,7 +30,7 @@ return {
 	-- winbar plugin
 	{
 		"utilyre/barbecue.nvim",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		name = "barbecue",
 		version = "*",
 		opts = {
@@ -69,14 +69,14 @@ return {
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},
 
 	-- show lightbulb where code action can be taken
 	{
 		"kosayoda/nvim-lightbulb",
-		event = { "BufRead", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		opts = {
 			autocmd = { enabled = true },
 		},
@@ -101,3 +101,4 @@ return {
 		},
 	},
 }
+
