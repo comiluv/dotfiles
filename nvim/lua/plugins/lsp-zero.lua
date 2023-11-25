@@ -475,20 +475,50 @@ return {
 
 	{
 		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
 		keys = {
 			{
 				"<leader>f",
 				function()
 					require("conform").format({ timeout_ms = 10000, lsp_fallback = true })
 				end,
-				mode = { "n", "v" },
+				mode = "",
 				desc = "Format Buffer",
 			},
 		},
 		config = function()
-			local cf = require("conform")
-			cf.setup({
+			-- This snippet will automatically detect which formatters take too long to run synchronously and will run them async on save instead.
+			local slow_format_filetypes = {}
+			local opts = {
+				format_on_save = function(bufnr)
+					-- Disable with a global or buffer-local variable
+					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+						return
+					end
+					if slow_format_filetypes[vim.bo[bufnr].filetype] then
+						return
+					end
+					local function on_format(err)
+						if err and err:match("timeout$") then
+							slow_format_filetypes[vim.bo[bufnr].filetype] = true
+						end
+					end
+
+					return { timeout_ms = 200, lsp_fallback = true }, on_format
+				end,
+
+				format_after_save = function(bufnr)
+					-- Disable with a global or buffer-local variable
+					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+						return
+					end
+					if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+						return
+					end
+					return { lsp_fallback = true }
+				end,
+
 				formatters_by_ft = {
 					javascript = { "prettierd" },
 					css = { "prettierd" },
@@ -500,11 +530,30 @@ return {
 					lua = { "stylua" },
 					java = { "google_java_format" },
 				},
-				format_on_save = {
-					timeout_ms = 10000,
-					lsp_fallback = true,
-				},
+			}
+			-- Create user commands to quickly enable/disable autoformatting
+			vim.api.nvim_create_user_command("FormatDisable", function(args)
+				if args.bang then
+					-- FormatDisable! will disable formatting just for this buffer
+					vim.b.disable_autoformat = true
+				else
+					vim.g.disable_autoformat = true
+				end
+			end, {
+				desc = "Disable autoformat-on-save",
+				bang = true,
 			})
+			vim.api.nvim_create_user_command("FormatEnable", function()
+				vim.b.disable_autoformat = false
+				vim.g.disable_autoformat = false
+			end, {
+				desc = "Re-enable autoformat-on-save",
+			})
+			require("conform").setup(opts)
+		end,
+		init = function()
+			-- If you want the formatexpr, here is the place to set it
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
 
