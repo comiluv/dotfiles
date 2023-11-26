@@ -27,17 +27,9 @@ vim.keymap.set("", "<A-l>", "<C-w>l")
 vim.keymap.set("n", "<left>", vim.cmd.bprevious)
 vim.keymap.set("n", "<right>", vim.cmd.bnext)
 
--- Conveniently move lines up and down with ctrl+j and ctrl+k
+-- Conveniently move lines up and down with shift+j and shift+k
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
--- Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
-vim.keymap.set("i", "<Tab>", function()
-	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, { expr = true })
-vim.keymap.set("i", "<S-Tab>", function()
-	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-end, { expr = true })
 
 -- delete selection and put without yanking selection
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Delete selection" })
