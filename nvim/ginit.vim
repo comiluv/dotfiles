@@ -5,7 +5,8 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont CaskaydiaMono NFM:h09
+    GuiFont! MonaspiceNe Nerd Font:h09
+    GuiRenderLigatures 1
     " Fallback font for CJK characters
     set guifontwide=Noto\ Sans\ Mono\ CJK\ KR
     let s:fontsize = 09
