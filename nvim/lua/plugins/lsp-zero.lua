@@ -54,7 +54,6 @@ return {
 					clangd = function(_, opts)
 						local clangd_capabilities =
 							require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-						clangd_capabilities.offsetEncoding = { "utf-16" }
 						opts.capabilities = clangd_capabilities
 						local on_attach = opts.on_attach
 						opts.on_attach = function(client, bufnr)
