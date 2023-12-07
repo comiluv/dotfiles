@@ -29,6 +29,7 @@ vim.g.info_file_pattern = {
 	"TelescopePrompt",
 	"TelescopeResults",
 	"''",
+	"markdown",
 }
 
 local trim_exclusions = {
