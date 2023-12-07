@@ -87,7 +87,7 @@ vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 4
 
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true
 vim.opt.title = true
 vim.opt.laststatus = 3
