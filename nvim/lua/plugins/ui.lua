@@ -27,44 +27,6 @@ return {
 		config = true,
 	},
 
-	-- winbar plugin
-	{
-		"utilyre/barbecue.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		name = "barbecue",
-		version = "*",
-		opts = {
-			create_autocmd = false,
-			attach_navic = false,
-		},
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
-		},
-		config = function(_, opts)
-			require("barbecue").setup(opts)
-
-			local events = {
-				"BufWinEnter",
-				"CursorHold",
-				"InsertLeave",
-			}
-
-			if vim.fn.has("nvim-0.9") == 1 then
-				table.insert(events, "WinResized")
-			else
-				table.insert(events, "WinScrolled")
-			end
-
-			vim.api.nvim_create_autocmd(events, {
-				group = vim.api.nvim_create_augroup("barbecue.updater", {}),
-				callback = function()
-					require("barbecue.ui").update()
-				end,
-			})
-		end,
-	},
-
 	-- LSP progress
 	{
 		"j-hui/fidget.nvim",
@@ -92,13 +54,8 @@ return {
 	},
 
 	{
-		"SmiteshP/nvim-navic",
-		lazy = true,
-		opts = {
-			lsp = {
-				auto_attach = true,
-			},
-		},
+		"nvim-treesitter/nvim-treesitter-context",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		config = true,
 	},
 }
-
