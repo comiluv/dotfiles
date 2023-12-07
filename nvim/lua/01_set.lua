@@ -90,7 +90,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 vim.opt.title = true
-vim.opt.winbar = "%=%m %f"
 vim.opt.laststatus = 3
 -- Better display for messages
 vim.opt.cmdheight = 2
