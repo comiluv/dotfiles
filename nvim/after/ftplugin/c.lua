@@ -22,7 +22,7 @@ end, { buffer = true })
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
 -- and press F5 in normal mode
-vim.keymap.set({ "i", "v" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true })
+vim.keymap.set({ "i", "x" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true })
 
 -- pressing f8 will run the executable
 if vim.fn.has("win32") == 1 then
@@ -39,15 +39,15 @@ end
 
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
 -- mode and press F8
-vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
+vim.keymap.set({ "i", "x" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
 
 -- flags
 -- gcc flags
--- vim.env.CFLAGS = "-Wall -Wextra -pedantic -g"
--- vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++17"
+-- vim.env.CFLAGS = "-Wall -Wextra -pedantic -g -std=c2x"
+-- vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++2a"
 -- cl flags
-vim.env.CFLAGS = "/Wall /Zi"
-vim.env.CXXFLAGS = "/EHsc /Wall /wd4668 /Zi /std:c++20"
+vim.env.CFLAGS = "/Wall /Zi /std:clatest"
+vim.env.CXXFLAGS = "/EHsc /Wall /wd4668 /Zi /std:c++latest"
 
 vim.env.CC = "cl.exe"
 vim.env.CXX = "cl.exe"
