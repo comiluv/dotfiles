@@ -8,4 +8,4 @@ vim.bo.expandtab = true
 vim.keymap.set("n", "<F8>", ":<C-u>update<BAR>:cd %:p:h<BAR>:exec 'term node' shellescape(@%)<CR>", { buffer = true })
 
 -- pressing F8 in insert mode or visual mode will exit respective mode and press F8
-vim.keymap.set({ "i", "v" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
+vim.keymap.set({ "i", "x" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
