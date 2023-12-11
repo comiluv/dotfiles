@@ -4,8 +4,6 @@ vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
--- it'll also be used for C++
-
 -- use msys2 make
 if vim.fn.has("win32") == 1 then
 	vim.bo.makeprg = "mingw32-make.exe"
@@ -13,11 +11,25 @@ end
 
 -- pressing F5 will call make to compile it
 vim.keymap.set("n", "<F5>", function()
+	local fullpath = vim.api.nvim_buf_get_name(0)
+	local last_slash = fullpath:match(".*%/(.*)$")
+	if last_slash then
+		fullpath = last_slash
+	end
+	local dot = fullpath:match(".*%.(.*)")
+	if dot then
+		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. ".exe"
+	end
+
+	local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\ %"
+	local gcc = "!g++.exe -g -std=c++2a -O2 -Wall % -o .\\bin\\" .. fullpath
+	local clang = "!clang++.exe -g -std=c++2a -O2 -Wall % -o .\\bin\\" .. fullpath
+
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
 	vim.cmd.call("mkdir('bin','p')")
 	vim.cmd.update()
-	vim.cmd("!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\ %")
+	vim.cmd(clang)
 end, { buffer = true })
 
 -- pressing Shift-F5 will compile all .cpp files
@@ -31,11 +43,16 @@ vim.keymap.set("n", "<s-F5>", function()
 	if dot then
 		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. ".exe"
 	end
+
+	local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\" .. fullpath .. " .\\*.cpp"
+	local gcc = "!g++.exe -g -std=c++2a -O2 -Wall .\\*.cpp -o .\\bin\\" .. fullpath
+	local clang = "!clang++.exe -g -std=c++2a -O2 -Wall .\\*.cpp -o .\\bin\\" .. fullpath
+
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
 	vim.cmd.call("mkdir('bin','p')")
 	vim.cmd.update()
-	vim.cmd("!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\" .. fullpath .. " .\\*.cpp")
+	vim.cmd(clang)
 end, { buffer = true })
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
@@ -65,8 +82,8 @@ vim.keymap.set({ "i", "x" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true 
 -- vim.env.CFLAGS = "-Wall -Wextra -pedantic -g -std=c2x"
 -- vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++17"
 -- cl flags
-vim.env.CFLAGS = "/Wall /Zi /std:clatest"
-vim.env.CXXFLAGS = "/EHsc /Wall /wd4668 /Zi /std:c++latest"
+vim.env.CFLAGS = "/W4 /Zi /std:clatest"
+vim.env.CXXFLAGS = "/EHsc /W4 /wd4668 /Zi /std:c++latest"
 
 vim.env.CC = "cl.exe"
 vim.env.CXX = "cl.exe"
