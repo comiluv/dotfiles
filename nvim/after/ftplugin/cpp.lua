@@ -4,8 +4,10 @@ vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
+local windows = vim.fn.has("win32") == 1
+
 -- use msys2 make
-if vim.fn.has("win32") == 1 then
+if windows then
 	vim.bo.makeprg = "mingw32-make.exe"
 end
 
@@ -15,6 +17,11 @@ vim.keymap.set("n", "<F5>", function()
 	local last_slash = fullpath:match(".*%/(.*)$")
 	if last_slash then
 		fullpath = last_slash
+	elseif windows then
+		local last_backslash = fullpath:match(".*%\\(.*)$")
+		if last_backslash then
+			fullpath = last_backslash
+		end
 	end
 	local dot = fullpath:match(".*%.(.*)")
 	if dot then
@@ -38,6 +45,11 @@ vim.keymap.set("n", "<s-F5>", function()
 	local last_slash = fullpath:match(".*%/(.*)$")
 	if last_slash then
 		fullpath = last_slash
+	elseif windows then
+		local last_backslash = fullpath:match(".*%\\(.*)$")
+		if last_backslash then
+			fullpath = last_backslash
+		end
 	end
 	local dot = fullpath:match(".*%.(.*)")
 	if dot then
