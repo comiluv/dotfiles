@@ -43,7 +43,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb neovim unzip fd-find ripgrep bat zsh jq -y
+sudo apt install gcc g++ gdb make gpg neovim unzip fd-find ripgrep bat zsh jq python3-pip -y
 
 # setup some symlinks
 ln -s $(which fdfind) ~/.local/bin/fd
@@ -59,13 +59,20 @@ gunzip tree-sitter.gz
 sudo install tree-sitter /usr/local/bin
 rm tree-sitter
 
-#install lazygit
+# install lazygit
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 rm lazygit.tar.gz
 sudo install lazygit /usr/local/bin
 rm lazygit
+
+# install eza
+sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+sudo apt install -y eza
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -89,7 +96,13 @@ git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-
 
 sed -i 's/plugins=(git)/plugins=(zsh-nvm git zsh-autosuggestions)/g' ~/.zshrc
 
-chsh -s /bin/zsh
+# install eza completions
+git clone https://github.com/eza-community/eza.git ~/eza
+echo '\n# Eza completions\nexport FPATH="~/eza/completions/zsh:$FPATH"\n' >> ~/.zshrc
 
+# eza aliases
+printf "\n#Eza aliases\nalias ld='eza -lD'\nalias lf='eza -lF --color=always | grep -v /'\nalias lh='eza -dl .* --group-directories-first'\nalias ll='eza -al --group-directories-first'\nalias ls='eza -alF --color=always --sort=size | grep -v /'\nalias lt='eza -al --sort=modified'\nalias l='eza -lah'\nalias la='eza -lAh'\nalias lsa='eza -lah'\n" >> ~/.zshrc
+
+chsh -s /bin/zsh
 zsh
 
