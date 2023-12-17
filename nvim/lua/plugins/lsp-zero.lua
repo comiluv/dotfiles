@@ -74,6 +74,8 @@ return {
 					"lua_ls",
 					"pyright",
 					"tsserver",
+					"clangd",
+					"jdtls",
 				},
 			}
 		end,
@@ -622,7 +624,7 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
-		opts = { },
+		opts = {},
 		keys = {
 			{
 				"gw",
