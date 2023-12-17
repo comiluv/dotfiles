@@ -6,17 +6,19 @@ return {
 			"nvim-lua/plenary.nvim",
 			{
 				"nvim-telescope/telescope-fzf-native.nvim",
-				build = function(ev)
-					local build_commands = {
-						'cd "' .. ev.dir .. '"',
-						'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"',
-						"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release",
-						"cmake --build build --config Release",
-						"cmake --install build --prefix build",
-					}
-					local build_command_str = table.concat(build_commands, " && ")
-					vim.fn.system(build_command_str)
-				end,
+				build = vim.fn.has("win32") == 1
+						and function(ev)
+							local build_commands = {
+								'cd "' .. ev.dir .. '"',
+								'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"',
+								"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release",
+								"cmake --build build --config Release",
+								"cmake --install build --prefix build",
+							}
+							local build_command_str = table.concat(build_commands, " && ")
+							vim.fn.system(build_command_str)
+						end
+					or "make",
 			},
 		},
 		cmd = "Telescope",
