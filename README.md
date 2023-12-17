@@ -23,15 +23,12 @@ Powershell:
 New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
 ```
 
-### efm-langserver
-
-folder containing efm language server configs
-Powershell:
-
-```powershell
-New-Item -ItemType Junction -Path $ENV:Appdata\efm-langserver -Target efm-langserver
-```
-
-### setup.sh
+### bootstrap-ubuntu.sh
 
 Useful Ubuntu bootstrap commands in case I reinstall wsl
+
+```
+wget https://raw.githubusercontent.com/comiluv/dotfiles/main/bootstrap-ubuntu.sh
+chmod +x bootstrap-ubuntu.sh
+./bootstrap-ubuntu.sh
+```
