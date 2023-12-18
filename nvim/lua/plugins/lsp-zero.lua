@@ -70,13 +70,7 @@ return {
 					-- Specify * to use this function as a fallback for any server
 					-- ["*"] = function(server, opts) end,
 				},
-				ensure_installed = {
-					"lua_ls",
-					"pyright",
-					"tsserver",
-					"clangd",
-					"jdtls",
-				},
+				ensure_installed = {},
 			}
 		end,
 		---@param opts PluginLspOpts
@@ -220,7 +214,7 @@ return {
 			end
 			vim.diagnostic.config(opts.diagnostics)
 
-			require("mason").setup()
+			-- require("mason").setup()
 
 			local lspconfig = require("lspconfig")
 			local servers = opts.servers
@@ -549,7 +543,37 @@ return {
 		event = "VeryLazy",
 		cmd = { "Mason", "MasonUpdate" },
 		build = ":MasonUpdate",
-		config = true,
+		opts = {
+			ensure_installed = {
+				"lua-language-server",
+				"stylua",
+				"pyright",
+				"black",
+				"isort",
+				"ruff",
+				"mypy",
+				"debugpy",
+				"typescript-language-server",
+				"prettierd",
+				"clangd",
+				"jdtls",
+				"google-java-format",
+			},
+		},
+		config = function(_, opts)
+			require("mason").setup(opts)
+
+			-- implements ensure_installed behavior
+			local registry = require("mason-registry")
+			registry.refresh(function()
+				for _, pkg_name in ipairs(opts.ensure_installed) do
+					local pkg = registry.get_package(pkg_name)
+					if not pkg:is_installed() then
+						pkg:install()
+					end
+				end
+			end)
+		end,
 	},
 
 	{
