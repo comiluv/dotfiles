@@ -36,18 +36,18 @@ echo 'source ~/.config/.vim/vimrc' >> ~/.vimrc
 # Add git ppa repo
 sudo add-apt-repository ppa:git-core/ppa -y
 
-# Add neovim ppa repo
-sudo add-apt-repository ppa:neovim-ppa/unstable -y
-
 # Update packages
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb make gpg neovim unzip fd-find ripgrep bat zsh jq python3-pip -y
+sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 -y
+
+# Install neovim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
 
 # setup some symlinks
 ln -s $(which fdfind) ~/.local/bin/fd
-ln -s /usr/bin/nvim ~/.local/bin/v
 ln -s /bin/batcat ~/.local/bin/bat
 
 # use Windows Explorer with ii
@@ -77,8 +77,18 @@ sudo apt install -y eza
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+# user aliases for sudo and neovim
+printf "\n# sudo aliases with sudo\nalias sudo='sudo '\n# neovim\nalias v='~/nvim.appimage '\n" >> ~/.zshrc
+
 # Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# install eza completions
+git clone https://github.com/eza-community/eza.git ~/eza
+echo '\n# Eza completions\nexport FPATH="~/eza/completions/zsh:$FPATH"\n' >> ~/.zshrc
+
+# eza aliases
+printf "\n#Eza aliases\nalias ld='eza -lD'\nalias lf='eza -lF --color=always | grep -v /'\nalias lh='eza -dl .* --group-directories-first'\nalias ll='eza -al --group-directories-first'\nalias ls='eza -alF --color=always --sort=size | grep -v /'\nalias lt='eza -al --sort=modified'\nalias l='eza -lah'\nalias la='eza -lAh'\nalias lsa='eza -lah'\n" >> ~/.zshrc
 
 # configure .zshrc
 printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
@@ -95,13 +105,6 @@ PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mn
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
 sed -i 's/plugins=(git)/plugins=(zsh-nvm git zsh-autosuggestions)/g' ~/.zshrc
-
-# install eza completions
-git clone https://github.com/eza-community/eza.git ~/eza
-echo '\n# Eza completions\nexport FPATH="~/eza/completions/zsh:$FPATH"\n' >> ~/.zshrc
-
-# eza aliases
-printf "\n#Eza aliases\nalias ld='eza -lD'\nalias lf='eza -lF --color=always | grep -v /'\nalias lh='eza -dl .* --group-directories-first'\nalias ll='eza -al --group-directories-first'\nalias ls='eza -alF --color=always --sort=size | grep -v /'\nalias lt='eza -al --sort=modified'\nalias l='eza -lah'\nalias la='eza -lAh'\nalias lsa='eza -lah'\n" >> ~/.zshrc
 
 chsh -s /bin/zsh
 zsh
