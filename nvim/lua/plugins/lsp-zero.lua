@@ -487,6 +487,22 @@ return {
 					lua = { "stylua" },
 					java = { "google_java_format" },
 				},
+				formatters = {
+					google_java_format = {
+						command = "google-java-format",
+						range_args = function(ctx)
+							return {
+								"--lines",
+								ctx.range.start[1] .. ":" .. ctx.range["end"][1],
+								"--skip-sorting-imports",
+								"--skip-removing-unused-imports",
+								"--skip-javadoc-formatting",
+								"--skip-reflowing-long-strings",
+								"-",
+							}
+						end,
+					},
+				},
 			}
 			-- Create user commands to quickly enable/disable autoformatting
 			vim.api.nvim_create_user_command("FormatDisable", function(args)
