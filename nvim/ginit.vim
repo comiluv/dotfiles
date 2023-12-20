@@ -5,11 +5,23 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
-    GuiFont! MonaspiceNe Nerd Font:h09
+    let s:fontname = "Liga SFMono Nerd Font"
+    :execute "GuiFont! " . s:fontname . ":h09"
+    " GuiFont! FragmentMono NFM:h09
     GuiRenderLigatures 1
     " Fallback font for CJK characters
-    set guifontwide=Noto\ Sans\ Mono\ CJK\ KR
+    set guifontwide=D2CodingLigature\ Nerd\ Font
     let s:fontsize = 09
+
+    " change font size with Ctrl + mouse-wheel
+    function! AdjustFontSize(amount)
+        let s:fontsize = s:fontsize+a:amount
+        :execute "GuiFont! ".s:fontname.":h" . s:fontsize
+    endfunction
+    noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
+    noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
+    inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
+    inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
 endif
 
 " Disable GUI Tabline
@@ -32,14 +44,4 @@ nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
 inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
 xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
-
-" change font size with Ctrl + mouse-wheel
-function! AdjustFontSize(amount)
-    let s:fontsize = s:fontsize+a:amount
-    :execute "GuiFont! CaskaydiaMono NFM:h" . s:fontsize
-endfunction
-noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
-noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
-inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
-inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
 
