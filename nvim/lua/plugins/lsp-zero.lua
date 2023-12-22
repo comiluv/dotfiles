@@ -490,17 +490,6 @@ return {
 				formatters = {
 					google_java_format = {
 						command = "google-java-format",
-						range_args = function(ctx)
-							return {
-								"--lines",
-								ctx.range.start[1] .. ":" .. ctx.range["end"][1],
-								"--skip-sorting-imports",
-								"--skip-removing-unused-imports",
-								"--skip-javadoc-formatting",
-								"--skip-reflowing-long-strings",
-								"-",
-							}
-						end,
 					},
 				},
 			}
