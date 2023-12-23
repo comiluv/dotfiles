@@ -36,7 +36,7 @@ vim.keymap.set("n", "<F5>", function()
 	vim.cmd.call("mkdir('obj','p')")
 	vim.cmd.call("mkdir('bin','p')")
 	vim.cmd.update()
-	vim.cmd(clang)
+	vim.cmd(gcc)
 end, { buffer = true })
 
 -- pressing Shift-F5 will compile all .cpp files
@@ -64,7 +64,7 @@ vim.keymap.set("n", "<s-F5>", function()
 	vim.cmd.call("mkdir('obj','p')")
 	vim.cmd.call("mkdir('bin','p')")
 	vim.cmd.update()
-	vim.cmd(clang)
+	vim.cmd(gcc)
 end, { buffer = true })
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode

@@ -8,11 +8,11 @@ require("03_autocmd")
 require("04_load_lazy")
 
 if vim.g.neovide then
-	vim.o.guifont = "Liga SFMono Nerd Font,D2CodingLigature Nerd Font:h11"
-	vim.g.neovide_refresh_rate = 144
+	vim.o.guifont = "Liga_SFMono_Nerd_Font,D2CodingLigature_Nerd_Font,Noto_Color_Emoji:h11"
 	vim.g.neovide_refresh_rate_idle = 5
+	vim.g.neovide_theme = "light"
 	-- Turn off cursor animation completely
-	vim.g.neovide_cursor_animation_length = 0
+	-- vim.g.neovide_cursor_animation_length = 0
 	vim.g.neovide_hide_mouse_when_typing = true
 end
 
