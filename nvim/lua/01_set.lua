@@ -99,4 +99,4 @@ vim.o.timeout = true
 vim.o.timeoutlen = 500
 
 -- include msys64 usr/bin to use its utils such as gzip, tar, etc.
-vim.env.PATH = vim.env.PATH .. ";C:\\tools\\msys64\\usr\\bin"
+vim.env.PATH = vim.env.PATH .. ";C:\\Users\\choij\\scoop\\apps\\msys2\\current\\usr\\bin"
