@@ -550,17 +550,25 @@ return {
 		build = ":MasonUpdate",
 		opts = {
 			ensure_installed = {
+				-- lua
 				"lua-language-server",
 				"stylua",
+				-- python
 				"pyright",
 				"black",
 				"isort",
 				"ruff",
 				"mypy",
 				"debugpy",
+				-- web
 				"typescript-language-server",
+				"css-lsp",
+				"tailwindcss-language-server",
+				"eslint-lsp",
 				"prettierd",
+				-- c/c++
 				"clangd",
+				-- java
 				"jdtls",
 				"google-java-format",
 			},
