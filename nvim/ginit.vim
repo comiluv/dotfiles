@@ -7,13 +7,12 @@ if exists(':GuiFont')
     " Use GuiFont! to ignore font errors
     let s:fontname = "Liga SFMono Nerd Font"
     :execute "GuiFont! " . s:fontname . ":h09"
-    " GuiFont! FragmentMono NFM:h09
     GuiRenderLigatures 1
     " Fallback font for CJK characters
     let s:widecharfontname = "D2CodingLigature Nerd Font"
-    :execute "set guifontwide=" . s:widecharfontname
+    let &guifontwide = s:widecharfontname
     let s:fontsize = 09
-    " 가나다라마바사
+    " test : 가나다라마바사
 
     " change font size with Ctrl + mouse-wheel
     function! AdjustFontSize(amount)
