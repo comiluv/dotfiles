@@ -11,6 +11,11 @@ if windows then
 	vim.bo.makeprg = "mingw32-make.exe"
 end
 
+-- Default compiler command lines for each compiler
+local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\"
+local gcc = "!g++.exe -g -std=c++2b -O2 -Wall -o .\\bin\\"
+local clang = "!clang++.exe -g -std=c++2b -O2 -Wall -o .\\bin\\"
+
 -- pressing F5 will call make to compile it
 vim.keymap.set("n", "<F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
@@ -28,9 +33,9 @@ vim.keymap.set("n", "<F5>", function()
 		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. ".exe"
 	end
 
-	local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\ %"
-	local gcc = "!g++.exe -g -std=c++2a -O2 -Wall % -o .\\bin\\" .. fullpath
-	local clang = "!clang++.exe -g -std=c++2a -O2 -Wall % -o .\\bin\\" .. fullpath
+	local cl = cl .. " %"
+	local gcc = gcc .. fullpath .. " %"
+	local clang = clang .. fullpath .. " %"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
@@ -56,9 +61,9 @@ vim.keymap.set("n", "<s-F5>", function()
 		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. ".exe"
 	end
 
-	local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\" .. fullpath .. " .\\*.cpp"
-	local gcc = "!g++.exe -g -std=c++2a -O2 -Wall .\\*.cpp -o .\\bin\\" .. fullpath
-	local clang = "!clang++.exe -g -std=c++2a -O2 -Wall .\\*.cpp -o .\\bin\\" .. fullpath
+	local cl = cl .. fullpath .. " .\\*.cpp"
+	local gcc = gcc .. fullpath .. " .\\*.cpp"
+	local clang = clang .. fullpath .. " .\\*.cpp"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
