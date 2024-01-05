@@ -16,11 +16,20 @@ folder containing vim files but I migrated to neovim
 
 ### nvim
 
-folder containing neovim configs
+folder containing neovim configs 
 Powershell:
 
 ```powershell
 New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
+```
+
+### neovide
+
+neovide config.toml file for symlink 
+Powershell:
+
+```powershell
+New-Item -ItemType Junction -Path $ENV:Appdata\neovide -Target neovide
 ```
 
 ### bootstrap-ubuntu.sh

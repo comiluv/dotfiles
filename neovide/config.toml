@@ -1,0 +1,19 @@
+[font]
+normal = ["MonaspiceNe Nerd Font"]
+size = 15
+
+[font.features]
+# disable texture healing because of zero issue
+# https://github.com/githubnext/monaspace/issues/109
+"MonaspiceNe Nerd Font" = [
+	"+dlig",
+	"-calt",
+	"+ss01",
+	"+ss02",
+	"+ss03",
+	"+ss04",
+	"+ss05",
+	"+ss06",
+	"+ss07",
+	"+ss08",
+]
