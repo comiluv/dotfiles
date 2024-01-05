@@ -482,7 +482,6 @@ return {
 					html = { "prettierd" },
 					json = { "prettierd" },
 					yaml = { "prettierd" },
-					markdown = { "prettierd" },
 					python = { "isort", "black" },
 					lua = { "stylua" },
 					java = { "google_java_format" },
