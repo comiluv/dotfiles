@@ -126,8 +126,3 @@ xnoremap & :&&<CR>
 " replace whatever was on the cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
-set ideajoin
-set commentary
-set surround
-set clipboard^=ideaput
-
