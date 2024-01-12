@@ -23,7 +23,7 @@ echo Input git email
 read gitemail
 git config --global user.name $gitname
 git config --global user.email $gitemail
-git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
+git config --global credential.helper "/mnt/c/Users/choij/scoop/apps/git/2.43.0/mingw64/bin/git-credential-manager.exe"
 git config --global core.editor "nvim"
 
 # setup vim
