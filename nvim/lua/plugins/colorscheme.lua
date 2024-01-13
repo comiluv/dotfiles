@@ -1,12 +1,12 @@
 return {
 	{
-		"Mofiqul/vscode.nvim",
+		"uloco/bluloco.nvim",
+		lazy = false,
+		priority = 1000,
+		dependencies = { "rktjmp/lush.nvim" },
 		config = function()
-			vim.o.background = "light"
-			require("vscode").setup({
-				transparent = false,
-			})
-			require("vscode").load()
+			require("bluloco").setup({ style = "light" })
+			vim.cmd("colorscheme bluloco")
 		end,
 	},
 }
