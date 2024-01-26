@@ -45,7 +45,7 @@ return {
 						filetypes = { "markdown", "text" },
 					},
 				},
-				skip_server_setup = { jdtls = true },
+				skip_server_setup = { jdtls = true, rust_analyzer = true },
 				-- you can do any additional lsp server setup here
 				-- return true if you don't want this server to be setup with lspconfig
 				---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
@@ -348,6 +348,8 @@ return {
 					{ name = "luasnip" },
 					{ name = "nvim_lua" },
 					{ name = "buffer" },
+					{ name = "path" },
+					{ name = "crates" },
 				}),
 				experimental = {
 					ghost_text = false,
@@ -487,6 +489,7 @@ return {
 					python = { "isort", "black" },
 					lua = { "stylua" },
 					java = { "google_java_format" },
+					rust = { "rust-analyzer" },
 				},
 				formatters = {
 					google_java_format = {
@@ -681,5 +684,18 @@ return {
 				desc = "Search diagnostic with Google",
 			},
 		},
+	},
+
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4",
+		dependencies = "mason.nvim",
+	},
+
+	{
+		"saecki/crates.nvim",
+		dependencies = "hrsh7th/nvim-cmp",
+		ft = { "rust", "toml" },
+		config = true,
 	},
 }
