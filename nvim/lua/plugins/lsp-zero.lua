@@ -709,7 +709,7 @@ return {
 		config = true,
 	},
 
-	-- inlay hints feature that's going to be in Neovim 0.10 but not yet in 0.9
+	-- inlay hints feature that's going to be native in Neovim 0.10 but not yet in 0.9
 	{
 		"lvimuser/lsp-inlayhints.nvim",
 		event = { "LspAttach" },
@@ -730,7 +730,7 @@ return {
 			})
 			vim.keymap.set("n", "<leader>h", function()
 				inlay.toggle()
-			end, {})
+			end, { desc = "Toggle inlay hints" })
 			inlay.setup()
 		end,
 	},
