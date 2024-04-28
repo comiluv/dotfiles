@@ -120,7 +120,7 @@ return {
 	-- tab out from parentheses, quotes, similar contexts
 	{
 		"abecodes/tabout.nvim",
-		event = "InsertEnter",
+		event = "InsertCharPre",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp", "zbirenbaum/copilot.lua" },
 		config = function()
 			require("tabout").setup({
