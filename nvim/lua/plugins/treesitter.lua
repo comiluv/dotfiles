@@ -9,9 +9,6 @@ return {
 			-- auto close block with end
 			"RRethy/nvim-treesitter-endwise",
 
-			-- auto close tags
-			"windwp/nvim-ts-autotag",
-
 			-- jump to matching parens
 			{
 				"andymass/vim-matchup",
@@ -53,32 +50,6 @@ return {
 			},
 			indent = { enable = false },
 			endwise = { enable = true }, -- "RRethy/nvim-treesitter-endwise",
-			autotag = {
-				enable = true,
-				enable_rename = true,
-				enable_close = true,
-				enable_close_on_slash = true,
-				filetypes = {
-					"html",
-					"htmldjango",
-					"javascript",
-					"typescript",
-					"javascriptreact",
-					"typescriptreact",
-					"svelte",
-					"vue",
-					"tsx",
-					"jsx",
-					"rescript",
-					"xml",
-					"php",
-					"markdown",
-					"astro",
-					"glimmer",
-					"handlebars",
-					"hbs",
-				},
-			}, -- "windwp/nvim-ts-autotag",
 			matchup = { enable = true }, -- "andymass/vim-matchup",
 		},
 		config = function(_, opts)
@@ -87,4 +58,3 @@ return {
 		end,
 	},
 }
-
