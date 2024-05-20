@@ -1,6 +1,6 @@
 [font]
 normal = ["SFMono Nerd Font"]
-size = 15
+size = 12
 
 [font.features]
 # disable texture healing because of zero issue
