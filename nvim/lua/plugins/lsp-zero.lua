@@ -50,6 +50,7 @@ return {
 				-- return true if you don't want this server to be setup with lspconfig
 				---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 				setup = {
+					---@class opts
 					clangd = function(_, opts)
 						local clangd_capabilities =
 							require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -57,7 +58,9 @@ return {
 						local on_attach = opts.on_attach
 						opts.on_attach = function(client, bufnr)
 							client.server_capabilities.signatureHelpProvider = false
-							on_attach(client, bufnr)
+							if on_attach then
+								on_attach(client, bufnr)
+							end
 						end
 						require("lspconfig").clangd.setup(opts)
 						return true
