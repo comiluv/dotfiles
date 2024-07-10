@@ -8,7 +8,6 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
-		---@class PluginLspOpts
 		opts = function()
 			return {
 				-- options for vim.diagnostic.config()
@@ -25,8 +24,6 @@ return {
 					hint = "⚑",
 					info = "",
 				},
-				-- LSP Server Settings
-				---@type lspconfig.options
 				servers = {
 					lua_ls = {
 						-- mason = false, -- set to false if you don't want this server to be installed with mason
@@ -48,7 +45,6 @@ return {
 				skip_server_setup = { jdtls = true, rust_analyzer = true },
 				-- you can do any additional lsp server setup here
 				-- return true if you don't want this server to be setup with lspconfig
-				---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 				setup = {
 					---@class opts
 					clangd = function(_, opts)
@@ -76,7 +72,7 @@ return {
 				ensure_installed = {},
 			}
 		end,
-		---@param opts PluginLspOpts
+		---@class opts
 		config = function(_, opts)
 			-- create remaps
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -673,7 +669,9 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
-		opts = {},
+		opts = {
+			openai_model_id = "gpt-4o",
+		},
 		keys = {
 			{
 				"gw",
