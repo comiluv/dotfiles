@@ -670,7 +670,7 @@ return {
 			"MunifTanjim/nui.nvim",
 		},
 		opts = {
-			openai_model_id = "gpt-4o",
+			openai_model_id = "gpt-4o-mini",
 		},
 		keys = {
 			{
