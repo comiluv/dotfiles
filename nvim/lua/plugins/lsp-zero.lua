@@ -702,7 +702,9 @@ return {
 	{
 		"saecki/crates.nvim",
 		dependencies = "hrsh7th/nvim-cmp",
-		ft = { "rust", "toml" },
-		config = true,
+		event = { "BufRead Cargo.toml" },
+		config = function()
+			require("crates").setup()
+		end,
 	},
 }
