@@ -5,18 +5,20 @@ vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
 local windows = vim.fn.has("win32") == 1
+local windows_extension = ""
 
--- use msys2 make
+-- use msys2 make in Windows
 if windows then
 	vim.bo.makeprg = "mingw32-make.exe"
+	windows_extension = ".exe"
 end
 
 -- Default compiler command lines for each compiler
-local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo.\\obj\\ /Fe.\\bin\\"
-local gcc = "!g++.exe -g -std=c++2b -O2 -Wall -o .\\bin\\"
-local clang = "!clang++.exe -g -std=c++2b -O2 -Wall -o .\\bin\\"
+local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo./obj/ /Fe./bin/"
+local gcc = "!g++ -g -std=c++2b -O2 -Wall -o ./bin/"
+local clang = "!clang++ -g -std=c++2b -O2 -Wall -o ./bin/"
 
--- pressing F5 will call make to compile it
+-- pressing F5 will compile current buffer
 vim.keymap.set("n", "<F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
 	local last_slash = fullpath:match(".*%/(.*)$")
@@ -30,7 +32,7 @@ vim.keymap.set("n", "<F5>", function()
 	end
 	local dot = fullpath:match(".*%.(.*)")
 	if dot then
-		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. ".exe"
+		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. windows_extension
 	end
 
 	local cl = cl .. " %"
@@ -58,12 +60,12 @@ vim.keymap.set("n", "<s-F5>", function()
 	end
 	local dot = fullpath:match(".*%.(.*)")
 	if dot then
-		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. ".exe"
+		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. windows_extension
 	end
 
-	local cl = cl .. fullpath .. " .\\*.cpp"
-	local gcc = gcc .. fullpath .. " .\\*.cpp"
-	local clang = clang .. fullpath .. " .\\*.cpp"
+	local cl = cl .. fullpath .. " ./*.cpp"
+	local gcc = gcc .. fullpath .. " ./*.cpp"
+	local clang = clang .. fullpath .. " ./*.cpp"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
@@ -78,7 +80,7 @@ vim.keymap.set({ "i", "x" }, "<F5>", "<ESC><F5>", { buffer = true, remap = true 
 vim.keymap.set({ "i", "x" }, "<s-F5>", "<ESC><s-F5>", { buffer = true, remap = true })
 
 -- pressing f8 will run the executable
-if vim.fn.has("win32") == 1 then
+if windows then
 	vim.keymap.set("n", "<f8>", function()
 		vim.cmd.cd("%:p:h")
 		vim.cmd.exec("'term' shellescape('bin/' .. expand('%<')..'.exe')")
@@ -94,16 +96,12 @@ end
 -- mode and press F8
 vim.keymap.set({ "i", "x" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
 
--- flags
--- gcc flags
+-- Vim can use environmental variables when compiling using make
 -- vim.env.CFLAGS = "-Wall -Wextra -pedantic -g -std=c2x"
 -- vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++17"
--- cl flags
-vim.env.CFLAGS = "/W4 /Zi /std:clatest"
-vim.env.CXXFLAGS = "/EHsc /W4 /wd4668 /Zi /std:c++latest"
 
-vim.env.CC = "cl.exe"
-vim.env.CXX = "cl.exe"
+-- vim.env.CC = "cl.exe"
+-- vim.env.CXX = "cl.exe"
 
--- requires Visual Studio English language pack installed
+-- Output Visual Studio messages in English (rather than system locale). Requires Visual Studio English language pack installed
 vim.env.VSLANG = 1033
