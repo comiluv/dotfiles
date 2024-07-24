@@ -8,7 +8,7 @@ sudo locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
 sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
 
-# Update server to use Kakao mirror
+# Update server to use Kakao mirror (!UNOFFICIAL MIRROR!)
 sudo sed -i 's/archive\.ubuntu\.com/mirror\.kakao\.com/g' /etc/apt/sources.list
 
 # make some dirs
