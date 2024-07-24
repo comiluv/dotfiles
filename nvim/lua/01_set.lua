@@ -100,3 +100,5 @@ vim.o.timeoutlen = 500
 
 -- include msys64 usr/bin to use its utils such as gzip, tar, etc.
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
+
+vim.opt.background = "light"
