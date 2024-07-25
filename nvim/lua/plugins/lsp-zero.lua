@@ -500,13 +500,18 @@ return {
 					},
 				},
 			}
+			require("conform").setup(opts)
+		end,
+		init = function()
 			-- Create user commands to quickly enable/disable autoformatting
 			vim.api.nvim_create_user_command("FormatDisable", function(args)
 				if args.bang then
 					-- FormatDisable! will disable formatting just for this buffer
 					vim.b.disable_autoformat = true
+					print("Autoformat disabled (buffer)")
 				else
 					vim.g.disable_autoformat = true
+					print("Autoformat disabled (global)")
 				end
 			end, {
 				desc = "Disable autoformat-on-save",
@@ -515,12 +520,10 @@ return {
 			vim.api.nvim_create_user_command("FormatEnable", function()
 				vim.b.disable_autoformat = false
 				vim.g.disable_autoformat = false
+				print("Autoformat enabled")
 			end, {
 				desc = "Re-enable autoformat-on-save",
 			})
-			require("conform").setup(opts)
-		end,
-		init = function()
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
