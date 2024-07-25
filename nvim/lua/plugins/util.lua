@@ -22,12 +22,12 @@ return {
 		opts = { curl_opts = { compressed = false } },
 	},
 
-	-- Use Microsoft Visual Studio as default C/C++ compiler in Neovim
+	-- setup environmental variables for Visual Studio compiler
 	{
 		"hattya/vcvars.vim",
 		event = "VeryLazy",
 		config = function()
-			-- refernce: https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
+			-- https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
 			vim.cmd([[
 			if (len(vcvars#list()) > 0)
 				let vcvars_dict = vcvars#get(vcvars#list()[-1])
@@ -72,6 +72,8 @@ return {
 			})
 		end,
 	},
+
+	-- see changes in live action
 	{
 		"smjonas/live-command.nvim",
 		version = false,
