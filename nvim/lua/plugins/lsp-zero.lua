@@ -700,8 +700,8 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^4",
-		dependencies = "mason.nvim",
-		lazy = false,
+		dependencies = { "mason.nvim" },
+		event = "VeryLazy",
 	},
 
 	{
