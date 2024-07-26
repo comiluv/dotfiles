@@ -10,7 +10,7 @@ return {
 	-- show indent lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufEnter", "BufNewFile", "InsertEnter" },
+		event = { "VeryLazy", "BufNewFile", "InsertEnter" },
 		main = "ibl",
 		opts = {
 			enabled = true,

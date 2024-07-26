@@ -51,7 +51,7 @@ return {
 	-- abbreviations and substitutions
 	{
 		"tpope/vim-abolish",
-		event = { "CmdlineEnter", "BufEnter", "BufNewFile" },
+		event = { "CmdlineEnter", "VeryLazy", "BufNewFile" },
 		cmd = { "Subvert", "S", "Abolish" },
 		dependencies = { "smjonas/live-command.nvim" },
 		config = function()
