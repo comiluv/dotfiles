@@ -21,23 +21,11 @@ local clang = "!clang++ -g -std=c++2b -O2 -Wall -o ./bin/"
 -- pressing F5 will compile current buffer
 vim.keymap.set("n", "<F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
-	local last_slash = fullpath:match(".*%/(.*)$")
-	if last_slash then
-		fullpath = last_slash
-	elseif windows then
-		local last_backslash = fullpath:match(".*%\\(.*)$")
-		if last_backslash then
-			fullpath = last_backslash
-		end
-	end
-	local dot = fullpath:match(".*%.(.*)")
-	if dot then
-		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. windows_extension
-	end
+	local filename_only = vim.api.nvim_call_function("fnamemodify", { fullpath, ":t:r" }) .. windows_extension
 
 	local cl = cl .. " %"
-	local gcc = gcc .. fullpath .. " %"
-	local clang = clang .. fullpath .. " %"
+	local gcc = gcc .. filename_only .. " %"
+	local clang = clang .. filename_only .. " %"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
@@ -49,23 +37,11 @@ end, { buffer = true })
 -- pressing Shift-F5 will compile all .cpp files
 vim.keymap.set("n", "<s-F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
-	local last_slash = fullpath:match(".*%/(.*)$")
-	if last_slash then
-		fullpath = last_slash
-	elseif windows then
-		local last_backslash = fullpath:match(".*%\\(.*)$")
-		if last_backslash then
-			fullpath = last_backslash
-		end
-	end
-	local dot = fullpath:match(".*%.(.*)")
-	if dot then
-		fullpath = fullpath:sub(1, #fullpath - #dot - 1) .. windows_extension
-	end
+	local filename_only = vim.api.nvim_call_function("fnamemodify", { fullpath, ":t:r" }) .. windows_extension
 
-	local cl = cl .. fullpath .. " ./*.cpp"
-	local gcc = gcc .. fullpath .. " ./*.cpp"
-	local clang = clang .. fullpath .. " ./*.cpp"
+	local cl = cl .. filename_only .. " ./*.cpp"
+	local gcc = gcc .. filename_only .. " ./*.cpp"
+	local clang = clang .. filename_only .. " ./*.cpp"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
