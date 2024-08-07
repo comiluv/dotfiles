@@ -1,16 +1,15 @@
 #!/usr/bin/sh
 
+# make sure to run this script as user after doing chmod +x filename
+
 # disabling password
-# ask for username (which is current user)
-echo Input current username
-read username
+username=$(whoami)
 # add the username to a sudo config file
 temp=$(mktemp)
 printf '%s ALL=(ALL) NOPASSWD:ALL\n' "$username" > $temp
 chmod 644 $temp
 sudo cp $temp /etc/sudoers.d/$username
 
-# make sure to run this script as user after doing chmod +x filename
 cd ~
 
 # install locale
