@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-# make sure to run this script as user after doing chmod +x filename
+# make sure to chmod +x filename
 
 # disabling password
 username=$(whoami)
