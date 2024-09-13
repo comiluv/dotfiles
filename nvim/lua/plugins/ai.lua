@@ -4,7 +4,17 @@ return {
 		event = "VeryLazy",
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
-			-- add any opts here
+			provide = "claude",
+			claude = {
+				api_key_name = {
+					"kpscript",
+					"-c:GetEntryString",
+					"C:/code/api.kdbx",
+					"-pw:b_2Bn#iJuePuWT!_0y5c6BX8brnGUl",
+					"-Field:Password",
+					"-ref-Title:ANTHROPIC_API_KEY",
+				},
+			},
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = vim.fn.has("win32") == 1 and "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
@@ -101,12 +111,9 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
-		opts = {
-			openai_model_id = "gpt-4o-mini",
-		},
 		keys = {
 			{
-				"gw",
+				"<leader>wa",
 				mode = { "n", "x" },
 				function()
 					require("wtf").ai()
@@ -115,12 +122,46 @@ return {
 			},
 			{
 				mode = { "n" },
-				"gW",
+				"<leader>ws",
 				function()
 					require("wtf").search()
 				end,
 				desc = "Search diagnostic with Google",
 			},
+			{
+				mode = { "n" },
+				"<leader>wh",
+				function()
+					require("wtf").history()
+				end,
+				desc = "Populate the quickfix list with previous chat history",
+			},
+			{
+				mode = { "n" },
+				"<leader>wg",
+				function()
+					require("wtf").grep_history()
+				end,
+				desc = "Grep previous chat history with Telescope",
+			},
 		},
+		config = function()
+			local cmd = vim.system({
+				"kpscript",
+				"-c:GetEntryString",
+				"C:/code/api.kdbx",
+				"-pw:b_2Bn#iJuePuWT!_0y5c6BX8brnGUl",
+				"-Field:Password",
+				"-ref-Title:OPENAI_API_KEY",
+			})
+			local obj = cmd:wait()
+			-- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
+			local pos = string.find(obj.stdout, "\n")
+			local key = string.sub(obj.stdout, 1, pos):gsub("%s+$", "")
+			require("wtf").setup({
+				openai_model_id = "gpt-4o-mini",
+				openai_api_key = key,
+			})
+		end,
 	},
 }
