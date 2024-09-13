@@ -63,7 +63,7 @@ return {
 				markdown = true,
 				yaml = true,
 			}
-			local filetypes = array_to_table(vim.g.info_file_pattern)
+			local filetypes = array_to_table(vim.g.info_filetype)
 			for k, v in pairs(copilot_enabled_filetypes) do
 				filetypes[k] = v
 			end

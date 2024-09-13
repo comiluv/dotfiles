@@ -75,7 +75,12 @@ return {
 	{
 		"vladdoster/remember.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
+		config = function()
+			require("remember").setup({
+				ignore_filetype = vim.g.info_filetype,
+				dont_center = true,
+			})
+		end,
 	},
 
 	{

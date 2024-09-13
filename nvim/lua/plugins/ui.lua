@@ -14,7 +14,7 @@ return {
 		main = "ibl",
 		opts = {
 			enabled = true,
-			exclude = { filetypes = vim.g.info_file_pattern },
+			exclude = { filetypes = vim.g.info_filetype },
 			indent = { char = "┆" },
 		},
 	},

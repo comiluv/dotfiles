@@ -5,31 +5,35 @@ local TrimGroup = augroup("TrimGroup", {})
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank", {})
 
-vim.g.info_file_pattern = {
+vim.g.info_filetype = {
+	"''",
 	"PlenaryTestPopup",
+	"TelescopePrompt",
+	"TelescopeResults",
 	"Trouble",
 	"chatgpt",
 	"checkhealth",
+	"dap-repl",
+	"diff",
 	"fugitive",
+	"gitcommit",
+	"gitrebase",
 	"help",
+	"hgcommit",
 	"lazy",
 	"lspinfo",
 	"man",
+	"markdown",
 	"memento",
 	"netrw",
 	"notify",
+	"packer",
 	"qf",
 	"spectre_panel",
 	"startuptime",
+	"svn",
 	"tsplayground",
 	"undotree",
-	"diff",
-	"packer",
-	"gitcommit",
-	"TelescopePrompt",
-	"TelescopeResults",
-	"''",
-	"markdown",
 }
 
 local trim_exclusions = {
@@ -62,7 +66,7 @@ autocmd({ "FileType" }, {
 -- close some filetypes with <q>
 autocmd({ "FileType" }, {
 	group = MyGroup,
-	pattern = vim.g.info_file_pattern,
+	pattern = vim.g.info_filetype,
 	callback = function(event)
 		vim.opt_local.buflisted = false
 		vim.keymap.set("n", "q", "<cmd>silent! close<cr>", { buffer = event.buf, nowait = true })
@@ -127,7 +131,7 @@ autocmd("BufWritePre", {
 -- disable lsp for filetypes
 autocmd({ "FileType" }, {
 	group = MyGroup,
-	pattern = vim.g.info_file_pattern,
+	pattern = vim.g.info_filetype,
 	callback = function()
 		vim.diagnostic.disable(0)
 	end,
