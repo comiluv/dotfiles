@@ -8,8 +8,8 @@ return {
 			-- add any opts here
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		-- build = "make",
-		build = "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false", -- for windows
+		build = vim.fn.has("win32") == 1 and "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+			or "make",
 		dependencies = {
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
