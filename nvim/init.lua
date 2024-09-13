@@ -1,6 +1,5 @@
 -- note placing files in /plugin directory did NOT improve start up time
 -- this structure is about 10 ms faster in hyperfine results
-vim.opt.shadafile = "NONE"
 
 -- Load core configuration modules
 require("01_set")

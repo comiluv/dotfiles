@@ -73,21 +73,17 @@ return {
 
 	-- auto locate last location in the file
 	{
-		"vladdoster/remember.nvim",
+		"ethanholz/nvim-lastplace",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = function()
-			require("remember").setup({
-				ignore_filetype = vim.g.info_filetype,
-				dont_center = true,
-			})
-		end,
+		config = true,
 	},
 
 	{
-		"mbbill/undotree",
-		cmd = "UndotreeToggle",
-		keys = {
-			{ "<leader>u", vim.cmd.UndotreeToggle, desc = "Open Undotree" },
+		"jiaoshijie/undotree",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = true,
+		keys = { -- load the plugin only when using it's keybinding:
+			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
 		},
 	},
 

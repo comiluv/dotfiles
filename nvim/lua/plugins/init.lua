@@ -1,8 +1,6 @@
 --[[
 List of plugins that Neovim(lua) version is desired
 {
-	www.github.com/mbbill/undotree         : Vimscript
-                                           : http://github.com/debugloop/telescope-undo.nvim but not equivalent
 	www.github.com/andymass/vim-matchup    : Vimscript
 	www.github.com/junegunn/vim-easy-align : Vimscript
 }
@@ -22,4 +20,3 @@ List of plugins that Neovim(lua) version is desired
 return {
 	{ "folke/lazy.nvim", version = "*" },
 }
-
