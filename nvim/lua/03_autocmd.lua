@@ -36,6 +36,7 @@ local trim_exclusions = {
 	"markdown",
 }
 
+-- Flash yanked text after yanking
 autocmd("TextYankPost", {
 	group = yank_group,
 	pattern = "*",
@@ -63,7 +64,7 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = vim.g.info_file_pattern,
 	callback = function(event)
-		vim.bo[event.buf].buflisted = false
+		vim.opt_local.buflisted = false
 		vim.keymap.set("n", "q", "<cmd>silent! close<cr>", { buffer = event.buf, nowait = true })
 	end,
 })
@@ -106,11 +107,12 @@ autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
 		-- Only trim when there's no formatter attached
-		if #(require("conform").list_formatters()) > 0 then
+		vim.b.num_formatters = vim.b.num_formatters or #(require("conform").list_formatters())
+		if vim.b.num_formatters > 0 then
 			return
 		end
 		for _, filetype in ipairs(trim_exclusions) do
-			if vim.bo.filetype == filetype then
+			if vim.opt_local.filetype:get() == filetype then
 				return
 			end
 		end
