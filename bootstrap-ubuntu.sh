@@ -3,7 +3,7 @@
 # make sure to chmod +x filename
 
 # disabling password
-username=$(whoami)
+username=$(id -un)
 # add the username to a sudo config file
 temp=$(mktemp)
 printf '%s ALL=(ALL) NOPASSWD:ALL\n' "$username" > $temp
@@ -109,12 +109,12 @@ sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
 # temporarily remove Windows path from wsl
 # see https://stackoverflow.com/questions/51336147/how-to-remove-the-win10s-path-from-wsl
-PATH=$(/usr/bin/printenv PATH | /usr/bin/perl -ne 'print join(":", grep { !/\/mnt\/[a-z]/ } split(/:/));')
+PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-z]' | tr '\n' ':' | sed 's/:$//')
 
 # Install zsh-nvm
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 
-sed -i 's/plugins=(git)/plugins=(zsh-nvm git zsh-autosuggestions)/g' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git zsh-nvm zsh-autosuggestions)/g' ~/.zshrc
 
 chsh -s /bin/zsh
 zsh
