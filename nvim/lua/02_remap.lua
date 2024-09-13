@@ -2,7 +2,7 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open Netrw" })
 
 -- Don't use Ex mode, use Q for formatting.
 -- Revert with ":unmap Q".
-vim.keymap.set("", "Q", "gq", { remap = true })
+vim.keymap.set({ "n", "v" }, "Q", "gq", { remap = true })
 
 -- n N J are centered
 vim.keymap.set("n", "J", "mzJ`z")
@@ -30,13 +30,12 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Delete selection" })
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
--- also note below is taken from book Practical Vim 2nd edition which should be
--- update of this remap
-vim.keymap.set("c", "%%", function()
+-- note below is taken from book Practical Vim 2nd edition
+local function expand_to_path()
 	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
-end, { expr = true, desc = "expand to path" })
-vim.keymap.set("n", "<leader>e", ":e %%", { remap = true, desc = "Open adjacent file" })
-vim.keymap.set("v", "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
+end
+vim.keymap.set("c", "%%", expand_to_path, { expr = true, desc = "expand to path" })
+vim.keymap.set({ "n", "v" }, "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
 
 -- Allow for easy copying and pasting
 vim.keymap.set("v", "y", "y`]", { silent = true })
@@ -85,9 +84,8 @@ vim.keymap.set("c", "!", function()
 	return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
 end, { expr = true })
 
--- open help about the word on cursor by pressing <F1>
-vim.keymap.set("n", "<F1>", ":help <C-r><C-w><CR>", { silent = true })
-vim.keymap.set({ "c", "i", "v" }, "<F1>", "<ESC><F1>", { silent = true, remap = true })
+-- open help about the word under cursor by pressing <F1>
+vim.keymap.set({ "n", "i", "v", "c" }, "<F1>", "<esc>:help <C-r><C-w><cr>", { silent = true })
 
 -- "around document" text object
 vim.keymap.set("o", "ad", "<cmd>normal! ggVG<cr>", { noremap = true, desc = "around document" })
