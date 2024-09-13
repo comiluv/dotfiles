@@ -2,7 +2,6 @@
 List of plugins that Neovim(lua) version is desired
 {
 	www.github.com/andymass/vim-matchup    : Vimscript
-	www.github.com/junegunn/vim-easy-align : Vimscript
 }
 ]]
 

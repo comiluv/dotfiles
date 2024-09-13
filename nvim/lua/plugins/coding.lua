@@ -92,15 +92,9 @@ return {
 
 	-- easy align comments
 	{
-		"junegunn/vim-easy-align",
-		cmd = "EasyAlign",
-		keys = {
-			{ "ga", "<Plug>(EasyAlign)", mode = { "x", "n" }, desc = "Easy Align" },
-		},
-		config = function()
-			vim.g.easy_align_delimiters =
-				{ ["/"] = { pattern = "//\\+", delimiter_align = "l", ignore_groups = "!Comment" } }
-		end,
+		"echasnovski/mini.align",
+		version = false,
+		config = true,
 	},
 
 	-- LSP incrementally rename symbol
@@ -133,4 +127,3 @@ return {
 		end,
 	},
 }
-
