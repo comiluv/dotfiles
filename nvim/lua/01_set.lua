@@ -22,11 +22,6 @@ end
 vim.opt.clipboard = "unnamedplus"
 
 -- Some settings picked up from internet
-vim.opt.tabstop = 8
-vim.opt.shiftwidth = 8
-vim.opt.softtabstop = 0
-vim.opt.expandtab = false
-
 vim.opt.termguicolors = true
 vim.opt.lazyredraw = true
 vim.opt.redrawtime = 1500
@@ -90,13 +85,13 @@ vim.opt.undofile = true
 
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 
 -- Turn off lsp logging because the file size grows beyond control
 vim.lsp.set_log_level("off")
 
 vim.o.timeout = true
-vim.o.timeoutlen = 500
+vim.o.timeoutlen = 300
 
 -- include msys64 usr/bin to use its utils such as gzip, tar, etc.
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
