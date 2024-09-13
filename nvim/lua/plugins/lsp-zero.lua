@@ -188,21 +188,6 @@ return {
 						vim.lsp.buf.signature_help,
 						{ buffer = ev.buf, desc = "Signature help" }
 					)
-					vim.keymap.set(
-						"n",
-						"<space>wa",
-						vim.lsp.buf.add_workspace_folder,
-						{ buffer = ev.buf, desc = "Workspace Add folder" }
-					)
-					vim.keymap.set(
-						"n",
-						"<space>wr",
-						vim.lsp.buf.remove_workspace_folder,
-						{ buffer = ev.buf, desc = "Workspace Remove folder" }
-					)
-					vim.keymap.set("n", "<space>wl", function()
-						print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-					end, { buffer = ev.buf, desc = "Workspace List folders" })
 				end,
 			})
 
