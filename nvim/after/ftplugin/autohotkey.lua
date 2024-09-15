@@ -1,3 +1,4 @@
+-- get lsp from https://github.com/helsmy/vscode-autohotkey
 -- reuse vscode-autohotkey lsp client
 local lsp_clients = vim.lsp.get_active_clients()
 for _, client in ipairs(lsp_clients) do
@@ -9,7 +10,7 @@ end
 
 local cmd = {
 	"node",
-	"C:\\tools\\helsmy.ahk-simple-ls-0.9.2\\extension\\server\\out\\server.js",
+	"C:\\tools\\helsmy.ahk-simple-ls\\extension\\server\\out\\server.js",
 	"--stdio",
 	"--node-ipc",
 }
