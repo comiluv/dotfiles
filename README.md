@@ -41,3 +41,7 @@ wget https://raw.githubusercontent.com/comiluv/dotfiles/main/bootstrap-ubuntu.sh
 chmod +x bootstrap-ubuntu.sh
 ./bootstrap-ubuntu.sh
 ```
+
+### lsp_tests
+
+This folder contains some sample codes to test LSP functionality
