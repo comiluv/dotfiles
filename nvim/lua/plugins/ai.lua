@@ -5,16 +5,7 @@ return {
 		version = false, -- set this if you want to always pull the latest change
 		opts = {
 			provide = "claude",
-			claude = {
-				api_key_name = {
-					"kpscript",
-					"-c:GetEntryString",
-					"C:/code/api.kdbx",
-					"-pw:b_2Bn#iJuePuWT!_0y5c6BX8brnGUl",
-					"-Field:Password",
-					"-ref-Title:ANTHROPIC_API_KEY",
-				},
-			},
+			claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.asc" } },
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = vim.fn.has("win32") == 1 and "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
@@ -146,14 +137,7 @@ return {
 			},
 		},
 		config = function()
-			local cmd = vim.system({
-				"kpscript",
-				"-c:GetEntryString",
-				"C:/code/api.kdbx",
-				"-pw:b_2Bn#iJuePuWT!_0y5c6BX8brnGUl",
-				"-Field:Password",
-				"-ref-Title:OPENAI_API_KEY",
-			})
+			local cmd = vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.asc" })
 			local obj = cmd:wait()
 			-- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
 			local pos = string.find(obj.stdout, "\n")
