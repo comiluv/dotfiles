@@ -8,7 +8,8 @@ return {
 			claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.asc" } },
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = vim.fn.has("win32") == 1 and "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+		build = vim.fn.has("win32") == 1
+				and "pwsh -NoProfile -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
 			or "make",
 		dependencies = {
 			"stevearc/dressing.nvim",

@@ -411,7 +411,7 @@ return {
 			})
 		end,
 		-- jsregexp setup see https://github.com/L3MON4D3/LuaSnip/issues/1190#issuecomment-2171656749
-		build = "pwsh " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1",
+		build = "pwsh -NoProfile " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1",
 	},
 
 	-- java language server plugin because lsp-zero (and lspconfig to extent) doesn't work
