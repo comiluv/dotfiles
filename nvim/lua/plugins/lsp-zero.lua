@@ -655,9 +655,9 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^4",
+		version = "^5",
 		dependencies = { "mason.nvim" },
-		event = "VeryLazy",
+		ft = { "rust", "cargo" },
 	},
 
 	{

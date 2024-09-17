@@ -57,13 +57,6 @@ return {
 		end,
 	},
 
-	-- display git signs in the gutter
-	{
-		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
-	},
-
 	-- auto detect indentation
 	{
 		"Darazaki/indent-o-matic",
@@ -85,12 +78,6 @@ return {
 		keys = { -- load the plugin only when using it's keybinding:
 			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
 		},
-	},
-
-	{
-		"folke/which-key.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
 	},
 
 	{
@@ -159,7 +146,6 @@ return {
 
 	{
 		"windwp/nvim-ts-autotag",
-
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		opts = {
 			{

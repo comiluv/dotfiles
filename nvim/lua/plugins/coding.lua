@@ -93,6 +93,7 @@ return {
 	-- easy align comments
 	{
 		"echasnovski/mini.align",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		version = false,
 		config = true,
 	},
@@ -102,13 +103,6 @@ return {
 		"smjonas/inc-rename.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
-	},
-
-	-- better quickfix list
-	{
-		"kevinhwang91/nvim-bqf",
-		event = "VeryLazy",
-		opts = {},
 	},
 
 	-- tab out from parentheses, quotes, similar contexts

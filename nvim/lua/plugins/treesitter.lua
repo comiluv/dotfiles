@@ -7,12 +7,11 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			-- auto close block with end
-			"RRethy/nvim-treesitter-endwise",
+			{ "RRethy/nvim-treesitter-endwise" },
 
 			-- jump to matching parens
 			{
 				"andymass/vim-matchup",
-				event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 				config = function()
 					vim.g.matchup_matchparen_offscreen = { method = "popup" }
 				end,
@@ -53,7 +52,6 @@ return {
 			matchup = { enable = true }, -- "andymass/vim-matchup",
 		},
 		config = function(_, opts)
-			-- require("nvim-treesitter.install").compilers = { "zig" }
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},

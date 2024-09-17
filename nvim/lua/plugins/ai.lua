@@ -1,8 +1,12 @@
 return {
 	{
 		"yetone/avante.nvim",
-		event = "VeryLazy",
+		lazy = true,
 		version = false, -- set this if you want to always pull the latest change
+		cmd = { "AvanteAsk" },
+		keys = {
+			{ "<leader>aa", "<cmd>AvanteAsk<cr>", "Avante Sidebar" },
+		},
 		opts = {
 			provide = "claude",
 			claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.asc" } },
@@ -97,9 +101,10 @@ return {
 		end,
 	},
 
-	-- AI assisted diagnostics
+	-- AI assisted LSP diagnostics
 	{
 		"piersolenski/wtf.nvim",
+		event = { "LspAttach" },
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
@@ -138,15 +143,15 @@ return {
 			},
 		},
 		config = function()
-			local cmd = vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.asc" })
-			local obj = cmd:wait()
-			-- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
-			local pos = string.find(obj.stdout, "\n")
-			local key = string.sub(obj.stdout, 1, pos):gsub("%s+$", "")
-			require("wtf").setup({
-				openai_model_id = "gpt-4o-mini",
-				openai_api_key = key,
-			})
+			local on_exit = function(obj)
+				local pos = string.find(obj.stdout, "\n")
+				local key = string.sub(obj.stdout, 1, pos):gsub("%s+$", "")
+				require("wtf").setup({
+					openai_model_id = "gpt-4o-mini",
+					openai_api_key = key,
+				})
+			end
+			vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.asc" }, { text = true }, on_exit)
 		end,
 	},
 }

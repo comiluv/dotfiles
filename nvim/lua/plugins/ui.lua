@@ -31,14 +31,14 @@ return {
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "LspAttach" },
 		config = true,
 	},
 
 	-- show lightbulb where code action can be taken
 	{
 		"kosayoda/nvim-lightbulb",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "LspAttach" },
 		opts = {
 			autocmd = { enabled = true },
 		},
@@ -55,6 +55,26 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		config = true,
+	},
+
+	-- better quickfix list
+	{
+		"kevinhwang91/nvim-bqf",
+		ft = { "qf" },
+		opts = {},
+	},
+
+	-- display git signs in the gutter
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		config = true,
+	},
+
+	{
+		"folke/which-key.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},

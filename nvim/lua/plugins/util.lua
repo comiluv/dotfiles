@@ -25,7 +25,7 @@ return {
 	-- setup environmental variables for Visual Studio compiler
 	{
 		"hattya/vcvars.vim",
-		event = "VeryLazy",
+		ft = { "c", "cpp" },
 		config = function()
 			-- https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
 			vim.cmd([[
