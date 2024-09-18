@@ -243,175 +243,50 @@ return {
 		end,
 	},
 
-	-- Autocompletion
 	{
-		"hrsh7th/nvim-cmp",
-		version = false,
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lua",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"L3MON4D3/LuaSnip",
-			-- tabout required to register tab key remap
-			"abecodes/tabout.nvim",
+		"williamboman/mason.nvim",
+		event = "VeryLazy",
+		cmd = { "Mason", "MasonUpdate" },
+		build = ":MasonUpdate",
+		opts = {
+			ensure_installed = {
+				-- lua
+				"lua-language-server",
+				"stylua",
+				-- python
+				"pyright",
+				"black",
+				"isort",
+				"ruff",
+				"mypy",
+				"debugpy",
+				-- web
+				"typescript-language-server",
+				"css-lsp",
+				"tailwindcss-language-server",
+				"eslint-lsp",
+				"prettierd",
+				-- c/c++
+				"clangd",
+				-- java
+				"jdtls",
+				"google-java-format",
+			},
 		},
-		opts = function()
-			local cmp = require("cmp")
-			local cmp_select = { behavior = cmp.SelectBehavior.Select }
-			local cmp_select_page = { behavior = cmp.SelectBehavior.Select, count = 8 }
-			local luasnip = require("luasnip")
-			local neogen = require("neogen")
-			local copilot = require("copilot.suggestion")
-			return {
-				preselect = cmp.PreselectMode.None,
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-					["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-					["<C-u>"] = cmp.mapping.select_prev_item(cmp_select_page),
-					["<C-d>"] = cmp.mapping.select_next_item(cmp_select_page),
-					["<up>"] = cmp.mapping.select_prev_item(cmp_select),
-					["<down>"] = cmp.mapping.select_next_item(cmp_select),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-					["<CR>"] = cmp.mapping({
-						i = function(fallback)
-							if cmp.visible() and cmp.get_active_entry() then
-								cmp.confirm({ select = false })
-							else
-								fallback()
-							end
-						end,
-						s = cmp.mapping.confirm({ select = true }),
-						c = cmp.mapping.confirm({ select = true }),
-					}),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<C-Space>"] = cmp.mapping.complete(),
-					-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							local entry = cmp.get_selected_entry()
-							if not entry then
-								cmp.select_next_item(cmp_select)
-							else
-								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
-							end
-							-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-							-- they way you will only jump inside the snippet region
-						elseif luasnip.jumpable(1) then
-							luasnip.jump(1)
-						elseif neogen.jumpable() then
-							neogen.jump_next()
-						elseif copilot.is_visible() then
-							copilot.accept()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item(cmp_select)
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						elseif neogen.jumpable(true) then
-							neogen.jump_prev()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "nvim_lua" },
-					{ name = "buffer" },
-					{ name = "path" },
-					{ name = "crates" },
-				}),
-				experimental = {
-					ghost_text = false,
-				},
-			}
-		end,
 		config = function(_, opts)
-			local cmp = require("cmp")
-			cmp.setup(opts)
-			cmp.event:on("menu_opened", function()
-				vim.b.copilot_suggestion_hidden = true
-			end)
-			cmp.event:on("menu_closed", function()
-				local luasnip = require("luasnip")
-				if not (luasnip.jumpable(1) or luasnip.jumpable(-1)) then
-					vim.b.copilot_suggestion_hidden = false
+			require("mason").setup(opts)
+
+			-- implements ensure_installed behavior
+			local registry = require("mason-registry")
+			registry.refresh(function()
+				for _, pkg_name in ipairs(opts.ensure_installed) do
+					local pkg = registry.get_package(pkg_name)
+					if not pkg:is_installed() then
+						pkg:install()
+					end
 				end
 			end)
 		end,
-	},
-
-	-- Snippets
-	{
-		"L3MON4D3/LuaSnip",
-		lazy = true,
-		dependencies = {
-			-- Snippet Collection (Optional)
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
-		},
-		opts = {
-			history = true,
-			delete_check_events = "TextChanged",
-		},
-		config = function(_, opts)
-			require("luasnip").config.setup({
-				ext_opts = {
-					[require("luasnip.util.types").choiceNode] = {
-						active = {
-							virt_text = { { "●", "GruvboxOrange" } },
-						},
-					},
-					[require("luasnip.util.types").insertNode] = {
-						active = {
-							virt_text = { { "●", "GruvboxBlue" } },
-						},
-					},
-				},
-			})
-			require("luasnip").setup(opts)
-			local luasnip_group = vim.api.nvim_create_augroup("LuaSnipCopilotGroup", {})
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "LuasnipInsertNodeEnter",
-				group = luasnip_group,
-				callback = function()
-					vim.b.copilot_suggestion_hidden = true
-				end,
-			})
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "LuasnipInsertNodeLeave",
-				group = luasnip_group,
-				callback = function()
-					vim.b.copilot_suggestion_hidden = false
-				end,
-			})
-			vim.api.nvim_create_autocmd("InsertLeave", {
-				group = luasnip_group,
-				callback = function()
-					vim.b.copilot_suggestion_hidden = false
-				end,
-			})
-		end,
-		-- jsregexp setup see https://github.com/L3MON4D3/LuaSnip/issues/1190#issuecomment-2171656749
-		build = "pwsh -NoProfile " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1",
 	},
 
 	-- java language server plugin because lsp-zero (and lspconfig to extent) doesn't work
@@ -539,54 +414,7 @@ return {
 	},
 
 	{
-		"williamboman/mason.nvim",
-		event = "VeryLazy",
-		cmd = { "Mason", "MasonUpdate" },
-		build = ":MasonUpdate",
-		opts = {
-			ensure_installed = {
-				-- lua
-				"lua-language-server",
-				"stylua",
-				-- python
-				"pyright",
-				"black",
-				"isort",
-				"ruff",
-				"mypy",
-				"debugpy",
-				-- web
-				"typescript-language-server",
-				"css-lsp",
-				"tailwindcss-language-server",
-				"eslint-lsp",
-				"prettierd",
-				-- c/c++
-				"clangd",
-				-- java
-				"jdtls",
-				"google-java-format",
-			},
-		},
-		config = function(_, opts)
-			require("mason").setup(opts)
-
-			-- implements ensure_installed behavior
-			local registry = require("mason-registry")
-			registry.refresh(function()
-				for _, pkg_name in ipairs(opts.ensure_installed) do
-					local pkg = registry.get_package(pkg_name)
-					if not pkg:is_installed() then
-						pkg:install()
-					end
-				end
-			end)
-		end,
-	},
-
-	{
 		"mfussenegger/nvim-dap",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		keys = {
 			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", mode = "n", desc = "Toggle Debugger Breakpoint" },
 			{ "<leader>dr", "<cmd>DapContinue<cr>", mode = "n", desc = "Start or continue the debugger" },
@@ -603,7 +431,7 @@ return {
 					require("dap-python").test_method()
 				end,
 				mode = "n",
-				desc = "Debug Python",
+				desc = "Debug Python method",
 			},
 		},
 		dependencies = {
@@ -642,11 +470,10 @@ return {
 
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		lazy = true,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",
-			"rcarriga/nvim-dap-ui",
 		},
 		opts = {
 			handlers = {},
@@ -667,5 +494,12 @@ return {
 		config = function()
 			require("crates").setup()
 		end,
+	},
+
+	-- LSP incrementally rename symbol
+	{
+		"smjonas/inc-rename.nvim",
+		event = { "LspAttach" },
+		config = true,
 	},
 }
