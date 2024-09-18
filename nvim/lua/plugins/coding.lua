@@ -101,7 +101,7 @@ return {
 	-- LSP incrementally rename symbol
 	{
 		"smjonas/inc-rename.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "LspAttach" },
 		config = true,
 	},
 
