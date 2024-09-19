@@ -17,13 +17,16 @@ sudo locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
 sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
 
-# Update server to use Kakao mirror (!UNOFFICIAL MIRROR!)
-sudo sed -i 's/archive\.ubuntu\.com/mirror\.kakao\.com/g' /etc/apt/sources.list
-
 # make some dirs
 mkdir -p ~/.local/bin
 mkdir ~/.config
 mkdir ~/bin
+
+# Update packages
+sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
+
+# Install most softwares
+sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse libfuse2 vim -y
 
 # setup git
 echo Input git username
@@ -42,12 +45,6 @@ ln -s ~/dotfiles/.vim ~/.config/.vim
 ln -s ~/dotfiles/nvim ~/.config/nvim
 touch ~/.vimrc
 echo 'source ~/.config/.vim/vimrc' >> ~/.vimrc
-
-# Update packages
-sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
-
-# Install most softwares
-sudo apt install software-properties-common lsb_release gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 -y
 
 # Install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
@@ -79,7 +76,7 @@ sudo mkdir -p /etc/apt/keyrings
 wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
 echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
-sudo apt install -y eza
+sudo apt update && sudo apt install -y eza
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
