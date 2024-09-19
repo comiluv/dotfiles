@@ -42,6 +42,14 @@ chmod +x bootstrap-ubuntu.sh
 ./bootstrap-ubuntu.sh
 ```
 
+### bootstrap-deb.sh
+
+Does what Ubuntu script does in Debian but because Debian installed in WSL doesn't have wget nor curl, manually copying the script is the preferred method of installing this script
+
+### open-webui
+
+linux shell script that runs open-webui related Docker images
+
 ### lsp_tests
 
 This folder contains some sample codes to test LSP functionality
