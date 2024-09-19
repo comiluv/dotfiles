@@ -17,7 +17,7 @@ sudo locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
 sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
 
-# Update server to use Kakao mirror (!UNOFFICIAL MIRROR!)
+# Update server to use Kakao mirror
 sudo sed -i 's/archive\.ubuntu\.com/mirror\.kakao\.com/g' /etc/apt/sources.list
 
 # make some dirs
@@ -102,6 +102,9 @@ printf "\n#Eza aliases\nalias ld='eza -lD'\nalias lf='eza -lF --color=always | g
 
 # configure .zshrc
 printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
+
+# configure bat colorscheme to OneHalfLight
+echo '\nexport BAT_THEME="OneHalfLight"\n' >> ~/.zshrc
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k

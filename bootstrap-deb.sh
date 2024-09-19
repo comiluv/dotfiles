@@ -10,6 +10,9 @@ printf '%s ALL=(ALL) NOPASSWD:ALL\n' "$username" > $temp
 chmod 644 $temp
 sudo cp $temp /etc/sudoers.d/$username
 
+# change to systemd. requires wsl --shutdown and restarting
+echo '[boot]\nsystemd=true\n' | sudo tee /etc/wsl.conf
+
 cd ~
 
 # install locale
@@ -26,7 +29,7 @@ mkdir ~/bin
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim -y
+sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc -y
 
 # setup git
 echo Input git username
@@ -96,6 +99,9 @@ printf "\n#Eza aliases\nalias ld='eza -lD'\nalias lf='eza -lF --color=always | g
 
 # configure .zshrc
 printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
+
+# configure bat colorscheme to OneHalfLight
+echo '\nexport BAT_THEME="OneHalfLight"\n' >> ~/.zshrc
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
