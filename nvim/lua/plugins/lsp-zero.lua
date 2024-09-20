@@ -56,6 +56,7 @@ return {
 							on_attach(client, bufnr)
 						end
 					end
+					opts.cmd = { "clangd", "--header-insertion=never" }
 					require("lspconfig").clangd.setup(opts)
 					return true
 				end,
