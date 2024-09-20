@@ -8,188 +8,72 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
-		opts = function()
-			return {
-				-- options for vim.diagnostic.config()
-				diagnostics = {
-					underline = true,
-					update_in_insert = false,
-					virtual_text = { spacing = 4, prefix = "●" },
-					severity_sort = true,
-					float = { source = "always", border = "rounded" },
-				},
-				sign_icons = {
-					error = "✘",
-					warn = "▲",
-					hint = "⚑",
-					info = "",
-				},
-				servers = {
-					lua_ls = {
-						-- mason = false, -- set to false if you don't want this server to be installed with mason
-						settings = {
-							Lua = {
-								diagnostics = {
-									globals = { "vim" },
-								},
-								telemetry = {
-									enable = false,
-								},
+		opts = {
+			-- options for vim.diagnostic.config()
+			diagnostics = {
+				underline = true,
+				update_in_insert = false,
+				virtual_text = { spacing = 4, prefix = "●" },
+				severity_sort = true,
+				float = { source = "always", border = "rounded" },
+			},
+			sign_icons = {
+				error = "✘",
+				warn = "▲",
+				hint = "⚑",
+				info = "",
+			},
+			servers = {
+				lua_ls = {
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+							telemetry = {
+								enable = false,
 							},
 						},
 					},
-					grammarly = {
-						filetypes = { "markdown", "text" },
-					},
 				},
-				skip_server_setup = { jdtls = true, rust_analyzer = true },
-				-- you can do any additional lsp server setup here
-				-- return true if you don't want this server to be setup with lspconfig
-				setup = {
-					---@class opts
-					clangd = function(_, opts)
-						local clangd_capabilities =
-							require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-						opts.capabilities = clangd_capabilities
-						local on_attach = opts.on_attach
-						opts.on_attach = function(client, bufnr)
-							client.server_capabilities.signatureHelpProvider = false
-							if on_attach then
-								on_attach(client, bufnr)
-							end
+				grammarly = {
+					filetypes = { "markdown", "text" },
+				},
+			},
+			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true },
+			-- you can do any additional lsp server setup here
+			-- return true if you don't want this server to be setup with lspconfig
+			setup = {
+				---@class opts
+				clangd = function(_, opts)
+					local clangd_capabilities =
+						require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+					opts.capabilities = clangd_capabilities
+					local on_attach = opts.on_attach
+					opts.on_attach = function(client, bufnr)
+						client.server_capabilities.signatureHelpProvider = false
+						if on_attach then
+							on_attach(client, bufnr)
 						end
-						require("lspconfig").clangd.setup(opts)
-						return true
-					end,
-					-- example to setup with typescript.nvim
-					-- ts_ls = function(_, opts)
-					--   require("typescript").setup({ server = opts })
-					--   return true
-					-- end,
-					-- Specify * to use this function as a fallback for any server
-					-- ["*"] = function(server, opts) end,
-				},
-				ensure_installed = {},
-			}
-		end,
+					end
+					require("lspconfig").clangd.setup(opts)
+					return true
+				end,
+				-- example to setup with typescript.nvim
+				-- ts_ls = function(_, opts)
+				--   require("typescript").setup({ server = opts })
+				--   return true
+				-- end,
+				-- Specify * to use this function as a fallback for any server
+				-- ["*"] = function(server, opts) end,
+			},
+			ensure_installed = {}, -- due to bug with symbol lookup
+		},
+
 		---@class opts
 		config = function(_, opts)
 			-- create remaps
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("LspRemaps", {}),
-				callback = function(ev)
-					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
-					vim.keymap.set(
-						"n",
-						"gd",
-						"<cmd>Telescope lsp_definitions<cr>",
-						{ buffer = ev.buf, desc = "Go to definition" }
-					)
-					vim.keymap.set(
-						"n",
-						"gi",
-						"<cmd>Telescope lsp_implementations<cr>",
-						{ buffer = ev.buf, desc = "Go to implementation" }
-					)
-					vim.keymap.set(
-						"n",
-						"gr",
-						"<cmd>Telescope lsp_references<cr>",
-						{ buffer = ev.buf, desc = "List references" }
-					)
-					vim.keymap.set(
-						"n",
-						"go",
-						"<cmd>Telescope lsp_type_definitions<cr>",
-						{ buffer = ev.buf, desc = "Go to type definition" }
-					)
-					vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature help" })
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf })
-					vim.keymap.set(
-						"n",
-						"<leader>vws",
-						vim.lsp.buf.workspace_symbol,
-						{ buffer = ev.buf, desc = "Workspace symbol" }
-					)
-					vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = ev.buf, desc = "Show diagnostic" })
-					vim.keymap.set(
-						"n",
-						"<leader>vd",
-						vim.diagnostic.open_float,
-						{ buffer = ev.buf, desc = "View diagnostic" }
-					)
-					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = ev.buf, desc = "Next diagnostic" })
-					vim.keymap.set(
-						"n",
-						"[d",
-						vim.diagnostic.goto_prev,
-						{ buffer = ev.buf, desc = "Previous diagnostic" }
-					)
-					vim.keymap.set("n", "<leader>x", function()
-						require("telescope.builtin").diagnostics({ bufnr = 0 })
-					end, { buffer = ev.buf, desc = "Diagnostics Quickfix" })
-					vim.keymap.set("n", "<A-6>", function()
-						require("telescope.builtin").diagnostics({ bufnr = 0 })
-					end, { buffer = ev.buf, desc = "Diagnostics Quickfix" })
-					vim.keymap.set(
-						"n",
-						"<leader>vca",
-						vim.lsp.buf.code_action,
-						{ buffer = ev.buf, desc = "Code action" }
-					)
-					vim.keymap.set(
-						"n",
-						"<leader>vrr",
-						"<cmd>Telescope lsp_references<cr>",
-						{ buffer = ev.buf, desc = "Open references" }
-					)
-					vim.keymap.set("n", "<leader>ss", function()
-						require("telescope.builtin").lsp_document_symbols({
-							symbols = {
-								"Class",
-								"Function",
-								"Method",
-								"Constructor",
-								"Interface",
-								"Module",
-								"Struct",
-								"Trait",
-								"Field",
-								"Property",
-							},
-						})
-					end, { buffer = ev.buf, desc = "Goto Symbol" })
-					vim.keymap.set("n", "<leader>sS", function()
-						require("telescope.builtin").lsp_workspace_symbols({
-							symbols = {
-								"Class",
-								"Function",
-								"Method",
-								"Constructor",
-								"Interface",
-								"Module",
-								"Struct",
-								"Trait",
-								"Field",
-								"Property",
-							},
-						})
-					end, { buffer = ev.buf, desc = "Goto Symbol (Workspace)" })
-					vim.keymap.set("n", "<f2>", ":IncRename <C-r><C-w>", { buffer = ev.buf, desc = "Rename symbol" })
-					vim.keymap.set(
-						"n",
-						"<leader>vrn",
-						":IncRename <C-r><C-w>",
-						{ buffer = ev.buf, desc = "Rename symbol" }
-					)
-					vim.keymap.set(
-						"i",
-						"<C-h>",
-						vim.lsp.buf.signature_help,
-						{ buffer = ev.buf, desc = "Signature help" }
-					)
-				end,
-			})
+			require("lsp_remaps").create_remaps()
 
 			-- register diagnostic icons
 			for name, icon in pairs(opts.sign_icons) do
@@ -266,11 +150,11 @@ return {
 				"tailwindcss-language-server",
 				"eslint-lsp",
 				"prettierd",
-				-- c/c++
-				"clangd",
 				-- java
 				"jdtls",
 				"google-java-format",
+				-- c/c++
+				"clangd",
 			},
 		},
 		config = function(_, opts)
