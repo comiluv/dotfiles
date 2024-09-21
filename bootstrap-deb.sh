@@ -20,6 +20,9 @@ sudo locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
 sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
 
+# Update server to use Kaist mirror
+sudo sed -i.bak 's/\(deb\|ftp\|security\)\.debian\.org/ftp.kaist.ac.kr/g' /etc/apt/sources.list
+
 # make some dirs
 mkdir -p ~/.local/bin
 mkdir ~/.config
@@ -29,7 +32,7 @@ mkdir ~/bin
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc -y
+sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc xclip -y
 
 # setup git
 echo Input git username
