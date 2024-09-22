@@ -122,7 +122,7 @@ return {
 				function()
 					require("wtf").ai()
 				end,
-				desc = "Debug diagnostic with AI",
+				desc = "AI: Debug diagnostic with AI",
 			},
 			{
 				mode = { "n" },
@@ -130,7 +130,7 @@ return {
 				function()
 					require("wtf").search()
 				end,
-				desc = "Search diagnostic with Google",
+				desc = "AI: Search diagnostic with Google",
 			},
 			{
 				mode = { "n" },
@@ -138,7 +138,7 @@ return {
 				function()
 					require("wtf").history()
 				end,
-				desc = "Populate the quickfix list with previous chat history",
+				desc = "AI: Populate the quickfix list with previous chat history",
 			},
 			{
 				mode = { "n" },
@@ -146,7 +146,7 @@ return {
 				function()
 					require("wtf").grep_history()
 				end,
-				desc = "Grep previous chat history with Telescope",
+				desc = "AI: Grep previous chat history with Telescope",
 			},
 		},
 		cond = function()

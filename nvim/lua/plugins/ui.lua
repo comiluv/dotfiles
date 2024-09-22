@@ -6,7 +6,7 @@ return {
 			return vim.fn.executable("lazygit") == 1
 		end,
 		keys = {
-			{ "<leader>gs", vim.cmd.LazyGit, silent = true, desc = [[Open LazyGit (A-\ is ESC)]] },
+			{ "<leader>gs", vim.cmd.LazyGit, silent = true, desc = [[LazyGit (A-\ is ESC)]] },
 		},
 	},
 
@@ -78,6 +78,10 @@ return {
 
 	{
 		"folke/which-key.nvim",
+		dependencies = {
+			"echasnovski/mini.icons",
+			"nvim-tree/nvim-web-devicons",
+		},
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		config = true,
 	},

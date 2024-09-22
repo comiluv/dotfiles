@@ -18,6 +18,9 @@ vim.opt.rtp:prepend(lazypath)
 -- fix drag-n-drop functionality for neovim-qt
 -- see https://github.com/folke/lazy.nvim/issues/403
 local opts = {
+	spec = { import = "plugins" },
+	change_detection = { notify = false },
+	checker = { enabled = true },
 	performance = {
 		rtp = {
 			disabled_plugins = {
@@ -40,4 +43,4 @@ local opts = {
 	},
 }
 
-require("lazy").setup("plugins", opts)
+require("lazy").setup(opts)
