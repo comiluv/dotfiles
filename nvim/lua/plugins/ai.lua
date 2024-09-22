@@ -15,6 +15,10 @@ return {
 		build = vim.fn.has("win32") == 1
 				and "pwsh -NoProfile -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
 			or "make",
+		cond = function()
+			return vim.fn.executable("gpg") == 1
+				and (vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1 or vim.fn.executable("make") == 1)
+		end,
 		dependencies = {
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
@@ -54,6 +58,9 @@ return {
 		event = "InsertEnter",
 		cmd = "Copilot",
 		build = ":Copilot auth",
+		cond = function()
+			return vim.fn.executable("node") == 1
+		end,
 		config = function()
 			local function array_to_table(arr)
 				local tbl = {}
@@ -142,6 +149,9 @@ return {
 				desc = "Grep previous chat history with Telescope",
 			},
 		},
+		cond = function()
+			return vim.fn.executable("gpg") == 1
+		end,
 		config = function()
 			local on_exit = function(obj)
 				local pos = string.find(obj.stdout, "\n")

@@ -19,6 +19,10 @@ return {
 							vim.fn.system(build_command_str)
 						end
 					or "make",
+				cond = function()
+					return vim.fn.has("win32") == 1 and vim.fn.executable("cmake") == 1
+						or vim.fn.executable("make") == 1
+				end,
 			},
 		},
 		cmd = "Telescope",
