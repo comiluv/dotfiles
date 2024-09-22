@@ -38,7 +38,10 @@ return {
 			},
 		},
 		opts = {
-			ensure_installed = {},
+-- stylua: ignore
+			ensure_installed = {
+"bash","c","c_sharp","cmake","cpp","css","csv","diff","dockerfile","editorconfig","git_config","gitattributes","gitcommit","gitignore","go","haskell","html","htmldjango","java","javascript","jsdoc","json","jsonc","kotlin","lua","markdown","markdown_inline","pascal","php","powershell","python","rust","sql","squirrel","tsv","typescript","vim","vimdoc","xml","yaml","zig"
+			},
 			ignore_install = { "ini" },
 			sync_install = false,
 			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
