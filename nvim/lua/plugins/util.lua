@@ -57,9 +57,9 @@ return {
 		event = { "CmdlineEnter", "VeryLazy", "BufNewFile" },
 		cmd = { "Subvert", "S", "Abolish" },
 		dependencies = { "smjonas/live-command.nvim" },
-		config = function()
-			require("which-key").add({
-				{ "cr", group = "Coercion" },
+		init = function()
+			local wk = require("which-key")
+			wk.add({
 				{ "cr-", desc = "Coerce: kebab-case (not reversible)" },
 				{ "cr.", desc = "Coerce: dot.case (not reversible)" },
 				{ "cr<space>", desc = "Coerce: space case (not reversible)" },
@@ -72,6 +72,7 @@ return {
 				{ "crs", desc = "Coerce: snake_case" },
 				{ "crt", desc = "Coerce: Title Case (not reversible)" },
 				{ "cru", desc = "Coerce: SNAKE_UPPER_CASE" },
+				{ "cr?", function() wk.show("cr") end },
 			})
 		end,
 	},
