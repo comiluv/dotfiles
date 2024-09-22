@@ -20,7 +20,6 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {
 	spec = { import = "plugins" },
 	change_detection = { notify = false },
-	checker = { enabled = true },
 	performance = {
 		rtp = {
 			disabled_plugins = {
