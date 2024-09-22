@@ -322,8 +322,9 @@ return {
 			"rcarriga/nvim-dap-ui",
 		},
 		config = function(_, opts)
-			local debugpy_path = os.getenv("LocalAppData")
-				.. "/nvim-data/mason/packages/debugpy/venv/Scripts/python.exe"
+			local debugpy_path = vim.fn.stdpath("data")
+				.. "/mason/packages/debugpy/venv/"
+				.. (vim.fn.has("win32") == 1 and "Scripts/python.exe" or "bin/python3")
 			require("dap-python").setup(debugpy_path)
 		end,
 	},
