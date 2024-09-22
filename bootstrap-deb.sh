@@ -86,13 +86,6 @@ printf "\n# sudo aliases with sudo\nalias sudo='sudo '\n# neovim\nalias v='~/nvi
 # Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# install eza completions
-git clone https://github.com/eza-community/eza.git ~/eza
-echo '\n# Eza completions\nexport FPATH="~/eza/completions/zsh:$FPATH"\n' >> ~/.zshrc
-
-# eza aliases
-printf "\n#Eza aliases\nalias ld='eza -lD'\nalias lf='eza -lF --color=always | grep -v /'\nalias lh='eza -dl .* --group-directories-first'\nalias ll='eza -al --group-directories-first'\nalias ls='eza -alF --color=always --sort=size'\nalias lt='eza -al --sort=modified'\nalias l='eza -lah'\nalias la='eza -lAh'\nalias lsa='eza -lah'\n" >> ~/.zshrc
-
 # configure .zshrc
 printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
 
