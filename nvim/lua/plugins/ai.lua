@@ -9,7 +9,7 @@ return {
 		},
 		opts = {
 			provide = "claude",
-			claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.asc" } },
+			claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.gpg" } },
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = vim.fn.has("win32") == 1
@@ -161,7 +161,7 @@ return {
 					openai_api_key = key,
 				})
 			end
-			vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.asc" }, { text = true }, on_exit)
+			vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.gpg" }, { text = true }, on_exit)
 		end,
 	},
 }

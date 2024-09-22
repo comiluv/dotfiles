@@ -6,7 +6,7 @@ docker run -d --name searxng -p 8080:8080 -v ./searxng:/etc/searxng --restart al
 
 docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama:latest
 
-openai=$(gpg -d ~/openai.txt.asc)
+openai=$(gpg -d ~/openai.txt.gpg)
 docker run -e WEBUI_AUTH='False' \
   -e OPENAI_API_BASE_URLS="https://api.openai.com/v1" \
   -e OPENAI_API_KEYS="${openai}" \
