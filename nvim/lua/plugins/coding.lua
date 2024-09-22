@@ -88,10 +88,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "nvim_lua" },
-					{ name = "buffer" },
 					{ name = "path" },
-					{ name = "crates" },
 				}),
 				experimental = {
 					ghost_text = false,
@@ -110,6 +107,22 @@ return {
 					vim.b.copilot_suggestion_hidden = false
 				end
 			end)
+			cmp.setup.filetype({ "lua" }, {
+				sources = cmp.config.sources({
+					{ name = "nvim_lua" },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "path" },
+				}),
+			})
+			cmp.setup.filetype({ "rust" }, {
+				sources = cmp.config.sources({
+					{ name = "crates" },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" },
+					{ name = "path" },
+				}),
+			})
 		end,
 	},
 
