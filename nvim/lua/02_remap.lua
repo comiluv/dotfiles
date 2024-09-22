@@ -68,7 +68,7 @@ vim.keymap.set("v", "<leader>s", [["ly:%s/\<<C-r>l\>/<C-r>l/gI<Left><Left><Left>
 
 -- Neovim terminal mode remaps
 -- Use Escape key like a sane person
-vim.keymap.set("t", [[<A-\>]], [[<C-\><C-n>]])
+vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- Move out from terminal window with alt key shortcuts
 vim.keymap.set("t", "<A-h>", [[<C-\><C-n><C-w>h]])

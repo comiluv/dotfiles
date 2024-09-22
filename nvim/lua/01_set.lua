@@ -19,7 +19,9 @@ if vim.fn.executable("rg") then
 	vim.opt.grepformat = "%f:%l:%c:%m"
 end
 
-vim.opt.clipboard = "unnamedplus"
+vim.schedule(function()
+	vim.opt.clipboard = "unnamedplus"
+end)
 
 -- Some settings picked up from internet
 vim.opt.termguicolors = true
@@ -40,16 +42,15 @@ vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.scrolloff = 4
-vim.opt.sidescrolloff = 4
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
 
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true
 vim.opt.title = true
 vim.opt.laststatus = 3
--- Better display for messages
-vim.opt.cmdheight = 2
+vim.opt.showmode = false
 -- You will have bad experience for diagnostic messages when it's default 4000.
 vim.opt.updatetime = 200
 
@@ -67,7 +68,8 @@ vim.opt.formatoptions:remove({ "o" })
 vim.opt.formatoptions:append("j")
 
 -- Show invisible characters in this format
-vim.opt.listchars = "tab:→ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»"
+vim.opt.listchars =
+	{ tab = "→ ", space = "·", nbsp = "␣", trail = "•", eol = "¶", precedes = "«", extends = "»" }
 
 -- Decent wildmenu
 -- vim.opt.path:append "**"

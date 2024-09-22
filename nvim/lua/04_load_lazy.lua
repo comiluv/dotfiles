@@ -1,7 +1,7 @@
 -- auto install folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local out = vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
@@ -9,18 +9,17 @@ if not vim.loop.fs_stat(lazypath) then
 		"--branch=stable", -- latest stable release
 		lazypath,
 	})
+	if vim.v.shell_error ~= 0 then
+		error("Error cloning lazy.nvim:\n" .. out)
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- fix drag-n-drop functionality for neovim-qt
 -- see https://github.com/folke/lazy.nvim/issues/403
 local opts = {
-	change_detection = {
-		notify = false,
-	},
 	performance = {
 		rtp = {
-			reset = false,
 			disabled_plugins = {
 				"editorconfig",
 				"health",
@@ -42,4 +41,3 @@ local opts = {
 }
 
 require("lazy").setup("plugins", opts)
-
