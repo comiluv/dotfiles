@@ -4,58 +4,27 @@ function M.create_remaps()
 	-- create remaps
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("LspRemaps", {}),
-		callback = function(ev)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
-			vim.keymap.set(
-				"n",
-				"gd",
-				"<cmd>Telescope lsp_definitions<cr>",
-				{ buffer = ev.buf, desc = "Go to definition" }
-			)
-			vim.keymap.set(
-				"n",
-				"gi",
-				"<cmd>Telescope lsp_implementations<cr>",
-				{ buffer = ev.buf, desc = "Go to implementation" }
-			)
-			vim.keymap.set(
-				"n",
-				"gr",
-				"<cmd>Telescope lsp_references<cr>",
-				{ buffer = ev.buf, desc = "List references" }
-			)
-			vim.keymap.set(
-				"n",
-				"go",
-				"<cmd>Telescope lsp_type_definitions<cr>",
-				{ buffer = ev.buf, desc = "Go to type definition" }
-			)
-			vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature help" })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = ev.buf })
-			vim.keymap.set(
-				"n",
-				"<leader>vws",
-				vim.lsp.buf.workspace_symbol,
-				{ buffer = ev.buf, desc = "Workspace symbol" }
-			)
-			vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = ev.buf, desc = "Show diagnostic" })
-			vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { buffer = ev.buf, desc = "View diagnostic" })
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = ev.buf, desc = "Next diagnostic" })
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = ev.buf, desc = "Previous diagnostic" })
-			vim.keymap.set("n", "<leader>x", function()
+		callback = function(event)
+			local map = function(keys, func, desc, mode)
+				mode = mode or "n"
+				vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+			end
+			map("gD", vim.lsp.buf.declaration, "[G]o to [D]eclaration")
+			map("gd", "<cmd>Telescope lsp_definitions<cr>", "[G]o to [d]efinition")
+			map("gi", "<cmd>Telescope lsp_implementations<cr>", "[G]o to [i]mplementation")
+			map("gr", "<cmd>Telescope lsp_references<cr>", "[G]oto [r]eferences")
+			map("go", "<cmd>Telescope lsp_type_definitions<cr>", "[Go] to type definition")
+			map("gs", vim.lsp.buf.signature_help, "Signature help")
+			map("K", vim.lsp.buf.hover, "Hover over cursor")
+			map("gl", vim.diagnostic.open_float, "Show diagnostic")
+			map("<leader>vd", vim.diagnostic.open_float, "Show diagnostic")
+			map("]d", vim.diagnostic.goto_next, "Next diagnostic")
+			map("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
+			map("<leader>x", function()
 				require("telescope.builtin").diagnostics({ bufnr = 0 })
-			end, { buffer = ev.buf, desc = "Diagnostics Quickfix" })
-			vim.keymap.set("n", "<A-6>", function()
-				require("telescope.builtin").diagnostics({ bufnr = 0 })
-			end, { buffer = ev.buf, desc = "Diagnostics Quickfix" })
-			vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, { buffer = ev.buf, desc = "Code action" })
-			vim.keymap.set(
-				"n",
-				"<leader>vrr",
-				"<cmd>Telescope lsp_references<cr>",
-				{ buffer = ev.buf, desc = "Open references" }
-			)
-			vim.keymap.set("n", "<leader>ss", function()
+			end, "Diagnostics Quickfix")
+			map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+			map("<leader>ss", function()
 				require("telescope.builtin").lsp_document_symbols({
 					symbols = {
 						"Class",
@@ -70,9 +39,9 @@ function M.create_remaps()
 						"Property",
 					},
 				})
-			end, { buffer = ev.buf, desc = "Goto Symbol" })
-			vim.keymap.set("n", "<leader>sS", function()
-				require("telescope.builtin").lsp_workspace_symbols({
+			end, "Document symbols")
+			map("<leader>sS", function()
+				require("telescope.builtin").lsp_dynamic_workspace_symbols({
 					symbols = {
 						"Class",
 						"Function",
@@ -86,11 +55,48 @@ function M.create_remaps()
 						"Property",
 					},
 				})
-			end, { buffer = ev.buf, desc = "Goto Symbol (Workspace)" })
-			vim.keymap.set("n", "<f2>", ":IncRename <C-r><C-w>", { buffer = ev.buf, desc = "Rename symbol" })
-			vim.keymap.set("n", "<leader>vrn", ":IncRename <C-r><C-w>", { buffer = ev.buf, desc = "Rename symbol" })
-			vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { buffer = ev.buf, desc = "Signature help" })
-		end,
+			end, "Workspace symbols")
+			map("<f2>", ":IncRename <C-r><C-w>", "Rename symbol")
+			map("<C-h>", vim.lsp.buf.signature_help, "Signature help", "i")
+
+			-- The following two autocommands are used to highlight references of the
+			-- word under your cursor when your cursor rests there for a little while.
+			--    See `:help CursorHold` for information about when this is executed
+			--
+			-- When you move your cursor, the highlights will be cleared (the second autocommand).
+			local client = vim.lsp.get_client_by_id(event.data.client_id)
+			if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+				local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+					buffer = event.buf,
+					group = highlight_augroup,
+					callback = vim.lsp.buf.document_highlight,
+				})
+
+				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+					buffer = event.buf,
+					group = highlight_augroup,
+					callback = vim.lsp.buf.clear_references,
+				})
+
+				vim.api.nvim_create_autocmd("LspDetach", {
+					group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
+					callback = function(event2)
+						vim.lsp.buf.clear_references()
+						vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+					end,
+				})
+			end
+			-- The following code creates a keymap to toggle inlay hints in your
+			-- code, if the language server you are using supports them
+			--
+			-- This may be unwanted, since they displace some of your code
+			if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+				map("<leader>th", function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+				end, "[T]oggle Inlay [H]ints")
+			end
+		end, -- function end
 	})
 end
 

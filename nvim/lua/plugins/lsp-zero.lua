@@ -83,15 +83,13 @@ return {
 			end
 			vim.diagnostic.config(opts.diagnostics)
 
-			-- require("mason").setup()
-
 			local lspconfig = require("lspconfig")
 			local servers = opts.servers
 			local lsp_capabilities =
 				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			local function setup(server)
-				local server_opts = vim.tbl_deep_extend("force", {
+				local server_opts = vim.tbl_deep_extend("force", {}, {
 					capabilities = vim.deepcopy(lsp_capabilities),
 				}, servers[server] or {})
 
@@ -190,7 +188,7 @@ return {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ timeout_ms = 10000, lsp_fallback = true })
+					require("conform").format({ timeout_ms = 500, lsp_format = "fallback" })
 				end,
 				mode = "",
 				desc = "Format Buffer",
@@ -214,7 +212,7 @@ return {
 						end
 					end
 
-					return { timeout_ms = 200, lsp_fallback = true }, on_format
+					return { timeout_ms = 500, lsp_format = "fallback" }, on_format
 				end,
 
 				format_after_save = function(bufnr)
@@ -225,7 +223,7 @@ return {
 					if not slow_format_filetypes[vim.bo[bufnr].filetype] then
 						return
 					end
-					return { lsp_fallback = true }
+					return { lsp_format = "fallback" }
 				end,
 
 				formatters_by_ft = {
