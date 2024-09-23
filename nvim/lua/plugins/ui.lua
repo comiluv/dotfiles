@@ -2,9 +2,6 @@ return {
 	{
 		"kdheepak/lazygit.nvim",
 		cmd = "LazyGit",
-		cond = function()
-			return vim.fn.executable("lazygit") == 1
-		end,
 		keys = {
 			{ "<leader>gs", vim.cmd.LazyGit, silent = true, desc = [[LazyGit (A-\ is ESC)]] },
 		},

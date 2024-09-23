@@ -136,3 +136,12 @@ autocmd({ "FileType" }, {
 		vim.diagnostic.disable(0)
 	end,
 })
+
+-- disable <esc><esc> keymap in lazygit window
+autocmd({ "FileType" }, {
+	group = MyGroup,
+	pattern = "lazygit",
+	callback = function()
+		vim.keymap.set("t", "<ESC><ESC>", "<NOP>", { buffer = true })
+	end,
+})
