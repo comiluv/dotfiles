@@ -186,14 +186,9 @@ return {
 			})
 		end,
 		-- jsregexp setup see https://github.com/L3MON4D3/LuaSnip/issues/1190#issuecomment-2171656749
-		build = function()
-			if vim.fn.executable("make") == 1 then
-				return "make install_jsregexp"
-			end
-			if vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1 then
-				return "pwsh -NoProfile " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1"
-			end
-		end,
+		build = vim.fn.executable("make") == 1 and "make install_jsregexp"
+			or (vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1)
+				and ("pwsh -NoProfile " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1"),
 	},
 
 	{
