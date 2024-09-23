@@ -241,6 +241,7 @@ return {
 					google_java_format = {
 						command = "google-java-format",
 					},
+					isort = { args = { "-" } },
 				},
 			}
 			require("conform").setup(opts)
