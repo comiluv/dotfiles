@@ -32,7 +32,7 @@ mkdir ~/bin
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc xclip -y
+sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc xclip sqlite3 libsqlite3-dev -y
 
 # setup git
 echo Input git username

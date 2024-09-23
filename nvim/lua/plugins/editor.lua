@@ -24,6 +24,24 @@ return {
 						or vim.fn.executable("make") == 1
 				end,
 			},
+			{
+				"nvim-telescope/telescope-smart-history.nvim",
+				build = function()
+					local db_subdir = vim.fn.stdpath("data") .. "/databases"
+					vim.system({ "mkdir", "-p", db_subdir })
+					vim.system({ "touch", db_subdir .. "/telescope_history.sqlite3" })
+				end,
+			},
+			"nvim-telescope/telescope-ui-select.nvim",
+			{
+				"kkharji/sqlite.lua",
+				lazy = false,
+				config = function()
+					if vim.fn.has("win32") == 1 then
+						vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
+					end
+				end,
+			},
 		},
 		cmd = "Telescope",
 		keys = {
@@ -51,13 +69,22 @@ return {
 			{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Telescope recent files" },
 		},
 		config = function()
+			local telescope = require("telescope")
 			-- stylua: ignore
 			local file_ignore_patterns =
 {"^.*%.7z$","^.*%.aux$","^.*%.avi$","^.*%.bak$","^.*%.bib$","^.*%.class$","^.*%.cls$","^.*%.cmi$","^.*%.cmo$","^.*%.doc$","^.*%.docx$","^.*%.dvi$","^.*%.flac$","^.*%.flv$","^.*%.gem$","^.*%.gif$","^.*%.hi$","^.*%.ico$","^.*%.jpeg$","^.*%.jpg$","^.*%.log$","^.*%.min.*%.js$","^.*%.min%.js$","^.*%.mov$","^.*%.mp3$","^.*%.mp4$","^.*%.mpg$","^.*%.nav$","^.*%.o$","^.*%.obj$","^.*%.ods$","^.*%.odt$","^.*%.ogg$","^.*%.opus$","^.*%.out$","^.*%.pdf$","^.*%.pem$","^.*%.png$","^.*%.rar$","^.*%.rbc$","^.*%.rbo$","^.*%.settings$","^.*%.sty$","^.*%.svg$","^.*%.swp$","^.*%.swp.*%.$","^.*%.tar$","^.*%.tar%.bz2$","^.*%.tar%.gz$","^.*%.tar%.xz$","^.*%.tgz$","^.*%.toc$","^.*%.wav$","^.*%.webm$","^.*%.xcf$","^.*%.xls$","^.*%.xlsx$","^.*%.zip$","^.*/%.bundle/.*$","^.*/%.sass%-cache/.*$","^.*/vendor/cache/.*$","^.*/vendor/gems/.*$","^.*%~$","^%._.*$","^%.git$","^%.hg$","^%.svn$","^Thumbs%.db$","^Zend$","^intermediate/.*$","^publish/.*$","^vendor$"}
-			require("telescope").setup({
-				defaults = { file_ignore_patterns = file_ignore_patterns },
+			telescope.setup({
+				defaults = {
+					file_ignore_patterns = file_ignore_patterns,
+					history = {
+						path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",
+						limit = 100,
+					},
+				},
 			})
-			require("telescope").load_extension("fzf")
+			telescope.load_extension("fzf")
+			telescope.load_extension("smart_history")
+			telescope.load_extension("ui-select")
 		end,
 	},
 

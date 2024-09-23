@@ -50,7 +50,7 @@ sudo add-apt-repository ppa:git-core/ppa -y
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 xclip -y
+sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 xclip sqlite3 libsqlite3-dev -y
 
 # Install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
