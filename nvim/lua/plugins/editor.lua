@@ -73,6 +73,7 @@ return {
 				end,
 				desc = "Telescope current buffer",
 			},
+			{ "<leader>ca", vim.lsp.buf.code_action, "Telescope Code action" },
 		},
 		config = function()
 			local telescope = require("telescope")

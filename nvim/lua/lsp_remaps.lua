@@ -23,7 +23,6 @@ function M.create_remaps()
 			map("<leader>x", function()
 				require("telescope.builtin").diagnostics({ bufnr = 0 })
 			end, "Diagnostics Quickfix")
-			map("<leader>ca", vim.lsp.buf.code_action, "Code action")
 			map("<leader>ss", function()
 				require("telescope.builtin").lsp_document_symbols({
 					symbols = {
