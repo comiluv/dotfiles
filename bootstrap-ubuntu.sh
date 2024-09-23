@@ -56,6 +56,8 @@ sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-p
 # Install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
+sudo mkdir -p /opt/nvim
+sudo mv nvim.appimage /opt/nvim/nvim
 
 # setup some symlinks
 ln -s $(which fdfind) ~/.local/bin/fd
@@ -81,8 +83,9 @@ rm lazygit
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-# user aliases for sudo and neovim
-printf "\n# sudo aliases with sudo\nalias sudo='sudo '\n# neovim\nalias v='~/nvim.appimage '\n" >> ~/.zshrc
+# path and user aliases for sudo and neovim
+echo 'PATH="$PATH:/opt/nvim/"' >> ~/.zshrc
+printf "\n# sudo aliases with sudo\nalias sudo='sudo '\n# neovim\nalias v='/opt/nvim/nvim '\n" >> ~/.zshrc
 
 # Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
