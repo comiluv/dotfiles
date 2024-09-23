@@ -67,6 +67,7 @@ return {
 			},
 			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 			{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Telescope recent files" },
+			{ "<leader>/", require("telescope.builtin").current_buffer_fuzzy_find, desc = "Telescope current buffer" },
 		},
 		config = function()
 			local telescope = require("telescope")
