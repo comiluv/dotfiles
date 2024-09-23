@@ -35,7 +35,6 @@ return {
 			"nvim-telescope/telescope-ui-select.nvim",
 			{
 				"kkharji/sqlite.lua",
-				lazy = false,
 				config = function()
 					if vim.fn.has("win32") == 1 then
 						vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
@@ -67,7 +66,13 @@ return {
 			},
 			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
 			{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Telescope recent files" },
-			{ "<leader>/", require("telescope.builtin").current_buffer_fuzzy_find, desc = "Telescope current buffer" },
+			{
+				"<leader>/",
+				function()
+					require("telescope.builtin").current_buffer_fuzzy_find()
+				end,
+				desc = "Telescope current buffer",
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
