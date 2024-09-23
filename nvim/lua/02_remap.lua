@@ -103,3 +103,21 @@ vim.cmd([[command! QA qall]])
 vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }))
 end, { silent = true, noremap = true, desc = "[T]oggle LSP [d]iagnostic" })
+
+-- Move normally in word-wrapped lines
+vim.keymap.set("n", "j", function()
+	local count = vim.v.count
+	if count == 0 then
+		return "gj"
+	else
+		return "j"
+	end
+end, { expr = true })
+vim.keymap.set("n", "k", function()
+	local count = vim.v.count
+	if count == 0 then
+		return "gk"
+	else
+		return "k"
+	end
+end, { expr = true })
