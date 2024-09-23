@@ -35,7 +35,7 @@ return {
 			"nvim-telescope/telescope-ui-select.nvim",
 			{
 				"kkharji/sqlite.lua",
-				config = function()
+				init = function()
 					if vim.fn.has("win32") == 1 then
 						vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
 					end
@@ -104,20 +104,20 @@ return {
 	{
 		"Darazaki/indent-o-matic",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
+		opts = {},
 	},
 
 	-- auto locate last location in the file
 	{
 		"ethanholz/nvim-lastplace",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
+		opts = {},
 	},
 
 	{
 		"jiaoshijie/undotree",
 		dependencies = "nvim-lua/plenary.nvim",
-		config = true,
+		opts = {},
 		keys = { -- load the plugin only when using it's keybinding:
 			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
 		},
@@ -184,7 +184,6 @@ return {
 				},
 			}
 		end,
-		config = true,
 	},
 
 	{

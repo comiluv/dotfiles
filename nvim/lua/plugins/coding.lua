@@ -195,7 +195,7 @@ return {
 		"kylechui/nvim-surround",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		version = "*",
-		config = true,
+		opts = {},
 	},
 
 	-- auto generate comments on a hotkey
@@ -287,7 +287,7 @@ return {
 		"echasnovski/mini.align",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		version = false,
-		config = true,
+		opts = {},
 	},
 
 	-- tab out from parentheses, quotes, similar contexts

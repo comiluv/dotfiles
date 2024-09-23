@@ -194,7 +194,7 @@ return {
 				desc = "Format Buffer",
 			},
 		},
-		config = function()
+		opts = function()
 			-- This snippet will automatically detect which formatters take too long to run synchronously and will run them async on save instead.
 			local slow_format_filetypes = {}
 			local opts = {
@@ -244,7 +244,7 @@ return {
 					isort = { args = { "-" } },
 				},
 			}
-			require("conform").setup(opts)
+			return opts
 		end,
 		init = function()
 			-- Create user commands to quickly enable/disable autoformatting
@@ -322,7 +322,7 @@ return {
 			"mfussenegger/nvim-dap",
 			"rcarriga/nvim-dap-ui",
 		},
-		config = function(_, opts)
+		config = function()
 			local debugpy_path = vim.fn.stdpath("data")
 				.. "/mason/packages/debugpy/venv/"
 				.. (vim.fn.has("win32") == 1 and "Scripts/python.exe" or "bin/python3")
@@ -376,16 +376,14 @@ return {
 		"saecki/crates.nvim",
 		dependencies = "hrsh7th/nvim-cmp",
 		event = { "BufRead Cargo.toml" },
-		config = function()
-			require("crates").setup()
-		end,
+		opts = {},
 	},
 
 	-- LSP incrementally rename symbol
 	{
 		"smjonas/inc-rename.nvim",
 		event = { "LspAttach" },
-		config = true,
+		opts = {},
 	},
 
 	-- show LSP diagnostics in multiple lines

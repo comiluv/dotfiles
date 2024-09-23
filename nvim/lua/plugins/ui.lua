@@ -24,7 +24,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = true,
+		opts = {},
 	},
 
 	-- LSP progress
@@ -32,7 +32,7 @@ return {
 		"j-hui/fidget.nvim",
 		tag = "legacy",
 		event = { "LspAttach" },
-		config = true,
+		opts = {},
 	},
 
 	-- show lightbulb where code action can be taken
@@ -56,7 +56,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
+		opts = {},
 	},
 
 	-- better quickfix list
@@ -70,7 +70,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
+		opts = {},
 	},
 
 	{
@@ -79,6 +79,6 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		config = true,
+		opts = {},
 	},
 }

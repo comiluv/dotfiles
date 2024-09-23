@@ -48,7 +48,7 @@ return {
 		"tomiis4/hypersonic.nvim",
 		event = "CmdlineEnter",
 		cmd = "Hypersonic",
-		config = true,
+		opts = {},
 	},
 
 	-- abbreviations and substitutions
@@ -91,13 +91,6 @@ return {
 		"smjonas/live-command.nvim",
 		version = false,
 		event = { "CmdlineEnter" },
-		config = function()
-			require("live-command").setup({
-				Norm = { cmd = "norm" },
-				commands = {
-					S = { cmd = "Subvert" },
-				},
-			})
-		end,
+		opts = { Norm = { cmd = "norm" }, commands = { S = { cmd = "Subvert" } } },
 	},
 }
