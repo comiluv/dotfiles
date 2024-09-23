@@ -32,7 +32,7 @@ mkdir ~/bin
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc xclip sqlite3 libsqlite3-dev -y
+sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc xclip sqlite3 libsqlite3-dev tealdeer -y
 
 # setup git
 echo Input git username
@@ -44,6 +44,7 @@ git config --global user.email $gitemail
 # assume git is installed using installer from https://git-scm.com/downloads
 git config --global credential.helper "mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe"
 git config --global core.editor "nvim"
+git config --global init.defaultbranch "main"
 
 # setup vim
 git clone https://github.com/comiluv/dotfiles ~/dotfiles

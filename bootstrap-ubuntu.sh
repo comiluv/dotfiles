@@ -35,6 +35,7 @@ git config --global user.email $gitemail
 # assume git is installed using installer from https://git-scm.com/downloads
 git config --global credential.helper "mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe"
 git config --global core.editor "nvim"
+git config --global init.defaultbranch "main"
 
 # setup vim
 git clone https://github.com/comiluv/dotfiles ~/dotfiles
@@ -50,7 +51,7 @@ sudo add-apt-repository ppa:git-core/ppa -y
 sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 
 # Install most softwares
-sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 xclip sqlite3 libsqlite3-dev -y
+sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 xclip sqlite3 libsqlite3-dev tealdeer -y
 
 # Install neovim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
