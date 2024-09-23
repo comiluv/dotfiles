@@ -14,6 +14,7 @@ return {
 			"L3MON4D3/LuaSnip",
 			-- tabout required to register tab key remap
 			"abecodes/tabout.nvim",
+			"onsails/lspkind.nvim",
 		},
 		opts = function()
 			local cmp = require("cmp")
@@ -96,7 +97,11 @@ return {
 			}
 		end,
 		config = function(_, opts)
+			local lspkind = require("lspkind")
 			local cmp = require("cmp")
+			opts.formatting = {
+				format = lspkind.cmp_format({}),
+			}
 			cmp.setup(opts)
 			cmp.event:on("menu_opened", function()
 				vim.b.copilot_suggestion_hidden = true
