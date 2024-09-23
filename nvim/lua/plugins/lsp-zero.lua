@@ -387,4 +387,22 @@ return {
 		event = { "LspAttach" },
 		config = true,
 	},
+
+	-- show LSP diagnostics in multiple lines
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		event = { "LspAttach" },
+		config = function()
+			require("lsp_lines").setup({})
+			vim.diagnostic.config({ virtual_text = false })
+			vim.keymap.set("", "<leader>l", function()
+				local config = vim.diagnostic.config() or {}
+				if config.virtual_text then
+					vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+				else
+					vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+				end
+			end, { desc = "LSP: Toggle lsp_lines" })
+		end,
+	},
 }
