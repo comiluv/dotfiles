@@ -93,7 +93,7 @@ return {
 		event = { "CmdlineEnter" },
 		opts = { Norm = { cmd = "norm" }, commands = { S = { cmd = "Subvert" } } },
 		config = function(_, opts)
-			require("live-command.nvim").setup(opts)
+			require("live-command").setup(opts)
 		end,
 	},
 }
