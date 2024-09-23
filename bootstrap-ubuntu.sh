@@ -14,8 +14,8 @@ cd ~
 
 # install locale
 sudo locale-gen "en_US.UTF-8"
-sudo dpkg-reconfigure locales
 sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
+sudo dpkg-reconfigure locales
 
 # Update server to use Kaist mirror
 sudo sed -i.bak 's/\(archive\|security\)\.ubuntu\.com/ftp.kaist.ac.kr/g' /etc/apt/sources.list
