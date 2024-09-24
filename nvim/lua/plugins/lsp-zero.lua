@@ -331,29 +331,6 @@ return {
 	},
 
 	{
-		"rcarriga/nvim-dap-ui",
-		lazy = true,
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-neotest/nvim-nio",
-		},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			dapui.setup()
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.after.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.after.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-		end,
-	},
-
-	{
 		"jay-babu/mason-nvim-dap.nvim",
 		lazy = true,
 		dependencies = {
@@ -384,23 +361,5 @@ return {
 		"smjonas/inc-rename.nvim",
 		event = { "LspAttach" },
 		opts = {},
-	},
-
-	-- show LSP diagnostics in multiple lines
-	{
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		event = { "LspAttach" },
-		config = function()
-			require("lsp_lines").setup({})
-			vim.diagnostic.config({ virtual_text = false })
-			vim.keymap.set("", "<leader>l", function()
-				local config = vim.diagnostic.config() or {}
-				if config.virtual_text then
-					vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
-				else
-					vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
-				end
-			end, { desc = "LSP: Toggle lsp_lines" })
-		end,
 	},
 }
