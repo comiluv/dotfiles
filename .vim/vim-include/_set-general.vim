@@ -16,17 +16,14 @@ endif
 " Some settings picked up from internet
 set autoread
 set autoindent
-set tabstop=8
-set shiftwidth=8
-set softtabstop=0
-set noexpandtab
+set expandtab
 set smarttab
 set smartindent
 set complete-=i
 set number
 set relativenumber
 set nrformats-=octal
-set wrap linebreak breakindent nolist
+set wrap linebreak breakindent
 set hlsearch
 set incsearch
 set ignorecase
@@ -47,10 +44,8 @@ set colorcolumn=80
 set signcolumn=yes
 set laststatus=2
 set termguicolors
-set ttyfast
 set title
 set lazyredraw
-set showcmd
 set mouse=a
 set cursorline
 set completeopt=menuone,noinsert,noselect

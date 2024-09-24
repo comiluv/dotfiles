@@ -5,14 +5,9 @@ if &compatible
 endif
 " Some settings picked up from internet
 set autoindent
-set tabstop=8
-set shiftwidth=8
-set softtabstop=0
-set noexpandtab
+set expandtab
 set number
 set relativenumber
-set wrap
-set nolist
 set hlsearch
 set incsearch
 set ignorecase
@@ -20,8 +15,6 @@ set smartcase
 set scrolloff=4
 set backspace=indent,eol,start
 set history=10000
-set laststatus=2
-set showcmd
 set cursorline
 
 set clipboard=unnamed

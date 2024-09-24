@@ -17,7 +17,7 @@ function! SetUnsetQShortcut()
     endif
 endfunction
 
-augroup COMILUV
+augroup MYGROUP
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
     " Return to last edit position when opening files

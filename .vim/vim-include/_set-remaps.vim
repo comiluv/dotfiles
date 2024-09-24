@@ -37,10 +37,8 @@ noremap <A-k> <C-w>k
 noremap <A-l> <C-w>l
 
 " Left and right can switch buffers
-if !exists("g:vscode")
-    nnoremap <left> :bp<CR>
-    nnoremap <right> :bn<CR>
-endif
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
 
 " Jumplist mutations for k and j
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
