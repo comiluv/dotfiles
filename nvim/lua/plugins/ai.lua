@@ -1,11 +1,10 @@
 return {
 	{
 		"yetone/avante.nvim",
-		lazy = true,
 		version = false, -- set this if you want to always pull the latest change
 		cmd = { "AvanteAsk" },
 		keys = {
-			{ "<leader>aa", "<cmd>AvanteAsk<cr>", "Avante Sidebar" },
+			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
 		},
 		opts = {
 			provide = "claude",
