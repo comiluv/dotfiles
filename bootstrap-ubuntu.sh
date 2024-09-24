@@ -37,12 +37,14 @@ git config --global credential.helper "mnt/c/Program Files/Git/mingw64/bin/git-c
 git config --global core.editor "nvim"
 git config --global init.defaultbranch "main"
 
-# setup vim
 git clone https://github.com/comiluv/dotfiles ~/dotfiles
-ln -s ~/dotfiles/.vim ~/.config/.vim
-ln -s ~/dotfiles/nvim ~/.config/nvim
-touch ~/.vimrc
-echo 'source ~/.config/.vim/vimrc' >> ~/.vimrc
+
+# setup vim
+mkdir -p ~/.vim
+ln -sf ~/dotfiles/.vim/after ~/.vim/
+ln -sf ~/dotfiles/.vim/vim-include ~/.vim/
+ln -sf ~/dotfiles/.vim/vimrc ~/.vim/vimrc
+ln -sf ~/dotfiles/nvim ~/.config/nvim
 
 # Add git ppa repo
 sudo add-apt-repository ppa:git-core/ppa -y
