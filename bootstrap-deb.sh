@@ -11,7 +11,7 @@ chmod 644 $temp
 sudo cp $temp /etc/sudoers.d/$username
 
 # change to systemd. requires wsl --shutdown and restarting
-echo '[boot]\nsystemd=true\n' | sudo tee /etc/wsl.conf
+echo '[boot]\nsystemd=true\n' | sudo tee -a /etc/wsl.conf
 
 cd ~
 
