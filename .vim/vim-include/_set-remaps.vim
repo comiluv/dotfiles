@@ -41,8 +41,8 @@ nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
 " Jumplist mutations for k and j
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'j'
 
 " Move selected lines up and down in Visual mode
 vnoremap J :m '>+1<CR>gv=gv
