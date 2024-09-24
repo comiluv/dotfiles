@@ -77,4 +77,5 @@ if has('termguicolors') || (match($TERM, "-256color") != -1) && (match($TERM, "s
     set termguicolors
 endif
 set background=light
+colorscheme onehalflight
 
