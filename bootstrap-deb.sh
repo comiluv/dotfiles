@@ -53,11 +53,15 @@ ln -s ~/dotfiles/nvim ~/.config/nvim
 touch ~/.vimrc
 echo 'source ~/.config/.vim/vimrc' >> ~/.vimrc
 
-# Install neovim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-sudo mkdir -p /opt/nvim
-sudo mv nvim.appimage /opt/nvim/nvim
+# Now we install nvim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+sudo rm -rf /opt/nvim-linux64
+sudo mkdir -p /opt/nvim-linux64
+sudo chmod a+rX /opt/nvim-linux64
+sudo tar -C /opt -xzf nvim-linux64.tar.gz
+
+# make it available in /usr/local/bin, distro installs to /usr/bin
+sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/
 
 # setup some symlinks
 ln -s $(which fdfind) ~/.local/bin/fd
@@ -84,8 +88,7 @@ rm lazygit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # path and user aliases for sudo and neovim
-echo 'PATH="$PATH:/opt/nvim/"' >> ~/.zshrc
-printf "\n# sudo aliases with sudo\nalias sudo='sudo '\n# neovim\nalias v='/opt/nvim/nvim '\n" >> ~/.zshrc
+printf "\n# sudo aliases with sudo\nalias sudo='sudo '\n# neovim\nalias v='/usr/local/bin/nvim '\n" >> ~/.zshrc
 
 # Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
