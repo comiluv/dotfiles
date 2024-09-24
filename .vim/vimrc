@@ -54,7 +54,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
 Plug 'dunstontc/vim-vscode-theme',
-Plug 'sonph/onehalf',
+Plug 'sonph/onehalf', { 'rtp' : 'vim/' }
 Plug 'jiangmiao/auto-pairs',
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-ragtag'
