@@ -12,11 +12,13 @@ mklink /j ~/.vim/vim-include .vim/vim-include
 
 ### .vim
 
-folder containing vim files but I migrated to neovim
+Folder containing vim files but I migrated to neovim
 
 ### nvim
 
-folder containing neovim configs  
+Folder containing neovim configs
+Dependencies: git ripgrep fdfind gcc make sqlite3 msys2 pwsh
+Latter two are required for Windows only
 Powershell:
 
 ```powershell
@@ -25,7 +27,7 @@ New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
 
 ### neovide
 
-neovide config.toml file for symlink  
+Neovide config.toml file for symlink
 Powershell:
 
 ```powershell
@@ -48,7 +50,7 @@ Does what Ubuntu script does in Debian but because Debian installed in WSL doesn
 
 ### open-webui
 
-linux shell script that runs open-webui related Docker images
+Linux shell script that runs open-webui related Docker images
 
 ### lsp_tests
 
