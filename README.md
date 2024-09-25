@@ -16,9 +16,9 @@ Folder containing vim files but I migrated to neovim
 
 ### nvim
 
-Folder containing neovim configs
-Dependencies: git ripgrep fdfind gcc make sqlite3 msys2 pwsh
-Latter two are required for Windows only
+Folder containing neovim configs  
+Dependencies: git ripgrep fdfind gcc make sqlite3 msys2 pwsh  
+Latter two are required for Windows only  
 Powershell:
 
 ```powershell
@@ -27,7 +27,7 @@ New-Item -ItemType Junction -Path $ENV:LocalAppdata\nvim -Target nvim
 
 ### neovide
 
-Neovide config.toml file for symlink
+Neovide config.toml file for symlink  
 Powershell:
 
 ```powershell
