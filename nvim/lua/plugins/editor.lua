@@ -228,8 +228,8 @@ return {
 		"mcauley-penney/visual-whitespace.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
 		opts = function(opt)
-			local listchars = vim.opt.listchars._value
-			for k, v in string.gmatch(listchars, "([^:,]+):([^:,]+)") do
+			local listchars = vim.opt.listchars:get()
+			for k, v in pairs(listchars) do
 				if k == "eol" then
 					opt["nl_char"] = v
 				else
