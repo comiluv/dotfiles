@@ -43,14 +43,6 @@ return {
 		end,
 	},
 
-	-- regex explainer
-	{
-		"tomiis4/hypersonic.nvim",
-		event = "CmdlineEnter",
-		cmd = "Hypersonic",
-		opts = {},
-	},
-
 	-- abbreviations and substitutions
 	{
 		"tpope/vim-abolish",
