@@ -50,10 +50,15 @@ git clone https://github.com/comiluv/dotfiles ~/dotfiles
 
 # setup vim
 mkdir -p ~/.vim
-ln -sf ~/dotfiles/.vim/after ~/.vim/
-ln -sf ~/dotfiles/.vim/vim-include ~/.vim/
-ln -sf ~/dotfiles/.vim/vimrc ~/.vim/vimrc
+# Loop over each item in the dotfiles/.vim directory
+for item in ~/dotfiles/.vim/*; do
+	# Get the base name of the file or directory
+	base_item=$(basename "$item")
+	# Create a symbolic link in the destination directory
+	ln -sf "$item" ~/.vim/"$base_item"
+done
 ln -sf ~/dotfiles/nvim ~/.config/nvim
+#!/bin/bash
 
 # Now we install nvim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
