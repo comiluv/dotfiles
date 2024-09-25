@@ -222,4 +222,21 @@ return {
 			},
 		},
 	},
+
+	-- show invisible characters in visual mode
+	{
+		"mcauley-penney/visual-whitespace.nvim",
+		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		opts = function(opt)
+			local listchars = vim.opt.listchars._value
+			for k, v in string.gmatch(listchars, "([^:,]+):([^:,]+)") do
+				if k == "eol" then
+					opt["nl_char"] = v
+				else
+					opt[k .. "_char"] = v
+				end
+			end
+			return opt
+		end,
+	},
 }

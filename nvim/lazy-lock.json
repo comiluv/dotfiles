@@ -70,6 +70,7 @@
   "vcvars.vim": { "branch": "master", "commit": "a06beff5fc49b21186f2b555f636ce168c230655" },
   "vim-abolish": { "branch": "master", "commit": "dcbfe065297d31823561ba787f51056c147aa682" },
   "vim-matchup": { "branch": "master", "commit": "1975afe63198ab6a0dff7200919828e5cd4330b9" },
+  "visual-whitespace.nvim": { "branch": "main", "commit": "e22d8508a0236f274dde39775ee127c85d30c0c0" },
   "which-key.nvim": { "branch": "main", "commit": "fb070344402cfc662299d9914f5546d840a22126" },
   "wtf.nvim": { "branch": "main", "commit": "16eec1f32c3608bd8519e9e520041fe34201abb0" }
 }
