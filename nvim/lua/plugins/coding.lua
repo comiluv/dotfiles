@@ -10,7 +10,6 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
 			"L3MON4D3/LuaSnip",
 			-- tabout required to register tab key remap
 			"abecodes/tabout.nvim",
@@ -128,32 +127,6 @@ return {
 					{ name = "luasnip" },
 					{ name = "path" },
 				}),
-			})
-			local cmd_tab = {
-				["<Tab>"] = cmp.mapping({
-					c = function(fallback)
-						if cmp.visible() then
-							local entry = cmp.get_selected_entry()
-							if not entry then
-								cmp.select_next_item()
-							else
-								cmp.confirm()
-							end
-						else
-							fallback()
-						end
-					end,
-				}),
-			}
-			-- `/` cmdline setup.
-			cmp.setup.cmdline("/", { mapping = cmp.mapping.preset.cmdline(cmd_tab), sources = { { name = "buffer" } } })
-			-- `:` cmdline setup.
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(cmd_tab),
-				sources = cmp.config.sources(
-					{ { name = "path" } },
-					{ { name = "cmdline", option = { ignore_cmds = { "te", "term", "terminal", "!" } } } }
-				),
 			})
 		end,
 	},
