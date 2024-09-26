@@ -3,7 +3,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		version = false,
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
@@ -14,6 +14,7 @@ return {
 			"L3MON4D3/LuaSnip",
 			-- tabout required to register tab key remap
 			"abecodes/tabout.nvim",
+			-- add vscode-like pictograms
 			"onsails/lspkind.nvim",
 		},
 		opts = function()
@@ -49,7 +50,6 @@ return {
 							end
 						end,
 						s = cmp.mapping.confirm({ select = true }),
-						c = cmp.mapping.confirm({ select = true }),
 					}),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -129,6 +129,32 @@ return {
 					{ name = "path" },
 				}),
 			})
+			local cmd_tab = {
+				["<Tab>"] = cmp.mapping({
+					c = function(fallback)
+						if cmp.visible() then
+							local entry = cmp.get_selected_entry()
+							if not entry then
+								cmp.select_next_item()
+							else
+								cmp.confirm()
+							end
+						else
+							fallback()
+						end
+					end,
+				}),
+			}
+			-- `/` cmdline setup.
+			cmp.setup.cmdline("/", { mapping = cmp.mapping.preset.cmdline(cmd_tab), sources = { { name = "buffer" } } })
+			-- `:` cmdline setup.
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(cmd_tab),
+				sources = cmp.config.sources(
+					{ { name = "path" } },
+					{ { name = "cmdline", option = { ignore_cmds = { "te", "term", "terminal", "!" } } } }
+				),
+			})
 		end,
 	},
 
@@ -187,8 +213,10 @@ return {
 		end,
 		-- jsregexp setup see https://github.com/L3MON4D3/LuaSnip/issues/1190#issuecomment-2171656749
 		build = vim.fn.executable("make") == 1 and "make install_jsregexp"
-			or (vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1)
-				and ("pwsh -NoProfile " .. vim.fn.stdpath("config") .. "/luasnip_jsregexp_build.ps1") or "",
+			or (vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1) and ("pwsh -NoProfile " .. vim.fn.stdpath(
+				"config"
+			) .. "/luasnip_jsregexp_build.ps1")
+			or "",
 	},
 
 	{
