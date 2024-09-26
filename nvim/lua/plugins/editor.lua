@@ -239,4 +239,13 @@ return {
 			return opt
 		end,
 	},
+
+	-- Instant grep + quickfix taken from: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+	{
+		dir = vim.fn.stdpath("config") .. "/lua/grep_cmd.lua",
+		event = { "CmdlineEnter" },
+		config = function()
+			require("grep_cmd").setup()
+		end,
+	},
 }

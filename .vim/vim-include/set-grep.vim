@@ -3,7 +3,7 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor
 endif
 if executable('rg')
-    set grepprg=rg\ --no-heading\ --color\ never\ --vimgrep\ --iglob\ !/.git/
+    set grepprg=rg\ --no-heading\ --color\ never\ --vimgrep
     set grepformat=%f:%l:%c:%m
     let g:rg_derive_root='true'
 endif

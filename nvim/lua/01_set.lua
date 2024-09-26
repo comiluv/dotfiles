@@ -91,7 +91,7 @@ vim.schedule(function()
 	end
 
 	if vim.fn.executable("rg") then
-		vim.opt.grepprg = "rg --no-heading --color never --vimgrep --hidden --iglob !/.git/"
+		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
 		vim.opt.grepformat = "%f:%l:%c:%m"
 	end
 	vim.opt.clipboard = "unnamedplus"
