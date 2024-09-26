@@ -33,10 +33,7 @@ M.setup = function()
 		end)
 	end, { nargs = "+", complete = "file" })
 
-	-- Abbreviations for `grep` and `lgrep` commands
-	vim.cmd([[
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
-cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
-]])
+	vim.keymap.set("ca", "grep", "Grep")
+	vim.keymap.set("ca", "lgrep", "LGrep")
 end
 return M
