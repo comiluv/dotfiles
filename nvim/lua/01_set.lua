@@ -8,20 +8,6 @@ vim.g.netrw_fastbrowse = 0
 
 -- Suppress Alt keys in Windows so it can be used as shortcuts
 vim.opt.winaltkeys = "no"
-if vim.fn.has("unix") == 1 then
-	vim.g.python3_host_prog = "/usr/bin/python3"
-else
-	vim.g.python3_host_prog = "C:\\Windows\\py.exe"
-end
-
-if vim.fn.executable("rg") then
-	vim.opt.grepprg = "rg --no-heading --color never --vimgrep --hidden --iglob !/.git/"
-	vim.opt.grepformat = "%f:%l:%c:%m"
-end
-
-vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
-end)
 
 -- Some settings picked up from internet
 vim.opt.termguicolors = true
@@ -79,9 +65,6 @@ vim.opt.wildignorecase = true
 -- stylua: ignore
 vim.opt.wildignore = "*.7z,*.aux,*.avi,*.bak,*.bib,*.class,*.cls,*.cmi,*.cmo,*.doc,*.docx,*.dvi,*.flac,*.flv,*.gem,*.gif,*.hi,*.ico,*.jpeg,*.jpg,*.log,*.min*.js,*.min.js,*.mov,*.mp3,*.mp4,*.mpg,*.nav,*.o,*.obj,*.ods,*.odt,*.ogg,*.opus,*.out,*.pdf,*.pem,*.png,*.rar,*.rbc,*.rbo,*.settings,*.sty,*.svg,*.swp,*.swp*.,*.tar,*.tar.bz2,*.tar.gz,*.tar.xz,*.tgz,*.toc,*.wav,*.webm,*.xcf,*.xls,*.xlsx,*.zip,*/.bundle/*,*/.sass-cache/*,*/vendor/cache/*,*/vendor/gems/*,*~,._*,.git,.hg,.svn,Thumbs.db,Zend,intermediate/*,publish/*,vendor"
 
-vim.opt.sessionoptions:remove("options")
-vim.opt.viewoptions:remove("options")
-
 vim.opt.backup = false
 vim.opt.undofile = true
 
@@ -99,3 +82,17 @@ vim.o.timeoutlen = 300
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
 
 vim.opt.background = "light"
+
+vim.schedule(function()
+	if vim.fn.has("unix") == 1 then
+		vim.g.python3_host_prog = "/usr/bin/python3"
+	else
+		vim.g.python3_host_prog = "C:\\Windows\\py.exe"
+	end
+
+	if vim.fn.executable("rg") then
+		vim.opt.grepprg = "rg --no-heading --color never --vimgrep --hidden --iglob !/.git/"
+		vim.opt.grepformat = "%f:%l:%c:%m"
+	end
+	vim.opt.clipboard = "unnamedplus"
+end)

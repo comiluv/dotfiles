@@ -26,7 +26,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- delete selection and put without yanking selection
-vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Delete selection" })
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over selection" })
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
