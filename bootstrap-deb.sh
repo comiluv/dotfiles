@@ -58,7 +58,6 @@ for item in ~/dotfiles/.vim/*; do
 	ln -sf "$item" ~/.vim/"$base_item"
 done
 ln -sf ~/dotfiles/nvim ~/.config/nvim
-#!/bin/bash
 
 # Now we install nvim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
