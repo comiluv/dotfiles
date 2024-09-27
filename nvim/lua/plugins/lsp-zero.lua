@@ -344,10 +344,7 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
-		enabled = false,
 		version = "^5",
-		dependencies = { "mason.nvim" },
-		ft = { "rust", "cargo" },
 	},
 
 	{
