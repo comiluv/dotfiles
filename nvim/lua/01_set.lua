@@ -25,11 +25,11 @@ vim.opt.smartcase = true
 vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
 
--- Use 'textwidth' and set 'colorcolumn' relative to 'textwidth', only when needed
+-- Set 'textwidth' and set 'colorcolumn' relative to 'textwidth', only when needed
 vim.opt.signcolumn = "yes"
-vim.opt.cursorline = true
 vim.opt.title = true
 vim.opt.laststatus = 3
+-- Plugin lualine does what 'showmode' does and more
 vim.opt.showmode = false
 -- You will have bad experience for diagnostic messages when it's default 4000.
 vim.opt.updatetime = 200
@@ -40,12 +40,6 @@ vim.opt.tabpagemax = 100
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-
--- You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
--- or have this run as autocmd. See autocmd section.
-vim.opt.formatoptions:remove({ "o" })
--- Delete comment character when joining commented lines
-vim.opt.formatoptions:append("j")
 
 -- Show invisible characters in this format
 vim.opt.listchars =
@@ -59,9 +53,9 @@ vim.opt.wildignorecase = true
 -- stylua: ignore
 vim.opt.wildignore = "*.7z,*.aux,*.avi,*.bak,*.bib,*.class,*.cls,*.cmi,*.cmo,*.doc,*.docx,*.dvi,*.flac,*.flv,*.gem,*.gif,*.hi,*.ico,*.jpeg,*.jpg,*.log,*.min*.js,*.min.js,*.mov,*.mp3,*.mp4,*.mpg,*.nav,*.o,*.obj,*.ods,*.odt,*.ogg,*.opus,*.out,*.pdf,*.pem,*.png,*.rar,*.rbc,*.rbo,*.settings,*.sty,*.svg,*.swp,*.swp*.,*.tar,*.tar.bz2,*.tar.gz,*.tar.xz,*.tgz,*.toc,*.wav,*.webm,*.xcf,*.xls,*.xlsx,*.zip,*/.bundle/*,*/.sass-cache/*,*/vendor/cache/*,*/vendor/gems/*,*~,._*,.git,.hg,.svn,Thumbs.db,Zend,intermediate/*,publish/*,vendor"
 
-vim.opt.backup = false
 vim.opt.undofile = true
 
+-- Tree-sitter folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
@@ -70,7 +64,7 @@ vim.opt.foldlevelstart = 99
 vim.lsp.set_log_level("off")
 
 vim.o.timeout = true
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 100
 
 -- include msys64 usr/bin to use its utils such as gzip, tar, etc.
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"

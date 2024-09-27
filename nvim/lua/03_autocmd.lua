@@ -57,9 +57,9 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = "*",
 	callback = function()
-		vim.opt.formatoptions:remove({ "o" })
+		vim.opt_local.formatoptions:remove("o")
 		-- auto remove comment when joining lines with <J> key
-		vim.opt.formatoptions:append("j")
+		vim.opt_local.formatoptions:append("j")
 	end,
 })
 
@@ -73,33 +73,11 @@ autocmd({ "FileType" }, {
 	end,
 })
 
--- auto toggle cursorline in insert mode
-autocmd({ "InsertLeave", "WinEnter" }, {
-	group = MyGroup,
-	pattern = "*",
-	callback = function()
-		vim.opt.cursorline = true
-	end,
-})
-autocmd({ "InsertEnter", "WinLeave" }, {
-	group = MyGroup,
-	pattern = "*",
-	callback = function()
-		vim.opt.cursorline = false
-	end,
-})
-
--- enter Terminal-mode automatically
+-- enter insert mode in Terminal automatically
 autocmd({ "TermOpen" }, {
 	group = MyGroup,
 	pattern = "*",
 	command = "startinsert",
-})
-
--- Check if we need to reload the file when it changed
-autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-	group = MyGroup,
-	command = "checktime",
 })
 
 -- trim whitespace and put one blank line at the end

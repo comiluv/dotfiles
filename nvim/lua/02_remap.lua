@@ -67,8 +67,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- replace visually selected
 vim.keymap.set("v", "<leader>s", [["ly:%s/\<<C-r>l\>/<C-r>l/gI<Left><Left><Left>]], { desc = "Replace selected" })
 
--- Neovim terminal mode remaps
--- Use Escape key like a sane person
+-- Press <ESC> to escape insert mode in terminal
 vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- Move out from terminal window with alt key shortcuts
