@@ -10,19 +10,13 @@ vim.g.netrw_fastbrowse = 0
 vim.opt.winaltkeys = "no"
 
 -- Some settings picked up from internet
-vim.opt.termguicolors = true
-vim.opt.lazyredraw = true
-vim.opt.redrawtime = 1500
-
 vim.opt.ruler = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.smartindent = true
 vim.opt.wrap = true
-vim.opt.linebreak = true
 vim.opt.breakindent = true
-vim.opt.list = false
 
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
@@ -31,8 +25,8 @@ vim.opt.smartcase = true
 vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
 
+-- Use 'textwidth' and set 'colorcolumn' relative to 'textwidth', only when needed
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "100"
 vim.opt.cursorline = true
 vim.opt.title = true
 vim.opt.laststatus = 3
