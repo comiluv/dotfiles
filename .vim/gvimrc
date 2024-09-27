@@ -3,5 +3,3 @@ set mouse=a
 set guifont=DejaVuSansM\ Nerd\ Font\ Mono\ Regular\ 20
 set guifontwide=D2CodingLigature\ Nerd\ Font\ Regular\ 20
 
-set lines=55 columns=90
-
