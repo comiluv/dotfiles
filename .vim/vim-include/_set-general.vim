@@ -19,11 +19,10 @@ set autoindent
 set expandtab
 set smarttab
 set smartindent
-set complete-=i
 set number
 set relativenumber
 set nrformats-=octal
-set wrap linebreak breakindent
+set wrap breakindent
 set hlsearch
 set incsearch
 set ignorecase
@@ -34,24 +33,20 @@ set display+=lastline
 set hidden
 set ruler
 set encoding=utf-8
-set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,euc-kr,latin1
 set tenc=utf-8
 set backspace=indent,eol,start
 set history=10000
 set tabpagemax=100
-set colorcolumn=80
+" Use 'textwidth' and set 'colorcolumn' relative to 'textwidth', only when needed
 set signcolumn=yes
-set laststatus=2
+set laststatus=3
 set termguicolors
 set title
 set lazyredraw
 set mouse=a
-set cursorline
 set completeopt=menuone,noinsert,noselect
 set splitbelow splitright
-" Better display for messages
-set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 set clipboard=unnamedplus
@@ -113,9 +108,7 @@ if !isdirectory(expand(s:dir))
     call system("mkdir -p " . expand(s:dir) . "/{backup,undo}")
 endif
 set undofile
-set noswapfile
 set nobackup
-set nowritebackup " writebackup can cause problems? https://github.com/sheerun/vimrc/blob/master/plugin/vimrc.vim
 
 " Drop powershell and revert back to cmd for Windows because powershell is too
 " slow and most plugins assume to use cmd in Windows

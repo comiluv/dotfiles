@@ -10,8 +10,10 @@ if has('unix') && !has('nvim') " Only works in unix Vim (and not in Windows) and
     execute "set <M-p>=\<Esc>p"
     execute "set <M-n>=\<Esc>n"
     execute "set <M-b>=\<Esc>b"
+    execute "set <M-h>=\<Esc>h"
     execute "set <M-j>=\<Esc>j"
     execute "set <M-k>=\<Esc>k"
+    execute "set <M-l>=\<Esc>l"
 endif
 
 " Don't use Ex mode, use Q for formatting.
@@ -40,7 +42,7 @@ noremap <A-l> <C-w>l
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
-" Jumplist mutations for k and j
+" Jumplist mutations + easy navigation in wrapped lines for k and j
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'j'
 

@@ -119,9 +119,6 @@ if !exists('g:vscode')
     endif
 endif
 
-if has('unix')
-    set runtimepath+=~/.config/.vim
-end
 " loop through subdirectory and source .vim files
 " https://johngrib.github.io/wiki/vim/configure-split/
 for include_file in uniq(sort(globpath(&rtp, 'vim-include/*.vim', 0, 1)))
