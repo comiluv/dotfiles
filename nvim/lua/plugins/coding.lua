@@ -15,6 +15,7 @@ return {
 			"abecodes/tabout.nvim",
 			-- add vscode-like pictograms
 			"onsails/lspkind.nvim",
+			"zbirenbaum/copilot.lua",
 		},
 		opts = function()
 			local cmp = require("cmp")
@@ -22,7 +23,7 @@ return {
 			local cmp_select_page = { behavior = cmp.SelectBehavior.Select, count = 8 }
 			local luasnip = require("luasnip")
 			local neogen = require("neogen")
-			local copilot = require("copilot.suggestion")
+			local has_copilot, copilot = pcall(require, "copilot.suggestion")
 			return {
 				preselect = cmp.PreselectMode.None,
 				snippet = {
@@ -67,7 +68,7 @@ return {
 							luasnip.jump(1)
 						elseif neogen.jumpable() then
 							neogen.jump_next()
-						elseif copilot.is_visible() then
+						elseif has_copilot and copilot.is_visible() then
 							copilot.accept()
 						else
 							fallback()
