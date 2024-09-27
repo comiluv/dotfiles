@@ -1,5 +1,4 @@
-" Exit vimscript
-"finish
+" Lots of stuffs are from https://github.com/tpope/vim-sensible
 
 " Make gVim speak English
 " set langmenu=en_US.UTF-8
