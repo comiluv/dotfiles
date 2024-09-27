@@ -47,8 +47,8 @@ nnoremap <expr> k (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'k
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'j'
 
 " Move selected lines up and down in Visual mode
-vnoremap J <CMD>m '>+1<CR>gv=gv
-vnoremap K <CMD>m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
