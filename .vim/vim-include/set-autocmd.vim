@@ -19,6 +19,6 @@ augroup MYGROUP
     " Remove auto commenting when pressing o or O
     autocmd FileType * set formatoptions-=ro
     " Press q to instantly quit the buffer
-    autocmd FileType help,qf,man,notify,fugitive,vim-plug nnoremap <buffer><nowait> q :q<CR>
+    autocmd FileType help,qf,man,notify,fugitive,vim-plug nnoremap <buffer><nowait> q <CMD>q<CR>
 augroup END
 

@@ -1,7 +1,7 @@
 " Remaps for plugins are inside individual set-pluginname.vim files
 
 let mapleader="\<Space>"
-nnoremap <leader>pv :Ex<CR>
+nnoremap <leader>pv <CMD>Ex<CR>
 
 " Remap Alt key combinations to M combinations in wsl2 / Ubuntu
 " https://github.com/vim/vim/issues/8726
@@ -39,16 +39,16 @@ noremap <A-k> <C-w>k
 noremap <A-l> <C-w>l
 
 " Left and right can switch buffers
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
+nnoremap <left> <CMD>bp<CR>
+nnoremap <right> <CMD>bn<CR>
 
 " Jumplist mutations + easy navigation in wrapped lines for k and j
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'j'
 
 " Move selected lines up and down in Visual mode
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+vnoremap J <CMD>m '>+1<CR>gv=gv
+vnoremap K <CMD>m '<-2<CR>gv=gv
 
 " Use <Tab> and <S-Tab> to navigate through popup menu and <Enter> to select
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -107,7 +107,7 @@ xnoremap & :&&<CR>
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " open help about word on cursor by pressing <F1>
-nnoremap <F1> :help <C-r><C-w><CR>
+nnoremap <F1> <CMD>help <C-r><C-w><CR>
 cmap <F1> <ESC><F1>
 imap <F1> <ESC><F1>
 vmap <F1> <ESC><F1>
