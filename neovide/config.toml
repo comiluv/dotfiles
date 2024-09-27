@@ -1,8 +1,9 @@
 [font]
-normal = ["SFMono Nerd Font"]
+normal = ["SFMono Nerd Font", "D2CodingLigature Nerd Font"]
 size = 12
 
 [font.features]
 # disable texture healing because of zero issue
 # https://github.com/githubnext/monaspace/issues/109
 "SFMono Nerd Font" = ["+liga", "+dlig", "+calt"]
+

@@ -40,6 +40,7 @@ local opts = {
 			},
 		},
 	},
+	install = { colorscheme = { "default" } },
 }
 
 require("lazy").setup(opts)
