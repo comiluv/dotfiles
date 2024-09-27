@@ -34,6 +34,17 @@ sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 # Install most softwares
 sudo apt install man-db software-properties-common wget curl lsb-release gcc g++ gdb python3 python3-pip make git gnupg unzip fd-find ripgrep bat zsh jq fuse3 libfuse2 vim psmisc xclip sqlite3 libsqlite3-dev tealdeer -y
 
+# Install nerd fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/D2Coding.tar.xz
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/DejaVuSansMono.tar.xz
+sudo mkdir -p /usr/share/fonts/DejaVuSansMono
+sudo mkdir -p /usr/share/fonts/d2coding
+sudo tar xf DejaVuSansMono.tar.xz --directory=/usr/share/fonts/DejaVuSansMono
+sudo tar xf D2Coding.tar.xz --directory=/usr/share/fonts/d2coding
+rm DejaVuSansMono.tar.xz
+rm D2Coding.tar.xz
+sudo fc-cache -f
+
 # setup git
 echo Input git username
 read gitname

@@ -59,6 +59,17 @@ sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 # Install most softwares
 sudo apt install gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 xclip sqlite3 libsqlite3-dev tealdeer -y
 
+# Install nerd fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/D2Coding.tar.xz
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/DejaVuSansMono.tar.xz
+sudo mkdir -p /usr/share/fonts/DejaVuSansMono
+sudo mkdir -p /usr/share/fonts/d2coding
+sudo tar xf DejaVuSansMono.tar.xz --directory=/usr/share/fonts/DejaVuSansMono
+sudo tar xf D2Coding.tar.xz --directory=/usr/share/fonts/d2coding
+rm DejaVuSansMono.tar.xz
+rm D2Coding.tar.xz
+sudo fc-cache -f
+
 # Now we install nvim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 sudo rm -rf /opt/nvim-linux64
