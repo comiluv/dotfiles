@@ -93,7 +93,7 @@ if &t_Co == 8 && $TERM !~# '^Eterm'
 endif
 
 " Disable a legacy behavior that can break plugin maps.
-if has('langmap') && exists('+langremap') && &langremap && s:MaySet('langremap')
+if has('langmap') && exists('+langremap') && &langremap
   set nolangremap
 endif
 
