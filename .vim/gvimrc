@@ -23,7 +23,7 @@ function! ScreenFilename()
     endif
 endfunction
 
-function! ScreenRestore()
+function! ScreenRestore(...)
     " Restore window size (columns and lines) and position
     " from values stored in vimsize file.
     " Must set font first so columns and lines are based on font size.
