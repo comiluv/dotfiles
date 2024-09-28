@@ -1,6 +1,20 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.schedule(function()
+	if vim.fn.has("unix") == 1 then
+		vim.g.python3_host_prog = "/usr/bin/python3"
+	else
+		vim.g.python3_host_prog = "C:\\Windows\\py.exe"
+	end
+
+	if vim.fn.executable("rg") then
+		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
+		vim.opt.grepformat = "%f:%l:%c:%m"
+	end
+	vim.opt.clipboard = "unnamedplus"
+end)
+
 vim.g.netrw_browse_split = 0
 vim.g.netrw_winsize = 25
 -- Delete netrw buffer after entering a file
@@ -71,16 +85,4 @@ vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
 
 vim.opt.background = "light"
 
-vim.schedule(function()
-	if vim.fn.has("unix") == 1 then
-		vim.g.python3_host_prog = "/usr/bin/python3"
-	else
-		vim.g.python3_host_prog = "C:\\Windows\\py.exe"
-	end
-
-	if vim.fn.executable("rg") then
-		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
-		vim.opt.grepformat = "%f:%l:%c:%m"
-	end
-	vim.opt.clipboard = "unnamedplus"
-end)
+vim.g.c_syntax_for_h = true
