@@ -1,5 +1,5 @@
 #!/usr/bin/sh
-docker run -e -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower:latest --run-once --include-restarting --include-stopped --cleanup
+docker run --rm --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower:latest --run-once --include-restarting --include-stopped --cleanup
 
 docker run -d --name searxng -p 8080:8080 -v ./searxng:/etc/searxng --restart always searxng/searxng:latest
 
