@@ -40,7 +40,7 @@ local opts = {
 			},
 		},
 	},
-	install = { colorscheme = { "default" } },
+	install = { colorscheme = { "doom-one" } },
 }
 
 require("lazy").setup(opts)
