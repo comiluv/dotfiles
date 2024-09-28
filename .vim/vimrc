@@ -50,10 +50,10 @@ endif
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
+Plug 'sonph/onehalf', { 'rtp' : 'vim/' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
 Plug 'dunstontc/vim-vscode-theme',
-Plug 'sonph/onehalf', { 'rtp' : 'vim/' }
 Plug 'jiangmiao/auto-pairs',
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-ragtag'
@@ -64,6 +64,10 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'bronson/vim-visual-star-search'
 Plug 'mbbill/undotree', exists('g:vscode') ? {'on': []} : {}
 call plug#end()
+
+" Set colorscheme here
+set background=light
+colorscheme onehalflight
 
 if !exists('g:vscode')
     " Below was added by gVim installer therefore use it for Vim not for Neovim

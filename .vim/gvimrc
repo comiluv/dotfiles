@@ -62,7 +62,7 @@ endfunction
 
 augroup gVimWindows
     autocmd!
-    autocmd VimEnter * if g:screen_size_restore_pos == 1 | call ScreenRestore() | endif
+    autocmd GUIEnter * if g:screen_size_restore_pos == 1 | call timer_start(100, 'ScreenRestore') | endif
     autocmd VimLeavePre * if g:screen_size_restore_pos == 1 | call ScreenSave() | endif
 augroup END
 
