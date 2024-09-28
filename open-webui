@@ -1,4 +1,5 @@
 #!/usr/bin/sh
+docker run -e -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower:latest --run-once --include-restarting --include-stopped --cleanup
 
 docker run -d --name searxng -p 8080:8080 -v ./searxng:/etc/searxng --restart always searxng/searxng:latest
 
@@ -13,10 +14,4 @@ docker run -e WEBUI_AUTH='False' \
   --name open-webui \
   --restart always \
   ghcr.io/open-webui/open-webui:latest
-
-docker run -e WATCHTOWER_CLEANUP="true" \
-  -e WATCHTOWER_INCLUDE_STOPPED="true" \
-  -e WATCHTOWER_POLL_INTERVAL="3600" \
-  -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock \
-  containrrr/watchtower:latest
 
