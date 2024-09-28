@@ -10,4 +10,8 @@ return {
 			vim.cmd.colorscheme("doom-one")
 		end,
 	},
+	{
+		"projekt0n/github-nvim-theme",
+		name = "github-theme",
+	},
 }
