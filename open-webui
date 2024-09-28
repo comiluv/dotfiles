@@ -1,10 +1,8 @@
 #!/usr/bin/sh
 
-docker run -e WATCHTOWER_CLEANUP="true" -d -v /var/run/docker.sock:/var/run/docker.sock --restart always containrrr/watchtower:latest
-
 docker run -d --name searxng -p 8080:8080 -v ./searxng:/etc/searxng --restart always searxng/searxng:latest
 
-docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama:latest
+docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama --restart always ollama/ollama:latest
 
 openai=$(gpg -d ~/openai.txt.gpg)
 docker run -e WEBUI_AUTH='False' \
@@ -14,5 +12,11 @@ docker run -e WEBUI_AUTH='False' \
   -v open-webui:/app/backend/data \
   --name open-webui \
   --restart always \
-  ghcr.io/open-webui/open-webui:main
+  ghcr.io/open-webui/open-webui:latest
+
+docker run -e WATCHTOWER_CLEANUP="true" \
+  -e WATCHTOWER_INCLUDE_STOPPED="true" \
+  -e WATCHTOWER_POLL_INTERVAL="3600" \
+  -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock \
+  containrrr/watchtower:latest
 
