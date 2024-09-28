@@ -3,7 +3,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		version = false,
-		event = { "InsertEnter", "CmdlineEnter" },
+		event = { "InsertEnter" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
@@ -23,7 +23,7 @@ return {
 			local cmp_select_page = { behavior = cmp.SelectBehavior.Select, count = 8 }
 			local luasnip = require("luasnip")
 			local neogen = require("neogen")
-			local has_copilot, copilot = pcall(require, "copilot.suggestion")
+			local copilot = require("copilot.suggestion")
 			return {
 				preselect = cmp.PreselectMode.None,
 				snippet = {
@@ -68,7 +68,7 @@ return {
 							luasnip.jump(1)
 						elseif neogen.jumpable() then
 							neogen.jump_next()
-						elseif has_copilot and copilot.is_visible() then
+						elseif copilot and copilot.is_visible() then
 							copilot.accept()
 						else
 							fallback()
