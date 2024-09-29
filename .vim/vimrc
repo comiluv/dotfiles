@@ -50,6 +50,7 @@ endif
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
+Plug 'agudulin/vim-colors-alabaster',
 Plug 'sonph/onehalf', { 'rtp' : 'vim/' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim',
@@ -67,7 +68,7 @@ call plug#end()
 
 " Set colorscheme here
 set background=light
-colorscheme onehalflight
+colorscheme alabaster
 
 if !exists('g:vscode')
     " Below was added by gVim installer therefore use it for Vim not for Neovim
