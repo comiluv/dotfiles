@@ -227,7 +227,7 @@ return {
 	{
 		"mcauley-penney/visual-whitespace.nvim",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		opts = function(opt)
+		opts = function(_, opt)
 			local listchars = vim.opt.listchars:get()
 			for k, v in pairs(listchars) do
 				if k == "eol" then
