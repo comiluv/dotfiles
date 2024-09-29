@@ -46,10 +46,10 @@ return {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		ft = { "css" },
+		ft = { "css", "json" },
 		opts = {
-			filetypes = { "css" },
-			user_default_options = { css = true },
+			filetypes = { "css", "json" },
+			user_default_options = { mode = "virtualtext", names = false, css = true },
 		},
 	},
 
