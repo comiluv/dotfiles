@@ -13,7 +13,6 @@ return {
 		event = { "VeryLazy", "BufNewFile", "InsertEnter" },
 		main = "ibl",
 		opts = {
-			enabled = true,
 			exclude = { filetypes = vim.g.info_filetype },
 			indent = { char = "┆" },
 		},
