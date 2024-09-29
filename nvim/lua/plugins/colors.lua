@@ -4,14 +4,23 @@ return {
 	},
 	{
 		"NTBBloodbath/doom-one.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("doom-one")
-		end,
 	},
 	{
 		"projekt0n/github-nvim-theme",
 		name = "github-theme",
+	},
+	{
+		"p00f/alabaster.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("alabaster")
+		end,
+	},
+	{
+		"disrupted/one.nvim",
+	},
+	{
+		"miikanissi/modus-themes.nvim",
 	},
 }
