@@ -40,6 +40,7 @@ vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 10
 
 -- Set 'textwidth' and set 'colorcolumn' relative to 'textwidth', only when needed
+vim.opt.colorcolumn = "+1"
 vim.opt.signcolumn = "yes"
 vim.opt.title = true
 vim.opt.laststatus = 3

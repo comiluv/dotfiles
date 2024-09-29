@@ -39,6 +39,7 @@ set complete-=i
 set history=1000
 set tabpagemax=100
 " Set 'textwidth' and set 'colorcolumn' relative to 'textwidth', only when needed
+set colorcolumn=+1
 set signcolumn=yes
 set laststatus=2
 set termguicolors
