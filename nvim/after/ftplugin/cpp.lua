@@ -7,20 +7,20 @@ vim.bo.expandtab = true
 -- Compiler to use
 local compiler = "g++"
 
-local compile_commands = {
-	["cl"] = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo./obj/ /Fe./bin/",
-	["c++"] = "!g++ -g -std=c++2b -O2 -Wall -o ./bin/",
-	["g++"] = "!g++ -g -std=c++2b -O2 -Wall -o ./bin/",
-	["clang++"] = "!clang++ -g -std=c++2b -O2 -Wall -o ./bin/",
-}
-
-local compile_command = compile_commands[compiler]
-
 -- Check if compiler exists
-if vim.fn.executable(compile_command) == 0 then
+if vim.fn.executable(compiler) == 0 then
 	vim.notify("C++ Compiler Not Found", vim.log.levels.WARN)
 	return
 end
+
+local compile_commands = {
+	["cl"] = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo./obj/ /Fe./bin/",
+	["c++"] = "!g++ -g -std=c++2b -Wall -o ./bin/",
+	["g++"] = "!g++ -g -std=c++2b -Wall -o ./bin/",
+	["clang++"] = "!clang++ -g -std=c++2b -Wall -o ./bin/",
+}
+
+local compile_command = compile_commands[compiler]
 
 local windows = vim.fn.has("win32") == 1
 local windows_extension = ""

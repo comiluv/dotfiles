@@ -1,4 +1,9 @@
--- clang-format default
+-- Quit if it's C++
+if vim.bo.filetype ~= "c" then
+	return
+end
+
+-- Clang-format default
 vim.bo.tabstop = 2
 vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
@@ -7,21 +12,21 @@ vim.bo.expandtab = true
 -- Compiler to use
 local compiler = "gcc"
 
-local compile_commands = {
-	cl = "!cl.exe /W4 /Zi /O2 /Fo./obj/ /Fe./bin/",
-	cc = "!cc -g -O2 -Wall -Wextra -pedantic -o ./bin/",
-	gcc = "!gcc -g -O2 -Wall -Wextra -pedantic -o ./bin/",
-	clang = "!clang -g -O2 -Wall -Wextra -pedantic -o ./bin/",
-	zig = "!zig cc -g -O2 -Wall -Wextra -pedantic -o ./bin/",
-}
-
-local compile_command = compile_commands[compiler]
-
 -- Check if compiler exists
-if vim.fn.executable(compile_command) == 0 then
+if vim.fn.executable(compiler) == 0 then
 	vim.notify("C Compiler Not Found", vim.log.levels.WARN)
 	return
 end
+
+local compile_commands = {
+	cl = "!cl.exe /W4 /Zi /O2 /Fo./obj/ /Fe./bin/",
+	cc = "!cc -g -Wall -Wextra -pedantic -o ./bin/",
+	gcc = "!gcc -g -Wall -Wextra -pedantic -o ./bin/",
+	clang = "!clang -g -Wall -Wextra -pedantic -o ./bin/",
+	zig = "!zig cc -g -Wall -Wextra -pedantic -o ./bin/",
+}
+
+local compile_command = compile_commands[compiler]
 
 local windows = vim.fn.has("win32") == 1
 local windows_extension = ""
