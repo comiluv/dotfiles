@@ -1,17 +1,18 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.schedule(function()
-	if vim.fn.has("unix") == 1 then
-		vim.g.python3_host_prog = "/usr/bin/python3"
-	else
-		vim.g.python3_host_prog = "C:\\Windows\\py.exe"
-	end
+if vim.fn.has("unix") == 1 then
+	vim.g.python3_host_prog = "/usr/bin/python3"
+else
+	vim.g.python3_host_prog = "C:\\Windows\\py.exe"
+end
 
-	if vim.fn.executable("rg") then
-		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
-		vim.opt.grepformat = "%f:%l:%c:%m"
-	end
+vim.schedule(function()
+if vim.fn.executable("rg") then
+	vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
+	vim.opt.grepformat = "%f:%l:%c:%m"
+end
+
 	vim.opt.clipboard = "unnamedplus"
 end)
 
