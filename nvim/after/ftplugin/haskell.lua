@@ -7,10 +7,8 @@ local has_runhaskell = vim.fn.executable("runhaskell") == 1
 local has_runghc = vim.fn.executable("runghc") == 1
 
 if not has_runhaskell and not has_runghc then
-	vim.api.nvim_command('echomsg "runhaskell not found"')
-	do
-		return
-	end
+	vim.notify("Runhaskell Not Found", vim.log.levels.WARN)
+	return
 end
 
 local haskell = has_runhaskell and "runhaskell" or "runghc"

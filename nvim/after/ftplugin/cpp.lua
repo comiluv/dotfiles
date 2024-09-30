@@ -4,6 +4,24 @@ vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
+-- Compiler to use
+local compiler = "g++"
+
+local compile_commands = {
+	["cl"] = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo./obj/ /Fe./bin/",
+	["c++"] = "!g++ -g -std=c++2b -O2 -Wall -o ./bin/",
+	["g++"] = "!g++ -g -std=c++2b -O2 -Wall -o ./bin/",
+	["clang++"] = "!clang++ -g -std=c++2b -O2 -Wall -o ./bin/",
+}
+
+local compile_command = compile_commands[compiler]
+
+-- Check if compiler exists
+if vim.fn.executable(compile_command) == 0 then
+	vim.notify("C++ Compiler Not Found", vim.log.levels.WARN)
+	return
+end
+
 local windows = vim.fn.has("win32") == 1
 local windows_extension = ""
 
@@ -13,25 +31,21 @@ if windows then
 	windows_extension = ".exe"
 end
 
--- Default compiler command lines for each compiler
-local cl = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo./obj/ /Fe./bin/"
-local gcc = "!g++ -g -std=c++2b -O2 -Wall -o ./bin/"
-local clang = "!clang++ -g -std=c++2b -O2 -Wall -o ./bin/"
+-- Output Visual Studio messages in English (rather than system locale). Requires Visual Studio English language pack installed
+vim.env.VSLANG = 1033
 
 -- pressing F5 will compile current buffer
 vim.keymap.set("n", "<F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
 	local filename_only = vim.api.nvim_call_function("fnamemodify", { fullpath, ":t:r" }) .. windows_extension
 
-	local cl = cl .. " %"
-	local gcc = gcc .. filename_only .. " %"
-	local clang = clang .. filename_only .. " %"
+	local f5_command = compile_command .. (compiler == "cl" and "" or filename_only) .. " %"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
 	vim.cmd.call("mkdir('bin','p')")
 	vim.cmd.update()
-	vim.cmd(gcc)
+	vim.cmd(f5_command)
 end, { buffer = true })
 
 -- pressing Shift-F5 will compile all .cpp files
@@ -39,15 +53,13 @@ vim.keymap.set("n", "<s-F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
 	local filename_only = vim.api.nvim_call_function("fnamemodify", { fullpath, ":t:r" }) .. windows_extension
 
-	local cl = cl .. filename_only .. " ./*.cpp"
-	local gcc = gcc .. filename_only .. " ./*.cpp"
-	local clang = clang .. filename_only .. " ./*.cpp"
+	local f5_command = compile_command .. filename_only .. " ./*.cpp"
 
 	vim.cmd.cd("%:p:h")
 	vim.cmd.call("mkdir('obj','p')")
 	vim.cmd.call("mkdir('bin','p')")
 	vim.cmd.update()
-	vim.cmd(gcc)
+	vim.cmd(f5_command)
 end, { buffer = true })
 
 -- pressing F5 key in insert mode or visual mode will exit respective mode
@@ -71,13 +83,3 @@ end
 -- just like above, pressing F8 in insert mode or visual mode will exit respective
 -- mode and press F8
 vim.keymap.set({ "i", "x" }, "<F8>", "<ESC><F8>", { buffer = true, remap = true })
-
--- Vim can use environmental variables when compiling using make
--- vim.env.CFLAGS = "-Wall -Wextra -pedantic -g -std=c2x"
--- vim.env.CXXFLAGS = "-Wall -Wextra -pedantic -g -std=c++17"
-
--- vim.env.CC = "cl.exe"
--- vim.env.CXX = "cl.exe"
-
--- Output Visual Studio messages in English (rather than system locale). Requires Visual Studio English language pack installed
-vim.env.VSLANG = 1033
