@@ -113,3 +113,15 @@ vmap <F1> <ESC><F1>
 onoremap ad <CMD>normal! ggVG<CR>
 xnoremap ad gg0oG$
 
+" Ctrl-,(comma) to duplicate current line
+function! PreserveStartOfLineAndCopy()
+  " Step 1: Store the current value of 'startofline' option
+  let l:original_startofline = &startofline
+  " Step 2: Perform ':copy .' command
+  execute "normal! :copy .\<CR>"
+  " Step 3: Restore the 'startofline' option to its original value
+  let &startofline = l:original_startofline
+endfunction
+
+nnoremap <C-,> :call PreserveStartOfLineAndCopy()<CR>
+
