@@ -120,3 +120,11 @@ vim.keymap.set("n", "k", function()
 		return "k"
 	end
 end, { expr = true })
+
+-- Duplicate current line while staying in the column
+vim.keymap.set("n", "<C-,>", function()
+	local startofline = vim.opt.startofline:get()
+	vim.opt.startofline = false
+	vim.cmd.copy(".")
+	vim.opt.startofline = startofline
+end, { noremap = true })
