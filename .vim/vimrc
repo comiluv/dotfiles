@@ -50,16 +50,14 @@ endif
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | source $MYVIMRC | endif
 " Plugin list here
 call plug#begin('~/.vim/plugged')
-Plug 'agudulin/vim-colors-alabaster',
-Plug 'sonph/onehalf', { 'rtp' : 'vim/' }
+Plug 'chasinglogic/modus-themes-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim',
-Plug 'dunstontc/vim-vscode-theme',
-Plug 'jiangmiao/auto-pairs',
+Plug 'junegunn/fzf.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary',
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'machakann/vim-highlightedyank'
 Plug 'bronson/vim-visual-star-search'
@@ -68,7 +66,7 @@ call plug#end()
 
 " Set colorscheme here
 set background=light
-colorscheme alabaster
+colorscheme modus-operandi
 
 if !exists('g:vscode')
     " Below was added by gVim installer therefore use it for Vim not for Neovim
