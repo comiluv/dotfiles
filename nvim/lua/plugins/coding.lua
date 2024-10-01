@@ -23,7 +23,7 @@ return {
 			local cmp_select_page = { behavior = cmp.SelectBehavior.Select, count = 8 }
 			local luasnip = require("luasnip")
 			local neogen = require("neogen")
-			local has_copilot, copilot = pcall(require,"copilot.suggestion")
+			local has_copilot, copilot = pcall(require, "copilot.suggestion")
 			return {
 				preselect = cmp.PreselectMode.None,
 				snippet = {
@@ -89,6 +89,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					{ name = "buffer" },
 					{ name = "path" },
 				}),
 				experimental = {
@@ -117,8 +118,8 @@ return {
 					{ name = "nvim_lua" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "path" },
 					{ name = "buffer" },
+					{ name = "path" },
 				}),
 			})
 			cmp.setup.filetype({ "rust" }, {
@@ -126,6 +127,7 @@ return {
 					{ name = "crates" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
+					{ name = "buffer" },
 					{ name = "path" },
 				}),
 			})

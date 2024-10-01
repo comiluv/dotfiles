@@ -1,8 +1,7 @@
 [font]
-normal = ["JetBrainsMono Nerd Font", "D2CodingLigature Nerd Font"]
+normal = ["JetBrainsMono Nerd Font"]
 size = 12
 
 [font.features]
-# disable texture healing because of zero issue
-# https://github.com/githubnext/monaspace/issues/109
-
+"JetBrainsMono Nerd Font" = ["-calt", "+ss01", "-ss02", "-ss19", "+zero"]
+# "SampleText" = "x <= y, x >= y, a => b, c -> d, e != f, g == h, i === j, k !== l, m <- n"
