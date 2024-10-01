@@ -6,14 +6,10 @@ nnoremap <leader>pv <CMD>Ex<CR>
 " Remap Alt key combinations to M combinations in wsl2 / Ubuntu
 " https://github.com/vim/vim/issues/8726
 if has('unix') && !has('nvim') " Only works in unix Vim (and not in Windows) and neoVim doesn't need this
-    execute "set <M-e>=\<Esc>e"
-    execute "set <M-p>=\<Esc>p"
-    execute "set <M-n>=\<Esc>n"
-    execute "set <M-b>=\<Esc>b"
-    execute "set <M-h>=\<Esc>h"
-    execute "set <M-j>=\<Esc>j"
-    execute "set <M-k>=\<Esc>k"
-    execute "set <M-l>=\<Esc>l"
+    for c in range(char2nr('a'), char2nr('z'))
+        execute printf("set <M-%s>=\e%s", nr2char(c), nr2char(c))
+    endfor
+    set ttimeoutlen=50
 endif
 
 " Don't use Ex mode, use Q for formatting.
