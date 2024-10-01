@@ -1,7 +1,8 @@
 [font]
-normal = ["JetBrainsMono Nerd Font"]
+normal = ["Iosevka Nerd Font"]
 size = 12
 
 [font.features]
-"JetBrainsMono Nerd Font" = ["-calt", "+ss01", "-ss02", "-ss19", "+zero"]
-# "SampleText" = "x <= y, x >= y, a => b, c -> d, e != f, g == h, i === j, k !== l, m <- n"
+"Iosevka Nerd Font" = ["+clik"]
+# clik: -> ->> --> ---> <= >= <-> <=> :: == != /* */ ++ +++
+# calt: <-- <--- <== <===
