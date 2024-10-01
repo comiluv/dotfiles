@@ -9,7 +9,6 @@ if has('unix') && !has('nvim') " Only works in unix Vim (and not in Windows) and
     for c in range(char2nr('a'), char2nr('z'))
         execute printf("set <M-%s>=\e%s", nr2char(c), nr2char(c))
     endfor
-    set ttimeoutlen=50
 endif
 
 " Don't use Ex mode, use Q for formatting.
