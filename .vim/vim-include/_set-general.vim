@@ -49,7 +49,6 @@ set completeopt=menuone,noinsert,noselect
 set splitbelow splitright
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
-set clipboard=autoselectplus
 set formatoptions-=ro " You need to make $HOME/.vim/after/ftplugin.vim and put it there to make it work
 " or have this run as autocmd. See autocmd section.
 set formatoptions+=j " Delete comment character when joining commented lines
