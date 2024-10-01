@@ -3,6 +3,8 @@ set mouse=a
 set guifont=DejaVuSansM\ Nerd\ Font\ Mono\ Regular\ 20
 set guifontwide=D2CodingLigature\ Nerd\ Font\ Regular\ 20
 
+set guioptions=PegmrLT
+
 " https://vim.fandom.com/wiki/Restore_screen_size_and_position
 " Restore screen size and position for gvim is wonky inside WSL
 
