@@ -62,9 +62,6 @@ else
     inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 endif
 
-" delete selection and put without yanking selection
-vmap <leader>p "_dP
-
 " delete without yanking
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
