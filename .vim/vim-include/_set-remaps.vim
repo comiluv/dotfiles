@@ -117,9 +117,11 @@ xnoremap ad gg0oG$
 function! PreserveStartOfLineAndCopy()
   " Step 1: Store the current value of 'startofline' option
   let l:original_startofline = &startofline
-  " Step 2: Perform ':copy .' command
+  " Step 2: Set 'startofline' option to false
+  let &startofline = v:false
+  " Step 3: Perform ':copy .' command
   execute "normal! :copy .\<CR>"
-  " Step 3: Restore the 'startofline' option to its original value
+  " Step 4: Restore the 'startofline' option to its original value
   let &startofline = l:original_startofline
 endfunction
 
