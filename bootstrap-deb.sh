@@ -59,6 +59,9 @@ git config --global init.defaultbranch "main"
 
 git clone https://github.com/comiluv/dotfiles ~/dotfiles
 
+# Install volta
+curl https://get.volta.sh | bash
+
 # setup vim
 mkdir -p ~/.vim
 # Loop over each item in the dotfiles/.vim directory
@@ -120,14 +123,7 @@ echo '\nexport BAT_THEME="OneHalfLight"\n' >> ~/.zshrc
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sed -i 's/^ZSH_THEME=.*$/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' ~/.zshrc
 
-# temporarily remove Windows path from wsl
-# see https://stackoverflow.com/questions/51336147/how-to-remove-the-win10s-path-from-wsl
-PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-z]' | tr '\n' ':' | sed 's/:$//')
-
-# Install zsh-nvm
-git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
-
-sed -i 's/plugins=(git)/plugins=(git zsh-nvm zsh-autosuggestions)/g' ~/.zshrc
+sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions)/g' ~/.zshrc
 
 chsh -s /bin/zsh
 zsh
