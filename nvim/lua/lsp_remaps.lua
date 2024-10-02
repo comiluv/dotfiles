@@ -23,36 +23,26 @@ function M.create_remaps()
 			map("<leader>x", function()
 				require("telescope.builtin").diagnostics({ bufnr = 0 })
 			end, "Diagnostics Quickfix")
+			local symbols = {
+				"Class",
+				"Function",
+				"Method",
+				"Constructor",
+				"Interface",
+				"Module",
+				"Struct",
+				"Trait",
+				"Field",
+				"Property",
+			}
 			map("<leader>ss", function()
 				require("telescope.builtin").lsp_document_symbols({
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
+					symbols = symbols,
 				})
 			end, "Document symbols")
 			map("<leader>sS", function()
 				require("telescope.builtin").lsp_dynamic_workspace_symbols({
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
+					symbols = symbols,
 				})
 			end, "Workspace symbols")
 			map("<f2>", ":IncRename <C-r><C-w>", "Rename symbol")
