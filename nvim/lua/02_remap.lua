@@ -125,3 +125,13 @@ vim.keymap.set("n", "<C-,>", function()
 	vim.cmd.copy(".")
 	vim.opt.startofline = startofline
 end, { noremap = true })
+
+-- Set language (Human language) for current buffer
+-- press z= to get spelling suggestions
+vim.keymap.set("n", "<leader>sl", function()
+	vim.opt_local.spelllang = vim.fn.input({
+		prompt = "Language > ",
+		default = vim.bo.spelllang,
+		cancelreturn = vim.bo.spelllang,
+	})
+end, { desc = "[S]et [l]anguage for buffer" })

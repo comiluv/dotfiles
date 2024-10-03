@@ -8,10 +8,10 @@ else
 end
 
 vim.schedule(function()
-if vim.fn.executable("rg") then
-	vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
-	vim.opt.grepformat = "%f:%l:%c:%m"
-end
+	if vim.fn.executable("rg") then
+		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
+		vim.opt.grepformat = "%f:%l:%c:%m"
+	end
 
 	vim.opt.clipboard = "unnamedplus"
 end)
@@ -86,3 +86,6 @@ vim.o.timeoutlen = 100
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
 
 vim.g.c_syntax_for_h = true
+
+-- Save language settings configured on each buffer
+vim.opt.sessionoptions:append("localoptions")
