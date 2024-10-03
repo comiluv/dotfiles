@@ -116,8 +116,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # configure .zshrc
 printf "\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/bin\" ] ; then\n PATH=\"\$HOME/bin:\$PATH\"\n fi\n\n# set PATH so it includes user's private bin if it exists\n if [ -d \"\$HOME/.local/bin\" ] ; then\n PATH=\"\$HOME/.local/bin:\$PATH\"\n fi\n" >> ~/.zshrc
 
-# configure bat colorscheme to OneHalfLight
-echo '\nexport BAT_THEME="OneHalfLight"\n' >> ~/.zshrc
+# configure bat colorscheme to Monokai Extended Light
+echo '\nexport BAT_THEME="Monokai Extended Light"\n' >> ~/.zshrc
 
 # Install powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
