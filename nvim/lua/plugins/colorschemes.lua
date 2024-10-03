@@ -18,9 +18,9 @@ return {
 		end,
 	},
 	{
-		"disrupted/one.nvim",
+		"miikanissi/modus-themes.nvim",
 	},
 	{
-		"miikanissi/modus-themes.nvim",
+		"polirritmico/monokai-nightasty.nvim",
 	},
 }
