@@ -3,6 +3,7 @@ require("01_set")
 require("02_remap")
 require("03_autocmd")
 require("04_load_lazy")
+require("05_user_command")
 
 if vim.g.neovide then
 	-- Neovide-specific settings
