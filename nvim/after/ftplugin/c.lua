@@ -19,7 +19,7 @@ if vim.fn.executable(compiler) == 0 then
 end
 
 local compile_commands = {
-	cl = "!cl.exe /W4 /Zi /O2 /Fo./obj/ /Fe./bin/",
+	cl = "!cl.exe /W4 /Zi /Fo./obj/ /Fe./bin/",
 	cc = "!cc -g -Wall -Wextra -pedantic -o ./bin/",
 	gcc = "!gcc -g -Wall -Wextra -pedantic -o ./bin/",
 	clang = "!clang -g -Wall -Wextra -pedantic -o ./bin/",

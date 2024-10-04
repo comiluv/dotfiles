@@ -14,7 +14,7 @@ if vim.fn.executable(compiler) == 0 then
 end
 
 local compile_commands = {
-	["cl"] = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /O2 /Fo./obj/ /Fe./bin/",
+	["cl"] = "!cl.exe /W4 /wd4458 /EHsc /Zi /std:c++latest /Fo./obj/ /Fe./bin/",
 	["c++"] = "!g++ -g -std=c++2b -Wall -o ./bin/",
 	["g++"] = "!g++ -g -std=c++2b -Wall -o ./bin/",
 	["clang++"] = "!clang++ -g -std=c++2b -Wall -o ./bin/",
