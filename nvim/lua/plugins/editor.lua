@@ -77,12 +77,8 @@ return {
 		},
 		config = function()
 			local telescope = require("telescope")
-			-- stylua: ignore
-			local file_ignore_patterns =
-{"^.*%.7z$","^.*%.aux$","^.*%.avi$","^.*%.bak$","^.*%.bib$","^.*%.class$","^.*%.cls$","^.*%.cmi$","^.*%.cmo$","^.*%.doc$","^.*%.docx$","^.*%.dvi$","^.*%.flac$","^.*%.flv$","^.*%.gem$","^.*%.gif$","^.*%.hi$","^.*%.ico$","^.*%.jpeg$","^.*%.jpg$","^.*%.log$","^.*%.min.*%.js$","^.*%.min%.js$","^.*%.mov$","^.*%.mp3$","^.*%.mp4$","^.*%.mpg$","^.*%.nav$","^.*%.o$","^.*%.obj$","^.*%.ods$","^.*%.odt$","^.*%.ogg$","^.*%.opus$","^.*%.out$","^.*%.pdf$","^.*%.pem$","^.*%.png$","^.*%.rar$","^.*%.rbc$","^.*%.rbo$","^.*%.settings$","^.*%.sty$","^.*%.svg$","^.*%.swp$","^.*%.swp.*%.$","^.*%.tar$","^.*%.tar%.bz2$","^.*%.tar%.gz$","^.*%.tar%.xz$","^.*%.tgz$","^.*%.toc$","^.*%.wav$","^.*%.webm$","^.*%.xcf$","^.*%.xls$","^.*%.xlsx$","^.*%.zip$","^.*/%.bundle/.*$","^.*/%.sass%-cache/.*$","^.*/vendor/cache/.*$","^.*/vendor/gems/.*$","^.*%~$","^%._.*$","^%.git$","^%.hg$","^%.svn$","^Thumbs%.db$","^Zend$","^intermediate/.*$","^publish/.*$","^vendor$"}
 			telescope.setup({
 				defaults = {
-					file_ignore_patterns = file_ignore_patterns,
 					history = {
 						path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",
 						limit = 100,
@@ -237,15 +233,6 @@ return {
 				end
 			end
 			return opt
-		end,
-	},
-
-	-- Instant grep + quickfix taken from: https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
-	{
-		dir = vim.fn.stdpath("config") .. "/lua/grep_cmd.lua",
-		event = { "CmdlineEnter" },
-		config = function()
-			require("grep_cmd").setup()
 		end,
 	},
 }

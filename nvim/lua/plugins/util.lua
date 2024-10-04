@@ -3,7 +3,7 @@ return {
 	{
 		"jghauser/mkdir.nvim",
 		event = "BufEnter",
-		-- event = "VeryLazy", -- "BufWritePre", "FileWritePre", "BufWriteCmd", "BufModifiedSet", didnt work
+		-- "BufWritePre", "FileWritePre", "BufWriteCmd", "BufModifiedSet", didnt work
 	},
 
 	-- Open the current word with custom openers, GitHub shorthands for example.

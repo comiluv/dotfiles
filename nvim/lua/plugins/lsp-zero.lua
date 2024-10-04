@@ -84,13 +84,14 @@ return {
 				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			local function setup(server)
+				if opts.skip_server_setup[server] then
+					return
+				end
 				local server_opts = vim.tbl_deep_extend("force", {}, {
 					capabilities = vim.deepcopy(lsp_capabilities),
 				}, servers[server] or {})
 
-				if opts.skip_server_setup[server] then
-					return
-				elseif opts.setup[server] then
+				if opts.setup[server] then
 					if opts.setup[server](server, server_opts) then
 						return
 					end
@@ -153,7 +154,6 @@ return {
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
-
 			-- implements ensure_installed behavior
 			local registry = require("mason-registry")
 			registry.refresh(function()
@@ -167,7 +167,7 @@ return {
 		end,
 	},
 
-	-- java language server plugin because lsp-zero (and lspconfig to extent) doesn't work
+	-- java language server plugin to further utilize lsp capabilities
 	-- see after/ftplugin/java.lua
 	{
 		"mfussenegger/nvim-jdtls",
@@ -189,21 +189,22 @@ return {
 				desc = "Format Buffer",
 			},
 		},
-		opts = function()
+		opts = function(_, opts)
+			opts = opts or {}
 			-- This snippet will automatically detect which formatters take too long to run synchronously and will run them async on save instead.
-			local slow_format_filetypes = {}
-			local opts = {
+			vim.g.slow_format_filetypes = vim.g.slow_format_filetypes or {}
+			local format = {
 				format_on_save = function(bufnr)
 					-- Disable with a global or buffer-local variable
 					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 						return
 					end
-					if slow_format_filetypes[vim.bo[bufnr].filetype] then
+					if vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
 						return
 					end
 					local function on_format(err)
 						if err and err:match("timeout$") then
-							slow_format_filetypes[vim.bo[bufnr].filetype] = true
+							vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] = true
 						end
 					end
 
@@ -215,7 +216,7 @@ return {
 					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 						return
 					end
-					if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+					if not vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
 						return
 					end
 					return { lsp_format = "fallback" }
@@ -239,6 +240,7 @@ return {
 					isort = { args = { "-" } },
 				},
 			}
+			opts = vim.tbl_deep_extend("force", opts, format)
 			return opts
 		end,
 		init = function()
@@ -275,9 +277,7 @@ return {
 			local lint = require("lint")
 			table.insert(lint.linters.mypy.args, "--ignore-missing-imports")
 			local new_ruff_args = { "--ignore", "E741" }
-			for i = 1, #new_ruff_args do
-				lint.linters.ruff.args[#lint.linters.ruff.args + 1] = new_ruff_args[i]
-			end
+			lint.linters.ruff.args = vim.list_extend(lint.linters.ruff.args, new_ruff_args)
 
 			lint.linters_by_ft = {
 				python = { "mypy", "ruff" },

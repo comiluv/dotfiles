@@ -62,12 +62,12 @@ vim.opt.splitright = true
 vim.opt.listchars = { tab = "→ ", lead = "·", space = "·", nbsp = "␣", trail = "•", eol = "¶", precedes = "«", extends = "»" }
 
 -- Decent wildmenu
--- vim.opt.path:append "**"
+vim.opt.path:append("**")
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:full"
 vim.opt.wildignorecase = true
 -- stylua: ignore
-vim.opt.wildignore = "*.7z,*.aux,*.avi,*.bak,*.bib,*.class,*.cls,*.cmi,*.cmo,*.doc,*.docx,*.dvi,*.flac,*.flv,*.gem,*.gif,*.hi,*.ico,*.jpeg,*.jpg,*.log,*.min*.js,*.min.js,*.mov,*.mp3,*.mp4,*.mpg,*.nav,*.o,*.obj,*.ods,*.odt,*.ogg,*.opus,*.out,*.pdf,*.pem,*.png,*.rar,*.rbc,*.rbo,*.settings,*.sty,*.svg,*.swp,*.swp*.,*.tar,*.tar.bz2,*.tar.gz,*.tar.xz,*.tgz,*.toc,*.wav,*.webm,*.xcf,*.xls,*.xlsx,*.zip,*/.bundle/*,*/.sass-cache/*,*/vendor/cache/*,*/vendor/gems/*,*~,._*,.git,.hg,.svn,Thumbs.db,Zend,intermediate/*,publish/*,vendor"
+vim.opt.wildignore = "*/.git/*"
 
 vim.opt.undofile = true
 
@@ -82,9 +82,10 @@ vim.lsp.set_log_level("off")
 vim.o.timeout = true
 vim.o.timeoutlen = 100
 
--- include msys64 usr/bin to use its utils such as gzip, tar, etc.
+-- Include msys64 usr/bin to use its utils such as gzip, tar, etc.
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
 
+-- Treat .h files as C
 vim.g.c_syntax_for_h = true
 
 -- Save language settings configured on each buffer
