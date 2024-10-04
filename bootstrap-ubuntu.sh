@@ -60,8 +60,8 @@ sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 sudo apt install build-essential gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip libfuse2 xclip sqlite3 libsqlite3-dev tealdeer anacron -y
 
 # Install nerd fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/D2Coding.tar.xz
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/DejaVuSansMono.tar.xz
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/D2Coding.tar.xz
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DejaVuSansMono.tar.xz
 sudo mkdir -p /usr/share/fonts/DejaVuSansMono
 sudo mkdir -p /usr/share/fonts/d2coding
 sudo tar xf DejaVuSansMono.tar.xz --directory=/usr/share/fonts/DejaVuSansMono
