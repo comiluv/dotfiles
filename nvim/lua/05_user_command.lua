@@ -54,6 +54,6 @@ usercmd("ClearShada", function()
 		::continue::
 	end
 	if all_success == 0 then
-		vim.print("Successfully deleted all temporary shada files")
+		vim.notify("Successfully deleted all temporary shada files", vim.log.levels.INFO)
 	end
 end, { desc = "Clears all the .tmp shada files" })

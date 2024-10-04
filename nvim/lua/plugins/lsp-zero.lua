@@ -249,10 +249,10 @@ return {
 				if args.bang then
 					-- FormatDisable! will disable formatting just for this buffer
 					vim.b.disable_autoformat = true
-					print("Autoformat disabled (buffer)")
+					vim.notify("Autoformat disabled (buffer)", vim.log.levels.INFO)
 				else
 					vim.g.disable_autoformat = true
-					print("Autoformat disabled (global)")
+					vim.notify("Autoformat disabled (global)", vim.log.levels.INFO)
 				end
 			end, {
 				desc = "Disable autoformat-on-save",
@@ -261,7 +261,7 @@ return {
 			vim.api.nvim_create_user_command("FormatEnable", function()
 				vim.b.disable_autoformat = false
 				vim.g.disable_autoformat = false
-				print("Autoformat enabled")
+				vim.notify("Autoformat enabled", vim.log.levels.INFO)
 			end, {
 				desc = "Re-enable autoformat-on-save",
 			})
