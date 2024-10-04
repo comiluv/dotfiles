@@ -11,16 +11,20 @@ return {
 	},
 	{
 		"p00f/alabaster.nvim",
-		priority = 1000,
-		config = function()
-			vim.opt.background = "light"
-			vim.cmd.colorscheme("alabaster")
-		end,
 	},
 	{
 		"miikanissi/modus-themes.nvim",
 	},
 	{
 		"polirritmico/monokai-nightasty.nvim",
+	},
+	{
+		"thimc/gruber-darker.nvim",
+		priority = 1000,
+		config = function()
+			require("gruber-darker").setup()
+			vim.cmd.colorscheme("gruber-darker")
+			vim.opt.background = "dark"
+		end,
 	},
 }
