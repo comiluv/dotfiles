@@ -7,7 +7,8 @@ openai=$(gpg -d ~/openai.txt.gpg)
 echo "OPENAI_API_KEYS=${openai}" > .env
 
 # Run Docker Compose
-docker compose -f docker-compose.yaml -f docker-compose.searxng.yaml up -d
-
 docker compose -f docker-compose.yaml up -d
+
+# Remove evidence
+shred --remove .env
 
