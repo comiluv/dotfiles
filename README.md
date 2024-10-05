@@ -48,9 +48,9 @@ chmod +x bootstrap-ubuntu.sh
 
 Does what Ubuntu script does in Debian but because Debian installed in WSL doesn't have wget nor curl, manually copying the script is the preferred method of installing this script
 
-### open-webui
+### docker
 
-Linux shell script that runs open-webui related Docker images
+This folder contains docker compose related files to run open-webui
 
 ### lsp_tests
 
