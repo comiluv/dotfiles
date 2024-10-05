@@ -68,8 +68,8 @@ return {
 
 		---@class opts
 		config = function(_, opts)
-			-- create remaps
-			require("lsp_remaps").create_remaps()
+			-- create keymaps
+			require("lsp_keymaps").create_keymaps()
 
 			-- register diagnostic icons
 			for name, icon in pairs(opts.sign_icons) do

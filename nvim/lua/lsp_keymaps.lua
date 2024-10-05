@@ -1,7 +1,7 @@
 local M = {}
 
-function M.create_remaps()
-	-- create remaps
+function M.create_keymaps()
+	-- create keymaps
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("LspRemaps", {}),
 		callback = function(event)

@@ -58,7 +58,7 @@ local capabilities = vim.tbl_deep_extend("force", lsp_capabilities, jdtls_capabi
 local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
--- remaps are handled globally by LspAttach autocmd
+-- keymaps are handled globally by LspAttach autocmd
 
 local config = {
 	-- The command that starts the language server

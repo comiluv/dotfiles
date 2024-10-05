@@ -102,7 +102,7 @@ vim.keymap.set("n", "<leader>td", function()
 		"LSP Diagnostic " .. (vim.diagnostic.is_enabled({ bufnr = 0 }) and "Enabled" or "Disabled"),
 		vim.log.levels.INFO
 	)
-end, { silent = true, noremap = true, desc = "[T]oggle LSP [d]iagnostic" })
+end, { silent = true, noremap = true, desc = "LSP: [T]oggle LSP [d]iagnostic" })
 
 -- Move normally in word-wrapped lines
 vim.keymap.set("n", "j", function()
