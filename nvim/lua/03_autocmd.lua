@@ -88,8 +88,8 @@ autocmd("BufWritePre", {
 	group = TrimGroup,
 	pattern = "*",
 	callback = function()
-		-- Only trim if the buffer is modifiable
-		if not vim.opt_local.modifiable:get() then
+		-- Only trim if the buffer is "normal buffer"
+		if vim.opt_local.buftype:get() ~= "" then
 			return
 		end
 		-- Only trim when there's no formatter attached

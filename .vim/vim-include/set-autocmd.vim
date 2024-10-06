@@ -1,4 +1,8 @@
 function! TrimWhitespace()
+    " Only trim "normal" buffers
+    if &buftype != ''
+        return
+    end
     if &ft =~ 'markdown\|ruby\|javascript\|perl'
 	    return
     end
