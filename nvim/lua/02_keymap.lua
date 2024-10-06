@@ -52,7 +52,7 @@ vim.keymap.set("n", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>f", "<nop>")
 
 -- quickfix navigation
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [q]uickfix list" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "LSP: Open diagnostic [q]uickfix list" })
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", ":cprev<CR>zz")
 vim.keymap.set("n", "<leader>j", ":lnext<CR>zz", { desc = "Next Location" })
