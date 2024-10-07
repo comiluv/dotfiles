@@ -137,7 +137,6 @@ return {
 				"black",
 				"isort",
 				"ruff",
-				"mypy",
 				"debugpy",
 				-- web
 				"typescript-language-server",
