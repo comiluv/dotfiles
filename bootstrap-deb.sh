@@ -2,6 +2,9 @@
 
 # make sure to chmod +x filename
 
+# Execution tracing
+set -xe
+
 # disabling password
 username=$(id -un)
 # add the username to a sudo config file

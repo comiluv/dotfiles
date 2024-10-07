@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Execution tracing
+set -xe
+
 # Decrypt the OpenAI key and store it in a variable
 openai=$(gpg -d ~/openai.txt.gpg)
 
