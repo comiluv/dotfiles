@@ -5,7 +5,8 @@
 # Execution tracing
 set -xe
 
-docker run --rm --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower:latest --run-once --include-restarting --include-stopped --cleanup
+timezone=$(cat /etc/timezone)
+docker run -e TZ="$timezone" --rm --name watchtower -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower:latest --run-once --include-restarting --include-stopped --cleanup
 
 docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama --restart always ollama/ollama:latest
 

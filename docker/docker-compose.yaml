@@ -1,9 +1,33 @@
 services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
   open-webui:
-    image: ghcr.io/open-webui/open-webui:latest
+    image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     ports:
-      - "3000:8080"
+      - 3000:8080
+    volumes:
+      - open-webui:/app/backend/data
+    depends_on:
+      - ollama
+      - searxng
     environment:
       WEBUI_AUTH: False
       OPENAI_API_BASE_URLS: "https://api.openai.com/v1"
@@ -13,28 +37,9 @@ services:
       RAG_WEB_SEARCH_RESULT_COUNT: 3
       RAG_WEB_SEARCH_CONCURRENT_REQUESTS: 10
       SEARXNG_QUERY_URL: "http://host.docker.internal:8080/search?q=<query>"
-    volumes:
-      - open-webui:/app/backend/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    restart: always
-
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama:/root/.ollama
-    restart: always
-    runtime: nvidia
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    restart: unless-stopped
 
   searxng:
     image: searxng/searxng:latest
