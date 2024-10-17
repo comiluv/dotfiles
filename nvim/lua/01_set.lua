@@ -76,9 +76,6 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
 
--- Turn off lsp logging because the file size grows beyond control
-vim.lsp.set_log_level("off")
-
 vim.o.timeout = true
 vim.o.timeoutlen = 100
 

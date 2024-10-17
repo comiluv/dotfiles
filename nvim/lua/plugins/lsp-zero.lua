@@ -36,6 +36,15 @@ return {
 						},
 					},
 				},
+				yamlls = {
+					settings = {
+						yaml = {
+							format = {
+								enable = true,
+							},
+						},
+					},
+				},
 				grammarly = {
 					filetypes = { "markdown", "text" },
 				},
@@ -44,7 +53,6 @@ return {
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig
 			setup = {
-				---@class opts
 				clangd = function(_, opts)
 					local clangd_capabilities =
 						require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -226,7 +234,6 @@ return {
 					css = { "prettierd" },
 					html = { "prettierd" },
 					json = { "prettierd" },
-					yaml = { "prettierd" },
 					python = { "isort", "black" },
 					lua = { "stylua" },
 					java = { "google_java_format" },
