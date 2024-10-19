@@ -20,6 +20,8 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_winsize = 25
 -- Delete netrw buffer after entering a file
 vim.g.netrw_fastbrowse = 0
+-- Show line numbers in Netrw
+vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro nornu"
 
 -- Suppress Alt keys in Windows so it can be used as shortcuts
 vim.opt.winaltkeys = "no"
