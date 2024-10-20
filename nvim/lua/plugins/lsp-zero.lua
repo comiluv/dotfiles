@@ -174,6 +174,13 @@ return {
 		end,
 	},
 
+	{
+		"williamboman/mason-lspconfig.nvim",
+		lazy = true,
+		dependencies = { "williamboman/mason.nvim" },
+		version = "^1",
+	},
+
 	-- java language server plugin to further utilize lsp capabilities
 	-- see after/ftplugin/java.lua
 	{
