@@ -81,7 +81,7 @@ return {
 	-- see changes in live action
 	{
 		"smjonas/live-command.nvim",
-		version = "^1.",
+		version = "^1",
 		event = { "CmdlineEnter" },
 		opts = { Norm = { cmd = "norm" }, commands = { S = { cmd = "Subvert" } } },
 		config = function(_, opts)
