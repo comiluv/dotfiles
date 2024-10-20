@@ -73,9 +73,7 @@ vim.opt.wildignore = "*/.git/*"
 
 vim.opt.undofile = true
 
--- Tree-sitter folding
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- Folding
 vim.opt.foldlevelstart = 99
 
 vim.o.timeout = true
