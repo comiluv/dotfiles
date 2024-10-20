@@ -48,26 +48,14 @@ return {
 				grammarly = {
 					filetypes = { "markdown", "text" },
 				},
+				clangd = {
+					cmd = {"clangd", "--header-insertion=never"},
+				},
 			},
 			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true },
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig
 			setup = {
-				clangd = function(_, opts)
-					local clangd_capabilities =
-						require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-					opts.capabilities = clangd_capabilities
-					local on_attach = opts.on_attach
-					opts.on_attach = function(client, bufnr)
-						client.server_capabilities.signatureHelpProvider = false
-						if on_attach then
-							on_attach(client, bufnr)
-						end
-					end
-					opts.cmd = { "clangd", "--header-insertion=never" }
-					require("lspconfig").clangd.setup(opts)
-					return true
-				end,
 				-- Specify * to use this function as a fallback for any server
 				-- ["*"] = function(server, opts) end,
 			},
