@@ -9,19 +9,25 @@ return {
 
 	-- show indent lines
 	{
-		"shellRaining/hlchunk.nvim",
+		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPre", "BufNewFile" },
-		opts = function(_, opts)
-			local filetypes = require("utils").array_to_table(vim.g.info_filetype, true)
-			local indent = {
-				indent = {
-					enable = true,
-					chars = { "┆" },
-					exclude_filetypes = filetypes,
-				},
+		main = "ibl",
+		config = function()
+			local opts = {
+				exclude = { filetypes = vim.g.info_filetype },
+				indent = { char = "┆" },
 			}
-			opts = vim.tbl_deep_extend("force", opts, indent)
-			return opts
+			require("ibl").setup(opts)
+			vim.api.nvim_create_autocmd({ "BufReadPre" }, {
+				group = vim.api.nvim_create_augroup("ibl_group", {}),
+				callback = function(event)
+					local ok, size = pcall(vim.fn.getfsize, event.file)
+					if not ok or size > 1024 * 1024 then -- 1 MB
+						require("ibl").setup_buffer(event.buf, { scope = { enabled = false } })
+						return
+					end
+				end,
+			})
 		end,
 	},
 
