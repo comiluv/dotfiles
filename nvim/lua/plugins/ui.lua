@@ -9,13 +9,20 @@ return {
 
 	-- show indent lines
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = { "VeryLazy", "BufNewFile", "InsertEnter" },
-		main = "ibl",
-		opts = {
-			exclude = { filetypes = vim.g.info_filetype },
-			indent = { char = "┆" },
-		},
+		"shellRaining/hlchunk.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = function(_, opts)
+			local filetypes = require("utils").array_to_table(vim.g.info_filetype, true)
+			local indent = {
+				indent = {
+					enable = true,
+					chars = { "┆" },
+					exclude_filetypes = filetypes,
+				},
+			}
+			opts = vim.tbl_deep_extend("force", opts, indent)
+			return opts
+		end,
 	},
 
 	-- statusline written in lua
@@ -55,7 +62,20 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
-		opts = {},
+		config = function()
+			require("treesitter-context").setup({ max_lines = 60 })
+			vim.api.nvim_create_autocmd({ "BufReadPre" }, {
+				group = vim.api.nvim_create_augroup("ts-context-group", {}),
+				callback = function(event)
+					local ok, size = pcall(vim.fn.getfsize, event.file)
+					if not ok or size > 1024 * 1024 then -- 1 MB
+						vim.cmd.TSContextDisable()
+						return
+					end
+					vim.cmd.TSContextEnable()
+				end,
+			})
+		end,
 	},
 
 	-- better quickfix list
