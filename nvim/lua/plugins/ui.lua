@@ -19,7 +19,7 @@ return {
 			}
 			require("ibl").setup(opts)
 			vim.api.nvim_create_autocmd({ "BufAdd" }, {
-				group = vim.api.nvim_create_augroup("IblGroup", {}),
+				group = vim.api.nvim_create_augroup("IndentBlankLineGroup", {}),
 				callback = function(event)
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
