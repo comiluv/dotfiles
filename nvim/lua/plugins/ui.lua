@@ -19,7 +19,7 @@ return {
 			}
 			require("ibl").setup(opts)
 			vim.api.nvim_create_autocmd({ "BufAdd" }, {
-				group = vim.api.nvim_create_augroup("ibl_group", {}),
+				group = vim.api.nvim_create_augroup("IblGroup", {}),
 				callback = function(event)
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
@@ -71,7 +71,7 @@ return {
 		config = function()
 			require("treesitter-context").setup({ max_lines = 60 })
 			vim.api.nvim_create_autocmd({ "BufAdd" }, {
-				group = vim.api.nvim_create_augroup("ts-context-group", {}),
+				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
 				callback = function(event)
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
