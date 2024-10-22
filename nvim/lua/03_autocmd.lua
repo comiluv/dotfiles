@@ -181,7 +181,7 @@ autocmd({ "BufReadPre" }, {
 	end,
 })
 
--- Add extensions for Zip Plugin (Note unlike Vim, modifying g:zipPlugin_ext doesn't work)
+-- Add extensions for Zip Plugin (Note unlike Vim, modifying g:zipPlugin_ext doesn't work in Neovim)
 autocmd({ "BufReadCmd" }, {
 	group = augroup("ZipPluginGroup", {}),
 	pattern = { "*.pak" },
