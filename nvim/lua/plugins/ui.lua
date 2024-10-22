@@ -84,13 +84,6 @@ return {
 		end,
 	},
 
-	-- better quickfix list
-	{
-		"kevinhwang91/nvim-bqf",
-		ft = { "qf" },
-		opts = {},
-	},
-
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
