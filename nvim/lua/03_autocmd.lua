@@ -180,3 +180,10 @@ autocmd({ "BufReadPre" }, {
 		end
 	end,
 })
+
+-- Add extensions for Zip Plugin (Note unlike Vim, modifying g:zipPlugin_ext doesn't work)
+autocmd({ "BufReadCmd" }, {
+	group = augroup("ZipPluginGroup", {}),
+	pattern = { "*.pak" },
+	command = 'call zip#Browse(expand("<amatch>"))',
+})

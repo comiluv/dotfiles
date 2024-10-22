@@ -23,20 +23,8 @@ local opts = {
 	performance = {
 		rtp = {
 			disabled_plugins = {
-				"editorconfig",
-				"health",
-				"gzip",
-				"man",
 				"matchit",
 				"matchparen",
-				"perl_provider",
-				"rplugin",
-				"ruby_provider",
-				"spellfile",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
-				"zipPlugin",
 			},
 		},
 	},
