@@ -48,44 +48,20 @@ return {
 		"tpope/vim-abolish",
 		event = { "CmdlineEnter", "VeryLazy", "BufNewFile" },
 		cmd = { "Subvert", "S", "Abolish" },
-		dependencies = { "smjonas/live-command.nvim" },
 		init = function()
-			local wk = require("which-key")
-			wk.add({
-				{
-					mode = { "n", "v" },
-					{ "cr-", desc = "Coerce: kebab-case (not reversible)" },
-					{ "cr.", desc = "Coerce: dot.case (not reversible)" },
-					{ "cr<space>", desc = "Coerce: space case (not reversible)" },
-					{ "crU", desc = "Coerce: SNAKE_UPPER_CASE" },
-					{ "cr_", desc = "Coerce: snake_case" },
-					{ "crc", desc = "Coerce: camelCase" },
-					{ "crk", desc = "Coerce: kebab-case" },
-					{ "crm", desc = "Coerce: MixedCase" },
-					{ "crp", desc = "Coerce: PascalCase" },
-					{ "crs", desc = "Coerce: snake_case" },
-					{ "crt", desc = "Coerce: Title Case (not reversible)" },
-					{ "cru", desc = "Coerce: SNAKE_UPPER_CASE" },
-					{
-						"cr?",
-						function()
-							wk.show("cr")
-						end,
-						group = "Coerce",
-					},
-				},
-			})
+			-- Disable coercion mappings. I use coerce.nvim for that.
+			vim.g.abolish_no_mappings = true
 		end,
 	},
 
-	-- see changes in live action
+	-- Quickly change keyword case (Coerce)
 	{
-		"smjonas/live-command.nvim",
-		version = "^1",
-		event = { "CmdlineEnter" },
-		opts = { Norm = { cmd = "norm" }, commands = { S = { cmd = "Subvert" } } },
-		config = function(_, opts)
-			require("live-command").setup(opts)
-		end,
+		"gregorias/coerce.nvim",
+		event = { "BufAdd", "BufNewFile" },
+		dependencies = {
+			"folke/which-key.nvim",
+		},
+		version = "^3",
+		opts = {},
 	},
 }
