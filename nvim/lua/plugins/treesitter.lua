@@ -3,7 +3,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		cmd = "TSUpdate",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		build = ":TSUpdate",
 		dependencies = {
 			-- auto close block with end

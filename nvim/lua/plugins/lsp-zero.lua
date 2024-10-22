@@ -2,7 +2,7 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -49,7 +49,7 @@ return {
 					filetypes = { "markdown", "text" },
 				},
 				clangd = {
-					cmd = {"clangd", "--header-insertion=never"},
+					cmd = { "clangd", "--header-insertion=never" },
 				},
 			},
 			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true },
@@ -273,7 +273,7 @@ return {
 
 	{
 		"mfussenegger/nvim-lint",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			local lint = require("lint")
 			table.insert(lint.linters.mypy.args, "--ignore-missing-imports")

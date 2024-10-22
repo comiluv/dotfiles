@@ -104,14 +104,14 @@ return {
 	-- auto detect indentation
 	{
 		"Darazaki/indent-o-matic",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 
 	-- auto locate last location in the file
 	{
 		"ethanholz/nvim-lastplace",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 
@@ -126,7 +126,7 @@ return {
 
 	{
 		"rktjmp/highlight-current-n.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			local clear_search_hl_group = vim.api.nvim_create_augroup("ClearSearchHL", {})
 			vim.api.nvim_create_autocmd("CmdlineEnter", {
@@ -189,7 +189,7 @@ return {
 
 	{
 		"windwp/nvim-ts-autotag",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {
 			{
 				enable_rename = true,
@@ -222,7 +222,7 @@ return {
 	-- show invisible characters in visual mode
 	{
 		"mcauley-penney/visual-whitespace.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = function(_, opt)
 			local listchars = vim.opt.listchars:get()
 			for k, v in pairs(listchars) do

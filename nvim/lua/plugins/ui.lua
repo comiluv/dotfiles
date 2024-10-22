@@ -10,7 +10,7 @@ return {
 	-- show indent lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufAdd", "BufNewFile" },
 		main = "ibl",
 		config = function()
 			local opts = {
@@ -18,7 +18,7 @@ return {
 				indent = { char = "┆" },
 			}
 			require("ibl").setup(opts)
-			vim.api.nvim_create_autocmd({ "BufReadPre" }, {
+			vim.api.nvim_create_autocmd({ "BufAdd" }, {
 				group = vim.api.nvim_create_augroup("ibl_group", {}),
 				callback = function(event)
 					local ok, size = pcall(vim.fn.getfsize, event.file)
@@ -34,7 +34,7 @@ return {
 	-- statusline written in lua
 	{
 		"nvim-lualine/lualine.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
@@ -67,10 +67,10 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			require("treesitter-context").setup({ max_lines = 60 })
-			vim.api.nvim_create_autocmd({ "BufReadPre" }, {
+			vim.api.nvim_create_autocmd({ "BufAdd" }, {
 				group = vim.api.nvim_create_augroup("ts-context-group", {}),
 				callback = function(event)
 					local ok, size = pcall(vim.fn.getfsize, event.file)
@@ -87,7 +87,7 @@ return {
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 
@@ -96,7 +96,7 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		event = { "BufReadPre", "BufNewFile", "InsertEnter" },
+		event = { "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 
