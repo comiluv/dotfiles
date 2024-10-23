@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open Netrw" })
+vim.keymap.set("n", "<leader>pv", "<CMD>Ex<CR>", { desc = "Open Netrw" })
 
 -- Don't use Ex mode, use Q for formatting.
 -- Revert with ":unmap Q".

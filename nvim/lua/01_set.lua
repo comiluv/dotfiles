@@ -16,7 +16,6 @@ vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
 
-vim.g.netrw_browse_split = 0
 vim.g.netrw_winsize = 25
 -- Delete netrw buffer after entering a file
 vim.g.netrw_fastbrowse = 0
