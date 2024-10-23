@@ -2,7 +2,7 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		lazy = false,
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",

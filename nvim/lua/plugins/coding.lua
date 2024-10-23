@@ -3,7 +3,8 @@ return {
 	-- Requires manual git command in https://github.com/ms-jpq/coq_nvim/issues/589#issuecomment-1651436348
 	{
 		"ms-jpq/coq_nvim",
-		lazy = true,
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		cmd = { "COQdeps", "COQnow", "COQhelp", "COQsnips", "COQstats" },
 		dependencies = {
 			-- add vscode-like pictograms
 			"onsails/lspkind.nvim",
