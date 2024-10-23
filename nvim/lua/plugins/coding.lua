@@ -3,9 +3,14 @@ return {
 	-- Requires manual git command in https://github.com/ms-jpq/coq_nvim/issues/589#issuecomment-1651436348
 	{
 		"ms-jpq/coq_nvim",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		branch = "coq",
+		event = { "InsertEnter" },
 		cmd = { "COQdeps", "COQnow", "COQhelp", "COQsnips", "COQstats" },
 		dependencies = {
+			{ "ms-jpq/coq.artifacts", branch = "artifacts" },
+			-- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+			-- Need to **configure separately**
+			{ "ms-jpq/coq.thirdparty", branch = "3p" },
 			-- add vscode-like pictograms
 			"onsails/lspkind.nvim",
 			"zbirenbaum/copilot.lua",

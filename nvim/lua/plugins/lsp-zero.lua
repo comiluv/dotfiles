@@ -2,19 +2,13 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			{
-				{
-					"ms-jpq/coq_nvim",
-					branch = "coq",
-				},
-				{ "ms-jpq/coq.artifacts", branch = "artifacts" },
-				-- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
-				-- Need to **configure separately**
-				{ "ms-jpq/coq.thirdparty", branch = "3p" },
+				"ms-jpq/coq_nvim",
+				branch = "coq",
 			},
 		},
 		opts = {
