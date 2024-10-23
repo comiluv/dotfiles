@@ -10,7 +10,7 @@ return {
 	-- show indent lines
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufAdd", "BufNewFile" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile" },
 		main = "ibl",
 		config = function()
 			local opts = {
@@ -18,9 +18,13 @@ return {
 				indent = { char = "┆" },
 			}
 			require("ibl").setup(opts)
-			vim.api.nvim_create_autocmd({ "BufAdd" }, {
+			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
 				group = vim.api.nvim_create_augroup("IndentBlankLineGroup", {}),
 				callback = function(event)
+					if vim.b.indent_blankline_set then
+						return
+					end
+					vim.b.indent_blankline_set = true
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
 						require("ibl").setup_buffer(event.buf, { scope = { enabled = false } })
@@ -34,7 +38,7 @@ return {
 	-- statusline written in lua
 	{
 		"nvim-lualine/lualine.nvim",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
@@ -67,12 +71,16 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			require("treesitter-context").setup({ max_lines = 60 })
-			vim.api.nvim_create_autocmd({ "BufAdd" }, {
+			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
 				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
 				callback = function(event)
+					if vim.b.treesitter_context_set then
+						return
+					end
+					vim.b.treesitter_context_set = true
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
 						vim.cmd.TSContextDisable()
@@ -87,7 +95,7 @@ return {
 	-- display git signs in the gutter
 	{
 		"lewis6991/gitsigns.nvim",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 
@@ -96,7 +104,7 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 

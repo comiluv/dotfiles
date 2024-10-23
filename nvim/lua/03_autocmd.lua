@@ -164,9 +164,13 @@ autocmd({ "LspAttach" }, {
 
 -- Set folding method for each buffer
 -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1100#issuecomment-1762594005
-autocmd({ "BufAdd" }, {
+autocmd({ "BufAdd", "BufReadPre" }, {
 	group = augroup("TreesitterFoldingGroup", {}),
 	callback = function(ev)
+		if vim.b.treesitter_folding_set then
+			return
+		end
+		vim.b.treesitter_folding_set = true
 		local ok, size = pcall(vim.fn.getfsize, ev.file)
 		if not ok or size > 1024 * 1024 then
 			-- fallback to default values

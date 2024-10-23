@@ -196,7 +196,7 @@ return {
 
 	{
 		"kylechui/nvim-surround",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		version = "*",
 		opts = {},
 	},
@@ -241,7 +241,7 @@ return {
 	-- comment/uncomment hotkeys
 	{
 		"numToStr/Comment.nvim",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = { toggler = { block = "gbb" } },
 	},
 
@@ -259,7 +259,7 @@ return {
 	-- easy align comments
 	{
 		"echasnovski/mini.align",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		version = false,
 		opts = {},
 	},

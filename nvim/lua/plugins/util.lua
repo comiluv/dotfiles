@@ -57,7 +57,7 @@ return {
 	-- Quickly change keyword case (Coerce)
 	{
 		"gregorias/coerce.nvim",
-		event = { "BufAdd", "BufNewFile" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile" },
 		dependencies = {
 			"folke/which-key.nvim",
 		},

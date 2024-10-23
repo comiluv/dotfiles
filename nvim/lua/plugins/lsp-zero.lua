@@ -2,7 +2,7 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -272,7 +272,7 @@ return {
 
 	{
 		"mfussenegger/nvim-lint",
-		event = { "BufAdd", "BufNewFile", "InsertEnter" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			local lint = require("lint")
 			table.insert(lint.linters.mypy.args, "--ignore-missing-imports")
