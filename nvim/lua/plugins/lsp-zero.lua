@@ -2,11 +2,20 @@ return {
 	-- LSP Support
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		lazy = false,
 		dependencies = {
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp",
+			{
+				{
+					"ms-jpq/coq_nvim",
+					branch = "coq",
+				},
+				{ "ms-jpq/coq.artifacts", branch = "artifacts" },
+				-- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+				-- Need to **configure separately**
+				{ "ms-jpq/coq.thirdparty", branch = "3p" },
+			},
 		},
 		opts = {
 			-- options for vim.diagnostic.config()
@@ -76,16 +85,12 @@ return {
 
 			local lspconfig = require("lspconfig")
 			local servers = opts.servers
-			local lsp_capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 			local function setup(server)
 				if opts.skip_server_setup[server] then
 					return
 				end
-				local server_opts = vim.tbl_deep_extend("force", {}, {
-					capabilities = vim.deepcopy(lsp_capabilities),
-				}, servers[server] or {})
+				local server_opts = vim.tbl_deep_extend("force", {}, servers[server] or {})
 
 				if opts.setup[server] then
 					if opts.setup[server](server, server_opts) then
@@ -96,7 +101,7 @@ return {
 						return
 					end
 				end
-				lspconfig[server].setup(server_opts)
+				lspconfig[server].setup(require("coq").lsp_ensure_capabilities(server_opts))
 			end
 
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
@@ -344,7 +349,6 @@ return {
 
 	{
 		"saecki/crates.nvim",
-		dependencies = "hrsh7th/nvim-cmp",
 		event = { "BufRead Cargo.toml" },
 		opts = {},
 	},

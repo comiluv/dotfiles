@@ -41,7 +41,7 @@ local path_to_jar = jdtls_dir .. "/plugins/org.eclipse.equinox.launcher_1.6.600.
 -- eclipse.jdt.ls installation                                           the actual version
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lsp_capabilities = require("coq").lsp_ensure_capabilities().capabilities
 local jdtls_capabilities = {
 	workspace = {
 		configuration = true,
