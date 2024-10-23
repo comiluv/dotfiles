@@ -135,9 +135,8 @@ return {
 				"ruff",
 				"debugpy",
 				-- web
-				"typescript-language-server",
+				"denols",
 				"css-lsp",
-				"tailwindcss-language-server",
 				"eslint-lsp",
 				"prettierd",
 				-- java
