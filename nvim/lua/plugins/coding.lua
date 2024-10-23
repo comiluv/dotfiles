@@ -19,6 +19,7 @@ return {
 			vim.g.coq_settings = {
 				auto_start = true,
 				keymap = { recommended = false },
+				display = { statusline = { helo = false } },
 			}
 			-- Keybindings
 			local has_copilot, copilot = pcall(require, "copilot.suggestion")
