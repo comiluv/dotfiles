@@ -135,7 +135,7 @@ return {
 				"ruff",
 				"debugpy",
 				-- web
-				"denols",
+				"deno",
 				"css-lsp",
 				"eslint-lsp",
 				"prettierd",
