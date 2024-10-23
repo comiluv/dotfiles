@@ -64,4 +64,13 @@ return {
 		version = "^3",
 		opts = {},
 	},
+
+	-- Extends zip.vim to browse and edit nested zip files
+	{
+		"lbrayner/vim-rzip",
+		event = { "VeryLazy" },
+		init = function()
+			vim.g.rzipPlugin_extra_ext = "*.pak"
+		end,
+	},
 }
