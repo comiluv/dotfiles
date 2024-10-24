@@ -7,7 +7,7 @@ return {
 			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
 		},
 		opts = {
-			provide = "claude",
+			provider = "claude",
 			claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.gpg" } },
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
