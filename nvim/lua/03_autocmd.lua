@@ -172,12 +172,8 @@ autocmd({ "BufAdd", "BufReadPre" }, {
 		end
 		vim.b.treesitter_folding_set = true
 		local ok, size = pcall(vim.fn.getfsize, ev.file)
-		if not ok or size > 1024 * 1024 then
-			-- fallback to default values
-			vim.opt_local.foldmethod = "manual"
-			vim.opt_local.foldexpr = "0"
-			vim.opt_local.foldtext = "foldtext()"
-		else
+		-- File exists and small enough for tree-sitter folding
+		if ok and size > 0 and size < 1024 * 1024 then
 			vim.opt_local.foldmethod = "expr"
 			vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 			vim.opt_local.foldtext = "v:lua.vim.treesitter.foldtext()"
