@@ -21,7 +21,7 @@ return {
 			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
 				group = vim.api.nvim_create_augroup("IndentBlankLineGroup", {}),
 				callback = function(event)
-					if vim.b.indent_blankline_set then
+					if vim.b.indent_blankline_set or event.file == "" then
 						return
 					end
 					vim.b.indent_blankline_set = true
@@ -77,7 +77,7 @@ return {
 			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
 				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
 				callback = function(event)
-					if vim.b.treesitter_context_set then
+					if vim.b.treesitter_context_set or event.file == "" then
 						return
 					end
 					vim.b.treesitter_context_set = true

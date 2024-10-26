@@ -167,7 +167,7 @@ autocmd({ "LspAttach" }, {
 autocmd({ "BufAdd", "BufReadPre" }, {
 	group = augroup("TreesitterFoldingGroup", {}),
 	callback = function(ev)
-		if vim.b.treesitter_folding_set then
+		if vim.b.treesitter_folding_set or ev.file == "" then
 			return
 		end
 		vim.b.treesitter_folding_set = true
