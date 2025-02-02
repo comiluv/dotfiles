@@ -3,6 +3,7 @@ return {
 	-- Requires manual git command in https://github.com/ms-jpq/coq_nvim/issues/589#issuecomment-1651436348
 	{
 		"ms-jpq/coq_nvim",
+		lazy = false,
 		branch = "coq",
 		event = { "InsertEnter" },
 		cmd = { "COQdeps", "COQnow", "COQhelp", "COQsnips", "COQstats" },
@@ -18,7 +19,7 @@ return {
 		init = function()
 			vim.g.coq_settings = {
 				auto_start = true,
-				keymap = { recommended = false },
+				keymap = { recommended = false, jump_to_mark = "<tab>" },
 				display = { statusline = { helo = false } },
 			}
 
