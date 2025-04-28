@@ -115,7 +115,7 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = vim.g.info_filetype,
 	callback = function()
-		vim.diagnostic.disable(0)
+		vim.diagnostic.enable(false, {nil, 0})
 	end,
 })
 
