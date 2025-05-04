@@ -16,12 +16,14 @@ return {
 				virtual_text = { spacing = 4, prefix = "●" },
 				severity_sort = true,
 				float = { source = "always", border = "rounded" },
-			},
-			sign_icons = {
-				error = "✘",
-				warn = "▲",
-				hint = "⚑",
-				info = "",
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "✘",
+						[vim.diagnostic.severity.WARN] = "▲",
+						[vim.diagnostic.severity.HINT] = "⚑",
+						[vim.diagnostic.severity.INFO] = "",
+					},
+				},
 			},
 			servers = {
 				lua_ls = {
@@ -67,11 +69,6 @@ return {
 			-- create keymaps
 			require("lsp_keymaps").create_keymaps()
 
-			-- register diagnostic icons
-			for name, icon in pairs(opts.sign_icons) do
-				name = "DiagnosticSign" .. name:gsub("^%a", string.upper)
-				vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-			end
 			vim.diagnostic.config(opts.diagnostics)
 
 			local lspconfig = require("lspconfig")
