@@ -1,4 +1,7 @@
-vim.keymap.set("n", "<leader>pv", "<CMD>Ex<CR>", { desc = "Open Netrw" })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.keymap.set("", "<leader>pv", "<ESC>:Ex<CR>", { desc = "Open Netrw" })
 
 -- Don't use Ex mode, use Q for formatting.
 -- Revert with ":unmap Q".

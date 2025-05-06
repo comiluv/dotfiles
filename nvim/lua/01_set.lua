@@ -1,6 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 if vim.fn.has("unix") == 1 then
 	vim.g.python3_host_prog = "/usr/bin/python3"
 else
