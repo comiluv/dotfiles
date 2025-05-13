@@ -105,7 +105,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		opts = {},
+		opts = { delay = 0 },
 	},
 
 	-- show LSP diagnostics in multiple lines
