@@ -45,7 +45,7 @@ autocmd("TextYankPost", {
 	group = yank_group,
 	pattern = "*",
 	callback = function()
-		vim.highlight.on_yank({
+		vim.hl.on_yank({
 			higroup = "IncSearch",
 			timeout = 40,
 		})
@@ -115,7 +115,7 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = vim.g.info_filetype,
 	callback = function()
-		vim.diagnostic.enable(false, {nil, 0})
+		vim.diagnostic.enable(false, { nil, 0 })
 	end,
 })
 
