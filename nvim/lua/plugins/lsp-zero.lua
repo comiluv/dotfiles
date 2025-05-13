@@ -5,7 +5,7 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		opts = {
@@ -116,7 +116,7 @@ return {
 	},
 
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		event = "VeryLazy",
 		cmd = { "Mason", "MasonUpdate" },
 		build = ":MasonUpdate",
@@ -159,9 +159,9 @@ return {
 	},
 
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		lazy = true,
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "mason-org/mason.nvim" },
 		version = "^1",
 	},
 
@@ -326,7 +326,7 @@ return {
 		"jay-babu/mason-nvim-dap.nvim",
 		lazy = true,
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			"mfussenegger/nvim-dap",
 		},
 		opts = {
