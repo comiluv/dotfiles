@@ -283,7 +283,10 @@ return {
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "TextChanged" }, {
 				group = vim.api.nvim_create_augroup("lint", { clear = true }),
 				callback = function()
-					lint.try_lint()
+					-- Only run the linter in modifiable buffers
+					if vim.opt_local.modifiable:get() then
+						lint.try_lint()
+					end
 				end,
 			})
 		end,
