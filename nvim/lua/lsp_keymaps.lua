@@ -1,3 +1,9 @@
+-- Disable global default LSP keymaps introduce in Neovim 0.10
+vim.keymap.del("n", "grn")
+vim.keymap.del({ "n", "v" }, "gra")
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "gri")
+
 local M = {}
 
 function M.create_keymaps()
