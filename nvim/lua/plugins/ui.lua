@@ -114,13 +114,14 @@ return {
 		event = { "LspAttach" },
 		config = function()
 			require("lsp_lines").setup({})
-			vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+			local virtual_text = vim.diagnostic.config().virtual_text or true
+			vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
 			vim.keymap.set("", "<leader>l", function()
 				local config = vim.diagnostic.config() or {}
-				if config.virtual_text then
+				if config.virtual_text ~= false then
 					vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
 				else
-					vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+					vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
 				end
 			end, { desc = "LSP: Toggle lsp_lines" })
 		end,
