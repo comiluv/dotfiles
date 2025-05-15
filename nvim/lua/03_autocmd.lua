@@ -166,12 +166,12 @@ autocmd({ "LspAttach" }, {
 -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1100#issuecomment-1762594005
 autocmd({ "BufAdd", "BufReadPre" }, {
 	group = augroup("TreesitterFoldingGroup", {}),
-	callback = function(ev)
-		if vim.b.treesitter_folding_set or ev.file == "" then
+	callback = function(event)
+		if vim.b.treesitter_folding_set or event.file == "" then
 			return
 		end
 		vim.b.treesitter_folding_set = true
-		local ok, size = pcall(vim.fn.getfsize, ev.file)
+		local ok, size = pcall(vim.fn.getfsize, event.file)
 		-- File exists and small enough for tree-sitter folding
 		if ok and size > 0 and size < 1024 * 1024 then
 			vim.opt_local.foldmethod = "expr"
