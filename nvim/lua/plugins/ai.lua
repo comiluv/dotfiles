@@ -17,6 +17,7 @@ return {
 		cond = function()
 			return vim.fn.executable("gpg") == 1
 				and (vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1 or vim.fn.executable("make") == 1)
+				and vim.uv.fs_stat(vim.fn.getenv("HOME") .. "/anthropic.txt.gpg")
 		end,
 		dependencies = {
 			"stevearc/dressing.nvim",
@@ -142,7 +143,7 @@ return {
 			},
 		},
 		cond = function()
-			return vim.fn.executable("gpg") == 1
+			return vim.fn.executable("gpg") == 1 and vim.uv.fs_stat(vim.fn.getenv("HOME") .. "/openai.txt.gpg")
 		end,
 		config = function()
 			local on_exit = function(obj)
