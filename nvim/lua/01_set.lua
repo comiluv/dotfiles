@@ -73,7 +73,7 @@ vim.opt.undofile = true
 vim.opt.foldlevelstart = 99
 
 vim.o.timeout = true
-vim.o.timeoutlen = 100
+vim.o.timeoutlen = 200
 
 -- Include msys64 usr/bin to use its utils such as gzip, tar, etc.
 vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
