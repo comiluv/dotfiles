@@ -106,15 +106,6 @@ autocmd("BufWritePre", {
 	end,
 })
 
--- disable lsp for filetypes
-autocmd({ "FileType" }, {
-	group = MyGroup,
-	pattern = vim.g.info_filetype,
-	callback = function(event)
-		vim.diagnostic.enable(false, { nil, event.buf })
-	end,
-})
-
 -- disable <esc><esc> keymap in lazygit window
 autocmd({ "FileType" }, {
 	group = MyGroup,
