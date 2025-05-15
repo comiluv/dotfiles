@@ -43,7 +43,6 @@ local trim_exclusions = {
 -- Flash yanked text after yanking
 autocmd("TextYankPost", {
 	group = yank_group,
-	pattern = "*",
 	callback = function()
 		vim.hl.on_yank({
 			higroup = "IncSearch",
@@ -55,7 +54,6 @@ autocmd("TextYankPost", {
 -- Remove inserting comment marker the cursor is on a comment and open a new line
 autocmd({ "FileType" }, {
 	group = MyGroup,
-	pattern = "*",
 	callback = function()
 		vim.opt_local.formatoptions:remove("o")
 		-- auto remove comment when joining lines with <J> key
@@ -76,7 +74,6 @@ autocmd({ "FileType" }, {
 -- enter insert mode in Terminal automatically
 autocmd({ "TermOpen" }, {
 	group = MyGroup,
-	pattern = "*",
 	command = "startinsert",
 })
 
@@ -86,7 +83,6 @@ autocmd({ "TermOpen" }, {
 -- source 3: https://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file
 autocmd("BufWritePre", {
 	group = TrimGroup,
-	pattern = "*",
 	callback = function()
 		-- Only trim if the buffer is "normal buffer"
 		if vim.opt_local.buftype:get() ~= "" then
@@ -114,8 +110,8 @@ autocmd("BufWritePre", {
 autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = vim.g.info_filetype,
-	callback = function()
-		vim.diagnostic.enable(false, { nil, 0 })
+	callback = function(event)
+		vim.diagnostic.enable(false, { nil, event.buf })
 	end,
 })
 
