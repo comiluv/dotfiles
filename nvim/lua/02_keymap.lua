@@ -87,10 +87,6 @@ end, { expr = true })
 -- open help about the word under cursor by pressing <F1>
 vim.keymap.set({ "n", "i", "v", "c" }, "<F1>", "<esc>:help <C-r><C-w><cr>", { silent = true })
 
--- "around document" text object
-vim.keymap.set("o", "ad", "<cmd>normal! ggVG<cr>", { noremap = true, desc = "around document" })
-vim.keymap.set("x", "ad", "gg0oG$", { noremap = true, desc = "around document" })
-
 -- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
 -- help you not the other way around. : https://thoughtbot.com/upcase/vim
 -- Bind :Q to q
