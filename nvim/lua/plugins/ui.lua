@@ -83,10 +83,10 @@ return {
 					vim.b.treesitter_context_set = true
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
-						vim.cmd.TSContextDisable()
+						vim.cmd.TSContext('disable')
 						return
 					end
-					vim.cmd.TSContextEnable()
+					vim.cmd.TSContext('enable')
 				end,
 			})
 		end,
