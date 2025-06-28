@@ -24,5 +24,6 @@ augroup MYGROUP
     autocmd FileType * set formatoptions-=ro
     " Press q to instantly quit the buffer
     autocmd FileType help,qf,man,notify,fugitive,vim-plug nnoremap <buffer><nowait> q <CMD>q<CR>
+    autocmd TerminalWinOpen * nnoremap <buffer><nowait> q <CMD>q<CR>
 augroup END
 
