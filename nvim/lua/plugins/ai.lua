@@ -106,7 +106,9 @@ return {
 		"piersolenski/wtf.nvim",
 		event = { "LspAttach" },
 		dependencies = {
+			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			"nvim-telescope/telescope.nvim", -- Optional: For WtfGrepHistory
 		},
 		keys = {
 			{
@@ -150,8 +152,13 @@ return {
 				local pos = string.find(obj.stdout, "\n")
 				local key = string.sub(obj.stdout, 1, pos):gsub("%s+$", "")
 				require("wtf").setup({
-					openai_model_id = "gpt-4o-mini",
-					openai_api_key = key,
+					provider = "openai",
+					providers = {
+						openai = {
+							model_id = "gpt-4.1-mini",
+							api_key = key,
+						},
+					},
 				})
 			end
 			vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.gpg" }, { text = true }, on_exit)
