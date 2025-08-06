@@ -344,7 +344,7 @@ return {
 
 	{
 		"saecki/crates.nvim",
-		dependencies = "hrsh7th/nvim-cmp",
+		tag = "stable",
 		event = { "BufRead Cargo.toml" },
 		opts = {},
 	},
