@@ -61,8 +61,9 @@ return {
 		dependencies = {
 			"folke/which-key.nvim",
 		},
-		version = "^3",
-		opts = {},
+		opts = {
+			default_mode_mask = { visual_mode = false },
+		},
 	},
 
 	-- Extends zip.vim to browse and edit nested zip files
