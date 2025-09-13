@@ -101,6 +101,9 @@ return {
 		end,
 	},
 
+	-- auto close block with end
+	{ "RRethy/nvim-treesitter-endwise" },
+
 	-- jump to matching parens
 	{
 		"andymass/vim-matchup",

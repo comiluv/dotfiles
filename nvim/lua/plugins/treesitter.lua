@@ -7,8 +7,6 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		build = ":TSUpdate",
 		dependencies = {
-			-- auto close block with end
-			{ "RRethy/nvim-treesitter-endwise" },
 			{
 				"nvim-treesitter/nvim-treesitter-textobjects",
 				init = function()
@@ -48,7 +46,6 @@ return {
 				end,
 			},
 			indent = { enable = false },
-			endwise = { enable = true }, -- "RRethy/nvim-treesitter-endwise",
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
