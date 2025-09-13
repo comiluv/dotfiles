@@ -9,14 +9,6 @@ return {
 		dependencies = {
 			-- auto close block with end
 			{ "RRethy/nvim-treesitter-endwise" },
-
-			-- jump to matching parens
-			{
-				"andymass/vim-matchup",
-				config = function()
-					vim.g.matchup_matchparen_offscreen = { method = "popup" }
-				end,
-			},
 			{
 				"nvim-treesitter/nvim-treesitter-textobjects",
 				init = function()
@@ -57,7 +49,6 @@ return {
 			},
 			indent = { enable = false },
 			endwise = { enable = true }, -- "RRethy/nvim-treesitter-endwise",
-			matchup = { enable = true }, -- "andymass/vim-matchup",
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)

@@ -101,6 +101,14 @@ return {
 		end,
 	},
 
+	-- jump to matching parens
+	{
+		"andymass/vim-matchup",
+		config = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
+	},
+
 	-- auto detect indentation
 	{
 		"Darazaki/indent-o-matic",
