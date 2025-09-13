@@ -102,7 +102,9 @@ return {
 	},
 
 	-- auto close block with end
-	{ "RRethy/nvim-treesitter-endwise" },
+	{
+		"RRethy/nvim-treesitter-endwise",
+	},
 
 	-- jump to matching parens
 	{

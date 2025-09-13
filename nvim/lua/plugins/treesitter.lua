@@ -1,54 +1,84 @@
+-- from https://github.com/cameronr/dotfiles/blob/main/nvim/lua/plugins/treesitter.lua
+-- on main branch, treesitter isn't started automatically
+vim.api.nvim_create_autocmd({ "Filetype" }, {
+	callback = function(event)
+		local ignored_fts = {
+			"snacks_dashboard",
+			"snacks_notif",
+			"snacks_input",
+			"prompt", -- bt: snacks_picker_input
+			"ini",
+			"ada",
+		}
+
+		if vim.tbl_contains(ignored_fts, event.match) then
+			return
+		end
+
+		-- skip for large files
+		local max_filesize = 100 * 1024 -- 100 KB
+		local filesize_ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(event.buf))
+		if not filesize_ok or stats and stats.size > max_filesize then
+			return true
+		end
+
+		-- make sure nvim-treesitter is loaded
+		local ok, nvim_treesitter = pcall(require, "nvim-treesitter")
+
+		-- no nvim-treesitter, maybe fresh install
+		if not ok then
+			return
+		end
+
+		local ft = vim.bo[event.buf].ft
+		local lang = vim.treesitter.language.get_lang(ft)
+		nvim_treesitter.install({ lang }):await(function(err)
+			if err then
+				vim.notify("Treesitter install error for ft: " .. ft .. " err: " .. err)
+				return
+			end
+
+			pcall(vim.treesitter.start, event.buf)
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		end)
+	end,
+})
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		version = false,
-		branch = "master",
+		branch = "main",
 		cmd = "TSUpdate",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		build = ":TSUpdate",
 		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter-textobjects",
-				init = function()
-					-- PERF: no need to load the plugin, if we only need its queries for mini.ai
-					local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
-					local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-					local enabled = false
-					if opts.textobjects then
-						for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-							if opts.textobjects[mod] and opts.textobjects[mod].enable then
-								enabled = true
-								break
-							end
-						end
-					end
-					if not enabled then
-						require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-					end
-				end,
-			},
+			{ "folke/ts-comments.nvim", opts = {} },
 		},
-		opts = {
-			ensure_installed = {},
-			ignore_install = { "ini", "ada" },
-			sync_install = false,
-			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-			auto_install = true,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-				disable = function(_, buf)
-					local max_filesize = 100 * 1024 -- 100 KB
-					local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if not ok or stats and stats.size > max_filesize then
-						return true
-					end
-				end,
-			},
-			indent = { enable = false },
-		},
+		opts = {},
 		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+			local ensure_installed = {}, require("nvim-treesitter").install(ensure_installed)
+		end,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		init = function()
+			-- PERF: no need to load the plugin, if we only need its queries for mini.ai
+			local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
+			local opts = require("lazy.core.plugin").values(plugin, "opts", false)
+			local enabled = false
+			if opts.textobjects then
+				for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+					if opts.textobjects[mod] and opts.textobjects[mod].enable then
+						enabled = true
+						break
+					end
+				end
+			end
+			if not enabled then
+				require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+			end
 		end,
 	},
 }
