@@ -22,7 +22,7 @@ services:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     ports:
-      - 3000:8080
+      - 5000:8080
     volumes:
       - open-webui:/app/backend/data
     depends_on:
@@ -47,11 +47,26 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./searxng:/etc/searxng
-    restart: always
+      - ./searxng:/etc/searxng:rw
+    env_file:
+      - searxng.env
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
 
 volumes:
   ollama:
     external: True
   open-webui:
     external: True
+
