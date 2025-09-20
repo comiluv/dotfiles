@@ -71,7 +71,6 @@ return {
 
 			vim.diagnostic.config(opts.diagnostics)
 
-			local lspconfig = require("lspconfig")
 			local servers = opts.servers
 			local lsp_capabilities =
 				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -93,7 +92,7 @@ return {
 						return
 					end
 				end
-				lspconfig[server].setup(server_opts)
+				vim.lsp.config(server, server_opts)
 			end
 
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
