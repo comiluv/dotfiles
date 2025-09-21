@@ -93,6 +93,7 @@ return {
 					end
 				end
 				vim.lsp.config(server, server_opts)
+				vim.lsp.enable(server)
 			end
 
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
