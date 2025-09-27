@@ -1,7 +1,5 @@
-if vim.fn.has("unix") == 1 then
-	vim.g.python3_host_prog = "/usr/bin/python3"
-else
-	vim.g.python3_host_prog = "C:\\Windows\\py.exe"
+if vim.fn.has("win32") == 1 then
+	vim.g.python3_host_prog = vim.fn.exepath("python")
 end
 
 vim.schedule(function()
