@@ -54,6 +54,8 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			{ "folke/ts-comments.nvim", opts = {} },
+			{ "andymass/vim-matchup" },
+			{ "RRethy/nvim-treesitter-endwise" },
 		},
 		opts = {},
 		config = function(_, opts)

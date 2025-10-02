@@ -104,11 +104,13 @@ return {
 	-- auto close block with end
 	{
 		"RRethy/nvim-treesitter-endwise",
+		lazy = true,
 	},
 
 	-- jump to matching parens
 	{
 		"andymass/vim-matchup",
+		lazy = true,
 		config = function()
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
