@@ -53,6 +53,9 @@ return {
 				clangd = {
 					cmd = { "clangd", "--header-insertion=never" },
 				},
+				powershell_es = {
+					bundle_path = vim.fn.stdpath("data") .. "\\mason\\packages\\powershell-editor-services",
+				},
 			},
 			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true },
 			-- you can do any additional lsp server setup here
