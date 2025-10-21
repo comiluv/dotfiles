@@ -187,7 +187,7 @@ return {
 				end,
 			})
 		end,
-		build = vim.fn.has("win32") == 1 and "mingw32-make install_jsregexp" or "make install_jsregexp",
+		build = "make install_jsregexp",
 	},
 
 	{
