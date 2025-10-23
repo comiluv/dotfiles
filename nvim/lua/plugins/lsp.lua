@@ -123,41 +123,7 @@ return {
 		event = "VeryLazy",
 		cmd = { "Mason", "MasonUpdate" },
 		build = ":MasonUpdate",
-		opts = {
-			ensure_installed = {
-				-- lua
-				"lua-language-server",
-				"stylua",
-				-- python
-				"pyright",
-				"black",
-				"isort",
-				"ruff",
-				-- web
-				"deno",
-				"css-lsp",
-				"eslint-lsp",
-				"prettierd",
-				-- java
-				"jdtls",
-				"google-java-format",
-				-- c/c++
-				"clangd",
-			},
-		},
-		config = function(_, opts)
-			require("mason").setup(opts)
-			-- implements ensure_installed behavior
-			local registry = require("mason-registry")
-			registry.refresh(function()
-				for _, pkg_name in ipairs(opts.ensure_installed) do
-					local pkg = registry.get_package(pkg_name)
-					if not pkg:is_installed() then
-						pkg:install()
-					end
-				end
-			end)
-		end,
+		opts = {},
 	},
 
 	{
