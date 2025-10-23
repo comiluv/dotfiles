@@ -303,31 +303,6 @@ return {
 	},
 
 	{
-		"mfussenegger/nvim-dap-python",
-		ft = "python",
-		keys = {
-			{
-				"<leader>dpr",
-				function()
-					require("dap-python").test_method()
-				end,
-				mode = "n",
-				desc = "Debug: Test Python method",
-			},
-		},
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"rcarriga/nvim-dap-ui",
-		},
-		config = function()
-			local debugpy_path = vim.fn.stdpath("data")
-				.. "/mason/packages/debugpy/venv/"
-				.. (vim.fn.has("win32") == 1 and "Scripts/python.exe" or "bin/python3")
-			require("dap-python").setup(debugpy_path)
-		end,
-	},
-
-	{
 		"jay-babu/mason-nvim-dap.nvim",
 		lazy = true,
 		dependencies = {
@@ -337,18 +312,6 @@ return {
 		opts = {
 			handlers = {},
 		},
-	},
-
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^6",
-	},
-
-	{
-		"saecki/crates.nvim",
-		tag = "stable",
-		event = { "BufRead Cargo.toml" },
-		opts = {},
 	},
 
 	-- LSP incrementally rename symbol
