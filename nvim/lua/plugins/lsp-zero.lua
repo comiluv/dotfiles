@@ -133,7 +133,6 @@ return {
 				"black",
 				"isort",
 				"ruff",
-				"debugpy",
 				-- web
 				"deno",
 				"css-lsp",
