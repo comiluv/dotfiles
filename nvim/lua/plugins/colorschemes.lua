@@ -8,14 +8,14 @@ return {
 	{
 		"projekt0n/github-nvim-theme",
 		name = "github-theme",
-	},
-	{
-		"p00f/alabaster.nvim",
 		priority = 1000,
 		config = function()
 			vim.opt.background = "light"
-			vim.cmd.colorscheme("alabaster")
+			vim.cmd.colorscheme("github_light")
 		end,
+	},
+	{
+		"p00f/alabaster.nvim",
 	},
 	{
 		"miikanissi/modus-themes.nvim",
