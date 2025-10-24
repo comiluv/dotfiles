@@ -195,13 +195,8 @@ return {
 					json = { "prettierd" },
 					python = { "isort", "black" },
 					lua = { "stylua" },
-					java = { "google_java_format" },
-					rust = { "rust-analyzer" },
 				},
 				formatters = {
-					google_java_format = {
-						command = "google-java-format",
-					},
 					isort = { args = { "-" } },
 				},
 			}
