@@ -227,22 +227,7 @@ return {
 	{
 		"mcauley-penney/visual-whitespace.nvim",
 		event = "ModeChanged *:[vV\22]",
-		opts = function(_, opt)
-			local listchars = vim.opt.listchars:get()
-			opt["list_chars"] = {}
-			for k, v in pairs(listchars) do
-				if k == "eol" then
-					opt["fileformat_chars"] = {
-						unix = v,
-						mac = v,
-						dos = v,
-					}
-				else
-					opt.list_chars[k] = v
-				end
-			end
-			return opt
-		end,
+		opts = {},
 	},
 
 	-- Improved UI and workflow for the Neovim quickfix
