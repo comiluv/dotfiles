@@ -116,13 +116,6 @@ return {
 		end,
 	},
 
-	-- auto detect indentation
-	{
-		"Darazaki/indent-o-matic",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		opts = {},
-	},
-
 	-- auto locate last location in the file
 	{
 		"ethanholz/nvim-lastplace",
