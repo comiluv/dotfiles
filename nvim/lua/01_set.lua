@@ -54,7 +54,7 @@ vim.opt.splitright = true
 
 -- Show invisible characters in this format
 -- stylua: ignore
-vim.opt.listchars = { tab = "↦", lead = "‹", space = "·", nbsp = "␣", trail = "›", eol = "¶", precedes = "«", extends = "»" }
+vim.opt.listchars = { tab = "↦ ", lead = "‹", space = "·", nbsp = "␣", trail = "›", eol = "¶", precedes = "«", extends = "»" }
 
 -- Decent wildmenu
 vim.opt.path:append("**")
