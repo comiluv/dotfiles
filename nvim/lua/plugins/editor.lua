@@ -233,14 +233,19 @@ return {
 	-- show invisible characters in visual mode
 	{
 		"mcauley-penney/visual-whitespace.nvim",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		event = "ModeChanged *:[vV\22]",
 		opts = function(_, opt)
 			local listchars = vim.opt.listchars:get()
+			opt["list_chars"] = {}
 			for k, v in pairs(listchars) do
 				if k == "eol" then
-					opt["nl_char"] = v
+					opt["fileformat_chars"] = {
+						unix = v,
+						mac = v,
+						dos = v,
+					}
 				else
-					opt[k .. "_char"] = v
+					opt.list_chars[k] = v
 				end
 			end
 			return opt
