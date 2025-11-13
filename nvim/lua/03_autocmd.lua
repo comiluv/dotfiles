@@ -166,3 +166,77 @@ autocmd({ "BufAdd", "BufReadPre" }, {
 		end
 	end,
 })
+
+-- Search highlight behavior and consistent n/N navigation
+-- See https://github.com/rktjmp/highlight-current-n.nvim?tab=readme-ov-file#neovim-09
+local hlsearch_group = augroup("SearchHLTweaks", { clear = true })
+
+autocmd("ColorScheme", {
+	group = hlsearch_group,
+	callback = function()
+		local search_hl = vim.api.nvim_get_hl(0, { name = "Search" })
+		vim.api.nvim_set_hl(0, "CurSearch", { link = "IncSearch" })
+		vim.api.nvim_set_hl(0, "SearchCurrentN", search_hl)
+		vim.api.nvim_set_hl(0, "Search", { link = "SearchCurrentN" })
+	end,
+})
+
+autocmd("CmdlineEnter", {
+	group = hlsearch_group,
+	pattern = { "/", "?" },
+	callback = function()
+		vim.opt.hlsearch = true
+		vim.opt.incsearch = true
+		vim.api.nvim_set_hl(0, "Search", { link = "SearchCurrentN" })
+	end,
+})
+
+autocmd("CmdlineLeave", {
+	group = hlsearch_group,
+	pattern = { "/", "?" },
+	callback = function()
+		vim.api.nvim_set_hl(0, "Search", {})
+		vim.defer_fn(function()
+			vim.opt.hlsearch = true
+		end, 5)
+	end,
+})
+
+autocmd({ "InsertEnter", "CursorMoved" }, {
+	group = hlsearch_group,
+	callback = function()
+		vim.schedule(function()
+			vim.cmd("nohlsearch")
+		end)
+	end,
+})
+
+local function repeat_search_consistent(key)
+	local function flipped(k)
+		if k == "n" then
+			return "N"
+		elseif k == "N" then
+			return "n"
+		else
+			return k
+		end
+	end
+
+	local search_forward = vim.v.searchforward
+	if search_forward == 0 then
+		vim.api.nvim_feedkeys(flipped(key), "n", true)
+	elseif search_forward == 1 then
+		vim.api.nvim_feedkeys(key, "n", true)
+	end
+
+	vim.defer_fn(function()
+		vim.opt.hlsearch = true
+	end, 5)
+end
+
+vim.keymap.set("n", "n", function()
+	repeat_search_consistent("n")
+end, { silent = true, desc = "Repeat search forward" })
+vim.keymap.set("n", "N", function()
+	repeat_search_consistent("N")
+end, { silent = true, desc = "Repeat search backward" })
