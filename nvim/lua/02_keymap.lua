@@ -11,8 +11,6 @@ vim.keymap.set({ "n", "v" }, "Q", "gq", { remap = true })
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
 
 -- Easy window navigation
 vim.keymap.set("", "<A-h>", "<C-w>h")

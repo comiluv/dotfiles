@@ -213,21 +213,14 @@ autocmd({ "InsertEnter", "CursorMoved" }, {
 
 local function repeat_search_consistent(key)
 	local function flipped(k)
-		if k == "n" then
-			return "N"
-		elseif k == "N" then
-			return "n"
-		else
-			return k
-		end
+		return (k == "n") and "N" or "n"
 	end
 
-	local search_forward = vim.v.searchforward
-	if search_forward == 0 then
-		vim.api.nvim_feedkeys(flipped(key), "n", true)
-	elseif search_forward == 1 then
-		vim.api.nvim_feedkeys(key, "n", true)
-	end
+	local effective_key = (vim.v.searchforward == 0) and flipped(key) or key
+	local count = vim.v.count1
+	local keys = tostring(count) .. effective_key .. "zzzv"
+
+	vim.api.nvim_feedkeys(keys, "n", false)
 
 	vim.defer_fn(function()
 		vim.opt.hlsearch = true
