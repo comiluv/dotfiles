@@ -193,7 +193,7 @@ return {
 					css = { "prettierd" },
 					html = { "prettierd" },
 					json = { "prettierd" },
-					python = { "isort", "black" },
+					python = { "ruff" },
 					lua = { "stylua" },
 				},
 				formatters = {
