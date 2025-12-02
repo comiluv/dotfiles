@@ -1,6 +1,4 @@
-if vim.fn.has("win32") == 1 then
-	vim.g.python3_host_prog = vim.fn.exepath("python")
-end
+vim.g.python3_host_prog = vim.fn.has("win32") == 1 and vim.fn.exepath("python") or vim.fn.exepath("python3")
 
 vim.schedule(function()
 	if vim.fn.executable("rg") then
