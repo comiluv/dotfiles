@@ -152,12 +152,14 @@ return {
 				local pos = string.find(obj.stdout, "\n")
 				local key = string.sub(obj.stdout, 1, pos):gsub("%s+$", "")
 				require("wtf").setup({
-					provider = "openai",
+					provider = "ollama",
 					providers = {
 						openai = {
-							model_id = "gpt-4.1-mini",
 							api_key = key,
 						},
+						ollama = {
+							model_id = "gpt-oss:20b"
+						}
 					},
 				})
 			end
