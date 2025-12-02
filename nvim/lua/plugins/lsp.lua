@@ -235,12 +235,11 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			local lint = require("lint")
-			table.insert(lint.linters.mypy.args, "--ignore-missing-imports")
 			local new_ruff_args = { "--ignore", "E741" }
 			lint.linters.ruff.args = vim.list_extend(lint.linters.ruff.args, new_ruff_args)
 
 			lint.linters_by_ft = {
-				python = { "mypy", "ruff" },
+				python = { "ruff" },
 			}
 
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "TextChanged" }, {
