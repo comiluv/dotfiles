@@ -1,5 +1,18 @@
 vim.g.python3_host_prog = vim.fn.has("win32") == 1 and vim.fn.exepath("python") or vim.fn.exepath("python3")
 
+-- Paste without CRLF in WSL
+if vim.fn.has("wsl") == 1 then
+	vim.g.clipboard = {
+		name = "WslClipboard",
+		copy = { ["+"] = "clip.exe", ["*"] = "clip.exe" },
+		paste = {
+			["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+			["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+		},
+		cache_enabled = 0,
+	}
+end
+
 vim.schedule(function()
 	if vim.fn.executable("rg") then
 		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
