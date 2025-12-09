@@ -8,17 +8,11 @@ return {
 		},
 		opts = {
 			provider = "claude",
-			providers = { claude = { api_key_name = { "gpg", "-d", vim.fn.getenv("HOME") .. "/anthropic.txt.gpg" } } },
 		},
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = vim.fn.has("win32") == 1
 				and "pwsh -NoProfile -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
 			or "make",
-		cond = function()
-			return vim.fn.executable("gpg") == 1
-				and (vim.fn.has("win32") == 1 and vim.fn.executable("pwsh") == 1 or vim.fn.executable("make") == 1)
-				and vim.uv.fs_stat(vim.fn.getenv("HOME") .. "/anthropic.txt.gpg")
-		end,
 		dependencies = {
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
@@ -144,26 +138,15 @@ return {
 				desc = "AI: Grep previous chat history with Telescope",
 			},
 		},
-		cond = function()
-			return vim.fn.executable("gpg") == 1 and vim.uv.fs_stat(vim.fn.getenv("HOME") .. "/openai.txt.gpg")
-		end,
 		config = function()
-			local on_exit = function(obj)
-				local pos = string.find(obj.stdout, "\n")
-				local key = string.sub(obj.stdout, 1, pos):gsub("%s+$", "")
-				require("wtf").setup({
-					provider = "ollama",
-					providers = {
-						openai = {
-							api_key = key,
-						},
-						ollama = {
-							model_id = "gpt-oss:20b"
-						}
+			require("wtf").setup({
+				provider = "openai",
+				providers = {
+					ollama = {
+						model_id = "gpt-oss:20b",
 					},
-				})
-			end
-			vim.system({ "gpg", "-d", vim.fn.getenv("HOME") .. "/openai.txt.gpg" }, { text = true }, on_exit)
+				},
+			})
 		end,
 	},
 }
