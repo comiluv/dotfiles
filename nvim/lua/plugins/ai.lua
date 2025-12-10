@@ -49,9 +49,6 @@ return {
 
 	{
 		"zbirenbaum/copilot.lua",
-		dependencies = {
-			"copilotlsp-nvim/copilot-lsp",
-		},
 		event = "InsertEnter",
 		cmd = "Copilot",
 		build = ":Copilot auth",
@@ -73,15 +70,7 @@ return {
 				suggestion = {
 					auto_trigger = true,
 					keymap = {
-						accept = false,
-					},
-				},
-				nes = {
-					enabled = true,
-					keymap = {
-						accept_and_goto = "<leader>o",
-						accept = false,
-						dismiss = "<Esc>",
+						accept = "<Tab>",
 					},
 				},
 				filetypes = filetypes,
