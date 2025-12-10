@@ -57,7 +57,7 @@ return {
 				desc = "Telescope grep string",
 			},
 			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
-			{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Telescope recent files" },
+			{ "<leader>r", "<cmd>Telescope smart_open<cr>", desc = "Telescope recent files" },
 			{
 				"<leader>/",
 				function()
@@ -186,5 +186,19 @@ return {
 		---@module "quicker"
 		---@type quicker.SetupOptions
 		opts = {},
+	},
+
+	-- fast file-finding
+	{
+		"danielfalk/smart-open.nvim",
+		branch = "0.2.x",
+		config = function()
+			require("telescope").load_extension("smart_open")
+		end,
+		dependencies = {
+			"kkharji/sqlite.lua",
+			-- Only required if using match_algorithm fzf
+			{ "nvim-telescope/telescope-fzf-native.nvim" },
+		},
 	},
 }
