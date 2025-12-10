@@ -24,14 +24,6 @@ return {
 						or vim.fn.executable("make") == 1
 				end,
 			},
-			{
-				"nvim-telescope/telescope-smart-history.nvim",
-				build = function()
-					local db_subdir = vim.fn.stdpath("data") .. "/databases"
-					vim.system({ "mkdir", "-p", db_subdir })
-					vim.system({ "touch", db_subdir .. "/telescope_history.sqlite3" })
-				end,
-			},
 			"nvim-telescope/telescope-ui-select.nvim",
 			{
 				"kkharji/sqlite.lua",
@@ -96,7 +88,6 @@ return {
 				},
 			})
 			telescope.load_extension("fzf")
-			telescope.load_extension("smart_history")
 			telescope.load_extension("ui-select")
 		end,
 	},
