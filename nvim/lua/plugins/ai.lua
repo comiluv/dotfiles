@@ -81,7 +81,7 @@ return {
 					keymap = {
 						accept_and_goto = "<leader>o",
 						accept = false,
-						dismiss = "<Esc",
+						dismiss = "<Esc>",
 					},
 				},
 				filetypes = filetypes,
