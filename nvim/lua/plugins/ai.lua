@@ -49,6 +49,12 @@ return {
 
 	{
 		"zbirenbaum/copilot.lua",
+		dependencies = {
+			"copilotlsp-nvim/copilot-lsp",
+			init = function()
+				vim.g.copilot_nes_debounce = 500
+			end,
+		},
 		event = "InsertEnter",
 		cmd = "Copilot",
 		build = ":Copilot auth",
@@ -73,6 +79,14 @@ return {
 						accept = false,
 					},
 				},
+				nes = {
+					enabled = true,
+					keymap = {
+						accept_and_goto = "<leader>o",
+						accept = false,
+						dismiss = "<Esc",
+					},
+				},
 				filetypes = filetypes,
 			})
 			-- detach Copilot for big files
@@ -91,7 +105,7 @@ return {
 				end,
 			})
 			-- start Copilot disabled
-			vim.cmd.Copilot("disable")
+			vim.cmd.Copilot("enable")
 		end,
 	},
 
