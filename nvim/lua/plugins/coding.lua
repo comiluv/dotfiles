@@ -27,11 +27,33 @@ return {
 			snippets = { preset = "luasnip" },
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
+				list = { selection = { preselect = false } },
 				documentation = { auto_show = true },
 				ghost_text = { enabled = false },
 			},
 			cmdline = { enabled = false },
 		},
+		init = function()
+			local BlinkGroup = vim.api.nvim_create_augroup("BlinkCmpCopilotGroup", {})
+			vim.api.nvim_create_autocmd("User", {
+				group = BlinkGroup,
+				pattern = "BlinkCmpMenuOpen",
+				callback = function()
+					local has_copilot, copilot = pcall(require, "copilot.suggestion")
+					if has_copilot then
+						copilot.dismiss()
+						vim.b.copilot_suggestion_hidden = true
+					end
+				end,
+			})
+			vim.api.nvim_create_autocmd("User", {
+				group = BlinkGroup,
+				pattern = "BlinkCmpMenuClose",
+				callback = function()
+					vim.b.copilot_suggestion_hidden = false
+				end,
+			})
+		end,
 	},
 
 	-- Snippets
