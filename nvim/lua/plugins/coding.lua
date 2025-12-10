@@ -1,137 +1,37 @@
 return {
-	-- Autocompletion
+	-- Completion
 	{
-		"hrsh7th/nvim-cmp",
-		version = false,
-		event = { "InsertEnter" },
+		"saghen/blink.cmp",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lua",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
 			"L3MON4D3/LuaSnip",
-			-- tabout required to register tab key keymap
-			"abecodes/tabout.nvim",
-			-- add vscode-like pictograms
-			"onsails/lspkind.nvim",
-			"zbirenbaum/copilot.lua",
 		},
-		opts = function()
-			local cmp = require("cmp")
-			local cmp_select = { behavior = cmp.SelectBehavior.Select }
-			local cmp_select_page = { behavior = cmp.SelectBehavior.Select, count = 8 }
-			local luasnip = require("luasnip")
-			local neogen = require("neogen")
-			local has_copilot, copilot = pcall(require, "copilot.suggestion")
-			return {
-				preselect = cmp.PreselectMode.None,
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
+		version = "1.*",
+		event = "InsertEnter",
+		-- build = "cargo build --release",
+		opts = {
+			keymap = {
+				preset = "super-tab",
+				["C-y"] = { "select_and_accept" },
+				["<CR>"] = { "accept", "fallback" },
+				["<C-d>"] = {
+					function(cmp)
+						cmp.select_next({ count = 8 })
 					end,
 				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-					["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-					["<C-u>"] = cmp.mapping.select_prev_item(cmp_select_page),
-					["<C-d>"] = cmp.mapping.select_next_item(cmp_select_page),
-					["<up>"] = cmp.mapping.select_prev_item(cmp_select),
-					["<down>"] = cmp.mapping.select_next_item(cmp_select),
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-					["<CR>"] = cmp.mapping({
-						i = function(fallback)
-							if cmp.visible() and cmp.get_active_entry() then
-								cmp.confirm({ select = false })
-							else
-								fallback()
-							end
-						end,
-						s = cmp.mapping.confirm({ select = true }),
-					}),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<C-Space>"] = cmp.mapping.complete(),
-					-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							local entry = cmp.get_selected_entry()
-							if not entry then
-								cmp.select_next_item(cmp_select)
-							else
-								cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
-							end
-							-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-							-- they way you will only jump inside the snippet region
-						elseif luasnip.jumpable(1) then
-							luasnip.jump(1)
-						elseif neogen.jumpable() then
-							neogen.jump_next()
-						elseif has_copilot and copilot.is_visible() then
-							copilot.accept()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item(cmp_select)
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						elseif neogen.jumpable(true) then
-							neogen.jump_prev()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-				experimental = {
-					ghost_text = false,
+				["<C-u>"] = {
+					function(cmp)
+						cmp.select_prev({ count = 8 })
+					end,
 				},
-			}
-		end,
-		config = function(_, opts)
-			local lspkind = require("lspkind")
-			local cmp = require("cmp")
-			opts.formatting = {
-				format = lspkind.cmp_format({}),
-			}
-			cmp.setup(opts)
-			cmp.event:on("menu_opened", function()
-				vim.b.copilot_suggestion_hidden = true
-			end)
-			cmp.event:on("menu_closed", function()
-				local luasnip = require("luasnip")
-				if not (luasnip.jumpable(1) or luasnip.jumpable(-1)) then
-					vim.b.copilot_suggestion_hidden = false
-				end
-			end)
-			cmp.setup.filetype({ "lua" }, {
-				sources = cmp.config.sources({
-					{ name = "nvim_lua" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-			})
-			cmp.setup.filetype({ "rust" }, {
-				sources = cmp.config.sources({
-					{ name = "crates" },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
-				}),
-			})
-		end,
+			},
+			snippets = { preset = "luasnip" },
+			completion = {
+				accept = { auto_brackets = { enabled = true } },
+				documentation = { auto_show = true },
+				ghost_text = { enabled = false },
+			},
+			cmdline = { enabled = false },
+		},
 	},
 
 	-- Snippets
@@ -227,10 +127,6 @@ return {
 			npairs.setup({
 				fast_wrap = {},
 			})
-			-- If you want insert `(` after select function or method item
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			local cmp = require("cmp")
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 
@@ -264,7 +160,10 @@ return {
 	{
 		"abecodes/tabout.nvim",
 		event = "InsertCharPre",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp", "zbirenbaum/copilot.lua" },
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"zbirenbaum/copilot.lua",
+		},
 		config = function()
 			require("tabout").setup({
 				tabkey = "",

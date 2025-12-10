@@ -5,8 +5,9 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
-			"mason-org/mason-lspconfig.nvim",
-			"hrsh7th/cmp-nvim-lsp",
+			{
+				"saghen/blink.cmp",
+			},
 		},
 		opts = {
 			-- options for vim.diagnostic.config()
@@ -38,26 +39,16 @@ return {
 						},
 					},
 				},
-				yamlls = {
-					settings = {
-						yaml = {
-							format = {
-								enable = true,
-							},
-						},
-					},
-				},
-				grammarly = {
-					filetypes = { "markdown", "text" },
-				},
 				clangd = {
 					cmd = { "clangd", "--header-insertion=never" },
 				},
+				prettierd = {},
+				pyright = {},
 				powershell_es = {
 					bundle_path = vim.fn.stdpath("data") .. "\\mason\\packages\\powershell-editor-services",
 				},
 			},
-			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true },
+			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true, stylua = true },
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig
 			setup = {
@@ -74,18 +65,10 @@ return {
 
 			vim.diagnostic.config(opts.diagnostics)
 
-			local servers = opts.servers
-			local lsp_capabilities =
-				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-			local function setup(server)
+			for server, server_opts in pairs(opts.servers) do
 				if opts.skip_server_setup[server] then
 					return
 				end
-				local server_opts = vim.tbl_deep_extend("force", {}, {
-					capabilities = vim.deepcopy(lsp_capabilities),
-				}, servers[server] or {})
-
 				if opts.setup[server] then
 					if opts.setup[server](server, server_opts) then
 						return
@@ -95,25 +78,9 @@ return {
 						return
 					end
 				end
+				server_opts.capabilities = require("blink-cmp").get_lsp_capabilities(server_opts.capabilities)
 				vim.lsp.config(server, server_opts)
 				vim.lsp.enable(server)
-			end
-
-			local have_mason, mlsp = pcall(require, "mason-lspconfig")
-			local available = have_mason and mlsp.get_available_servers() or {}
-
-			for server, server_opts in pairs(servers) do
-				if server_opts then
-					server_opts = server_opts == true and {} or server_opts
-					if server_opts.mason == false or not vim.tbl_contains(available, server) then
-						setup(server)
-					end
-				end
-			end
-
-			if have_mason then
-				mlsp.setup({ ensure_installed = opts.ensure_installed })
-				mlsp.setup_handlers({ setup })
 			end
 		end,
 	},
@@ -124,13 +91,6 @@ return {
 		cmd = { "Mason", "MasonUpdate" },
 		build = ":MasonUpdate",
 		opts = {},
-	},
-
-	{
-		"mason-org/mason-lspconfig.nvim",
-		lazy = true,
-		dependencies = { "mason-org/mason.nvim" },
-		version = "^1",
 	},
 
 	-- java language server plugin to further utilize lsp capabilities

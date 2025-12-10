@@ -41,7 +41,6 @@ local path_to_jar = jdtls_dir .. "/plugins/org.eclipse.equinox.launcher_1.6.600.
 -- eclipse.jdt.ls installation                                           the actual version
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local jdtls_capabilities = {
 	workspace = {
 		configuration = true,
@@ -54,7 +53,7 @@ local jdtls_capabilities = {
 		},
 	},
 }
-local capabilities = vim.tbl_deep_extend("force", lsp_capabilities, jdtls_capabilities)
+local lsp_capabilities = require("blink-cmp").get_lsp_capabilities(jdtls_capabilities)
 local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 extendedClientCapabilities.onCompletionItemSelectedCommand = "editor.action.triggerParameterHints"
 
@@ -118,7 +117,7 @@ local config = {
 		bundles = {},
 		extendedClientCapabilities = extendedClientCapabilities,
 	},
-	capabilities = capabilities,
+	capabilities = lsp_capabilities,
 }
 
 -- This starts a new client & server,
