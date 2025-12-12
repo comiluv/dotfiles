@@ -4,10 +4,13 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			"L3MON4D3/LuaSnip",
+			{
+				"onsails/lspkind.nvim",
+				opts = { preset = "codicons" },
+			},
 		},
 		version = "1.*",
 		event = "InsertEnter",
-		-- build = "cargo build --release",
 		opts = {
 			keymap = {
 				preset = "super-tab",
@@ -30,6 +33,18 @@ return {
 				list = { selection = { preselect = false } },
 				documentation = { auto_show = true },
 				ghost_text = { enabled = false },
+				menu = {
+					draw = {
+						components = {
+							kind_icon = {
+								ellipsis = false,
+								text = function(ctx)
+									return require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+								end,
+							},
+						},
+					},
+				},
 			},
 			cmdline = { enabled = false },
 		},
