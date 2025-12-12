@@ -14,7 +14,7 @@ return {
 		opts = {
 			keymap = {
 				preset = "super-tab",
-				["C-y"] = { "select_and_accept" },
+				["<C-y>"] = { "select_and_accept" },
 				["<CR>"] = { "accept", "fallback" },
 				["<C-d>"] = {
 					function(cmp)
