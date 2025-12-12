@@ -1,8 +1,4 @@
 [font]
-normal = ["Sarasa Mono K Nerd Font"]
+normal = ["SarasaFixedK Nerd Font"]
 size = 12
 
-[font.features]
-"Sarasa Mono K Nerd Font" = ["-calt"]
-# clik: -> ->> --> ---> <= >= <-> <=> :: == != /* */ ++ +++
-# calt: <-- <--- <== <===
