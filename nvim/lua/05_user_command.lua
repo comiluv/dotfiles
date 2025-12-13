@@ -1,9 +1,13 @@
 local usercmd = vim.api.nvim_create_user_command
 -- Converted from https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3 to lua
 local function Grep(args)
-	local cmd = vim.opt.grepprg:get() .. " " .. args
+	local c = vim.opt.grepprg:get() .. " " .. args
+	local cmd = {}
+	for word in c:gmatch("%S+") do
+		cmd[#cmd + 1] = word
+	end
 	-- Execute the command and return its output
-	return vim.fn.system(cmd)
+	return vim.system(cmd, { "text=true" }):wait().stdout
 end
 
 -- Helper function to split lines and filter out empty ones

@@ -10,13 +10,16 @@ return {
 						and function(ev)
 							local build_commands = {
 								'cd "' .. ev.dir .. '"',
+								"&&",
 								'"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"',
+								"&&",
 								"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release",
+								"&&",
 								"cmake --build build --config Release",
+								"&&",
 								"cmake --install build --prefix build",
 							}
-							local build_command_str = table.concat(build_commands, " && ")
-							vim.fn.system(build_command_str)
+							vim.system(build_commands)
 						end
 					or "make",
 				cond = function()
@@ -40,8 +43,7 @@ return {
 			{
 				"<C-p>",
 				function()
-					vim.fn.system("git rev-parse --is-inside-work-tree")
-					if vim.v.shell_error == 0 then
+					if vim.system({ "git", "rev-parse", "--is-inside-work-tree" }):wait().code == 0 then
 						vim.api.nvim_exec2("Telescope git_files", {})
 					else
 						vim.api.nvim_exec2("Telescope find_files", {})
