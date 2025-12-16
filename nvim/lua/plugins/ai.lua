@@ -6,18 +6,53 @@ return {
 		keys = {
 			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
 		},
-		opts = {
-			provider = "claude",
-		},
+		config = function(_, opts)
+			local settings = {
+				mode = "legacy",
+				provider = "ollama",
+				providers = {
+					ollama = {
+						endpoint = "http://localhost:11434",
+						model = "codestral:latest",
+						timeout = 30000,
+						disable_tools = true,
+						is_env_set = require("avante.providers.ollama").check_endpoint_alive,
+					},
+					["openrouter-gpt"] = {
+						__inherited_from = "openai",
+						endpoint = "https://openrouter.ai/api/v1",
+						model = "openai/gpt-4o",
+						api_key_name = "AVANTE_OPENROUTER_API_KEY",
+						timeout = 30000,
+						disable_tools = true,
+					},
+				},
+				behaviour = {
+					auto_approve_tool_permissions = false,
+				},
+				selector = {
+					provider = "telescope",
+				},
+				input = {
+					provider = "snacks",
+					provier_opts = {
+						title = "Avante Input",
+						icon = " ",
+					}
+				}
+			}
+			require("avante").setup(settings)
+		end,
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = vim.fn.has("win32") == 1
 				and "pwsh -NoProfile -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
 			or "make",
 		dependencies = {
-			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			--- The below dependencies are optional,
+			"nvim-telescope/telescope.nvim",
+			"folke/snacks.nvim",
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 			{
 				-- support for image pasting
