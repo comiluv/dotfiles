@@ -21,8 +21,8 @@ return {
 					["openrouter-gpt"] = {
 						__inherited_from = "openai",
 						endpoint = "https://openrouter.ai/api/v1",
-						model = "openai/gpt-4o",
-						api_key_name = "AVANTE_OPENROUTER_API_KEY",
+						model = "mistralai/devstral-2512:free",
+						api_key_name = "OPENROUTER_API_KEY",
 						timeout = 30000,
 						disable_tools = true,
 					},
@@ -38,8 +38,8 @@ return {
 					provier_opts = {
 						title = "Avante Input",
 						icon = " ",
-					}
-				}
+					},
+				},
 			}
 			require("avante").setup(settings)
 		end,
