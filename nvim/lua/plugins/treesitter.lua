@@ -59,7 +59,8 @@ return {
 		},
 		opts = {},
 		config = function(_, opts)
-			local ensure_installed = {}, require("nvim-treesitter").install(ensure_installed)
+			local ensure_installed = {}
+			require("nvim-treesitter").install(ensure_installed)
 		end,
 	},
 
