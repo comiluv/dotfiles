@@ -4,9 +4,23 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			"L3MON4D3/LuaSnip",
+			"milanglacier/minuet-ai.nvim",
 			{
 				"onsails/lspkind.nvim",
-				opts = { preset = "codicons" },
+				opts = {
+					preset = "codicons",
+					symbol_map = {
+						claude = "󰋦",
+						openai = "󱢆",
+						codestral = "󱎥",
+						gemini = "",
+						Groq = "",
+						Openrouter = "󱂇",
+						Ollama = "󰳆",
+						["Llama.cpp"] = "󰳆",
+						Deepseek = "",
+					},
+				},
 			},
 		},
 		version = "1.*",
@@ -26,6 +40,22 @@ return {
 						cmp.select_prev({ count = 8 })
 					end,
 				},
+				-- Manually invoke minuet completion.
+				-- ["<A-y>"] = require("minuet").make_blink_map(),
+			},
+			sources = {
+				-- default = { "lsp", "path", "buffer", "snippets", "minuet" },
+				providers = {
+					minuet = {
+						name = "minuet",
+						module = "minuet.blink",
+						async = true,
+						-- Should match minuet.config.request_timeout * 1000,
+						-- since minuet.config.request_timeout is in seconds
+						timeout_ms = 3000,
+						score_offset = 50, -- Gives minuet higher priority among suggestions
+					},
+				},
 			},
 			snippets = { preset = "luasnip" },
 			completion = {
@@ -33,6 +63,7 @@ return {
 				list = { selection = { preselect = false } },
 				documentation = { auto_show = true },
 				ghost_text = { enabled = false },
+				-- trigger = { prefetch_on_insert = false },
 				menu = {
 					draw = {
 						components = {
@@ -49,25 +80,25 @@ return {
 			cmdline = { enabled = false },
 		},
 		init = function()
-			local BlinkGroup = vim.api.nvim_create_augroup("BlinkCmpCopilotGroup", {})
-			vim.api.nvim_create_autocmd("User", {
-				group = BlinkGroup,
-				pattern = "BlinkCmpMenuOpen",
-				callback = function()
-					local has_copilot, copilot = pcall(require, "copilot.suggestion")
-					if has_copilot then
+			local has_copilot, copilot = pcall(require, "copilot.suggestion")
+			if has_copilot then
+				local BlinkGroup = vim.api.nvim_create_augroup("BlinkCmpCopilotGroup", {})
+				vim.api.nvim_create_autocmd("User", {
+					group = BlinkGroup,
+					pattern = "BlinkCmpMenuOpen",
+					callback = function()
 						copilot.dismiss()
 						vim.b.copilot_suggestion_hidden = true
-					end
-				end,
-			})
-			vim.api.nvim_create_autocmd("User", {
-				group = BlinkGroup,
-				pattern = "BlinkCmpMenuClose",
-				callback = function()
-					vim.b.copilot_suggestion_hidden = false
-				end,
-			})
+					end,
+				})
+				vim.api.nvim_create_autocmd("User", {
+					group = BlinkGroup,
+					pattern = "BlinkCmpMenuClose",
+					callback = function()
+						vim.b.copilot_suggestion_hidden = false
+					end,
+				})
+			end
 		end,
 	},
 
