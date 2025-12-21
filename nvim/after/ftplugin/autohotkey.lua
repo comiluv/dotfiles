@@ -1,8 +1,8 @@
 -- get lsp from https://github.com/helsmy/vscode-autohotkey
 -- reuse vscode-autohotkey lsp client
-local lsp_clients = vim.lsp.get_active_clients()
+local lsp_clients = vim.lsp.get_clients({ name = "vscode_autohotkey" })
 for _, client in ipairs(lsp_clients) do
-	if client.name == "vscode_autohotkey" and vim.lsp.buf_is_attached(0, client.id) == false then
+	if vim.lsp.buf_is_attached(0, client.id) == false then
 		vim.lsp.buf_attach_client(0, client.id)
 		return
 	end
