@@ -5,9 +5,7 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
 			"mason.nvim",
-			{
-				"saghen/blink.cmp",
-			},
+			{ "saghen/blink.cmp" },
 		},
 		opts = {
 			-- options for vim.diagnostic.config()
