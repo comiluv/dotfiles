@@ -82,55 +82,6 @@ return {
 		},
 	},
 
-	{
-		"zbirenbaum/copilot.lua",
-		enabled = false,
-		event = "InsertEnter",
-		cmd = "Copilot",
-		build = ":Copilot auth",
-		cond = function()
-			return vim.fn.executable("node") == 1
-		end,
-		config = function()
-			-- https://codeinthehole.com/tips/vim-and-github-copilot/
-			local copilot_enabled_filetypes = {
-				gitcommit = true,
-				markdown = true,
-				yaml = true,
-			}
-			local filetypes = require("utils").array_to_table(vim.g.info_filetype, false)
-			for k, v in pairs(copilot_enabled_filetypes) do
-				filetypes[k] = v
-			end
-			require("copilot").setup({
-				suggestion = {
-					auto_trigger = true,
-					keymap = {
-						accept = "<Tab>",
-					},
-				},
-				filetypes = filetypes,
-			})
-			-- detach Copilot for big files
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("CopilotFileSizeCheck", {}),
-				callback = function(args)
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					if client.name == "copilot" then
-						local file_size = vim.fn.getfsize(args.file)
-						if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
-							vim.defer_fn(function()
-								vim.cmd.Copilot("detach")
-							end, 0)
-						end
-					end
-				end,
-			})
-			-- start Copilot disabled
-			vim.cmd.Copilot("enable")
-		end,
-	},
-
 	-- AI assisted LSP diagnostics
 	{
 		"piersolenski/wtf.nvim",
@@ -187,6 +138,55 @@ return {
 	},
 
 	{
+		"zbirenbaum/copilot.lua",
+		enabled = false,
+		event = "InsertEnter",
+		cmd = "Copilot",
+		build = ":Copilot auth",
+		cond = function()
+			return vim.fn.executable("node") == 1
+		end,
+		config = function()
+			-- https://codeinthehole.com/tips/vim-and-github-copilot/
+			local copilot_enabled_filetypes = {
+				gitcommit = true,
+				markdown = true,
+				yaml = true,
+			}
+			local filetypes = require("utils").array_to_table(vim.g.info_filetype, false)
+			for k, v in pairs(copilot_enabled_filetypes) do
+				filetypes[k] = v
+			end
+			require("copilot").setup({
+				suggestion = {
+					auto_trigger = true,
+					keymap = {
+						accept = "<Tab>",
+					},
+				},
+				filetypes = filetypes,
+			})
+			-- detach Copilot for big files
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("CopilotFileSizeCheck", {}),
+				callback = function(args)
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					if client.name == "copilot" then
+						local file_size = vim.fn.getfsize(args.file)
+						if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
+							vim.defer_fn(function()
+								vim.cmd.Copilot("detach")
+							end, 0)
+						end
+					end
+				end,
+			})
+			-- start Copilot disabled
+			vim.cmd.Copilot("enable")
+		end,
+	},
+
+	{
 		"milanglacier/minuet-ai.nvim",
 		event = "InsertEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -213,16 +213,11 @@ return {
 			context_window = 1024,
 			provider_options = {
 				openai_fim_compatible = {
-					-- For Windows users, TERM may not be present in environment variables.
-					-- Consider using APPDATA instead.
-					api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
-					name = "Ollama",
-					end_point = "http://localhost:11434/v1/completions",
-					model = "qwen2.5-coder:7b",
+					api_key = "DEEPSEEK_API_KEY",
+					name = "Deepseek",
 					optional = {
-						max_tokens = nil,
-						stop = nil,
-						-- top_p = 0.9,
+						max_tokens = 256,
+						top_p = 0.9,
 					},
 				},
 			},
