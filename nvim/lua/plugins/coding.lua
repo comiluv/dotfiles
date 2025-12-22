@@ -44,7 +44,7 @@ return {
 				-- ["<A-y>"] = require("minuet").make_blink_map(),
 			},
 			sources = {
-				-- default = { "lsp", "path", "buffer", "snippets", "minuet" },
+				default = { "lsp", "path", "buffer", "snippets", "minuet" },
 				providers = {
 					minuet = {
 						name = "minuet",
@@ -63,7 +63,7 @@ return {
 				list = { selection = { preselect = false } },
 				documentation = { auto_show = true },
 				ghost_text = { enabled = false },
-				-- trigger = { prefetch_on_insert = false },
+				trigger = { prefetch_on_insert = false },
 				menu = {
 					draw = {
 						components = {

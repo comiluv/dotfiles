@@ -190,37 +190,42 @@ return {
 		"milanglacier/minuet-ai.nvim",
 		event = "InsertEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("minuet").setup({
-				virtualtext = {
-					auto_trigger_ft = { "*" },
-					keymap = {
-						-- accept whole completion
-						accept = "<Tab>",
-						-- accept one line
-						accept_line = "<A-a>",
-						-- accept n lines (prompts for number)
-						-- e.g. "A-z 2 CR" will accept 2 lines
-						accept_n_lines = "<A-z>",
-						-- Cycle to prev completion item, or manually invoke completion
-						prev = "<A-[>",
-						-- Cycle to next completion item, or manually invoke completion
-						next = "<A-]>",
-						dismiss = "<A-e>",
+		opts = {
+			virtualtext = {
+				auto_trigger_ft = { "*" },
+				keymap = {
+					-- accept whole completion
+					accept = "<Tab>",
+					-- accept one line
+					accept_line = "<A-a>",
+					-- accept n lines (prompts for number)
+					-- e.g. "A-z 2 CR" will accept 2 lines
+					accept_n_lines = "<A-z>",
+					-- Cycle to prev completion item, or manually invoke completion
+					prev = "<A-[>",
+					-- Cycle to next completion item, or manually invoke completion
+					next = "<A-]>",
+					dismiss = "<A-e>",
+				},
+			},
+			provider = "openai_fim_compatible",
+			n_completions = 1,
+			context_window = 1024,
+			provider_options = {
+				openai_fim_compatible = {
+					-- For Windows users, TERM may not be present in environment variables.
+					-- Consider using APPDATA instead.
+					api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
+					name = "Ollama",
+					end_point = "http://localhost:11434/v1/completions",
+					model = "qwen2.5-coder:7b",
+					optional = {
+						max_tokens = nil,
+						stop = nil,
+						-- top_p = 0.9,
 					},
 				},
-				provider = "openai_fim_compatible",
-				provider_options = {
-					openai_fim_compatible = {
-						api_key = "DEEPSEEK_API_KEY",
-						name = "Deepseek",
-						optional = {
-							max_tokens = 256,
-							top_p = 0.9,
-						},
-					},
-				},
-			})
-		end,
+			},
+		},
 	},
 }
