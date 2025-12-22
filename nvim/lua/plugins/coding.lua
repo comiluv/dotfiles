@@ -25,60 +25,63 @@ return {
 		},
 		version = "1.*",
 		event = "InsertEnter",
-		opts = {
-			keymap = {
-				preset = "super-tab",
-				["<C-y>"] = { "select_and_accept" },
-				["<CR>"] = { "accept", "fallback" },
-				["<C-d>"] = {
-					function(cmp)
-						cmp.select_next({ count = 8 })
-					end,
+		config = function()
+			local opts = {
+				keymap = {
+					preset = "super-tab",
+					["<C-y>"] = { "select_and_accept" },
+					["<CR>"] = { "accept", "fallback" },
+					["<C-d>"] = {
+						function(cmp)
+							cmp.select_next({ count = 8 })
+						end,
+					},
+					["<C-u>"] = {
+						function(cmp)
+							cmp.select_prev({ count = 8 })
+						end,
+					},
+					-- Manually invoke minuet completion.
+					["<A-y>"] = require("minuet").make_blink_map(),
 				},
-				["<C-u>"] = {
-					function(cmp)
-						cmp.select_prev({ count = 8 })
-					end,
-				},
-				-- Manually invoke minuet completion.
-				["<A-y>"] = require("minuet").make_blink_map(),
-			},
-			sources = {
-				default = { "lsp", "path", "buffer", "snippets", "minuet" },
-				providers = {
-					minuet = {
-						name = "minuet",
-						module = "minuet.blink",
-						async = true,
-						-- Should match minuet.config.request_timeout * 1000,
-						-- since minuet.config.request_timeout is in seconds
-						timeout_ms = 3000,
-						score_offset = 50, -- Gives minuet higher priority among suggestions
+				sources = {
+					default = { "lsp", "path", "buffer", "snippets", "minuet" },
+					providers = {
+						minuet = {
+							name = "minuet",
+							module = "minuet.blink",
+							async = true,
+							-- Should match minuet.config.request_timeout * 1000,
+							-- since minuet.config.request_timeout is in seconds
+							timeout_ms = 3000,
+							score_offset = 50, -- Gives minuet higher priority among suggestions
+						},
 					},
 				},
-			},
-			snippets = { preset = "luasnip" },
-			completion = {
-				accept = { auto_brackets = { enabled = true } },
-				list = { selection = { preselect = false, auto_insert=false } },
-				documentation = { auto_show = true },
-				ghost_text = { enabled = false },
-				trigger = { prefetch_on_insert = false },
-				menu = {
-					draw = {
-						components = {
-							kind_icon = {
-								ellipsis = false,
-								text = function(ctx)
-									return require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
-								end,
+				snippets = { preset = "luasnip" },
+				completion = {
+					accept = { auto_brackets = { enabled = true } },
+					list = { selection = { preselect = false, auto_insert = false } },
+					documentation = { auto_show = true },
+					ghost_text = { enabled = false },
+					trigger = { prefetch_on_insert = false },
+					menu = {
+						draw = {
+							components = {
+								kind_icon = {
+									ellipsis = false,
+									text = function(ctx)
+										return require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+									end,
+								},
 							},
 						},
 					},
 				},
-			},
-			cmdline = { enabled = false },
-		},
+				cmdline = { enabled = false },
+			}
+			require("blink.cmp").setup(opts)
+		end,
 		init = function()
 			local has_copilot, copilot = pcall(require, "copilot.suggestion")
 			if has_copilot then
