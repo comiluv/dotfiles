@@ -188,7 +188,7 @@ return {
 
 	{
 		"milanglacier/minuet-ai.nvim",
-		-- event = "InsertEnter",
+		event = "InsertEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("minuet").setup({
