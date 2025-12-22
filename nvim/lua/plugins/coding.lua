@@ -41,7 +41,7 @@ return {
 					end,
 				},
 				-- Manually invoke minuet completion.
-				-- ["<A-y>"] = require("minuet").make_blink_map(),
+				["<A-y>"] = require("minuet").make_blink_map(),
 			},
 			sources = {
 				default = { "lsp", "path", "buffer", "snippets", "minuet" },
@@ -60,7 +60,7 @@ return {
 			snippets = { preset = "luasnip" },
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
-				list = { selection = { preselect = false } },
+				list = { selection = { preselect = false, auto_insert=false } },
 				documentation = { auto_show = true },
 				ghost_text = { enabled = false },
 				trigger = { prefetch_on_insert = false },
