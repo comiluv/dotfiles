@@ -10,6 +10,7 @@ return {
 				opts = {
 					preset = "codicons",
 					symbol_map = {
+						Copilot = "",
 						claude = "󰋦",
 						openai = "󱢆",
 						codestral = "󱎥",
