@@ -149,13 +149,13 @@ return {
 		config = function()
 			-- https://codeinthehole.com/tips/vim-and-github-copilot/
 			local copilot_enabled_filetypes = {
-				gitcommit = true,
-				markdown = true,
-				yaml = true,
+				"gitcommit",
+				"markdown",
+				"yaml",
 			}
 			local filetypes = require("utils").array_to_table(vim.g.info_filetype, false)
-			for k, v in pairs(copilot_enabled_filetypes) do
-				filetypes[k] = v
+			for _, v in ipairs(copilot_enabled_filetypes) do
+				filetypes[v] = true
 			end
 			require("copilot").setup({
 				suggestion = {
@@ -194,6 +194,7 @@ return {
 		opts = {
 			virtualtext = {
 				auto_trigger_ft = { "*" },
+				auto_trigger_ignore_ft = vim.g.info_filetype,
 				keymap = {
 					-- accept whole completion
 					accept = "<Tab>",
@@ -240,5 +241,24 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			require("minuet").setup(opts)
+			-- detach Minuet for big files
+			vim.api.nvim_create_autocmd("BufEnter", {
+				group = vim.api.nvim_create_augroup("MinuetFileSizeCheck", {}),
+				callback = function(args)
+					local file_size = vim.fn.getfsize(args.file)
+					if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
+						vim.defer_fn(function()
+							vim.cmd("Minuet virtualtext disable")
+						end, 0)
+					else
+						vim.defer_fn(function()
+							vim.cmd("Minuet virtualtext enable")
+						end, 0)
+					end
+				end,
+			})
+		end,
 	},
 }
