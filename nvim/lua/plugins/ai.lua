@@ -212,10 +212,31 @@ return {
 			provider = "codestral",
 			provider_options = {
 				codestral = {
-					end_point = "https://codestral.mistral.ai/v1/fim/completions",
-					api_key = "CODESTRAL_API_KEY",
-					stream = true,
-					model = "codestral-latest",
+					optional = {
+						max_tokens = 256,
+						stop = { "\n\n" },
+					},
+				},
+			},
+			presets = {
+				preset_1 = {
+					provider = "openai_fim_compatible",
+					request_timeout = 10,
+					n_completions = 1,
+					context_window = 2048,
+					provider_options = {
+						openai_fim_compatible = {
+							name = "ollama",
+							end_point = "http://localhost:11434/v1/completions",
+							api_key = vim.fn.has("win32") and "APPDATA" or "TERM",
+							stream = true,
+							model = "freehuntx/qwen3-coder:30b",
+							optional = {
+								max_tokens = nil,
+								top_p = 0.9,
+							},
+						},
+					},
 				},
 			},
 		},
