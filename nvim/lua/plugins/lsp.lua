@@ -4,8 +4,9 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
-			"mason.nvim",
-			{ "saghen/blink.cmp" },
+			"mason-org/mason-lspconfig.nvim",
+			"mason.org/mason.nvim",
+			"saghen/blink.cmp",
 		},
 		opts = {
 			-- options for vim.diagnostic.config()
@@ -28,9 +29,6 @@ return {
 				lua_ls = {
 					settings = {
 						Lua = {
-							diagnostics = {
-								globals = { "vim" },
-							},
 							telemetry = {
 								enable = false,
 							},
@@ -40,22 +38,11 @@ return {
 				clangd = {
 					cmd = { "clangd", "--header-insertion=never" },
 				},
-				prettierd = {},
-				pyright = {},
-				powershell_es = {
-					bundle_path = vim.fn.stdpath("data") .. "\\mason\\packages\\powershell-editor-services",
-				},
 			},
-			skip_server_setup = { jdtls = true, rust_analyzer = true, ruff = true, stylua = true },
-			-- you can do any additional lsp server setup here
-			-- return true if you don't want this server to be setup with lspconfig
-			setup = {
-				-- Specify * to use this function as a fallback for any server
-				-- ["*"] = function(server, opts) end,
-			},
+			-- if you don't want this server to be setup with lspconfig
+			skip_server_setup = { "jdtls", "rust_analyzer", "ruff", "stylua" },
 			ensure_installed = {},
 		},
-
 		---@class opts
 		config = function(_, opts)
 			-- create keymaps
@@ -64,31 +51,27 @@ return {
 			vim.diagnostic.config(opts.diagnostics)
 
 			for server, server_opts in pairs(opts.servers) do
-				if opts.skip_server_setup[server] then
-					return
-				end
-				if opts.setup[server] then
-					if opts.setup[server](server, server_opts) then
-						return
-					end
-				elseif opts.setup["*"] then
-					if opts.setup["*"](server, server_opts) then
-						return
-					end
-				end
 				server_opts.capabilities = require("blink-cmp").get_lsp_capabilities(server_opts.capabilities)
 				vim.lsp.config(server, server_opts)
 				vim.lsp.enable(server)
 			end
+
+			require("mason-lspconfig").setup({
+				ensure_installed = opts.ensure_installed,
+				automatic_enable = { exclude = opts.skip_server_setup },
+			})
 		end,
 	},
 
 	{
-		"mason-org/mason.nvim",
-		event = "VeryLazy",
-		cmd = { "Mason", "MasonUpdate" },
-		build = ":MasonUpdate",
-		opts = {},
+		"mason-org/mason-lspconfig.nvim",
+		lazy = true,
+		dependencies = {
+			"mason-org/mason.nvim",
+			cmd = { "Mason", "MasonUpdate" },
+			build = ":MasonUpdate",
+			opts = {},
+		},
 	},
 
 	-- java language server plugin to further utilize lsp capabilities
