@@ -42,14 +42,14 @@ return {
 						"snippet_forward",
 						function(_)
 							if vim.g.llm == "copilot" then
-								local ok, copilot = pcall(require, "copilot.suggestion")
-								if ok and copilot.is_visible() then
+								local copilot = require("copilot.suggestion")
+								if copilot.is_visible() then
 									return copilot.accept()
 								end
 							elseif vim.g.llm == "minuet" then
-								local ok, minuet = pcall(require("minuet.virtualtext"))
-								if ok and minuet.action.is_visible() then
-									return minuet.accept()
+								local minuet = require("minuet.virtualtext")
+								if minuet.action.is_visible() then
+									return minuet.action.accept()
 								end
 							end
 							return vim.api.nvim_replace_termcodes("<Plug>(TaboutMulti)", true, true, true)
