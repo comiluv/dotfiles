@@ -181,8 +181,6 @@ return {
 					end
 				end,
 			})
-			-- start Copilot disabled
-			vim.cmd.Copilot("enable")
 		end,
 	},
 
@@ -250,11 +248,11 @@ return {
 					local file_size = vim.fn.getfsize(args.file)
 					if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
 						vim.defer_fn(function()
-							vim.cmd("Minuet virtualtext disable")
+							vim.cmd.Minuet("virtualtext disable")
 						end, 0)
 					else
 						vim.defer_fn(function()
-							vim.cmd("Minuet virtualtext enable")
+							vim.cmd.Minuet("virtualtext enable")
 						end, 0)
 					end
 				end,

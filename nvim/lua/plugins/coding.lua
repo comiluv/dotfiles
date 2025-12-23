@@ -28,6 +28,12 @@ return {
 		version = "1.*",
 		event = "InsertEnter",
 		config = function()
+			local llm = nil
+			if vim.g.llm == "copilot" then
+				llm = require("copilot.suggestion")
+			elseif vim.g.llm == "minuet" then
+				llm = require("minuet.virtualtext").action
+			end
 			local opts = {
 				keymap = {
 					preset = "super-tab",
@@ -41,16 +47,8 @@ return {
 						end,
 						"snippet_forward",
 						function(_)
-							if vim.g.llm == "copilot" then
-								local copilot = require("copilot.suggestion")
-								if copilot.is_visible() then
-									return copilot.accept()
-								end
-							elseif vim.g.llm == "minuet" then
-								local minuet = require("minuet.virtualtext")
-								if minuet.action.is_visible() then
-									return minuet.action.accept()
-								end
+							if llm.is_visible() then
+								return llm.accept()
 							end
 							return vim.api.nvim_replace_termcodes("<Plug>(TaboutMulti)", true, true, true)
 						end,
