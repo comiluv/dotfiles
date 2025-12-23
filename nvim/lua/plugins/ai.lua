@@ -209,24 +209,13 @@ return {
 					dismiss = "<C-]>",
 				},
 			},
-			provider = "openai_compatible",
-			request_timeout = 2.5,
-			throttle = 1500, -- Increase to reduce costs and avoid rate limits
-			debounce = 600, -- Increase to reduce costs and avoid rate limits
+			provider = "codestral",
 			provider_options = {
-				openai_compatible = {
-					api_key = "OPENROUTER_API_KEY",
-					end_point = "https://openrouter.ai/api/v1/chat/completions",
-					model = "mistralai/devstral-2512:free",
-					name = "codestral",
-					optional = {
-						max_tokens = nil,
-						top_p = 0.9,
-						provider = {
-							-- Prioritize throughput for faster completion
-							sort = "throughput",
-						},
-					},
+				codestral = {
+					end_point = "https://codestral.mistral.ai/v1/fim/completions",
+					api_key = "CODESTRAL_API_KEY",
+					stream = true,
+					model = "codestral-latest",
 				},
 			},
 		},
