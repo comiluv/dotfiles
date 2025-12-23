@@ -3,23 +3,24 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = {
+			"abecodes/tabout.nvim",
 			"L3MON4D3/LuaSnip",
-			vim.g.llm == "minuet" and "milanglacier/minuet-ai.nvim" or {},
+			vim.g.llm == "minuet" and "milanglacier/minuet-ai.nvim" or "zbirenbaum/copilot.lua",
 			{
 				"onsails/lspkind.nvim",
 				opts = {
 					preset = "codicons",
 					symbol_map = {
-						Copilot = "",
+						copilot = "",
 						claude = "󰋦",
 						openai = "󱢆",
 						codestral = "󱎥",
 						gemini = "",
-						Groq = "",
-						Openrouter = "󱂇",
-						Ollama = "󰳆",
-						["Llama.cpp"] = "󰳆",
-						Deepseek = "",
+						groq = "",
+						openrouter = "󱂇",
+						ollama = "󰳆",
+						["llama.cpp"] = "󰳆",
+						deepseek = "",
 					},
 				},
 			},
@@ -30,6 +31,30 @@ return {
 			local opts = {
 				keymap = {
 					preset = "super-tab",
+					["<Tab>"] = {
+						function(cmp)
+							if cmp.snippet_active() then
+								return cmp.accept()
+							else
+								return cmp.select_and_accept()
+							end
+						end,
+						"snippet_forward",
+						function(_)
+							if vim.g.llm == "copilot" then
+								local ok, copilot = pcall(require, "copilot.suggestion")
+								if ok and copilot.is_visible() then
+									return copilot.accept()
+								end
+							elseif vim.g.llm == "minuet" then
+								local ok, minuet = pcall(require("minuet.virtualtext"))
+								if ok and minuet.action.is_visible() then
+									return minuet.accept()
+								end
+							end
+							return vim.api.nvim_replace_termcodes("<Plug>(TaboutMulti)", true, true, true)
+						end,
+					},
 					["<C-y>"] = { "select_and_accept" },
 					["<CR>"] = { "accept", "fallback" },
 					["<C-d>"] = {
@@ -236,7 +261,6 @@ return {
 		event = "InsertCharPre",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"zbirenbaum/copilot.lua",
 		},
 		config = function()
 			require("tabout").setup({
@@ -244,8 +268,6 @@ return {
 				backwards_tabkey = "",
 				completion = false,
 			})
-			vim.keymap.set("i", "<tab>", require("tabout").taboutMulti, { silent = true })
-			vim.keymap.set("i", "<s-tab>", require("tabout").taboutBackMulti, { silent = true })
 		end,
 	},
 }
