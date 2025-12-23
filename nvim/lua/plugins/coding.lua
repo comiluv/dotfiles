@@ -4,7 +4,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = {
 			"L3MON4D3/LuaSnip",
-			"milanglacier/minuet-ai.nvim",
+			vim.g.llm == "minuet" and "milanglacier/minuet-ai.nvim" or {},
 			{
 				"onsails/lspkind.nvim",
 				opts = {
@@ -43,10 +43,9 @@ return {
 						end,
 					},
 					-- Manually invoke minuet completion.
-					["<A-y>"] = require("minuet").make_blink_map(),
+					["<A-y>"] = vim.g.llm == "minuet" and require("minuet").make_blink_map() or false,
 				},
 				sources = {
-					default = { "lsp", "path", "buffer", "snippets", "minuet" },
 					providers = {
 						minuet = {
 							name = "minuet",
@@ -81,6 +80,9 @@ return {
 				},
 				cmdline = { enabled = false },
 			}
+			if vim.g.llm == "minuet" then
+				opts.sources.default = { "lsp", "path", "buffer", "snippets", "minuet" }
+			end
 			require("blink.cmp").setup(opts)
 		end,
 		init = function()

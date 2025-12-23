@@ -139,7 +139,7 @@ return {
 
 	{
 		"zbirenbaum/copilot.lua",
-		enabled = false,
+		enabled = vim.g.llm == "copilot",
 		event = "InsertEnter",
 		cmd = "Copilot",
 		build = ":Copilot auth",
@@ -188,6 +188,7 @@ return {
 
 	{
 		"milanglacier/minuet-ai.nvim",
+		enabled = vim.g.llm == "minuet",
 		event = "InsertEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
@@ -213,11 +214,13 @@ return {
 			context_window = 1024,
 			provider_options = {
 				openai_fim_compatible = {
-					api_key = "DEEPSEEK_API_KEY",
-					name = "Deepseek",
+					api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
+					name = "Ollama",
+					end_point = "http://localhost:11434/v1/completions",
+					model = "qwen2.5-coder:7b",
 					optional = {
-						max_tokens = 256,
-						top_p = 0.9,
+						max_tokens = nil,
+						stop = nil,
 					},
 				},
 			},
