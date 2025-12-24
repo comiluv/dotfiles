@@ -106,17 +106,13 @@ return {
 			if vim.g.llm == "minuet" then
 				opts.sources.default = { "lsp", "path", "buffer", "snippets", "minuet" }
 			end
-			require("blink.cmp").setup(opts)
-		end,
-		init = function()
-			local has_copilot, copilot = pcall(require, "copilot.suggestion")
-			if has_copilot then
+			if vim.g.llm == "copilot" then
 				local BlinkGroup = vim.api.nvim_create_augroup("BlinkCmpCopilotGroup", {})
 				vim.api.nvim_create_autocmd("User", {
 					group = BlinkGroup,
 					pattern = "BlinkCmpMenuOpen",
 					callback = function()
-						copilot.dismiss()
+						llm.dismiss()
 						vim.b.copilot_suggestion_hidden = true
 					end,
 				})
@@ -128,6 +124,7 @@ return {
 					end,
 				})
 			end
+			require("blink.cmp").setup(opts)
 		end,
 	},
 
@@ -162,6 +159,8 @@ return {
 				},
 			})
 			require("luasnip").setup(opts)
+		end,
+		init = function()
 			local luasnip_group = vim.api.nvim_create_augroup("LuaSnipCopilotGroup", {})
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "LuasnipInsertNodeEnter",
@@ -260,12 +259,10 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
-		config = function()
-			require("tabout").setup({
-				tabkey = "",
-				backwards_tabkey = "",
-				completion = false,
-			})
-		end,
+		opts = {
+			tabkey = "",
+			backwards_tabkey = "",
+			completion = false,
+		},
 	},
 }
