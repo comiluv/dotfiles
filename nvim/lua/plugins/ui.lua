@@ -114,8 +114,8 @@ return {
 	{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		event = { "LspAttach" },
-		config = function()
-			require("lsp_lines").setup({})
+		opts = {},
+		init = function()
 			local virtual_text = vim.diagnostic.config().virtual_text or true
 			vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
 			vim.keymap.set("", "<leader>l", function()
