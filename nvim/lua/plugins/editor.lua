@@ -59,7 +59,6 @@ return {
 				desc = "Telescope grep string",
 			},
 			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
-			{ "<leader>r", "<cmd>Telescope smart_open<cr>", desc = "Telescope recent files" },
 			{
 				"<leader>/",
 				function()
@@ -193,6 +192,9 @@ return {
 	-- fast file-finding
 	{
 		"danielfalk/smart-open.nvim",
+		keys = {
+			{ "<leader>r", "<cmd>Telescope smart_open<cr>", desc = "Telescope recent files" },
+		},
 		branch = "0.2.x",
 		config = function()
 			require("telescope").load_extension("smart_open")
