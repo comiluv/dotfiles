@@ -9,7 +9,7 @@ return {
 		config = function(_, opts)
 			local settings = {
 				mode = "legacy",
-				provider = "ollama",
+				provider = "openrouter-gpt",
 				providers = {
 					ollama = {
 						endpoint = "http://localhost:11434",
@@ -128,11 +128,6 @@ return {
 		config = function()
 			require("wtf").setup({
 				provider = "openai",
-				providers = {
-					ollama = {
-						model_id = "gpt-oss:20b",
-					},
-				},
 			})
 		end,
 	},
@@ -166,16 +161,18 @@ return {
 				},
 				filetypes = filetypes,
 			})
+		end,
+		init = function()
 			-- detach Copilot for big files
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("CopilotFileSizeCheck", {}),
 				callback = function(args)
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					if client.name == "copilot" then
+					if client and client.name == "copilot" then
 						local file_size = vim.fn.getfsize(args.file)
 						if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
 							vim.defer_fn(function()
-								vim.cmd.Copilot("detach")
+								vim.cmd("Copilot", "detach")
 							end, 0)
 						end
 					end
@@ -239,8 +236,7 @@ return {
 				},
 			},
 		},
-		config = function(_, opts)
-			require("minuet").setup(opts)
+		init = function()
 			-- detach Minuet for big files
 			vim.api.nvim_create_autocmd("BufEnter", {
 				group = vim.api.nvim_create_augroup("MinuetFileSizeCheck", {}),
@@ -248,11 +244,11 @@ return {
 					local file_size = vim.fn.getfsize(args.file)
 					if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
 						vim.defer_fn(function()
-							vim.cmd.Minuet("virtualtext disable")
+							vim.cmd("Minuet", "virtualtext", "disable")
 						end, 0)
 					else
 						vim.defer_fn(function()
-							vim.cmd.Minuet("virtualtext enable")
+							vim.cmd("Minuet", "virtualtext", "enable")
 						end, 0)
 					end
 				end,
