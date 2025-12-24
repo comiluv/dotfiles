@@ -96,55 +96,50 @@ return {
 				desc = "Format Buffer",
 			},
 		},
-		opts = function(_, opts)
-			opts = opts or {}
-			-- This snippet will automatically detect which formatters take too long to run synchronously and will run them async on save instead.
-			vim.g.slow_format_filetypes = vim.g.slow_format_filetypes or {}
-			local format = {
-				format_on_save = function(bufnr)
-					-- Disable with a global or buffer-local variable
-					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-						return
+		-- This snippet will automatically detect which formatters take too long to run synchronously and will run them async on save instead.
+		opts = {
+			format_on_save = function(bufnr)
+				-- Disable with a global or buffer-local variable
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				if vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
+					return
+				end
+				local function on_format(err)
+					if err and err:match("timeout$") then
+						vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] = true
 					end
-					if vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
-						return
-					end
-					local function on_format(err)
-						if err and err:match("timeout$") then
-							vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] = true
-						end
-					end
+				end
 
-					return { timeout_ms = 500, lsp_format = "fallback" }, on_format
-				end,
+				return { timeout_ms = 500, lsp_format = "fallback" }, on_format
+			end,
 
-				format_after_save = function(bufnr)
-					-- Disable with a global or buffer-local variable
-					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-						return
-					end
-					if not vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
-						return
-					end
-					return { lsp_format = "fallback" }
-				end,
+			format_after_save = function(bufnr)
+				-- Disable with a global or buffer-local variable
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				if not vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
+					return
+				end
+				return { lsp_format = "fallback" }
+			end,
 
-				formatters_by_ft = {
-					javascript = { "prettierd" },
-					css = { "prettierd" },
-					html = { "prettierd" },
-					json = { "prettierd" },
-					python = { "ruff" },
-					lua = { "stylua" },
-				},
-				formatters = {
-					isort = { args = { "-" } },
-				},
-			}
-			opts = vim.tbl_deep_extend("force", opts, format)
-			return opts
-		end,
+			formatters_by_ft = {
+				javascript = { "prettierd" },
+				css = { "prettierd" },
+				html = { "prettierd" },
+				json = { "prettierd" },
+				python = { "ruff" },
+				lua = { "stylua" },
+			},
+			formatters = {
+				isort = { args = { "-" } },
+			},
+		},
 		init = function()
+			vim.g.slow_format_filetypes = vim.g.slow_format_filetypes or {}
 			-- Create user commands to quickly enable/disable autoformatting
 			vim.api.nvim_create_user_command("FormatDisable", function(args)
 				if args.bang then
