@@ -74,6 +74,8 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			require("treesitter-context").setup({ max_lines = 60 })
+		end,
+		init = function()
 			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
 				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
 				callback = function(event)
@@ -83,10 +85,10 @@ return {
 					vim.b.treesitter_context_set = true
 					local ok, size = pcall(vim.fn.getfsize, event.file)
 					if not ok or size > 1024 * 1024 then -- 1 MB
-						vim.cmd.TSContext('disable')
+						vim.cmd("TSContext disable")
 						return
 					end
-					vim.cmd.TSContext('enable')
+					vim.cmd("TSContext enable")
 				end,
 			})
 		end,
