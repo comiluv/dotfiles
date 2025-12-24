@@ -2,16 +2,7 @@
 -- on main branch, treesitter isn't started automatically
 vim.api.nvim_create_autocmd({ "Filetype" }, {
 	callback = function(event)
-		local ignored_fts = {
-			"snacks_dashboard",
-			"snacks_notif",
-			"snacks_input",
-			"prompt", -- bt: snacks_picker_input
-			"ini",
-			"ada",
-		}
-
-		if vim.tbl_contains(ignored_fts, event.match) then
+		if vim.tbl_contains(vim.g.info_filetype, event.match) then
 			return
 		end
 
