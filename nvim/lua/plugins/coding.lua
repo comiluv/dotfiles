@@ -68,19 +68,6 @@ return {
 					-- Manually invoke minuet completion.
 					["<A-y>"] = vim.g.llm == "minuet" and require("minuet").make_blink_map() or false,
 				},
-				sources = {
-					providers = {
-						minuet = {
-							name = "minuet",
-							module = "minuet.blink",
-							async = true,
-							-- Should match minuet.config.request_timeout * 1000,
-							-- since minuet.config.request_timeout is in seconds
-							timeout_ms = 10000,
-							score_offset = 50, -- Gives minuet higher priority among suggestions
-						},
-					},
-				},
 				snippets = { preset = "luasnip" },
 				completion = {
 					accept = { auto_brackets = { enabled = true } },
@@ -104,7 +91,20 @@ return {
 				cmdline = { enabled = false },
 			}
 			if vim.g.llm == "minuet" then
-				opts.sources.default = { "lsp", "path", "buffer", "snippets", "minuet" }
+				opts.sources = {
+					default = { "lsp", "path", "buffer", "snippets", "minuet" },
+					providers = {
+						minuet = {
+							name = "minuet",
+							module = "minuet.blink",
+							async = true,
+							-- Should match minuet.config.request_timeout * 1000,
+							-- since minuet.config.request_timeout is in seconds
+							timeout_ms = 10000,
+							score_offset = 50, -- Gives minuet higher priority among suggestions
+						},
+					},
+				}
 			end
 			if vim.g.llm == "copilot" then
 				local BlinkGroup = vim.api.nvim_create_augroup("BlinkCmpCopilotGroup", {})
