@@ -168,7 +168,7 @@ return {
 				group = vim.api.nvim_create_augroup("CopilotFileSizeCheck", {}),
 				callback = function(args)
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					if client and client.name == "copilot" then
+					if client.name == "copilot" then
 						local file_size = vim.fn.getfsize(args.file)
 						if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
 							vim.defer_fn(function()
