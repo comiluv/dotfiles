@@ -52,7 +52,12 @@ return {
 			"MunifTanjim/nui.nvim",
 			--- The below dependencies are optional,
 			"nvim-telescope/telescope.nvim",
-			"folke/snacks.nvim",
+			{
+				"folke/snacks.nvim",
+				lazy = false,
+				priority = 1000,
+				opts = {},
+			},
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 			{
 				-- support for image pasting
