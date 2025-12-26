@@ -15,7 +15,7 @@ end
 
 vim.schedule(function()
 	if vim.fn.executable("rg") then
-		vim.opt.grepprg = "rg --no-heading --color never --vimgrep"
+		vim.opt.grepprg = "rg --no-heading --vimgrep"
 		vim.opt.grepformat = "%f:%l:%c:%m"
 	end
 
