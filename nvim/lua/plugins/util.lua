@@ -1,11 +1,4 @@
 return {
-	-- automatically create any non-existent directories
-	{
-		"jghauser/mkdir.nvim",
-		event = "VeryLazy",
-		-- "BufWritePre", "FileWritePre", "BufWriteCmd", "BufModifiedSet", didnt work
-	},
-
 	-- Open the current word with custom openers, GitHub shorthands for example.
 	{
 		"ofirgall/open.nvim",
