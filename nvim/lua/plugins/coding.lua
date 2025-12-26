@@ -246,7 +246,7 @@ return {
 
 	-- easy align comments
 	{
-		"echasnovski/mini.align",
+		"nvim-mini/mini.align",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		version = false,
 		opts = {},

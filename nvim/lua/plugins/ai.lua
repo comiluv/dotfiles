@@ -58,7 +58,7 @@ return {
 				priority = 1000,
 				opts = {},
 			},
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"nvim-tree/nvim-web-devicons", -- or nvim-mini/mini.icons
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",

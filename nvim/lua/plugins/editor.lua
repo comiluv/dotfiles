@@ -125,7 +125,7 @@ return {
 	},
 
 	{
-		"echasnovski/mini.ai",
+		"nvim-mini/mini.ai",
 		event = "VeryLazy",
 		version = false,
 		opts = function()
