@@ -2,3 +2,6 @@
 normal = ["Sarasa Mono K", "Symbols Nerd Font"]
 size = 12
 
+[font.features]
+"Symbols Nerd Font" = ["-calt"]
+"Sarasa Mono K" = ["-calt"]
