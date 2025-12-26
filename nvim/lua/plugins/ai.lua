@@ -242,7 +242,8 @@ return {
 				},
 			},
 		},
-		init = function()
+		config = function(_, opts)
+			require("minuet").setup(opts)
 			-- detach Minuet for big files
 			vim.api.nvim_create_autocmd("BufEnter", {
 				group = vim.api.nvim_create_augroup("MinuetFileSizeCheck", {}),
