@@ -143,9 +143,7 @@ return {
 		event = "InsertEnter",
 		cmd = "Copilot",
 		build = ":Copilot auth",
-		cond = function()
-			return vim.fn.executable("node") == 1 and vim.g.llm == "copilot"
-		end,
+		cond = vim.fn.executable("node") == 1 and vim.g.llm == "copilot",
 		config = function()
 			-- https://codeinthehole.com/tips/vim-and-github-copilot/
 			local copilot_enabled_filetypes = {

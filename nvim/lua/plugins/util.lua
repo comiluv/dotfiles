@@ -19,9 +19,7 @@ return {
 	{
 		"hattya/vcvars.vim",
 		ft = { "c", "cpp" },
-		cond = function()
-			return vim.fn.has("win32") == 1
-		end,
+		cond = vim.fn.has("win32") == 1,
 		config = function()
 			-- https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
 			vim.cmd([[
