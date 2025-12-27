@@ -74,8 +74,6 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		config = function()
 			require("treesitter-context").setup({ max_lines = 60 })
-		end,
-		init = function()
 			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
 				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
 				callback = function(event)
@@ -115,7 +113,7 @@ return {
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		event = { "LspAttach" },
 		opts = {},
-		init = function()
+		config = function()
 			local virtual_text = vim.diagnostic.config().virtual_text or true
 			vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
 			vim.keymap.set("", "<leader>l", function()
