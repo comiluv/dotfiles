@@ -140,12 +140,11 @@ return {
 
 	{
 		"zbirenbaum/copilot.lua",
-		enabled = vim.g.llm == "copilot",
 		event = "InsertEnter",
 		cmd = "Copilot",
 		build = ":Copilot auth",
 		cond = function()
-			return vim.fn.executable("node") == 1
+			return vim.fn.executable("node") == 1 and vim.g.llm == "copilot"
 		end,
 		config = function()
 			-- https://codeinthehole.com/tips/vim-and-github-copilot/
@@ -189,7 +188,7 @@ return {
 
 	{
 		"milanglacier/minuet-ai.nvim",
-		enabled = vim.g.llm == "minuet",
+		cond = vim.g.llm == "minuet",
 		event = "InsertEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
