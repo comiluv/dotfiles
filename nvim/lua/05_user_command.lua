@@ -3,7 +3,10 @@ local usercmd = vim.api.nvim_create_user_command
 local function Grep(args)
 	local cmd = vim.opt.grepprg:get() .. " " .. args
 	-- Execute the command and return its output
-	return vim.fn.system(cmd)
+	local handle = io.popen(cmd)
+	local result = handle:read("*a")
+	handle:close()
+	return result
 end
 
 -- Helper function to split lines and filter out empty ones
