@@ -29,10 +29,10 @@ local windows_extension = ""
 if windows then
 	vim.bo.makeprg = "mingw32-make.exe"
 	windows_extension = ".exe"
-end
 
--- Output Visual Studio messages in English (rather than system locale). Requires Visual Studio English language pack installed
-vim.env.VSLANG = 1033
+	-- Output Visual Studio messages in English (rather than system locale). Requires Visual Studio English language pack installed
+	vim.env.VSLANG = 1033
+end
 
 -- pressing F5 will compile current buffer
 vim.keymap.set("n", "<F5>", function()
