@@ -19,6 +19,7 @@ vim.g.info_filetype = {
 	"fugitive",
 	"gitcommit",
 	"gitrebase",
+	"gitsigns-blame",
 	"help",
 	"hgcommit",
 	"ini",
