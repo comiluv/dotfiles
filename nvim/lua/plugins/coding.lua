@@ -26,7 +26,7 @@ return {
 			},
 		},
 		version = "1.*",
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		config = function()
 			local llm = nil
 			if vim.g.llm == "copilot" then
@@ -88,7 +88,6 @@ return {
 						},
 					},
 				},
-				cmdline = { enabled = false },
 			}
 			if vim.g.llm == "minuet" then
 				opts.sources = {
