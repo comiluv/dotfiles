@@ -28,7 +28,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
--- note below is taken from book Practical Vim 2nd edition
+-- from book Practical Vim 2nd edition
 local function expand_to_path()
 	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
 end
@@ -64,9 +64,6 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- replace visually selected
 vim.keymap.set("v", "<leader>s", [["ly:%s/\<<C-r>l\>/<C-r>l/gI<Left><Left><Left>]], { desc = "Replace selected" })
-
--- Press <ESC> to escape insert mode in terminal
-vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 -- Move out from terminal window with alt key shortcuts
 vim.keymap.set("t", "<A-h>", [[<C-\><C-n><C-w>h]])

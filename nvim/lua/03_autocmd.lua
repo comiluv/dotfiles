@@ -111,15 +111,6 @@ autocmd("BufWritePre", {
 	end,
 })
 
--- disable <esc><esc> keymap in lazygit window
-autocmd({ "FileType" }, {
-	group = MyGroup,
-	pattern = "lazygit",
-	callback = function()
-		vim.keymap.set("t", "<ESC><ESC>", "<NOP>", { buffer = true })
-	end,
-})
-
 -- The following two autocommands are used to highlight references of the
 -- word under your cursor when your cursor rests there for a little while.
 --    See `:help CursorHold` for information about when this is executed
