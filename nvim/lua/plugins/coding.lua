@@ -47,7 +47,7 @@ return {
 						end,
 						"snippet_forward",
 						function(_)
-							if llm.is_visible() then
+							if llm and llm.is_visible() then
 								return llm.accept()
 							end
 							return vim.api.nvim_replace_termcodes("<Plug>(TaboutMulti)", true, true, true)
