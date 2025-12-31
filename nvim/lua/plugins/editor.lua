@@ -91,13 +91,6 @@ return {
 		end,
 	},
 
-	-- auto locate last location in the file
-	{
-		"ethanholz/nvim-lastplace",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		opts = {},
-	},
-
 	{
 		"jiaoshijie/undotree",
 		dependencies = "nvim-lua/plenary.nvim",
