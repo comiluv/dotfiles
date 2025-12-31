@@ -18,6 +18,7 @@ return {
 					end
 				end,
 			},
+			"nvim-tree/nvim-web-devicons",
 		},
 		cmd = "Telescope",
 		keys = {
