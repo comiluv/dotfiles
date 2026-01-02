@@ -8,7 +8,6 @@ local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup("HighlightYank")
 
 vim.g.info_filetype = {
-	"''",
 	"PlenaryTestPopup",
 	"TelescopePrompt",
 	"TelescopeResults",
@@ -75,8 +74,13 @@ autocmd({ "FileType" }, {
 	group = MyGroup,
 	pattern = vim.g.info_filetype,
 	callback = function(event)
-		vim.opt_local.buflisted = false
-		vim.keymap.set("n", "q", "<cmd>silent! close<cr>", { buffer = event.buf, nowait = true })
+		vim.keymap.set("n", "q", function()
+			if vim.bo[event.buf].filetype == "TelescopePrompt" then
+				vim.cmd("bd!")
+			else
+				vim.cmd("bd")
+			end
+		end, { buffer = event.buf, nowait = true, desc = "Quick bd for info buffers" })
 	end,
 })
 
