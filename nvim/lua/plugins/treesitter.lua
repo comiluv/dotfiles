@@ -6,7 +6,7 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		build = ":TSUpdate",
 		dependencies = {
-			{ "folke/ts-comments.nvim", opts = {} },
+			{ "folke/ts-comments.nvim" },
 			{ "andymass/vim-matchup" },
 			{ "RRethy/nvim-treesitter-endwise" },
 		},
@@ -68,5 +68,11 @@ return {
 				require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
 			end
 		end,
+	},
+
+	{
+		"folke/ts-comments.nvim",
+		lazy = true,
+		opts = {},
 	},
 }

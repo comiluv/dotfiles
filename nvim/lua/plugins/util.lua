@@ -2,7 +2,7 @@ return {
 	-- Open the current word with custom openers, GitHub shorthands for example.
 	{
 		"ofirgall/open.nvim",
-		dependencies = "nvim-lua/plenary.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
 			{
 				"gx",
@@ -49,9 +49,7 @@ return {
 	{
 		"gregorias/coerce.nvim",
 		event = { "BufReadPre", "BufAdd", "BufNewFile" },
-		dependencies = {
-			"folke/which-key.nvim",
-		},
+		dependencies = { "folke/which-key.nvim" },
 		opts = {
 			default_mode_mask = { visual_mode = false },
 		},
@@ -63,6 +61,16 @@ return {
 		event = { "VeryLazy" },
 		init = function()
 			vim.g.rzipPlugin_extra_ext = "*.pak"
+		end,
+	},
+
+	{
+		"kkharji/sqlite.lua",
+		lazy = true,
+		init = function()
+			if vim.fn.has("win32") == 1 then
+				vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
+			end
 		end,
 	},
 }

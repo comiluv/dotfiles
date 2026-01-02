@@ -102,9 +102,7 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = { delay = 0 },
 	},
@@ -149,5 +147,60 @@ return {
 				dapui.close()
 			end
 		end,
+	},
+
+	{
+		"onsails/lspkind.nvim",
+		lazy = true,
+		opts = {
+			preset = "codicons",
+			symbol_map = {
+				copilot = "",
+				claude = "󰋦",
+				openai = "󱢆",
+				codestral = "󱎥",
+				gemini = "",
+				groq = "",
+				openrouter = "󱂇",
+				ollama = "󰳆",
+				["llama.cpp"] = "󰳆",
+				deepseek = "",
+			},
+		},
+	},
+
+	{
+		"folke/snacks.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
+
+	{
+		-- support for image pasting
+		"HakonHarnes/img-clip.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- recommended settings
+			default = {
+				embed_image_as_base64 = false,
+				prompt_for_file_name = false,
+				drag_and_drop = {
+					insert_mode = true,
+				},
+				-- required for Windows users
+				use_absolute_path = true,
+			},
+		},
+	},
+
+	{
+		-- Make sure to set this up properly if you have lazy=true
+		"MeanderingProgrammer/render-markdown.nvim",
+		opts = {
+			file_types = { "markdown", "Avante" },
+			restart_highlighter = true,
+		},
+		ft = { "markdown", "Avante" },
 	},
 }

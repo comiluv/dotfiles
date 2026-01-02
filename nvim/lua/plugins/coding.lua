@@ -122,13 +122,7 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		lazy = true,
-		dependencies = {
-			-- Snippet Collection (Optional)
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
-		},
+		dependencies = { "rafamadriz/friendly-snippets" },
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",
@@ -187,7 +181,7 @@ return {
 	{
 		"danymat/neogen",
 		version = "*",
-		dependencies = "nvim-treesitter/nvim-treesitter",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		lazy = true,
 		keys = {
 			{
@@ -226,7 +220,7 @@ return {
 	-- wrap/unwrap arguments
 	{
 		"Wansmer/treesj",
-		dependencies = { "nvim-treesitter" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
 		keys = {
 			{ "<leader>m", vim.cmd.TSJToggle, desc = "Wrap/unwrap arguments" },
@@ -246,13 +240,19 @@ return {
 	{
 		"abecodes/tabout.nvim",
 		event = "InsertCharPre",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {
 			tabkey = "",
 			backwards_tabkey = "",
 			completion = false,
 		},
+	},
+
+	{
+		"rafamadriz/friendly-snippets",
+		lazy = true,
+		config = function()
+			require("luasnip.loaders.from_vscode").lazy_load()
+		end,
 	},
 }

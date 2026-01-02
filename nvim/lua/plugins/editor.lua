@@ -4,20 +4,9 @@ return {
 		version = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "make",
-				cond = vim.fn.executable("make") == 1,
-			},
+			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			{
-				"kkharji/sqlite.lua",
-				init = function()
-					if vim.fn.has("win32") == 1 then
-						vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
-					end
-				end,
-			},
+			"kkharji/sqlite.lua",
 			"nvim-tree/nvim-web-devicons",
 		},
 		cmd = "Telescope",
@@ -93,7 +82,7 @@ return {
 
 	{
 		"jiaoshijie/undotree",
-		dependencies = "nvim-lua/plenary.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 		keys = { -- load the plugin only when using it's keybinding:
 			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
@@ -178,7 +167,14 @@ return {
 		dependencies = {
 			"kkharji/sqlite.lua",
 			-- Only required if using match_algorithm fzf
-			{ "nvim-telescope/telescope-fzf-native.nvim" },
+			"nvim-telescope/telescope-fzf-native.nvim",
 		},
+	},
+
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		lazy = true,
+		build = "make",
+		cond = vim.fn.executable("make") == 1,
 	},
 }

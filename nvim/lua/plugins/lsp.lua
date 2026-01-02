@@ -64,14 +64,16 @@ return {
 	},
 
 	{
+		"mason-org/mason.nvim",
+		cmd = { "Mason", "MasonUpdate" },
+		build = ":MasonUpdate",
+		opts = {},
+	},
+
+	{
 		"mason-org/mason-lspconfig.nvim",
 		lazy = true,
-		dependencies = {
-			"mason-org/mason.nvim",
-			cmd = { "Mason", "MasonUpdate" },
-			build = ":MasonUpdate",
-			opts = {},
-		},
+		dependencies = { "mason-org/mason.nvim" },
 	},
 
 	-- java language server plugin to further utilize lsp capabilities
