@@ -1,6 +1,7 @@
 [font]
-normal = ["Sarasa Mono K", "Symbols Nerd Font"]
+normal = ["Iosevka Custom", "D2Coding", "Symbols Nerd Font"]
 size = 12
 
 [font.features]
-"Sarasa Mono K" = ["-calt"]
+# "Iosevka Custom" = ["-calt"]
+
