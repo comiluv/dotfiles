@@ -1,9 +1,11 @@
-local augroup = vim.api.nvim_create_augroup
-local MyGroup = augroup("MyGroup", {})
-local TrimGroup = augroup("TrimGroup", {})
+local augroup = function(name)
+	return vim.api.nvim_create_augroup(name, { clear = true })
+end
+local MyGroup = augroup("MyGroup")
+local TrimGroup = augroup("TrimGroup")
 
 local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup("HighlightYank", {})
+local yank_group = augroup("HighlightYank")
 
 vim.g.info_filetype = {
 	"''",
@@ -122,7 +124,7 @@ autocmd({ "LspAttach" }, {
 	callback = function(event)
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-			local highlight_augroup = augroup("kickstart-lsp-highlight", { clear = false })
+			local highlight_augroup = augroup("kickstart-lsp-highlight")
 			autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = event.buf,
 				group = highlight_augroup,
@@ -136,7 +138,7 @@ autocmd({ "LspAttach" }, {
 			})
 
 			autocmd("LspDetach", {
-				group = augroup("kickstart-lsp-detach", { clear = true }),
+				group = augroup("kickstart-lsp-detach"),
 				callback = function(event2)
 					vim.lsp.buf.clear_references()
 					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
@@ -149,7 +151,7 @@ autocmd({ "LspAttach" }, {
 -- Set folding method for each buffer
 -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1100#issuecomment-1762594005
 autocmd({ "BufAdd", "BufReadPre" }, {
-	group = augroup("TreesitterFoldingGroup", {}),
+	group = augroup("TreesitterFoldingGroup"),
 	callback = function(event)
 		if vim.b.treesitter_folding_set or event.file == "" then
 			return
@@ -167,7 +169,7 @@ autocmd({ "BufAdd", "BufReadPre" }, {
 
 -- Search highlight behavior and consistent n/N navigation
 -- See https://github.com/rktjmp/highlight-current-n.nvim?tab=readme-ov-file#neovim-09
-local hlsearch_group = augroup("SearchHLTweaks", { clear = true })
+local hlsearch_group = augroup("SearchHLTweaks")
 
 autocmd("ColorScheme", {
 	group = hlsearch_group,
@@ -234,7 +236,7 @@ end, { silent = true, desc = "Repeat search backward" })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	group = augroup("auto_create_dir", { clear = true }),
+	group = augroup("auto_create_dir"),
 	callback = function(event)
 		if event.match:match("^%w%w+:[\\/][\\/]") then
 			return
@@ -246,7 +248,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-	group = augroup("checktime", { clear = true }),
+	group = augroup("checktime"),
 	callback = function()
 		if vim.o.buftype ~= "nofile" then
 			vim.cmd("checktime")
@@ -257,7 +259,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 -- Make sure ShaDa temp files that are empty are deleted on exit
 -- https://github.com/neovim/neovim/issues/8587#issuecomment-3557794273
 vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-	group = augroup("fuck_shada_temp", { clear = true }),
+	group = augroup("fuck_shada_temp"),
 	pattern = { "*" },
 	callback = function()
 		local status = 0
@@ -276,7 +278,7 @@ vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-	group = augroup("resize_splits", {}),
+	group = augroup("resize_splits"),
 	callback = function()
 		local current_tab = vim.fn.tabpagenr()
 		vim.cmd("tabdo wincmd =")
@@ -286,7 +288,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-	group = augroup("last_loc", {}),
+	group = augroup("last_loc"),
 	callback = function(event)
 		local exclude = { "gitcommit" }
 		local buf = event.buf
@@ -304,7 +306,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("man_unlisted", {}),
+	group = augroup("man_unlisted"),
 	pattern = { "man" },
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -313,7 +315,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("wrap_spell", {}),
+	group = augroup("wrap_spell"),
 	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
 	callback = function()
 		vim.opt_local.wrap = true
