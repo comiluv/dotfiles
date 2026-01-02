@@ -1,30 +1,21 @@
+local get_blink_deps = function()
+	local deps = {
+		"abecodes/tabout.nvim",
+		"L3MON4D3/LuaSnip",
+		"onsails/lspkind.nvim",
+	}
+	if vim.g.llm == "minuet" then
+		table.insert(deps, "milanglacier/minuet-ai.nvim")
+	elseif vim.g.llm == "copilot" then
+		table.insert(deps, "zbirenbaum/copilot.lua")
+	end
+	return deps
+end
 return {
 	-- Completion
 	{
 		"saghen/blink.cmp",
-		dependencies = {
-			"abecodes/tabout.nvim",
-			"L3MON4D3/LuaSnip",
-			vim.g.llm == "minuet" and "milanglacier/minuet-ai.nvim" or "zbirenbaum/copilot.lua",
-			{
-				"onsails/lspkind.nvim",
-				opts = {
-					preset = "codicons",
-					symbol_map = {
-						copilot = "",
-						claude = "󰋦",
-						openai = "󱢆",
-						codestral = "󱎥",
-						gemini = "",
-						groq = "",
-						openrouter = "󱂇",
-						ollama = "󰳆",
-						["llama.cpp"] = "󰳆",
-						deepseek = "",
-					},
-				},
-			},
-		},
+		dependencies = get_blink_deps(),
 		version = "1.*",
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = function()
