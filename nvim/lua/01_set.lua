@@ -35,7 +35,7 @@ vim.opt.ruler = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.breakindent = true
 
 vim.opt.hlsearch = false
@@ -80,7 +80,9 @@ vim.opt.undofile = true
 vim.opt.foldlevelstart = 99
 
 -- Include msys64 usr/bin to use its utils such as gzip, tar, etc.
-vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
+if vim.fn.has("win32") == 1 then
+	vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
+end
 
 -- Treat .h files as C
 vim.g.c_syntax_for_h = true
