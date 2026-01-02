@@ -60,3 +60,10 @@ usercmd("ClearShada", function()
 		vim.notify("Successfully deleted all temporary shada files", vim.log.levels.INFO)
 	end
 end, { desc = "Clears all the .tmp shada files" })
+
+-- Close all buffers except the current one
+-- Usage: :BufOnly
+usercmd("BufOnly", function()
+	vim.cmd("%bd|e#|bd#")
+end, { desc = "Close all buffers except the current one" })
+vim.keymap.set("n", "<leader>bo", "<Cmd>BufOnly<CR>", { desc = "Close all buffers except the current one" })
