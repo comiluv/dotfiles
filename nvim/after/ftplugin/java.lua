@@ -1,8 +1,8 @@
 -- Google java format indentation
-vim.bo.tabstop = 8
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
-vim.bo.expandtab = true
+vim.opt_local.tabstop = 8
+vim.opt_local.shiftwidth = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.expandtab = true
 
 if vim.fn.executable("java") == 0 then
 	vim.notify("Java Not Found", vim.log.levels.WARN)

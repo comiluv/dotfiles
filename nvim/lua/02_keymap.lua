@@ -129,7 +129,7 @@ end, { noremap = true })
 vim.keymap.set("n", "<leader>sl", function()
 	vim.opt_local.spelllang = vim.fn.input({
 		prompt = "Language > ",
-		default = vim.bo.spelllang,
-		cancelreturn = vim.bo.spelllang,
+		default = vim.opt_local.spelllang:get(),
+		cancelreturn = vim.opt_local.spelllang:get(),
 	})
 end, { desc = "[S]et [l]anguage for buffer" })

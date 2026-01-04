@@ -1,7 +1,7 @@
-vim.bo.tabstop = 8
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
-vim.bo.expandtab = true
+vim.opt_local.tabstop = 8
+vim.opt_local.shiftwidth = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.expandtab = true
 
 local has_runhaskell = vim.fn.executable("runhaskell") == 1
 local has_runghc = vim.fn.executable("runghc") == 1

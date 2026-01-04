@@ -1,8 +1,8 @@
 -- stylua
-vim.bo.tabstop = 4
-vim.bo.shiftwidth = 4
-vim.bo.softtabstop = 4
-vim.bo.expandtab = false
+vim.opt_local.tabstop = 4
+vim.opt_local.shiftwidth = 4
+vim.opt_local.softtabstop = 4
+vim.opt_local.expandtab = false
 
 if vim.fn.executable("lua") == 0 then
 	vim.notify("Lua Not Found", vim.log.levels.WARN)

@@ -1,13 +1,13 @@
 -- Quit if it's C++
-if vim.bo.filetype ~= "c" then
+if vim.opt_local.filetype:get() ~= "c" then
 	return
 end
 
 -- Clang-format default
-vim.bo.tabstop = 2
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
-vim.bo.expandtab = true
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 2
+vim.opt_local.softtabstop = 2
+vim.opt_local.expandtab = true
 
 -- Compiler to use
 local compiler = "gcc"
@@ -33,7 +33,7 @@ local windows_extension = ""
 
 -- use msys2 make in Windows
 if windows then
-	vim.bo.makeprg = "mingw32-make.exe"
+	vim.opt_local.makeprg = "mingw32-make.exe"
 	windows_extension = ".exe"
 end
 
