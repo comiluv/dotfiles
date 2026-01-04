@@ -98,7 +98,7 @@ autocmd("BufWritePre", {
 	group = TrimGroup,
 	callback = function()
 		-- Only trim if the buffer is "normal buffer"
-		if vim.opt_local.buftype:get() ~= "" then
+		if vim.bo.buftype ~= "" then
 			return
 		end
 		-- Only trim when there's no formatter attached
@@ -107,7 +107,7 @@ autocmd("BufWritePre", {
 			return
 		end
 		for _, filetype in ipairs(trim_exclusions) do
-			if vim.opt_local.filetype:get() == filetype then
+			if vim.bo.filetype == filetype then
 				return
 			end
 		end
@@ -235,7 +235,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("checktime"),
 	callback = function()
-		if vim.o.buftype ~= "nofile" then
+		if vim.bo.buftype ~= "nofile" then
 			vim.cmd("checktime")
 		end
 	end,
@@ -303,7 +303,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("wrap_spell"),
 	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
 	callback = function()
-		vim.opt_local.wrap = true
-		vim.opt_local.spell = true
+		vim.wo.wrap = true
+		vim.wo.spell = true
 	end,
 })

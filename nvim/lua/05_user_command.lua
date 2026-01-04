@@ -1,7 +1,7 @@
 local usercmd = vim.api.nvim_create_user_command
 -- Converted from https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3 to lua
 local function Grep(args)
-	local cmd = vim.opt.grepprg:get() .. " " .. args
+	local cmd = vim.opt_local.grepprg:get() .. " " .. args
 	-- Execute the command and return its output
 	local handle = io.popen(cmd)
 	local result = handle:read("*a")

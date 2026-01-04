@@ -164,7 +164,7 @@ return {
 				desc = "Re-enable autoformat-on-save",
 			})
 			-- If you want the formatexpr, here is the place to set it
-			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+			vim.bo.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
 
@@ -184,7 +184,7 @@ return {
 				group = vim.api.nvim_create_augroup("lint", { clear = true }),
 				callback = function()
 					-- Only run the linter in modifiable buffers
-					if vim.opt_local.modifiable:get() then
+					if vim.bo.buftype == "" and vim.bo.modifiable then
 						lint.try_lint()
 					end
 				end,
