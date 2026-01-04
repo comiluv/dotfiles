@@ -75,7 +75,7 @@ autocmd({ "FileType" }, {
 	pattern = vim.g.info_filetype,
 	callback = function(event)
 		vim.keymap.set("n", "q", function()
-			if vim.opt_local.filetype:get() == "TelescopePrompt" then
+			if vim.bo[event.buf].filetype == "TelescopePrompt" then
 				vim.cmd("bd!")
 			else
 				vim.cmd("bd")
@@ -277,7 +277,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function(event)
 		local exclude = { "gitcommit" }
 		local buf = event.buf
-		if vim.tbl_contains(exclude, vim.opt_local.filetype:get()) or vim.b[buf].lazyvim_last_loc then
+		if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
 			return
 		end
 		vim.b[buf].lazyvim_last_loc = true
@@ -293,8 +293,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("man_unlisted"),
 	pattern = { "man" },
-	callback = function()
-		vim.opt_local.buflisted = false
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
 	end,
 })
 

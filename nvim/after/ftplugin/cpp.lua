@@ -1,8 +1,8 @@
 -- clang-format default
-vim.opt_local.tabstop = 2
-vim.opt_local.shiftwidth = 2
-vim.opt_local.softtabstop = 2
-vim.opt_local.expandtab = true
+vim.bo.tabstop = 2
+vim.bo.shiftwidth = 2
+vim.bo.softtabstop = 2
+vim.bo.expandtab = true
 
 -- Compiler to use
 local compiler = "g++"
@@ -27,7 +27,7 @@ local windows_extension = ""
 
 -- use msys2 make in Windows
 if windows then
-	vim.opt_local.makeprg = "mingw32-make.exe"
+	vim.bo.makeprg = "mingw32-make.exe"
 	windows_extension = ".exe"
 
 	-- Output Visual Studio messages in English (rather than system locale). Requires Visual Studio English language pack installed

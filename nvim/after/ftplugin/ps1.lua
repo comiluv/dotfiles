@@ -1,1 +1,2 @@
-vim.opt_local.quoteescape = ""
+vim.bo.quoteescape=""
+
