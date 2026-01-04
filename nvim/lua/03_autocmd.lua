@@ -152,25 +152,6 @@ autocmd({ "LspAttach" }, {
 	end,
 })
 
--- Set folding method for each buffer
--- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1100#issuecomment-1762594005
-autocmd({ "BufAdd", "BufReadPre" }, {
-	group = augroup("TreesitterFoldingGroup"),
-	callback = function(event)
-		if vim.b.treesitter_folding_set or event.file == "" then
-			return
-		end
-		vim.b.treesitter_folding_set = true
-		local ok, size = pcall(vim.fn.getfsize, event.file)
-		-- File exists and small enough for tree-sitter folding
-		if ok and size > 0 and size < 1024 * 1024 then
-			vim.opt_local.foldmethod = "expr"
-			vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-			vim.opt_local.foldtext = "v:lua.vim.treesitter.foldtext()"
-		end
-	end,
-})
-
 -- Search highlight behavior and consistent n/N navigation
 -- See https://github.com/rktjmp/highlight-current-n.nvim?tab=readme-ov-file#neovim-09
 local hlsearch_group = augroup("SearchHLTweaks")
