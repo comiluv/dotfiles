@@ -1,7 +1,10 @@
 [font]
-normal = ["Iosevka Custom", "D2Coding", "Symbols Nerd Font"]
-size = 12
+normal = ["Monaspace Argon NF"]
+italic = ["Monaspace Radon NF", "D2Coding"]
+size = 10
 
 [font.features]
-# "Iosevka Custom" = ["-calt"]
+"Monaspace Argon NF" = ["+calt", "+ss01", "+ss02", "+ss03", "+ss06", "+ss09"]
+"Monaspace Radon NF" = ["+calt", "+ss01", "+ss02", "+ss03", "+ss06", "+ss09"]
 
+# == != <= >= <> -> <- => <=> ++ -- ** // /* */ ##
