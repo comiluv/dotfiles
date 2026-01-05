@@ -10,15 +10,28 @@ return {
 			{ "andymass/vim-matchup" },
 			{ "RRethy/nvim-treesitter-endwise" },
 		},
-		opts = {},
+		opts = {
+			indent = { enable = true },
+			highlight = { enable = true },
+			folds = { enable = true },
+		},
 		config = function(_, opts)
 			local ensure_installed = {}
-			require("nvim-treesitter").install(ensure_installed)
+			local treesitter = require("nvim-treesitter")
+			vim.g.ts_langs = vim.g.ts_langs or treesitter.get_available()
+			vim.g.ts_filetypes = vim.g.ts_filetypes
+				or vim.iter(vim.g.ts_langs)
+					:map(function(lang)
+						return vim.treesitter.language.get_filetypes(lang)
+					end)
+					:flatten()
+					:totable()
+			treesitter.setup(opts)
+			treesitter.install(ensure_installed)
 			vim.api.nvim_create_autocmd({ "Filetype" }, {
+				group = vim.api.nvim_create_augroup("ts_group", { clear = true }),
+				pattern = vim.g.ts_filetypes,
 				callback = function(event)
-					if vim.tbl_contains(vim.g.info_filetype, event.match) then
-						return
-					end
 					-- skip for large files
 					local max_filesize = 100 * 1024 -- 100 KB
 					local filesize_ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(event.buf))
@@ -31,8 +44,8 @@ return {
 					if not ok then
 						return
 					end
-					local ft = vim.bo[event.buf].ft
-					local lang = vim.treesitter.language.get_lang(ft)
+					local ft = event.match
+					local lang = vim.treesitter.language.get_lang(event.match)
 					nvim_treesitter.install({ lang }):await(function(err)
 						if err then
 							vim.notify("Treesitter install error for ft: " .. ft .. " err: " .. err)
