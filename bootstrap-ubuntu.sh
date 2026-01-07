@@ -20,9 +20,6 @@ sudo locale-gen "en_US.UTF-8"
 sudo update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
 sudo dpkg-reconfigure locales
 
-# Update server to use Kaist mirror
-sudo sed -i.bak 's/\(archive\|security\)\.ubuntu\.com/ftp.kaist.ac.kr/g' /etc/apt/sources.list
-
 # make some dirs
 mkdir -p ~/.local/bin
 mkdir ~/.config
@@ -62,21 +59,7 @@ sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y
 # Install most softwares
 sudo apt install build-essential gcc g++ gdb make gpg unzip fd-find ripgrep bat zsh jq python3-pip xclip sqlite3 libsqlite3-dev tealdeer anacron -y
 
-# Install nerd fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/D2Coding.tar.xz
-wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/DejaVuSansMono.tar.xz
-sudo mkdir -p /usr/share/fonts/DejaVuSansMono
-sudo mkdir -p /usr/share/fonts/d2coding
-sudo tar xf DejaVuSansMono.tar.xz --directory=/usr/share/fonts/DejaVuSansMono
-sudo tar xf D2Coding.tar.xz --directory=/usr/share/fonts/d2coding
-rm DejaVuSansMono.tar.xz
-rm D2Coding.tar.xz
-sudo fc-cache -f
-
-# Install volta
-curl https://get.volta.sh | bash
-
-# Now we install nvim
+# Install nvim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 sudo rm -rf /opt/nvim-linux-x86_64
 sudo mkdir -p /opt/nvim-linux-x86_64
