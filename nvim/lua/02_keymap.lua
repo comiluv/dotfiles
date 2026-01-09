@@ -133,3 +133,7 @@ vim.keymap.set("n", "<leader>sl", function()
 		cancelreturn = vim.bo.spelllang,
 	})
 end, { desc = "[S]et [l]anguage for buffer" })
+
+-- Indent and reselect in visual mode
+vim.keymap.set("x", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("x", ">", ">gv", { desc = "Indent right and reselect" })
