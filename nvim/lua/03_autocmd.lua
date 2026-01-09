@@ -1,11 +1,9 @@
-local augroup = function(name)
-	return vim.api.nvim_create_augroup(name, { clear = true })
+local augroup = function(name, opts)
+	opts = opts or { clear = true }
+	return vim.api.nvim_create_augroup(name, opts)
 end
-local MyGroup = augroup("MyGroup")
-local TrimGroup = augroup("TrimGroup")
 
 local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup("HighlightYank")
 
 vim.g.info_filetype = {
 	"PlenaryTestPopup",
@@ -50,7 +48,7 @@ local trim_exclusions = {
 
 -- Flash yanked text after yanking
 autocmd("TextYankPost", {
-	group = yank_group,
+	group = augroup("HighlightYank"),
 	callback = function()
 		vim.hl.on_yank({
 			higroup = "IncSearch",
@@ -61,7 +59,7 @@ autocmd("TextYankPost", {
 
 -- Remove inserting comment marker the cursor is on a comment and open a new line
 autocmd({ "FileType" }, {
-	group = MyGroup,
+	group = augroup("NoCommentNewLine"),
 	callback = function()
 		vim.opt_local.formatoptions:remove("o")
 		-- auto remove comment when joining lines with <J> key
@@ -71,7 +69,7 @@ autocmd({ "FileType" }, {
 
 -- close some filetypes with <q>
 autocmd({ "FileType" }, {
-	group = MyGroup,
+	group = augroup("InfoBufferCloseWithQ"),
 	pattern = vim.g.info_filetype,
 	callback = function(event)
 		vim.keymap.set("n", "q", function()
@@ -86,7 +84,7 @@ autocmd({ "FileType" }, {
 
 -- enter insert mode in Terminal automatically
 autocmd({ "TermOpen" }, {
-	group = MyGroup,
+	group = augroup("TermInsertMode"),
 	command = "startinsert",
 })
 
@@ -95,7 +93,7 @@ autocmd({ "TermOpen" }, {
 -- source 2: https://vim.fandom.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
 -- source 3: https://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file
 autocmd("BufWritePre", {
-	group = TrimGroup,
+	group = augroup("TrimWhitespaceAndFinalNewline"),
 	callback = function()
 		-- Only trim if the buffer is "normal buffer"
 		if vim.bo.buftype ~= "" then
@@ -124,11 +122,11 @@ autocmd("BufWritePre", {
 --
 -- When you move your cursor, the highlights will be cleared (the second autocommand).
 autocmd({ "LspAttach" }, {
-	group = MyGroup,
+	group = augroup("KickstartLspAttach"),
 	callback = function(event)
+		local highlight_augroup = augroup("KickstartLspHighlight")
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
-			local highlight_augroup = augroup("kickstart-lsp-highlight")
 			autocmd({ "CursorHold", "CursorHoldI" }, {
 				buffer = event.buf,
 				group = highlight_augroup,
@@ -142,10 +140,10 @@ autocmd({ "LspAttach" }, {
 			})
 
 			autocmd("LspDetach", {
-				group = augroup("kickstart-lsp-detach"),
+				group = highlight_augroup,
 				callback = function(event2)
 					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
+					vim.api.nvim_clear_autocmds({ group = "KickstartLspHighlight", buffer = event2.buf })
 				end,
 			})
 		end
@@ -221,7 +219,7 @@ end, { silent = true, desc = "Repeat search backward" })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	group = augroup("auto_create_dir"),
+	group = augroup("AutoCreateDir"),
 	callback = function(event)
 		if event.match:match("^%w%w+:[\\/][\\/]") then
 			return
@@ -233,7 +231,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-	group = augroup("checktime"),
+	group = augroup("AutoReloadFile"),
 	callback = function()
 		if vim.bo.buftype ~= "nofile" then
 			vim.cmd("checktime")
@@ -244,7 +242,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 -- Make sure ShaDa temp files that are empty are deleted on exit
 -- https://github.com/neovim/neovim/issues/8587#issuecomment-3557794273
 vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-	group = augroup("fuck_shada_temp"),
+	group = augroup("DeleteEmptyShaDaTempFiles"),
 	pattern = { "*" },
 	callback = function()
 		local status = 0
@@ -263,7 +261,7 @@ vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-	group = augroup("resize_splits"),
+	group = augroup("ResizeSplits"),
 	callback = function()
 		local current_tab = vim.fn.tabpagenr()
 		vim.cmd("tabdo wincmd =")
@@ -273,7 +271,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-	group = augroup("last_loc"),
+	group = augroup("LastLocRestore"),
 	callback = function(event)
 		local exclude = { "gitcommit" }
 		local buf = event.buf
@@ -291,7 +289,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("man_unlisted"),
+	group = augroup("ManCloseWithQ"),
 	pattern = { "man" },
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -300,7 +298,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("wrap_spell"),
+	group = augroup("WrapAndSpellCheck"),
 	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
 	callback = function()
 		vim.wo.wrap = true
