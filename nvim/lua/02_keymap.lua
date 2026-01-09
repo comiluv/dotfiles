@@ -12,6 +12,12 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+-- Undo breakpoints
+vim.keymap.set("i", ",", ",<C-G>u")
+vim.keymap.set("i", ".", ".<C-G>u")
+vim.keymap.set("i", "!", "!<C-G>u")
+vim.keymap.set("i", "?", "?<C-G>u")
+
 -- Easy window navigation
 vim.keymap.set("", "<A-h>", "<C-w>h")
 vim.keymap.set("", "<A-j>", "<C-w>j")

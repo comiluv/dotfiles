@@ -23,6 +23,12 @@ nnoremap Y y$
 "nnoremap N Nzzzv
 nnoremap J mzJ`z
 
+" Undo breakpoints
+inoremap , ,<C-G>u
+inoremap . .<C-G>u
+inoremap ! !<C-G>u
+inoremap ? ?<C-G>u
+
 " Undo breakpoints for C-U and C-W in insert mode
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
