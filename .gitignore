@@ -2,3 +2,5 @@ __pycache__/
 min.lua
 .vscode/
 .luarc.json
+neovide/config.toml
+

@@ -1,7 +1,0 @@
-[font]
-normal = ["Iosevka Custom", "D2Coding", "Symbols Nerd Font"]
-size = 12
-
-[font.features]
-# "Iosevka Custom" = ["-calt"]
-
