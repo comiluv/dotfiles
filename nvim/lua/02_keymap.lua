@@ -5,7 +5,7 @@ vim.keymap.set("", "<leader>pv", "<ESC>:Ex<CR>", { desc = "Open Netrw" })
 
 -- Don't use Ex mode, use Q for formatting.
 -- Revert with ":unmap Q".
-vim.keymap.set({ "n", "v" }, "Q", "gq", { remap = true })
+vim.keymap.set({ "n", "x" }, "Q", "gq", { remap = true })
 
 -- n N J are centered
 vim.keymap.set("n", "J", "mzJ`z")
@@ -30,8 +30,8 @@ vim.keymap.set("n", "<left>", vim.cmd.bprevious)
 vim.keymap.set("n", "<right>", vim.cmd.bnext)
 
 -- Conveniently move lines up and down with shift+j and shift+k
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("x", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv")
 
 -- Open new file adjacent to current file
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
@@ -40,10 +40,10 @@ local function expand_to_path()
 	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
 end
 vim.keymap.set("c", "%%", expand_to_path, { expr = true, desc = "expand to path" })
-vim.keymap.set({ "n", "v" }, "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
+vim.keymap.set({ "n", "x" }, "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
 
--- Allow for easy copying and pasting
-vim.keymap.set("v", "y", "y`]", { silent = true })
+-- Keep cursor in place when yanking or pasting
+vim.keymap.set("x", "y", "y`]", { silent = true })
 vim.keymap.set("n", "p", "p`]", { silent = true })
 vim.keymap.set("n", "P", "P`]", { silent = true })
 
@@ -70,7 +70,7 @@ vim.keymap.set("n", "<leader>k", ":lprev<CR>zz", { desc = "Previous Location" })
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace cursor" })
 
 -- replace visually selected
-vim.keymap.set("v", "<leader>s", [["ly:%s/\<<C-r>l\>/<C-r>l/gI<Left><Left><Left>]], { desc = "Replace selected" })
+vim.keymap.set("x", "<leader>s", [["ly:%s/\<<C-r>l\>/<C-r>l/gI<Left><Left><Left>]], { desc = "Replace selected" })
 
 -- Move out from terminal window with alt key shortcuts
 vim.keymap.set("t", "<A-h>", [[<C-\><C-n><C-w>h]])
@@ -87,7 +87,7 @@ vim.keymap.set("c", "!", function()
 end, { expr = true })
 
 -- open help about the word under cursor by pressing <F1>
-vim.keymap.set({ "n", "i", "v", "c" }, "<F1>", "<esc>:help <C-r><C-w><cr>", { silent = true })
+vim.keymap.set({ "n", "i", "x", "c" }, "<F1>", "<esc>:help <C-r><C-w><cr>", { silent = true })
 
 -- Auto-fix typo in command mode: Don't try to be perfect, adjust your tool to
 -- help you not the other way around. : https://thoughtbot.com/upcase/vim
