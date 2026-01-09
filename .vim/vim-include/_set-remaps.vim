@@ -26,6 +26,7 @@ nnoremap J mzJ`z
 " Undo breakpoints
 inoremap , ,<C-G>u
 inoremap . .<C-G>u
+inoremap ; ;<C-G>u
 inoremap ! !<C-G>u
 inoremap ? ?<C-G>u
 
