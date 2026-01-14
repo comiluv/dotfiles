@@ -132,12 +132,12 @@ return {
 				ext_opts = {
 					[require("luasnip.util.types").choiceNode] = {
 						active = {
-							virt_text = { { "●", "GruvboxOrange" } },
+							virt_text = { { "●", "DiagnosticWarn" } },
 						},
 					},
 					[require("luasnip.util.types").insertNode] = {
 						active = {
-							virt_text = { { "●", "GruvboxBlue" } },
+							virt_text = { { "●", "DiagnosticInfo" } },
 						},
 					},
 				},
