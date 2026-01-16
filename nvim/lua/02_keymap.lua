@@ -105,11 +105,13 @@ vim.keymap.set("n", "<leader>td", function()
 	)
 end, { silent = true, noremap = true, desc = "LSP: [T]oggle LSP [d]iagnostic" })
 
--- Move normally in word-wrapped lines
+-- Mutate jumplist and move normally in word-wrapped lines
 vim.keymap.set("n", "j", function()
 	local count = vim.v.count
 	if count == 0 then
 		return "gj"
+	elseif count > 5 then
+		return "m'" .. count .. "j"
 	else
 		return "j"
 	end
@@ -118,6 +120,8 @@ vim.keymap.set("n", "k", function()
 	local count = vim.v.count
 	if count == 0 then
 		return "gk"
+	elseif count > 5 then
+		return "m'" .. count .. "k"
 	else
 		return "k"
 	end
