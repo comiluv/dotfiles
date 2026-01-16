@@ -44,9 +44,9 @@ noremap <A-l> <C-w>l
 nnoremap <left> <CMD>bp<CR>
 nnoremap <right> <CMD>bn<CR>
 
-" Jumplist mutations + easy navigation in wrapped lines for k and j
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'k'
-nnoremap <expr> j (v:count > 5 ? "m'" . v:count : v:count1 == 1 ? "g" : "") . 'j'
+" Easy navigation in wrapped lines for k and j
+nnoremap <expr> k (v:count1 == 1 ? "g" : "") . 'k'
+nnoremap <expr> j (v:count1 == 1 ? "g" : "") . 'j'
 
 " Move selected lines up and down in Visual mode
 vnoremap J :m '>+1<CR>gv=gv
