@@ -152,7 +152,6 @@ return {
 	{
 		"onsails/lspkind.nvim",
 		lazy = true,
-		commit = "3ddd1b4edefa425fda5a9f95a4f25578727c0bb3",
 		opts = {
 			preset = "codicons",
 			symbol_map = {
