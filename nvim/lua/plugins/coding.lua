@@ -3,6 +3,7 @@ local get_blink_deps = function()
 		"abecodes/tabout.nvim",
 		"L3MON4D3/LuaSnip",
 		"onsails/lspkind.nvim",
+		"nvim-tree/nvim-web-devicons",
 	}
 	if vim.g.llm == "minuet" then
 		table.insert(deps, "milanglacier/minuet-ai.nvim")
@@ -72,7 +73,28 @@ return {
 								kind_icon = {
 									ellipsis = false,
 									text = function(ctx)
-										return require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+										local icon = ctx.kind_icon
+										if vim.tbl_contains({ "Path" }, ctx.source_name) then
+											local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+											if dev_icon then
+												icon = dev_icon
+											end
+										else
+											icon = require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+										end
+
+										return icon .. ctx.icon_gap
+									end,
+
+									highlight = function(ctx)
+										local hl = ctx.kind_hl
+										if vim.tbl_contains({ "Path" }, ctx.source_name) then
+											local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+											if dev_icon then
+												hl = dev_hl
+											end
+										end
+										return hl
 									end,
 								},
 							},
