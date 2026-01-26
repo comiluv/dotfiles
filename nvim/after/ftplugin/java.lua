@@ -4,7 +4,8 @@ vim.bo.shiftwidth = 2
 vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
-if vim.fn.executable("java") == 0 then
+-- Check if Java is installed
+if not (vim.fn.executable("java") == 1 and vim.fn.executable("javac") == 1) then
 	vim.notify("Java Not Found", vim.log.levels.WARN)
 	return
 end

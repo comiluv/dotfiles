@@ -76,13 +76,6 @@ return {
 		dependencies = { "mason-org/mason.nvim" },
 	},
 
-	-- java language server plugin to further utilize lsp capabilities
-	-- see after/ftplugin/java.lua
-	{
-		"mfussenegger/nvim-jdtls",
-		lazy = true,
-	},
-
 	{
 		"stevearc/conform.nvim",
 		version = "*",
