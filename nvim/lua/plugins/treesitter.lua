@@ -9,13 +9,7 @@ return {
 			{ "andymass/vim-matchup" },
 			{ "RRethy/nvim-treesitter-endwise" },
 		},
-		opts = {
-			indent = { enable = true },
-			highlight = { enable = true },
-			folds = { enable = true },
-		},
-		config = function(_, opts)
-			local ensure_installed = {}
+		config = function()
 			local treesitter = require("nvim-treesitter")
 			vim.g.ts_langs = vim.g.ts_langs or treesitter.get_available()
 			vim.g.ts_filetypes = vim.g.ts_filetypes
@@ -25,8 +19,6 @@ return {
 					end)
 					:flatten()
 					:totable()
-			treesitter.setup(opts)
-			treesitter.install(ensure_installed)
 			vim.api.nvim_create_autocmd({ "Filetype" }, {
 				group = vim.api.nvim_create_augroup("ts_group", { clear = true }),
 				pattern = vim.g.ts_filetypes,
