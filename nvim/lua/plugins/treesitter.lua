@@ -4,7 +4,6 @@ return {
 		branch = "main",
 		cmd = "TSUpdate",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		build = ":TSUpdate",
 		dependencies = {
 			{ "folke/ts-comments.nvim" },
 			{ "andymass/vim-matchup" },
