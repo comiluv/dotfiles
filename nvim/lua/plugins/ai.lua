@@ -208,6 +208,25 @@ return {
 						},
 					},
 				},
+				preset_2 = {
+					provider = "openai_fim_compatible",
+					request_timeout = 10,
+					n_completions = 1,
+					context_window = 2048,
+					provider_options = {
+						openai_fim_compatible = {
+							name = "ollama",
+							end_point = "http://localhost:11434/v1/completions",
+							api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
+							stream = true,
+							model = "deepseek-coder-v2:latest",
+							optional = {
+								max_tokens = 256,
+								top_p = 0.9,
+							},
+						},
+					},
+				},
 			},
 		},
 		config = function(_, opts)
