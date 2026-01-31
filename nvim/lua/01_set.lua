@@ -18,7 +18,7 @@ vim.schedule(function()
 		vim.opt.grepprg = "rg --no-heading --vimgrep"
 		vim.opt.grepformat = "%f:%l:%c:%m"
 	end
-	vim.opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
+	vim.opt.clipboard = vim.env.SSH_CONNECTION == nil and "" or "unnamedplus"
 end)
 
 vim.g.netrw_winsize = 25
