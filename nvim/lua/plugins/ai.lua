@@ -198,7 +198,7 @@ return {
 						openai_fim_compatible = {
 							name = "ollama",
 							end_point = "http://localhost:11434/v1/completions",
-							api_key = vim.fn.has("win32") and "APPDATA" or "TERM",
+							api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
 							stream = true,
 							model = "freehuntx/qwen3-coder:30b",
 							optional = {
