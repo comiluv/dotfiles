@@ -85,7 +85,18 @@ return {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ timeout_ms = 500, lsp_format = "fallback" })
+					local conform = require("conform")
+					local bufnr = vim.api.nvim_get_current_buf()
+					if vim.b[bufnr].conform_slow_format then
+						conform.format({ lsp_format = "fallback" })
+						return
+					end
+					conform.format({ timeout_ms = 10000, lsp_format = "fallback" }, function(err)
+						if err and err:match("timeout$") then
+							vim.b[bufnr].conform_slow_format = true
+							conform.format({ lsp_format = "fallback" })
+						end
+					end)
 				end,
 				mode = "",
 				desc = "Format Buffer",
@@ -98,16 +109,16 @@ return {
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
 				end
-				if vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
+				if vim.b[bufnr].conform_slow_format then
 					return
 				end
 				local function on_format(err)
 					if err and err:match("timeout$") then
-						vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] = true
+						vim.b[bufnr].conform_slow_format = true
 					end
 				end
 
-				return { timeout_ms = 500, lsp_format = "fallback" }, on_format
+				return { timeout_ms = 10000, lsp_format = "fallback" }, on_format
 			end,
 
 			format_after_save = function(bufnr)
@@ -115,7 +126,7 @@ return {
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
 				end
-				if not vim.g.slow_format_filetypes[vim.bo[bufnr].filetype] then
+				if vim.b[bufnr].conform_slow_format ~= true then
 					return
 				end
 				return { lsp_format = "fallback" }
@@ -129,12 +140,8 @@ return {
 				python = { "ruff" },
 				lua = { "stylua" },
 			},
-			formatters = {
-				isort = { args = { "-" } },
-			},
 		},
 		init = function()
-			vim.g.slow_format_filetypes = vim.g.slow_format_filetypes or {}
 			-- Create user commands to quickly enable/disable autoformatting
 			vim.api.nvim_create_user_command("FormatDisable", function(args)
 				if args.bang then
