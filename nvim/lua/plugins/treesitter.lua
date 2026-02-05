@@ -2,6 +2,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
+		version = false,
+		build = function()
+			require("nvim-treesitter").update(nil, { summary = true })
+		end,
 		cmd = "TSUpdate",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = {
