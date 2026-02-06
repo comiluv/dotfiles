@@ -111,7 +111,7 @@ return {
 
 	{
 		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		cmd = "Copilot",
 		build = ":Copilot auth",
 		cond = vim.g.llm == "copilot" and vim.fn.executable("node") == 1,
@@ -158,7 +158,7 @@ return {
 	{
 		"milanglacier/minuet-ai.nvim",
 		cond = vim.g.llm == "minuet",
-		event = "InsertEnter",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			virtualtext = {
@@ -182,13 +182,13 @@ return {
 			provider = "openai_fim_compatible",
 			request_timeout = 10,
 			n_completions = 1,
-			context_window = 2048,
+			context_window = 768,
 			provider_options = {
 				openai_fim_compatible = {
 					name = "ollama",
 					end_point = "http://localhost:11434/v1/completions",
 					api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
-					stream = true,
+					stream = false,
 					model = "deepseek-coder-v2:16b",
 					optional = {
 						max_tokens = 256,
@@ -199,35 +199,16 @@ return {
 			presets = {
 				preset_1 = {
 					provider = "openai_fim_compatible",
-					request_timeout = 10,
+					request_timeout = 30,
 					n_completions = 1,
-					context_window = 2048,
+					context_window = 768,
 					provider_options = {
 						openai_fim_compatible = {
 							name = "ollama",
 							end_point = "http://localhost:11434/v1/completions",
 							api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
-							stream = true,
+							stream = false,
 							model = "freehuntx/qwen3-coder:30b",
-							optional = {
-								max_tokens = nil,
-								top_p = 0.9,
-							},
-						},
-					},
-				},
-				preset_2 = {
-					provider = "openai_fim_compatible",
-					request_timeout = 10,
-					n_completions = 1,
-					context_window = 2048,
-					provider_options = {
-						openai_fim_compatible = {
-							name = "ollama",
-							end_point = "http://localhost:11434/v1/completions",
-							api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
-							stream = true,
-							model = "deepseek-coder-v2:16b",
 							optional = {
 								max_tokens = 256,
 								top_p = 0.9,
