@@ -5,7 +5,7 @@ vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
 -- Compiler to use
-local compiler = "g++"
+local compiler = vim.env.CXX or "g++"
 
 -- Check if compiler exists
 if vim.fn.executable(compiler) == 0 then

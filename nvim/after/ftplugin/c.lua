@@ -10,7 +10,7 @@ vim.bo.softtabstop = 2
 vim.bo.expandtab = true
 
 -- Compiler to use
-local compiler = "gcc"
+local compiler = vim.env.CC or "gcc"
 
 -- Check if compiler exists
 if vim.fn.executable(compiler) == 0 then
