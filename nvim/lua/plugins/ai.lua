@@ -180,7 +180,7 @@ return {
 				},
 			},
 			provider = "openai_fim_compatible",
-			request_timeout = 10,
+			request_timeout = 60,
 			n_completions = 1,
 			context_window = 768,
 			provider_options = {
