@@ -81,11 +81,6 @@ vim.keymap.set("t", "<A-l>", [[<C-\><C-n><C-w>l]])
 -- Switch between the last two files
 vim.keymap.set("n", "<Leader><Leader>", "<C-^>", { desc = "Switch buffer" })
 
--- Remap !:cmd to terminal cmd
-vim.keymap.set("c", "!", function()
-	return vim.fn.getcmdtype() == ":" and (vim.fn.getcmdpos() == 1 and "terminal " or "!") or "!"
-end, { expr = true })
-
 -- open help about the word under cursor by pressing <F1>
 vim.keymap.set({ "n", "i", "x", "c" }, "<F1>", "<esc>:help <C-r><C-w><cr>", { silent = true })
 
