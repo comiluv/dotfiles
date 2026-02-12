@@ -88,12 +88,12 @@ autocmd({ "TermOpen" }, {
 	command = "startinsert",
 })
 
--- trim whitespace and put one blank line at the end
+-- trim whitespace. Use 'set fixendofline' to append EOL at the end of file
 -- source 1: https://stackoverflow.com/questions/7495932/how-can-i-trim-blank-lines-at-the-end-of-file-in-vim/7501902#7501902
 -- source 2: https://vim.fandom.com/wiki/Remove_unwanted_spaces#Automatically_removing_all_trailing_whitespace
 -- source 3: https://vi.stackexchange.com/questions/454/whats-the-simplest-way-to-strip-trailing-whitespace-from-all-lines-in-a-file
 autocmd("BufWritePre", {
-	group = augroup("TrimWhitespaceAndFinalNewline"),
+	group = augroup("TrimWhitespace"),
 	callback = function()
 		-- Only trim if the buffer is "normal buffer"
 		if vim.bo.buftype ~= "" then
@@ -111,7 +111,7 @@ autocmd("BufWritePre", {
 		end
 
 		local view = vim.fn.winsaveview()
-		vim.cmd([[silent! undojoin|keeppatterns %s/\s\+$//e|$put_|$put_|silent! $;?\(^\s*$\)\@!?+2,$delete _]])
+		vim.cmd([[silent! undojoin|keeppatterns %s/\s\+$//e|$put_|silent! $;?\(^\s*$\)\@!?+1,$delete _]])
 		vim.fn.winrestview(view)
 	end,
 })
