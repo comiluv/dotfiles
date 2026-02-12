@@ -96,3 +96,6 @@ vim.g.zipPlugin_ext =
 
 -- LLM plugin
 vim.g.llm = vim.env.NEOVIM_LLM_PROVIDER or ""
+
+vim.g.editorconfig = false
+vim.opt.fixendofline = false
