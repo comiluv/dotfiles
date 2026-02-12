@@ -4,6 +4,7 @@ return {
 		branch = "main",
 		version = false,
 		build = function()
+			vim.cmd({ "Lazy", "load", "vcvars.vim" })
 			require("nvim-treesitter").update(nil, { summary = true })
 		end,
 		cmd = "TSUpdate",
