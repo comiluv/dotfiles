@@ -17,7 +17,7 @@ return {
 
 	-- setup environmental variables for Visual Studio compiler
 	{
-		"hattya/vcvars.vim",
+		"comiluv/vcvars.vim",
 		event = { "VeryLazy" },
 		cond = vim.fn.has("win32") == 1,
 		config = function()
