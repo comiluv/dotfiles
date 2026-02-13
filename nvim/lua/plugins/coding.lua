@@ -45,6 +45,12 @@ return {
 							return vim.api.nvim_replace_termcodes("<Plug>(TaboutMulti)", true, true, true)
 						end,
 					},
+					["<S-Tab>"] = {
+						"snippet_backward",
+						function(_)
+							return vim.api.nvim_replace_termcodes("<Plug>(TaboutBackMulti)", true, true, true)
+						end,
+					},
 					["<C-y>"] = { "select_and_accept" },
 					["<CR>"] = { "accept", "fallback" },
 					["<C-d>"] = {
