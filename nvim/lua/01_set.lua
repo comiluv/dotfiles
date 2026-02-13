@@ -99,3 +99,5 @@ vim.g.llm = vim.env.NEOVIM_LLM_PROVIDER or ""
 
 vim.g.editorconfig = false
 vim.opt.fixendofline = false
+
+vim.opt.exrc = true
