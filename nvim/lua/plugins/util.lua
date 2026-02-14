@@ -73,4 +73,10 @@ return {
 			end
 		end,
 	},
+
+	{
+		"comiluv/tabdiff.nvim",
+		cmd = "TabDiff",
+		opts = {},
+	},
 }
