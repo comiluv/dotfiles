@@ -101,3 +101,5 @@ vim.g.editorconfig = false
 vim.opt.fixendofline = false
 
 vim.opt.exrc = true
+
+vim.opt.diffopt:append("vertical")
