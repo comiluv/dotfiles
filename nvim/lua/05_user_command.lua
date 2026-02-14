@@ -25,6 +25,15 @@ usercmd("Grep", function(opts)
 	end)
 end, { nargs = "+", complete = "file" })
 
+-- New Grepadd (like :grepadd): append to current quickfix list
+usercmd("Grepadd", function(opts)
+	vim.schedule(function()
+		local results = split_and_filter(Grep(opts.args))
+		vim.fn.setqflist({}, "a", { title = "Grepadd", lines = results })
+		vim.cmd("copen")
+	end)
+end, { nargs = "+", complete = "file" })
+
 -- Create the `LGrep` command
 usercmd("LGrep", function(opts)
 	vim.schedule(function()
@@ -34,8 +43,19 @@ usercmd("LGrep", function(opts)
 	end)
 end, { nargs = "+", complete = "file" })
 
+-- New LGrepadd (like :lgrepadd): append to current location list
+usercmd("LGrepadd", function(opts)
+	vim.schedule(function()
+		local results = split_and_filter(Grep(opts.args))
+		vim.fn.setloclist(0, {}, "a", { title = "LGrepadd", lines = results })
+		vim.cmd("lopen")
+	end)
+end, { nargs = "+", complete = "file" })
+
 vim.keymap.set("ca", "grep", "Grep")
+vim.keymap.set("ca", "grepadd", "Grepadd")
 vim.keymap.set("ca", "lgrep", "LGrep")
+vim.keymap.set("ca", "lgrepadd", "LGrepadd")
 
 -- Make ClearShada user command to workaround Neovim creating endlessly empty main.shada.tmp.X files in $ENV:LocalAppData/nvim-data/shada
 -- https://github.com/neovim/neovim/issues/8587#issuecomment-2176399196
