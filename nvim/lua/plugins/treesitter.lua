@@ -16,6 +16,7 @@ return {
 		},
 		config = function()
 			local treesitter = require("nvim-treesitter")
+			vim.api.nvim_del_user_command("EditQuery")
 			vim.g.ts_langs = vim.g.ts_langs or treesitter.get_available()
 			vim.g.ts_filetypes = vim.g.ts_filetypes
 				or vim.iter(vim.g.ts_langs)
