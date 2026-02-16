@@ -143,3 +143,18 @@ end, { desc = "[S]et [l]anguage for buffer" })
 -- Indent and reselect in visual mode
 vim.keymap.set("x", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("x", ">", ">gv", { desc = "Indent right and reselect" })
+
+-- Copy path to clipboard
+-- %:p is the full path, %:t is the filename, %:h is the directory
+vim.keymap.set("n", "<leader>cf", function()
+	local path = vim.fn.expand("%")
+	vim.fn.setreg("+", path)
+end, { desc = "[C]opy [f]ilename to clipboard" })
+vim.keymap.set("n", "<leader>cpp", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+end, { desc = "[C]opy [p]ath to clipboard" })
+vim.keymap.set("n", "<leader>cph", function()
+	local path = vim.fn.expand("%:h")
+	vim.fn.setreg("+", path)
+end, { desc = "[C]opy [h]ome-relative path to clipboard" })
