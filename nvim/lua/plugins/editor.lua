@@ -6,6 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
+			"comiluv/telescope-git-file-history.nvim",
 			"kkharji/sqlite.lua",
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -62,6 +63,7 @@ return {
 			})
 			telescope.load_extension("fzf")
 			telescope.load_extension("ui-select")
+			telescope.load_extension("git_file_history")
 		end,
 	},
 
@@ -175,5 +177,11 @@ return {
 		lazy = true,
 		build = "make",
 		cond = vim.fn.executable("make") == 1,
+	},
+
+	{
+		"comiluv/telescope-git-file-history.nvim",
+		lazy = true,
+		dependencies = { "tpope/vim-fugitive" },
 	},
 }
