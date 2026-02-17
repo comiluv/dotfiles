@@ -6,7 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			"isak102/telescope-git-file-history.nvim",
+			"telescope-git-file-history.nvim",
 			"kkharji/sqlite.lua",
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -40,6 +40,15 @@ return {
 				desc = "Telescope current buffer",
 			},
 			{ "<leader>ca", vim.lsp.buf.code_action, "Telescope Code action" },
+			{
+				"<leader>bh",
+				function()
+					if vim.system({ "git", "rev-parse", "--is-inside-work-tree" }):wait().code == 0 then
+						vim.api.nvim_exec2("Telescope git_file_history", {})
+					end
+				end,
+				desc = "Telescope buffer history",
+			},
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -180,7 +189,8 @@ return {
 	},
 
 	{
-		"isak102/telescope-git-file-history.nvim",
+		dir = "~/telescope-git-file-history.nvim/",
+		name = "telescope-git-file-history.nvim",
 		lazy = true,
 		dependencies = { "tpope/vim-fugitive" },
 	},
