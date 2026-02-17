@@ -76,7 +76,7 @@ return {
 
 	{
 		"comiluv/tabdiff.nvim",
-		cmd = "TabDiff",
+		cmd = "Tabdiff",
 		opts = {},
 	},
 }
