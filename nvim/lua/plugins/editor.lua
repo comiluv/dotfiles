@@ -6,7 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			"comiluv/telescope-git-file-history.nvim",
+			"isak102/telescope-git-file-history.nvim",
 			"kkharji/sqlite.lua",
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -180,7 +180,7 @@ return {
 	},
 
 	{
-		"comiluv/telescope-git-file-history.nvim",
+		"isak102/telescope-git-file-history.nvim",
 		lazy = true,
 		dependencies = { "tpope/vim-fugitive" },
 	},
