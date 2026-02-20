@@ -56,9 +56,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- Disable 'press :qa to exit' messages
 vim.keymap.set("n", "<C-c>", "<Esc>")
 
--- lsp format placeholder
-vim.keymap.set("n", "<leader>f", "<nop>")
-
 -- quickfix navigation
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "LSP: Open diagnostic [q]uickfix list" })
 vim.keymap.set("n", "<C-j>", ":cnext<CR>zz")
