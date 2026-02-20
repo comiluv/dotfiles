@@ -155,3 +155,10 @@ vim.keymap.set("n", "<leader>cph", function()
 	local path = vim.fn.expand("%:h")
 	vim.fn.setreg("+", path)
 end, { desc = "[C]opy [h]ome-relative path to clipboard" })
+
+-- Very magic
+vim.keymap.set("n", "/", "/\\v")
+vim.keymap.set("n", "?", "?\\v")
+vim.keymap.set("c", "s/", function()
+	return vim.fn.getcmdtype() == ":" and "s/\\v" or "s/"
+end, { expr = true })
