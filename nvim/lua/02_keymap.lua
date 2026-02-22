@@ -144,17 +144,17 @@ vim.keymap.set("x", ">", ">gv", { desc = "Indent right and reselect" })
 -- Copy path to clipboard
 -- %:p is the full path, %:t is the filename, %:h is the directory
 vim.keymap.set("n", "<leader>cf", function()
-	local path = vim.fn.expand("%")
+	local path = vim.fn.expand("%:t")
 	vim.fn.setreg("+", path)
 end, { desc = "[C]opy [f]ilename to clipboard" })
-vim.keymap.set("n", "<leader>cpp", function()
+vim.keymap.set("n", "<leader>cpf", function()
 	local path = vim.fn.expand("%:p")
 	vim.fn.setreg("+", path)
-end, { desc = "[C]opy [p]ath to clipboard" })
+end, { desc = "[C]opy [f]ull path to clipboard" })
 vim.keymap.set("n", "<leader>cph", function()
 	local path = vim.fn.expand("%:h")
 	vim.fn.setreg("+", path)
-end, { desc = "[C]opy [h]ome-relative path to clipboard" })
+end, { desc = "[C]opy [h]ead of path to clipboard" })
 
 -- Very magic
 vim.keymap.set("n", "/", "/\\v")
