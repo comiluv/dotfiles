@@ -160,5 +160,12 @@ end, { desc = "[C]opy [h]ead of path to clipboard" })
 vim.keymap.set("n", "/", "/\\v")
 vim.keymap.set("n", "?", "?\\v")
 vim.keymap.set("c", "s/", function()
-	return vim.fn.getcmdtype() == ":" and "s/\\v" or "s/"
+	if vim.fn.getcmdtype() ~= ":" then
+		return "s/"
+	end
+	if string.find(vim.fn.getcmdline(), "s/") then
+		return "s/"
+	else
+		return "s/\\v"
+	end
 end, { expr = true })
