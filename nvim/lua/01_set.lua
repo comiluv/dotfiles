@@ -14,7 +14,7 @@ if vim.fn.has("wsl") == 1 then
 end
 
 vim.schedule(function()
-	if vim.fn.executable("rg") then
+	if vim.fn.executable("rg") == 1 then
 		vim.opt.grepprg = "rg --no-heading --vimgrep"
 		vim.opt.grepformat = "%f:%l:%c:%m"
 	end
