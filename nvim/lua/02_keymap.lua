@@ -37,7 +37,7 @@ vim.keymap.set("x", "K", ":m '<-2<CR>gv=gv")
 -- also see http://vimcasts.org/episodes/the-edit-command/ for verbose version
 -- from book Practical Vim 2nd edition
 local function expand_to_path()
-	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
+	return vim.fn.getcmdtype() == ":" and vim.fs.dirname(vim.api.nvim_buf_get_name(0)) .. "/" or "%%"
 end
 vim.keymap.set("c", "%%", expand_to_path, { expr = true, desc = "expand to path" })
 vim.keymap.set({ "n", "x" }, "<leader>e", "<Esc>:e %%", { remap = true, desc = "Open adjacent file" })
@@ -144,16 +144,13 @@ vim.keymap.set("x", ">", ">gv", { desc = "Indent right and reselect" })
 -- Copy path to clipboard
 -- %:p is the full path, %:t is the filename, %:h is the directory
 vim.keymap.set("n", "<leader>cf", function()
-	local path = vim.fn.expand("%:t")
-	vim.fn.setreg("+", path)
+	vim.fn.setreg("+", vim.fs.basename(vim.api.nvim_buf_get_name(0)))
 end, { desc = "[C]opy [f]ilename to clipboard" })
 vim.keymap.set("n", "<leader>cpf", function()
-	local path = vim.fn.expand("%:p")
-	vim.fn.setreg("+", path)
+	vim.fn.setreg("+", vim.api.nvim_buf_get_name(0))
 end, { desc = "[C]opy [f]ull path to clipboard" })
 vim.keymap.set("n", "<leader>cph", function()
-	local path = vim.fn.expand("%:h")
-	vim.fn.setreg("+", path)
+	vim.fn.setreg("+", vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
 end, { desc = "[C]opy [h]ead of path to clipboard" })
 
 -- Very magic

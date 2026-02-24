@@ -22,7 +22,7 @@ local compile_commands = {
 
 local compile_command = compile_commands[compiler]
 
-local windows = vim.fn.has("win32") == 1
+local windows = jit.os == "Windows"
 local windows_extension = ""
 
 -- use msys2 make in Windows
@@ -37,7 +37,8 @@ end
 -- pressing F5 will compile current buffer
 vim.keymap.set("n", "<F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
-	local filename_only = vim.api.nvim_call_function("fnamemodify", { fullpath, ":t:r" }) .. windows_extension
+	local basename = vim.fs.basename(fullpath)
+	local filename_only = (basename:match("(.+)%..+$") or basename) .. windows_extension
 
 	local f5_command = compile_command .. (compiler == "cl" and "" or filename_only) .. " %"
 
@@ -51,7 +52,8 @@ end, { buffer = true })
 -- pressing Shift-F5 will compile all .cpp files
 vim.keymap.set("n", "<s-F5>", function()
 	local fullpath = vim.api.nvim_buf_get_name(0)
-	local filename_only = vim.api.nvim_call_function("fnamemodify", { fullpath, ":t:r" }) .. windows_extension
+	local basename = vim.fs.basename(fullpath)
+	local filename_only = (basename:match("(.+)%..+$") or basename) .. windows_extension
 
 	local f5_command = compile_command .. filename_only .. " ./*.cpp"
 

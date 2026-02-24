@@ -36,7 +36,7 @@ end
 -- taken from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/mini.lua
 -- taken from MiniExtra.gen_ai_spec.buffer
 function M.ai_buffer(ai_type)
-	local start_line, end_line = 1, vim.fn.line("$")
+	local start_line, end_line = 1, vim.api.nvim_buf_line_count(0)
 	if ai_type == "i" then
 		-- Skip first and last blank lines for `i` textobject
 		local first_nonblank, last_nonblank = vim.fn.nextnonblank(start_line), vim.fn.prevnonblank(end_line)
@@ -47,7 +47,7 @@ function M.ai_buffer(ai_type)
 		start_line, end_line = first_nonblank, last_nonblank
 	end
 
-	local to_col = math.max(vim.fn.getline(end_line):len(), 1)
+	local to_col = math.max(#vim.api.nvim_buf_get_lines(0, end_line - 1, end_line, true)[1], 1)
 	return { from = { line = start_line, col = 1 }, to = { line = end_line, col = to_col } }
 end
 -- register all text objects with which-key

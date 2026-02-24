@@ -19,7 +19,7 @@ local root_markers = { ".git", ".editorconfig" }
 -- Change to table with settings if required
 
 local match = vim.fs.find(root_markers, { path = vim.api.nvim_buf_get_name(0), upward = true })[1]
-local root_dir = match and vim.fn.fnamemodify(match, ":p:h") or nil
+local root_dir = match and vim.fs.dirname(match) or nil
 local settings = vim.empty_dict()
 local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
 lsp_capabilities = require("blink-cmp").get_lsp_capabilities(lsp_capabilities)

@@ -1,7 +1,8 @@
-vim.g.python3_host_prog = vim.fn.has("win32") == 1 and vim.fn.exepath("python") or vim.fn.exepath("python3")
+vim.g.python3_host_prog = jit.os == "Windows" and vim.fn.exepath("python") or vim.fn.exepath("python3")
+vim.g.stdpath_data = vim.fn.stdpath("data")
 
 -- Paste without CRLF in WSL
-if vim.fn.has("wsl") == 1 then
+if (vim.uv.os_uname().release or ""):lower():find("microsoft") ~= nil then
 	vim.g.clipboard = {
 		name = "WslClipboard",
 		copy = { ["+"] = "/mnt/c/Windows/System32/clip.exe", ["*"] = "/mnt/c/Windows/System32/clip.exe" },
@@ -80,7 +81,7 @@ vim.opt.undofile = true
 vim.opt.foldlevelstart = 99
 
 -- Include msys64 usr/bin to use its utils such as gzip, tar, etc.
-if vim.fn.has("win32") == 1 then
+if jit.os == "Windows" then
 	vim.env.PATH = vim.env.PATH .. ";C:\\msys64\\usr\\bin"
 end
 

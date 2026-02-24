@@ -44,7 +44,7 @@ return {
 			require("avante").setup(settings)
 		end,
 		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = vim.fn.has("win32") == 1
+		build = jit.os == "Windows"
 				and "pwsh -NoProfile -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
 			or "make",
 		dependencies = {
@@ -143,8 +143,8 @@ return {
 				callback = function(args)
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
 					if client.name == "copilot" then
-						local file_size = vim.fn.getfsize(args.file)
-						if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
+						local stat = vim.uv.fs_stat(args.file)
+						if not stat or stat.type == "directory" or stat.size > 102400 then
 							vim.defer_fn(function()
 								vim.cmd("Copilot detach")
 							end, 0)
@@ -187,7 +187,7 @@ return {
 				openai_fim_compatible = {
 					name = "ollama",
 					end_point = "http://localhost:11434/v1/completions",
-					api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
+					api_key = jit.os == "Windows" and "APPDATA" or "TERM",
 					stream = false,
 					model = "deepseek-coder-v2:16b",
 					optional = {
@@ -206,7 +206,7 @@ return {
 						openai_fim_compatible = {
 							name = "ollama",
 							end_point = "http://localhost:11434/v1/completions",
-							api_key = vim.fn.has("win32") == 1 and "APPDATA" or "TERM",
+							api_key = jit.os == "Windows" and "APPDATA" or "TERM",
 							stream = false,
 							model = "freehuntx/qwen3-coder:30b",
 							optional = {
@@ -224,8 +224,8 @@ return {
 			vim.api.nvim_create_autocmd("BufEnter", {
 				group = vim.api.nvim_create_augroup("MinuetFileSizeCheck", {}),
 				callback = function(args)
-					local file_size = vim.fn.getfsize(args.file)
-					if file_size > 100 * 1024 or file_size == -2 then -- 100 KB
+					local stat = vim.uv.fs_stat(args.file)
+					if not stat or stat.type == "directory" or stat.size > 102400 then
 						vim.defer_fn(function()
 							vim.cmd("Minuet virtualtext disable")
 						end, 0)

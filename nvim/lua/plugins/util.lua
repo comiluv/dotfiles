@@ -19,7 +19,7 @@ return {
 	{
 		"hattya/vcvars.vim",
 		ft = { "c", "cpp", "cs" },
-		cond = vim.fn.has("win32") == 1,
+		cond = jit.os == "Windows",
 		config = function()
 			-- https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
 			vim.cmd([[
@@ -68,7 +68,7 @@ return {
 		"kkharji/sqlite.lua",
 		lazy = true,
 		init = function()
-			if vim.fn.has("win32") == 1 then
+			if jit.os == "Windows" then
 				vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
 			end
 		end,

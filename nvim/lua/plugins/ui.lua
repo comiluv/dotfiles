@@ -26,8 +26,8 @@ return {
 						return
 					end
 					vim.b.indent_blankline_set = true
-					local ok, size = pcall(vim.fn.getfsize, event.file)
-					if not ok or size > 1024 * 1024 then -- 1 MB
+					local stat = vim.uv.fs_stat(event.file)
+					if not stat or stat.type == "directory" or stat.size > 1024 * 1024 then
 						require("ibl").setup_buffer(event.buf, { scope = { enabled = false } })
 						return
 					end
@@ -82,8 +82,8 @@ return {
 						return
 					end
 					vim.b.treesitter_context_set = true
-					local ok, size = pcall(vim.fn.getfsize, event.file)
-					if not ok or size > 1024 * 1024 then -- 1 MB
+					local stat = vim.uv.fs_stat(event.file)
+					if not stat or stat.type == "directory" or stat.size > 1024 * 1024 then
 						vim.cmd("TSContext disable")
 						return
 					end

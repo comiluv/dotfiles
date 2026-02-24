@@ -28,10 +28,11 @@ end
 -- https://github.com/mfussenegger/nvim-jdtls#Configuration-verbose
 -- Only verbose config version works. Quickstart doens't work
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+local project_name = vim.fs.basename(vim.fn.getcwd())
 local workspace_dir = "C:\\code\\java\\" .. project_name
 
-local jdtls_dir = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+local data_dir = vim.g.stdpath_data
+local jdtls_dir = data_dir .. "/mason/packages/jdtls"
 local config_dir = jdtls_dir .. "/config_win"
 -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
 -- Must point to the                      Change to one of `linux`, `win` or `mac`

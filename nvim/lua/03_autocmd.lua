@@ -225,7 +225,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			return
 		end
 		local file = vim.uv.fs_realpath(event.match) or event.match
-		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+		vim.fn.mkdir(vim.fs.dirname(file), "p")
 	end,
 })
 
@@ -246,10 +246,27 @@ vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
 	pattern = { "*" },
 	callback = function()
 		local status = 0
-		for _, f in ipairs(vim.fn.globpath(vim.fn.stdpath("data") .. "/shada", "*tmp*", false, true)) do
-			if vim.tbl_isempty(vim.fn.readfile(f)) then
-				status = status + vim.fn.delete(f)
+		local shada_dir = vim.g.stdpath_data .. "/shada"
+		local handle = vim.uv.fs_scandir(shada_dir)
+		if handle then
+			while true do
+				local name = vim.uv.fs_scandir_next(handle)
+				if not name then
+					break
+				end
+				if name:find("tmp") then
+					local path = shada_dir .. "/" .. name
+					local stat = vim.uv.fs_stat(path)
+					if stat and stat.size == 0 then
+						if not os.remove(path) then
+							status = status + 1
+						end
+					end
+				end
 			end
+		else
+			vim.notify("Could not find ShaDa directory", vim.log.levels.ERROR)
+			vim.fn.getchar()
 		end
 		if status ~= 0 then
 			vim.notify("Could not delete empty temporary ShaDa files.", vim.log.levels.ERROR)
@@ -263,9 +280,9 @@ vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
 vim.api.nvim_create_autocmd({ "VimResized" }, {
 	group = augroup("ResizeSplits"),
 	callback = function()
-		local current_tab = vim.fn.tabpagenr()
+		local current_tab = vim.api.nvim_get_current_tabpage()
 		vim.cmd("tabdo wincmd =")
-		vim.cmd("tabnext " .. current_tab)
+		vim.api.nvim_set_current_tabpage(current_tab)
 	end,
 })
 

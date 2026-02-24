@@ -55,7 +55,7 @@ return {
 			telescope.setup({
 				defaults = {
 					history = {
-						path = vim.fn.stdpath("data") .. "/databases/telescope_history.sqlite3",
+						path = vim.g.stdpath_data .. "/databases/telescope_history.sqlite3",
 						limit = 100,
 					},
 				},
