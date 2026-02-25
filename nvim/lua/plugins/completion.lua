@@ -145,8 +145,8 @@ return {
 			require("blink.cmp").setup(opts)
 		end,
 	},
-	
-		-- Snippets
+
+	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
 		lazy = true,
@@ -197,7 +197,7 @@ return {
 		end,
 		build = "make install_jsregexp",
 	},
-	
+
 	{
 		"rafamadriz/friendly-snippets",
 		lazy = true,
@@ -205,7 +205,7 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
-		
+
 	{
 		"onsails/lspkind.nvim",
 		lazy = true,

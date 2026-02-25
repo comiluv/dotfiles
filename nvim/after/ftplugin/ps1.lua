@@ -1,2 +1,1 @@
-vim.bo.quoteescape=""
-
+vim.bo.quoteescape = ""

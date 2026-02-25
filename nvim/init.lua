@@ -1,4 +1,4 @@
-vim.loader.enable()  -- Enable Lua module loader for faster startup (Neovim 0.9+)
+vim.loader.enable() -- Enable Lua module loader for faster startup (Neovim 0.9+)
 -- Load core configuration modules
 require("01_set")
 require("02_keymap")

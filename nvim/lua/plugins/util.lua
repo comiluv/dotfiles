@@ -37,7 +37,7 @@ return {
 		"comiluv/tabdiff.nvim",
 		cmd = "Tabdiff",
 		opts = {},
-	},	
+	},
 
 	{
 		"kkharji/sqlite.lua",

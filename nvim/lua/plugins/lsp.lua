@@ -75,8 +75,7 @@ return {
 		lazy = true,
 		dependencies = { "mason-org/mason.nvim" },
 	},
-	
-	
+
 	{
 		"stevearc/conform.nvim",
 		version = "*",
@@ -199,7 +198,7 @@ return {
 		event = { "LspAttach" },
 		opts = {},
 	},
-	
+
 	-- LSP progress
 	{
 		"j-hui/fidget.nvim",

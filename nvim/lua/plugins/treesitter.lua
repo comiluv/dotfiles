@@ -109,7 +109,7 @@ return {
 			end
 		end,
 	},
-	
+
 	{
 		"windwp/nvim-ts-autotag",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },

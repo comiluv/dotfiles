@@ -5,13 +5,13 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = { toggler = { block = "gbb" } },
 	},
-	
+
 	{
 		"folke/ts-comments.nvim",
 		lazy = true,
 		opts = {},
 	},
-	
+
 	{
 		"kylechui/nvim-surround",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },

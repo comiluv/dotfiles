@@ -11,8 +11,8 @@ end
 
 -- taken from https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/init.lua
 function M.is_loaded(name)
-  local Config = require("lazy.core.config")
-  return Config.plugins[name] and Config.plugins[name]._.loaded
+	local Config = require("lazy.core.config")
+	return Config.plugins[name] and Config.plugins[name]._.loaded
 end
 
 ---@param name string
