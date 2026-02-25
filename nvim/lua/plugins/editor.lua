@@ -1,101 +1,47 @@
 return {
+	-- comment/uncomment hotkeys
 	{
-		"nvim-telescope/telescope.nvim",
-		version = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-fzf-native.nvim",
-			"nvim-telescope/telescope-ui-select.nvim",
-			"telescope-git-file-history.nvim",
-			"kkharji/sqlite.lua",
-			"nvim-tree/nvim-web-devicons",
-		},
-		cmd = "Telescope",
-		keys = {
-			{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Telescope find files" },
-			{
-				"<C-p>",
-				function()
-					if vim.system({ "git", "rev-parse", "--is-inside-work-tree" }):wait().code == 0 then
-						vim.api.nvim_exec2("Telescope git_files", {})
-					else
-						vim.api.nvim_exec2("Telescope find_files", {})
-					end
-				end,
-				desc = "Telescope find git files",
-			},
-			{
-				"<leader>ps",
-				function()
-					require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > "), use_regex = true })
-				end,
-				desc = "Telescope grep string",
-			},
-			{ "<leader>pb", "<cmd>Telescope buffers<cr>", desc = "Telescope buffers" },
-			{
-				"<leader>/",
-				function()
-					require("telescope.builtin").current_buffer_fuzzy_find()
-				end,
-				desc = "Telescope current buffer",
-			},
-			{ "<leader>ca", vim.lsp.buf.code_action, "Telescope Code action" },
-			{
-				"<leader>bh",
-				function()
-					if vim.system({ "git", "rev-parse", "--is-inside-work-tree" }):wait().code == 0 then
-						vim.api.nvim_exec2("Telescope git_file_history", {})
-					end
-				end,
-				desc = "Telescope buffer history",
-			},
-		},
+		"numToStr/Comment.nvim",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		opts = { toggler = { block = "gbb" } },
+	},
+	
+	{
+		"folke/ts-comments.nvim",
+		lazy = true,
+		opts = {},
+	},
+	
+	{
+		"kylechui/nvim-surround",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		version = "*",
+		opts = {},
+	},
+
+	-- auto close parentheses
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		config = function()
-			local telescope = require("telescope")
-			telescope.setup({
-				defaults = {
-					history = {
-						path = vim.g.stdpath_data .. "/databases/telescope_history.sqlite3",
-						limit = 100,
-					},
-				},
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
-					},
-				},
-				pickers = {
-					colorscheme = {
-						enable_preview = true,
-					},
-				},
+			local npairs = require("nvim-autopairs")
+
+			-- Press <A-e> in insert mode for fast wrap
+			npairs.setup({
+				fast_wrap = {},
 			})
-			telescope.load_extension("fzf")
-			telescope.load_extension("ui-select")
-			telescope.load_extension("git_file_history")
 		end,
 	},
 
-	-- auto close block with end
+	-- tab out from parentheses, quotes, similar contexts
 	{
-		"RRethy/nvim-treesitter-endwise",
-		lazy = true,
-	},
-
-	-- jump to matching parens
-	{
-		"andymass/vim-matchup",
-		lazy = true,
-		init = function()
-			vim.g.matchup_matchparen_offscreen = { method = "popup" }
-		end,
-	},
-
-	{
-		"jiaoshijie/undotree",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = { -- load the plugin only when using it's keybinding:
-			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+		"abecodes/tabout.nvim",
+		event = "InsertCharPre",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {
+			tabkey = "",
+			backwards_tabkey = "",
+			completion = false,
 		},
 	},
 
@@ -142,10 +88,72 @@ return {
 		end,
 	},
 
+	-- easy align comments
 	{
-		"windwp/nvim-ts-autotag",
+		"nvim-mini/mini.align",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		version = false,
 		opts = {},
+	},
+
+	-- Quickly change keyword case (Coerce)
+	{
+		"gregorias/coerce.nvim",
+		event = { "BufReadPre", "BufAdd", "BufNewFile" },
+		dependencies = { "folke/which-key.nvim" },
+		opts = {
+			default_mode_mask = { visual_mode = false },
+		},
+	},
+
+	-- abbreviations and substitutions
+	{
+		"tpope/vim-abolish",
+		event = { "CmdlineEnter", "VeryLazy", "BufNewFile" },
+		cmd = { "Subvert", "S", "Abolish" },
+		init = function()
+			-- Disable coercion mappings. I use coerce.nvim for that.
+			vim.g.abolish_no_mappings = true
+		end,
+	},
+
+	-- jump to matching parens
+	{
+		"andymass/vim-matchup",
+		lazy = true,
+		init = function()
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
+		end,
+	},
+
+	-- wrap/unwrap arguments
+	{
+		"Wansmer/treesj",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
+		keys = {
+			{ "<leader>m", vim.cmd.TSJToggle, desc = "Wrap/unwrap arguments" },
+		},
+		opts = { use_default_keymaps = false, max_join_length = 0xffffff },
+	},
+
+	-- auto generate comments on a hotkey
+	{
+		"danymat/neogen",
+		version = "*",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		lazy = true,
+		keys = {
+			{
+				"<leader>gc",
+				function()
+					require("neogen").generate()
+				end,
+				silent = true,
+				desc = "Generate comment",
+			},
+		},
+		opts = { snippet_engine = "luasnip" },
 	},
 
 	-- show invisible characters in visual mode
@@ -155,43 +163,11 @@ return {
 		opts = {},
 	},
 
-	-- Improved UI and workflow for the Neovim quickfix
 	{
-		"stevearc/quicker.nvim",
-		ft = "qf",
-		---@module "quicker"
-		---@type quicker.SetupOptions
-		opts = {},
-	},
-
-	-- fast file-finding
-	{
-		"danielfalk/smart-open.nvim",
-		keys = {
-			{ "<leader>r", "<cmd>Telescope smart_open<cr>", desc = "Telescope recent files" },
+		"jiaoshijie/undotree",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = { -- load the plugin only when using it's keybinding:
+			{ "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
 		},
-		branch = "0.2.x",
-		config = function()
-			require("telescope").load_extension("smart_open")
-		end,
-		dependencies = {
-			"kkharji/sqlite.lua",
-			-- Only required if using match_algorithm fzf
-			"nvim-telescope/telescope-fzf-native.nvim",
-		},
-	},
-
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		lazy = true,
-		build = "make",
-		cond = vim.fn.executable("make") == 1,
-	},
-
-	{
-		dir = "~/telescope-git-file-history.nvim/",
-		name = "telescope-git-file-history.nvim",
-		lazy = true,
-		dependencies = { "tpope/vim-fugitive" },
 	},
 }

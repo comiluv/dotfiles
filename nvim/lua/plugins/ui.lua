@@ -1,11 +1,11 @@
 return {
+
+	-- statusline written in lua
 	{
-		"kdheepak/lazygit.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		cmd = "LazyGit",
-		keys = {
-			{ "<leader>gs", vim.cmd.LazyGit, silent = true, desc = [[LazyGit]] },
-		},
+		"nvim-lualine/lualine.nvim",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
 	},
 
 	-- show indent lines
@@ -36,161 +36,12 @@ return {
 		end,
 	},
 
-	-- statusline written in lua
-	{
-		"nvim-lualine/lualine.nvim",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
-	},
-
-	-- LSP progress
-	{
-		"j-hui/fidget.nvim",
-		tag = "legacy",
-		event = { "LspAttach" },
-		opts = {},
-	},
-
-	-- show lightbulb where code action can be taken
-	{
-		"kosayoda/nvim-lightbulb",
-		event = { "LspAttach" },
-		opts = {
-			autocmd = { enabled = true },
-		},
-	},
-
 	{
 		"NvChad/nvim-colorizer.lua",
 		ft = { "css", "json" },
 		opts = {
 			filetypes = { "css", "json" },
 			user_default_options = { mode = "virtualtext", names = false, css = true },
-		},
-	},
-
-	{
-		"nvim-treesitter/nvim-treesitter-context",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		config = function()
-			require("treesitter-context").setup({ max_lines = 60 })
-			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
-				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
-				callback = function(event)
-					if vim.b.treesitter_context_set or event.file == "" then
-						return
-					end
-					vim.b.treesitter_context_set = true
-					local stat = vim.uv.fs_stat(event.file)
-					if not stat or stat.type == "directory" or stat.size > 1024 * 1024 then
-						vim.cmd("TSContext disable")
-						return
-					end
-					vim.cmd("TSContext enable")
-				end,
-			})
-		end,
-	},
-
-	-- display git signs in the gutter
-	{
-		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		opts = {},
-	},
-
-	{
-		"folke/which-key.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		opts = { delay = 0 },
-	},
-
-	-- show LSP diagnostics in multiple lines
-	{
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		event = { "LspAttach" },
-		opts = {},
-		config = function()
-			local virtual_text = vim.diagnostic.config().virtual_text or true
-			vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
-			vim.keymap.set("", "<leader>l", function()
-				local config = vim.diagnostic.config() or {}
-				if config.virtual_text ~= false then
-					vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
-				else
-					vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
-				end
-			end, { desc = "LSP: Toggle lsp_lines" })
-		end,
-	},
-
-	{
-		"rcarriga/nvim-dap-ui",
-		lazy = true,
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-neotest/nvim-nio",
-		},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			dapui.setup()
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.after.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.after.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-		end,
-	},
-
-	{
-		"onsails/lspkind.nvim",
-		lazy = true,
-		opts = {
-			preset = "codicons",
-			symbol_map = {
-				copilot = "",
-				claude = "󰋦",
-				openai = "󱢆",
-				codestral = "󱎥",
-				gemini = "",
-				groq = "",
-				openrouter = "󱂇",
-				ollama = "󰳆",
-				["llama.cpp"] = "󰳆",
-				deepseek = "",
-			},
-		},
-	},
-
-	{
-		"folke/snacks.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
-	},
-
-	{
-		-- support for image pasting
-		"HakonHarnes/img-clip.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- recommended settings
-			default = {
-				embed_image_as_base64 = false,
-				prompt_for_file_name = false,
-				drag_and_drop = {
-					insert_mode = true,
-				},
-				-- required for Windows users
-				use_absolute_path = true,
-			},
 		},
 	},
 
@@ -202,5 +53,28 @@ return {
 			restart_highlighter = true,
 		},
 		ft = { "markdown", "Avante" },
+	},
+
+	{
+		"folke/which-key.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		opts = { delay = 0 },
+	},
+
+	{
+		"folke/snacks.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
+
+	-- Improved UI and workflow for the Neovim quickfix
+	{
+		"stevearc/quicker.nvim",
+		ft = "qf",
+		---@module "quicker"
+		---@type quicker.SetupOptions
+		opts = {},
 	},
 }

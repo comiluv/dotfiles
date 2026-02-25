@@ -145,8 +145,8 @@ return {
 			require("blink.cmp").setup(opts)
 		end,
 	},
-
-	-- Snippets
+	
+		-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
 		lazy = true,
@@ -197,90 +197,32 @@ return {
 		end,
 		build = "make install_jsregexp",
 	},
-
-	{
-		"kylechui/nvim-surround",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		version = "*",
-		opts = {},
-	},
-
-	-- auto generate comments on a hotkey
-	{
-		"danymat/neogen",
-		version = "*",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		lazy = true,
-		keys = {
-			{
-				"<leader>gc",
-				function()
-					require("neogen").generate()
-				end,
-				silent = true,
-				desc = "Generate comment",
-			},
-		},
-		opts = { snippet_engine = "luasnip" },
-	},
-
-	-- auto close parentheses
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			local npairs = require("nvim-autopairs")
-
-			-- Press <A-e> in insert mode for fast wrap
-			npairs.setup({
-				fast_wrap = {},
-			})
-		end,
-	},
-
-	-- comment/uncomment hotkeys
-	{
-		"numToStr/Comment.nvim",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		opts = { toggler = { block = "gbb" } },
-	},
-
-	-- wrap/unwrap arguments
-	{
-		"Wansmer/treesj",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
-		keys = {
-			{ "<leader>m", vim.cmd.TSJToggle, desc = "Wrap/unwrap arguments" },
-		},
-		opts = { use_default_keymaps = false, max_join_length = 0xffffff },
-	},
-
-	-- easy align comments
-	{
-		"nvim-mini/mini.align",
-		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
-		version = false,
-		opts = {},
-	},
-
-	-- tab out from parentheses, quotes, similar contexts
-	{
-		"abecodes/tabout.nvim",
-		event = "InsertCharPre",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = {
-			tabkey = "",
-			backwards_tabkey = "",
-			completion = false,
-		},
-	},
-
+	
 	{
 		"rafamadriz/friendly-snippets",
 		lazy = true,
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
+	},
+		
+	{
+		"onsails/lspkind.nvim",
+		lazy = true,
+		opts = {
+			preset = "codicons",
+			symbol_map = {
+				copilot = "",
+				claude = "󰋦",
+				openai = "󱢆",
+				codestral = "󱎥",
+				gemini = "",
+				groq = "",
+				openrouter = "󱂇",
+				ollama = "󰳆",
+				["llama.cpp"] = "󰳆",
+				deepseek = "",
+			},
+		},
 	},
 }

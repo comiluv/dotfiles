@@ -75,7 +75,8 @@ return {
 		lazy = true,
 		dependencies = { "mason-org/mason.nvim" },
 	},
-
+	
+	
 	{
 		"stevearc/conform.nvim",
 		version = "*",
@@ -192,30 +193,46 @@ return {
 		end,
 	},
 
-	{
-		"mfussenegger/nvim-dap",
-		keys = {
-			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", mode = "n", desc = "Debug: Toggle Debugger Breakpoint" },
-			{ "<leader>dr", "<cmd>DapContinue<cr>", mode = "n", desc = "Debug: Start or continue the debugger" },
-		},
-	},
-
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		lazy = true,
-		dependencies = {
-			"mason-org/mason.nvim",
-			"mfussenegger/nvim-dap",
-		},
-		opts = {
-			handlers = {},
-		},
-	},
-
 	-- LSP incrementally rename symbol
 	{
 		"smjonas/inc-rename.nvim",
 		event = { "LspAttach" },
 		opts = {},
+	},
+	
+	-- LSP progress
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+		event = { "LspAttach" },
+		opts = {},
+	},
+
+	-- show lightbulb where code action can be taken
+	{
+		"kosayoda/nvim-lightbulb",
+		event = { "LspAttach" },
+		opts = {
+			autocmd = { enabled = true },
+		},
+	},
+
+	-- show LSP diagnostics in multiple lines
+	{
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		event = { "LspAttach" },
+		opts = {},
+		config = function()
+			local virtual_text = vim.diagnostic.config().virtual_text or true
+			vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
+			vim.keymap.set("", "<leader>l", function()
+				local config = vim.diagnostic.config() or {}
+				if config.virtual_text ~= false then
+					vim.diagnostic.config({ virtual_text = false, virtual_lines = true })
+				else
+					vim.diagnostic.config({ virtual_text = virtual_text, virtual_lines = false })
+				end
+			end, { desc = "LSP: Toggle lsp_lines" })
+		end,
 	},
 }

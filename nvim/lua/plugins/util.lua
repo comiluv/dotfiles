@@ -15,6 +15,40 @@ return {
 		opts = { curl_opts = { compressed = false } },
 	},
 
+	{
+		-- support for image pasting
+		"HakonHarnes/img-clip.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- recommended settings
+			default = {
+				embed_image_as_base64 = false,
+				prompt_for_file_name = false,
+				drag_and_drop = {
+					insert_mode = true,
+				},
+				-- required for Windows users
+				use_absolute_path = true,
+			},
+		},
+	},
+
+	{
+		"comiluv/tabdiff.nvim",
+		cmd = "Tabdiff",
+		opts = {},
+	},	
+
+	{
+		"kkharji/sqlite.lua",
+		lazy = true,
+		init = function()
+			if jit.os == "Windows" then
+				vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
+			end
+		end,
+	},
+
 	-- setup environmental variables for Visual Studio compiler
 	{
 		"hattya/vcvars.vim",
@@ -34,27 +68,6 @@ return {
 		end,
 	},
 
-	-- abbreviations and substitutions
-	{
-		"tpope/vim-abolish",
-		event = { "CmdlineEnter", "VeryLazy", "BufNewFile" },
-		cmd = { "Subvert", "S", "Abolish" },
-		init = function()
-			-- Disable coercion mappings. I use coerce.nvim for that.
-			vim.g.abolish_no_mappings = true
-		end,
-	},
-
-	-- Quickly change keyword case (Coerce)
-	{
-		"gregorias/coerce.nvim",
-		event = { "BufReadPre", "BufAdd", "BufNewFile" },
-		dependencies = { "folke/which-key.nvim" },
-		opts = {
-			default_mode_mask = { visual_mode = false },
-		},
-	},
-
 	-- Extends zip.vim to browse and edit nested zip files
 	{
 		"lbrayner/vim-rzip",
@@ -62,21 +75,5 @@ return {
 		init = function()
 			vim.g.rzipPlugin_extra_ext = "*.pak"
 		end,
-	},
-
-	{
-		"kkharji/sqlite.lua",
-		lazy = true,
-		init = function()
-			if jit.os == "Windows" then
-				vim.g.sqlite_clib_path = "c:/tools/sqlite/sqlite3.dll"
-			end
-		end,
-	},
-
-	{
-		"comiluv/tabdiff.nvim",
-		cmd = "Tabdiff",
-		opts = {},
 	},
 }

@@ -60,6 +60,35 @@ return {
 	},
 
 	{
+		"nvim-treesitter/nvim-treesitter-context",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		config = function()
+			require("treesitter-context").setup({ max_lines = 60 })
+			vim.api.nvim_create_autocmd({ "BufAdd", "BufReadPre" }, {
+				group = vim.api.nvim_create_augroup("TsContextGroup", {}),
+				callback = function(event)
+					if vim.b.treesitter_context_set or event.file == "" then
+						return
+					end
+					vim.b.treesitter_context_set = true
+					local stat = vim.uv.fs_stat(event.file)
+					if not stat or stat.type == "directory" or stat.size > 1024 * 1024 then
+						vim.cmd("TSContext disable")
+						return
+					end
+					vim.cmd("TSContext enable")
+				end,
+			})
+		end,
+	},
+
+	-- auto close block with end
+	{
+		"RRethy/nvim-treesitter-endwise",
+		lazy = true,
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		branch = "main",
 		init = function()
@@ -80,10 +109,10 @@ return {
 			end
 		end,
 	},
-
+	
 	{
-		"folke/ts-comments.nvim",
-		lazy = true,
+		"windwp/nvim-ts-autotag",
+		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = {},
 	},
 }
