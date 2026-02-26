@@ -137,6 +137,7 @@ return {
 				css = { "prettierd" },
 				html = { "prettierd" },
 				json = { "prettierd" },
+				json5 = { "prettierd" },
 				python = { "ruff" },
 				lua = { "stylua" },
 			},
