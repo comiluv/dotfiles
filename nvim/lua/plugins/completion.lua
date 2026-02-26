@@ -5,9 +5,9 @@ local get_blink_deps = function()
 		"onsails/lspkind.nvim",
 		"nvim-tree/nvim-web-devicons",
 	}
-	if vim.g.llm == "minuet" then
+	if vim.env.NEOVIM_COMPLETION_LLM == "minuet" then
 		table.insert(deps, "milanglacier/minuet-ai.nvim")
-	elseif vim.g.llm == "copilot" then
+	elseif vim.env.NEOVIM_COMPLETION_LLM == "copilot" then
 		table.insert(deps, "zbirenbaum/copilot.lua")
 	end
 	return deps
@@ -21,9 +21,9 @@ return {
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = function()
 			local llm = nil
-			if vim.g.llm == "copilot" then
+			if vim.env.NEOVIM_COMPLETION_LLM == "copilot" then
 				llm = require("copilot.suggestion")
-			elseif vim.g.llm == "minuet" then
+			elseif vim.env.NEOVIM_COMPLETION_LLM == "minuet" then
 				llm = require("minuet.virtualtext").action
 			end
 			local opts = {
@@ -63,7 +63,8 @@ return {
 						end,
 					},
 					-- Manually invoke minuet completion.
-					["<A-y>"] = vim.g.llm == "minuet" and require("minuet").make_blink_map() or false,
+					["<A-y>"] = vim.env.NEOVIM_COMPLETION_LLM == "minuet" and require("minuet").make_blink_map()
+						or false,
 				},
 				snippets = { preset = "luasnip" },
 				completion = {
@@ -107,7 +108,7 @@ return {
 					},
 				},
 			}
-			if vim.g.llm == "minuet" then
+			if vim.env.NEOVIM_COMPLETION_LLM == "minuet" then
 				opts.sources = {
 					default = { "lsp", "path", "buffer", "snippets", "minuet" },
 					providers = {
@@ -123,7 +124,7 @@ return {
 					},
 				}
 			end
-			if vim.g.llm == "copilot" then
+			if vim.env.NEOVIM_COMPLETION_LLM == "copilot" then
 				local BlinkGroup = vim.api.nvim_create_augroup("BlinkCmpCopilotGroup", {})
 				vim.api.nvim_create_autocmd("User", {
 					group = BlinkGroup,

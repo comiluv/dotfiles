@@ -115,7 +115,7 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		cmd = "Copilot",
 		build = ":Copilot auth",
-		cond = vim.g.llm == "copilot" and vim.fn.executable("node") == 1,
+		cond = vim.env.NEOVIM_COMPLETION_LLM == "copilot" and vim.fn.executable("node") == 1,
 		config = function()
 			-- https://codeinthehole.com/tips/vim-and-github-copilot/
 			local copilot_enabled_filetypes = {
@@ -158,7 +158,7 @@ return {
 
 	{
 		"milanglacier/minuet-ai.nvim",
-		cond = vim.g.llm == "minuet",
+		cond = vim.env.NEOVIM_COMPLETION_LLM == "minuet",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
@@ -167,7 +167,7 @@ return {
 				auto_trigger_ignore_ft = vim.g.info_filetype,
 				keymap = {
 					-- accept whole completion
-					accept = "<Tab>",
+					accept = nil,
 					-- accept one line
 					accept_line = "<A-a>",
 					-- accept n lines (prompts for number)
