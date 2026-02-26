@@ -2,6 +2,7 @@ return {
 	{
 		"yetone/avante.nvim",
 		version = false, -- set this if you want to always pull the latest change
+		cond = false,
 		cmd = { "AvanteAsk" },
 		keys = {
 			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
@@ -237,5 +238,60 @@ return {
 				end,
 			})
 		end,
+	},
+
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"ravitemer/codecompanion-history.nvim",
+			"Davidyz/VectorCode",
+		},
+		version = "^18.0.0",
+		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionActions" },
+		opts = function()
+			local opts = {
+				extensions = {
+					history = {
+						enabled = true,
+						opts = {
+							dir_to_save = vim.g.stdpath_data .. "/codecompanion_chats",
+						},
+					},
+					vectorcode = {
+						enabled = true,
+					},
+				},
+				interactions = {
+					chat = {
+						adapter = {
+							name = "openai",
+							model = "gpt-5.2",
+						},
+						keymaps = {
+							close = {
+								modes = { n = "q" },
+							},
+							stop = {
+								modes = { n = "Q" },
+							},
+						},
+					},
+				},
+			}
+			return opts
+		end,
+	},
+
+	{
+		"Davidyz/VectorCode",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = true,
+		version = "*",
+		build = "uv tool upgrade vectorcode", -- This helps keeping the CLI up-to-date
+		opts = {
+			-- async_backend = "lsp",
+		},
 	},
 }

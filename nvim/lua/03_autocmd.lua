@@ -13,6 +13,7 @@ vim.g.info_filetype = {
 	"ada",
 	"chatgpt",
 	"checkhealth",
+	"codecompanion",
 	"dap-repl",
 	"diff",
 	"fugitive",

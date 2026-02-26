@@ -3,4 +3,4 @@ min.lua
 .vscode/
 .luarc.json
 neovide/config.toml
-
+.vectorcode/
