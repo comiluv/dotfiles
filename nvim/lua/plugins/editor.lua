@@ -53,6 +53,14 @@ return {
 			backwards_tabkey = "",
 			completion = false,
 		},
+		config = function(_, opts)
+			local tabout = require("tabout")
+			tabout.setup(opts)
+			-- A multiline tabout setup could look like this
+			vim.keymap.set("i", "<C-tab>", function()
+				tabout.taboutMulti()
+			end, { silent = true })
+		end,
 	},
 
 	{
