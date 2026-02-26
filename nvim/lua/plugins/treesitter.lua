@@ -33,9 +33,9 @@ return {
 				callback = function(event)
 					-- skip for large files
 					local max_filesize = 100 * 1024 -- 100 KB
-					local filesize_ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(event.buf))
-					if not filesize_ok or stats and stats.size > max_filesize then
-						return true
+					local stat = vim.uv.fs_stat(event.file)
+					if not stat or stat.type == "directory" or stat.size > max_filesize then
+						return
 					end
 					-- make sure nvim-treesitter is loaded
 					local ok, nvim_treesitter = pcall(require, "nvim-treesitter")
