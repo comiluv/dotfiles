@@ -179,10 +179,10 @@ return {
 					dismiss = "<C-]>",
 				},
 			},
-			provider = "openai_fim_compatible",
-			request_timeout = 60,
+			provider = "codestral",
+			-- request_timeout = 60,
 			n_completions = 1,
-			context_window = 768,
+			-- context_window = 768,
 			provider_options = {
 				openai_fim_compatible = {
 					name = "ollama",
@@ -191,7 +191,7 @@ return {
 					stream = false,
 					model = "deepseek-coder-v2:16b",
 					optional = {
-						max_tokens = 256,
+						max_tokens = 56,
 						top_p = 0.9,
 					},
 				},
@@ -210,7 +210,7 @@ return {
 							stream = false,
 							model = "freehuntx/qwen3-coder:30b",
 							optional = {
-								max_tokens = 256,
+								max_tokens = 56,
 								top_p = 0.9,
 							},
 						},
