@@ -22,6 +22,7 @@ return {
 	-- auto close parentheses
 	{
 		"windwp/nvim-autopairs",
+		cond = false,
 		event = "InsertEnter",
 		config = function()
 			local npairs = require("nvim-autopairs")
@@ -31,6 +32,15 @@ return {
 				fast_wrap = {},
 			})
 		end,
+	},
+
+	{
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6", --recommended as each new version will have breaking changes
+		opts = {
+			--Config goes here
+		},
 	},
 
 	-- tab out from parentheses, quotes, similar contexts
