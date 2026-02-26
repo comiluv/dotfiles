@@ -219,7 +219,7 @@ vim.keymap.set("n", "N", function()
 end, { silent = true, desc = "Repeat search backward" })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+autocmd({ "BufWritePre" }, {
 	group = augroup("AutoCreateDir"),
 	callback = function(event)
 		if event.match:match("^%w%w+:[\\/][\\/]") then
@@ -231,7 +231,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	group = augroup("AutoReloadFile"),
 	callback = function()
 		if vim.bo.buftype ~= "nofile" then
@@ -242,7 +242,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 -- Make sure ShaDa temp files that are empty are deleted on exit
 -- https://github.com/neovim/neovim/issues/8587#issuecomment-3557794273
-vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+autocmd({ "VimLeavePre" }, {
 	group = augroup("DeleteEmptyShaDaTempFiles"),
 	pattern = { "*" },
 	callback = function()
@@ -278,7 +278,7 @@ vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
 })
 
 -- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+autocmd({ "VimResized" }, {
 	group = augroup("ResizeSplits"),
 	callback = function()
 		local current_tab = vim.api.nvim_get_current_tabpage()
@@ -288,7 +288,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 })
 
 -- go to last loc when opening a buffer
-vim.api.nvim_create_autocmd("BufReadPost", {
+autocmd("BufReadPost", {
 	group = augroup("LastLocRestore"),
 	callback = function(event)
 		local exclude = { "gitcommit" }
@@ -306,7 +306,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- make it easier to close man-files when opened inline
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = augroup("ManCloseWithQ"),
 	pattern = { "man" },
 	callback = function(event)
@@ -315,7 +315,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	group = augroup("WrapAndSpellCheck"),
 	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
 	callback = function()
