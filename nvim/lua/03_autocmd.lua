@@ -6,6 +6,7 @@ end
 local autocmd = vim.api.nvim_create_autocmd
 
 vim.g.info_filetype = {
+	"AvanteInput",
 	"PlenaryTestPopup",
 	"TelescopePrompt",
 	"TelescopeResults",
