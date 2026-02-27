@@ -1,0 +1,9 @@
+[font]
+normal = ["Iosevka Custom", "Symbols Nerd Font"]
+size = 12
+
+[font.features]
+"Iosevka Custom" = ["-calt"]
+
+# == != += -= *= /= <= >= ++ -- ** // -> /* */ ## ##[ ] {{ }} << >> && || <=>
+
