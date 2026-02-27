@@ -162,6 +162,7 @@ return {
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
+			notify = false,
 			virtualtext = {
 				auto_trigger_ft = { "*" },
 				auto_trigger_ignore_ft = vim.g.info_filetype,
