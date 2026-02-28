@@ -6,7 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			"telescope-git-file-history.nvim",
+			"comiluv/telescope-git-file-history.nvim",
 			"kkharji/sqlite.lua",
 			"nvim-tree/nvim-web-devicons",
 		},

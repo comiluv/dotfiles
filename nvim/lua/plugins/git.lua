@@ -16,8 +16,7 @@ return {
 	},
 
 	{
-		dir = "~/telescope-git-file-history.nvim/",
-		name = "telescope-git-file-history.nvim",
+		"comiluv/telescope-git-file-history.nvim",
 		lazy = true,
 		dependencies = { "tpope/vim-fugitive" },
 	},
