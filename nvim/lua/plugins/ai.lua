@@ -4,7 +4,7 @@ return {
 		dir = "C:\\code\\avante.nvim",
 		name = "avante.nvim",
 		version = false, -- set this if you want to always pull the latest change
-		-- cond = false,
+		cond = vim.env.AVANTE_RAG_HOST ~= nil,
 		cmd = { "AvanteAsk" },
 		keys = {
 			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
@@ -40,8 +40,8 @@ return {
 					},
 				},
 				rag_service = {
-					enabled = true,
-					host_mount = "C:\\game\\ultima\\server\\servuo",
+					enabled = vim.env.AVANTE_RAG_HOST ~= nil,
+					host_mount = vim.env.AVANTE_RAG_HOST, -- do NOT put trailing slash or backslash or you get 404
 					llm = {
 						model = "gpt-5-mini",
 					},
@@ -255,7 +255,14 @@ return {
 			"Davidyz/VectorCode",
 		},
 		version = "^18.0.0",
-		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionActions", "CodeCompanionHistory", "CodeCompanionSummaries" },
+		cmd = {
+			"CodeCompanion",
+			"CodeCompanionChat",
+			"CodeCompanionCmd",
+			"CodeCompanionActions",
+			"CodeCompanionHistory",
+			"CodeCompanionSummaries",
+		},
 		opts = function()
 			local opts = {
 				extensions = {
@@ -281,6 +288,28 @@ return {
 							},
 							stop = {
 								modes = { n = "Q" },
+							},
+						},
+						tools = {
+							["file_search"] = { opts = { require_approval_before = false } },
+							["grep_search"] = { opts = { require_approval_before = false } },
+							["get_changed_files"] = { opts = { require_approval_before = false } },
+							["read_file"] = { opts = { require_approval_before = false } },
+							groups = {
+								["finder"] = {
+									description = "Search for files and content",
+									prompt = "I'm giving you access to ${tools} to help you gather knowledge about the codebase.",
+									tools = {
+										"file_search",
+										"grep_search",
+										"get_changed_files",
+										"read_file",
+										"get_diagnostics",
+									},
+									opts = {
+										collapse_tools = true,
+									},
+								},
 							},
 						},
 					},
