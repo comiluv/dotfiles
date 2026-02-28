@@ -250,7 +250,7 @@ return {
 			"Davidyz/VectorCode",
 		},
 		version = "^18.0.0",
-		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionActions" },
+		cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionActions", "CodeCompanionHistory", "CodeCompanionSummaries" },
 		opts = function()
 			local opts = {
 				extensions = {
