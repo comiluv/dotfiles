@@ -1,8 +1,10 @@
 return {
 	{
-		"yetone/avante.nvim",
+		-- "yetone/avante.nvim",
+		dir = "C:\\code\\avante.nvim",
+		name = "avante.nvim",
 		version = false, -- set this if you want to always pull the latest change
-		cond = false,
+		-- cond = false,
 		cmd = { "AvanteAsk" },
 		keys = {
 			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
@@ -11,21 +13,17 @@ return {
 			local settings = {
 				mode = "legacy",
 				provider = "openrouter-gpt",
+				web_search_engine = {
+					provider = "searxng",
+				},
 				providers = {
-					ollama = {
-						endpoint = "http://localhost:11434",
-						model = "codestral:latest",
-						timeout = 30000,
-						disable_tools = true,
-						is_env_set = require("avante.providers.ollama").check_endpoint_alive,
-					},
 					["openrouter-gpt"] = {
 						__inherited_from = "openai",
 						endpoint = "https://openrouter.ai/api/v1",
-						model = "mistralai/devstral-2512:free",
+						model = "openai/gpt-5.2",
 						api_key_name = "OPENROUTER_API_KEY",
 						timeout = 30000,
-						disable_tools = true,
+						disable_tools = false,
 					},
 				},
 				behaviour = {
@@ -39,6 +37,13 @@ return {
 					provier_opts = {
 						title = "Avante Input",
 						icon = " ",
+					},
+				},
+				rag_service = {
+					enabled = true,
+					host_mount = "C:\\game\\ultima\\server\\servuo",
+					llm = {
+						model = "gpt-5-mini",
 					},
 				},
 			}
