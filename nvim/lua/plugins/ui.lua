@@ -49,10 +49,20 @@ return {
 		-- Make sure to set this up properly if you have lazy=true
 		"MeanderingProgrammer/render-markdown.nvim",
 		opts = {
-			file_types = { "markdown", "Avante", "codecompanion" },
+			file_types = { "markdown", "codecompanion" },
 			restart_highlighter = true,
 		},
-		ft = { "markdown", "Avante", "codecompanion" },
+		ft = { "markdown", "codecompanion" },
+	},
+
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && npm install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
 	},
 
 	{
@@ -60,13 +70,6 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
 		opts = { delay = 0 },
-	},
-
-	{
-		"folke/snacks.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
 	},
 
 	-- Improved UI and workflow for the Neovim quickfix
