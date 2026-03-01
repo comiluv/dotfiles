@@ -1,70 +1,4 @@
 return {
-	{
-		-- "yetone/avante.nvim",
-		dir = "C:\\code\\avante.nvim",
-		name = "avante.nvim",
-		version = false, -- set this if you want to always pull the latest change
-		cond = vim.env.AVANTE_RAG_HOST ~= nil,
-		cmd = { "AvanteAsk" },
-		keys = {
-			{ "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "AI: Avante Sidebar" },
-		},
-		config = function(_, opts)
-			local settings = {
-				mode = "legacy",
-				provider = "openrouter-gpt",
-				web_search_engine = {
-					provider = "searxng",
-				},
-				providers = {
-					["openrouter-gpt"] = {
-						__inherited_from = "openai",
-						endpoint = "https://openrouter.ai/api/v1",
-						model = "openai/gpt-5.2",
-						api_key_name = "OPENROUTER_API_KEY",
-						timeout = 30000,
-						disable_tools = false,
-					},
-				},
-				behaviour = {
-					auto_approve_tool_permissions = false,
-				},
-				selector = {
-					provider = "telescope",
-				},
-				input = {
-					provider = "snacks",
-					provier_opts = {
-						title = "Avante Input",
-						icon = " ",
-					},
-				},
-				rag_service = {
-					enabled = vim.env.AVANTE_RAG_HOST ~= nil,
-					host_mount = vim.env.AVANTE_RAG_HOST, -- do NOT put trailing slash or backslash or you get 404
-					llm = {
-						model = "gpt-5-mini",
-					},
-				},
-			}
-			require("avante").setup(settings)
-		end,
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		build = jit.os == "Windows"
-				and "pwsh -NoProfile -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-			or "make",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"nvim-telescope/telescope.nvim",
-			"folke/snacks.nvim",
-			"nvim-tree/nvim-web-devicons", -- or nvim-mini/mini.icons
-			"HakonHarnes/img-clip.nvim",
-			"MeanderingProgrammer/render-markdown.nvim",
-		},
-	},
-
 	-- AI assisted LSP diagnostics
 	{
 		"piersolenski/wtf.nvim",
@@ -310,7 +244,7 @@ return {
 		version = "*",
 		build = "uv tool upgrade vectorcode", -- This helps keeping the CLI up-to-date
 		opts = {
-			-- async_backend = "lsp",
+			-- async_backend = "lsp", -- doesn't work in Windows
 		},
 	},
 }
