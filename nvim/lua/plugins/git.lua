@@ -3,6 +3,19 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = { "BufReadPre", "BufAdd", "BufNewFile", "InsertEnter" },
+		keys = {
+			{
+				"<leader>gdt",
+				mode = { "n", "x" },
+				function()
+					local gitsigns = require("gitsigns")
+					gitsigns.toggle_deleted()
+					gitsigns.toggle_linehl()
+					gitsigns.toggle_word_diff()
+				end,
+				desc = "Git: toggle inline diffs",
+			},
+		},
 		opts = {},
 	},
 
