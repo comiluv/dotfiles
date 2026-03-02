@@ -41,7 +41,8 @@ return {
 		ft = { "css", "json" },
 		opts = {
 			filetypes = { "css", "json" },
-			user_default_options = { mode = "virtualtext", names = false, css = true },
+			options = { parsers = { css = true, names = { enable = false } } },
+			display = { mode = "virtualtext" },
 		},
 	},
 
