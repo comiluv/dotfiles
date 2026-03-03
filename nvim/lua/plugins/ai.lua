@@ -199,6 +199,19 @@ return {
 		},
 		opts = function()
 			local opts = {
+				adapters = {
+					http = {
+						openai = function()
+							return require("codecompanion.adapters").extend("openai", {
+								schema = {
+									model = {
+										default = "gpt-5.2",
+									},
+								},
+							})
+						end,
+					},
+				},
 				extensions = {
 					history = {
 						enabled = true,
@@ -212,10 +225,7 @@ return {
 				},
 				interactions = {
 					chat = {
-						adapter = {
-							name = "openai",
-							model = "gpt-5.2",
-						},
+						adapter = "openai",
 						keymaps = {
 							close = {
 								modes = { n = "q" },
@@ -246,6 +256,9 @@ return {
 								},
 							},
 						},
+					},
+					inline = {
+						adapter = "openai",
 					},
 				},
 			}
