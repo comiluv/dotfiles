@@ -143,14 +143,40 @@ vim.keymap.set("x", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- Copy path to clipboard
 -- %:p is the full path, %:t is the filename, %:h is the directory
+local function buf_relpath_from_cwd(bufnr)
+	bufnr = bufnr or 0
+	local abs = vim.api.nvim_buf_get_name(bufnr)
+	if abs == "" then
+		return nil
+	end
+
+	local cwd = vim.uv.cwd() -- same as :pwd
+	if not cwd or cwd == "" then
+		return vim.fs.normalize(abs)
+	end
+
+	abs = vim.fs.normalize(abs)
+	cwd = vim.fs.normalize(cwd)
+
+	-- Returns nil if it can't be made relative (e.g. different drive letters on Windows)
+	local rel = vim.fs.relpath(cwd, abs)
+	return rel or abs
+end
+
 vim.keymap.set("n", "<leader>cf", function()
 	vim.fn.setreg("+", vim.fs.basename(vim.api.nvim_buf_get_name(0)))
 end, { desc = "[C]opy [f]ilename to clipboard" })
 vim.keymap.set("n", "<leader>cpf", function()
-	vim.fn.setreg("+", vim.api.nvim_buf_get_name(0))
+	local rel = buf_relpath_from_cwd(0)
+	if rel then
+		vim.fn.setreg("+", rel)
+	end
 end, { desc = "[C]opy [f]ull path to clipboard" })
 vim.keymap.set("n", "<leader>cph", function()
-	vim.fn.setreg("+", vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+	local rel = buf_relpath_from_cwd(0)
+	if rel then
+		vim.fn.setreg("+", vim.fs.dirname(rel))
+	end
 end, { desc = "[C]opy [h]ead of path to clipboard" })
 
 -- Very magic
