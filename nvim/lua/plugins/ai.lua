@@ -120,8 +120,9 @@ return {
 					dismiss = "<C-]>",
 				},
 			},
-			provider = "codestral",
-			-- request_timeout = 60,
+			provider = "openai_fim_compatible",
+			-- recommend to actually measure latency when using ollama by using `time ollama run <modelname>` to avoid timeouts
+			request_timeout = 20,
 			n_completions = 1,
 			-- context_window = 768,
 			provider_options = {
@@ -129,8 +130,7 @@ return {
 					name = "ollama",
 					end_point = "http://localhost:11434/v1/completions",
 					api_key = jit.os == "Windows" and "APPDATA" or "TERM",
-					stream = false,
-					model = "deepseek-coder-v2:16b",
+					model = "qwen2.5-coder",
 					optional = {
 						max_tokens = 56,
 						top_p = 0.9,
@@ -149,7 +149,7 @@ return {
 							end_point = "http://localhost:11434/v1/completions",
 							api_key = jit.os == "Windows" and "APPDATA" or "TERM",
 							stream = false,
-							model = "freehuntx/qwen3-coder:30b",
+							model = "deepseek-coder-v2:16b",
 							optional = {
 								max_tokens = 56,
 								top_p = 0.9,
