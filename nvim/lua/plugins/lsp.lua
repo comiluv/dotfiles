@@ -143,6 +143,11 @@ return {
 			},
 		},
 		init = function()
+			-- Create user commands to quickly format current buffer by :Format
+			vim.api.nvim_create_user_command("Format", function(args)
+				require("conform").format({ lsp_format = "fallback" })
+			end, { range = true, desc = "Format buffer" })
+
 			-- Create user commands to quickly enable/disable autoformatting
 			vim.api.nvim_create_user_command("FormatDisable", function(args)
 				if args.bang then
