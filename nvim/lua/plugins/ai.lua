@@ -187,6 +187,7 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"ravitemer/codecompanion-history.nvim",
 			"Davidyz/VectorCode",
+			"xinghe98/codecompanion-model-selector.nvim",
 		},
 		version = "^18.0.0",
 		cmd = {
@@ -199,19 +200,6 @@ return {
 		},
 		opts = function()
 			local opts = {
-				adapters = {
-					http = {
-						openai = function()
-							return require("codecompanion.adapters").extend("openai", {
-								schema = {
-									model = {
-										default = "gpt-5.2",
-									},
-								},
-							})
-						end,
-					},
-				},
 				extensions = {
 					history = {
 						enabled = true,
@@ -222,10 +210,33 @@ return {
 					vectorcode = {
 						enabled = true,
 					},
+					model_selector = {
+						enabeld = true,
+						opts = {
+							default_adapter = "openrouter",
+							-- Define all your adapters and connection details here down below
+							adapters = {
+								openrouter = {
+									base = "openai_compatible",
+									env = {
+										url = "https://openrouter.ai/api/v1",
+										api_key = "OPENROUTER_API_KEY",
+										chat_url = "/chat/completions",
+									},
+									default = "openai/gpt-5.2",
+									choices = {
+										"openai/gpt-5.2",
+										"minimax/minimax-m2.5",
+										"claude-3.7-sonnet",
+									},
+								},
+							},
+						},
+					},
 				},
 				interactions = {
 					chat = {
-						adapter = "openai",
+						adapter = "openrouter",
 						keymaps = {
 							close = {
 								modes = { n = "q" },
@@ -258,7 +269,7 @@ return {
 						},
 					},
 					inline = {
-						adapter = "openai",
+						adapter = "openrouter",
 					},
 				},
 			}
