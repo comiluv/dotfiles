@@ -45,6 +45,13 @@ return {
 		config = function()
 			require("wtf").setup({
 				provider = "openai",
+				providers = {
+					openai = {
+						url = "https://openrouter.ai/api/v1/chat/completions",
+						api_key = vim.env.OPENROUTER_API_KEY,
+						model_id = "anthropic/claude-sonnet-4.6",
+					},
+				},
 			})
 		end,
 	},
