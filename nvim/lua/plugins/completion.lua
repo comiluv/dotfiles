@@ -18,6 +18,7 @@ return {
 		"saghen/blink.cmp",
 		dependencies = get_blink_deps(),
 		version = "1.*",
+		build = "cargo build --release",
 		event = { "InsertEnter", "CmdlineEnter" },
 		config = function()
 			local llm = nil
@@ -107,6 +108,7 @@ return {
 						},
 					},
 				},
+				fuzzy = { implementation = "prefer_rust_with_warning" },
 			}
 			if vim.env.NEOVIM_COMPLETION_LLM == "minuet" then
 				opts.sources = {
