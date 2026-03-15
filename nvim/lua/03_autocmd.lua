@@ -313,13 +313,3 @@ autocmd("FileType", {
 		vim.bo[event.buf].buflisted = false
 	end,
 })
-
--- wrap and check for spell in text filetypes
-autocmd("FileType", {
-	group = augroup("WrapAndSpellCheck"),
-	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
-	callback = function()
-		vim.wo.wrap = true
-		vim.wo.spell = true
-	end,
-})
