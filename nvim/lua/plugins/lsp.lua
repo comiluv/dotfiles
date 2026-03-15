@@ -138,6 +138,7 @@ return {
 				html = { "prettierd" },
 				json = { "prettierd" },
 				json5 = { "prettierd" },
+				jsonc = { "prettierd" },
 				python = { "ruff" },
 				lua = { "stylua" },
 			},
