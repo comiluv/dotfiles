@@ -55,15 +55,22 @@ return {
 		lazy = true,
 		config = function()
 			-- https://stackoverflow.com/questions/14369032/how-do-i-set-up-vim-to-compile-using-visual-studio-2010s-c-compiler
-			vim.cmd([[
-			if (len(vcvars#list()) > 0)
-				let vcvars_dict = vcvars#get(vcvars#list()[-1])
-				let $PATH = join(vcvars_dict.path, ';') .. ';' .. $PATH
-				let $INCLUDE = join(vcvars_dict.include, ';') .. ';' .. $INCLUDE
-				let $LIB = join(vcvars_dict.lib, ';') .. ';' .. $LIB
-				let $LIBPATH = join(vcvars_dict.libpath, ';') .. ';' .. $LIBPATH
-			endif
-			]])
+			local list = vim.fn["vcvars#list"]()
+			if #list > 0 then
+				local vcvars_dict = vim.fn["vcvars#get"](list[#list])
+				if vcvars_dict.path and #vcvars_dict.path > 0 then
+					vim.env.PATH = table.concat(vcvars_dict.path, ";") .. ";" .. vim.env.PATH
+				end
+				if vcvars_dict.include and #vcvars_dict.include > 0 then
+					vim.env.INCLUDE = table.concat(vcvars_dict.include, ";") .. ";" .. (vim.env.INCLUDE or "")
+				end
+				if vcvars_dict.lib and #vcvars_dict.lib > 0 then
+					vim.env.LIB = table.concat(vcvars_dict.lib, ";") .. ";" .. (vim.env.LIB or "")
+				end
+				if vcvars_dict.libpath and #vcvars_dict.libpath > 0 then
+					vim.env.LIBPATH = table.concat(vcvars_dict.libpath, ";") .. ";" .. (vim.env.LIBPATH or "")
+				end
+			end
 		end,
 	},
 
