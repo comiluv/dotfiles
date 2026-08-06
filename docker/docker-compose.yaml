@@ -22,35 +22,31 @@ services:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     ports:
-      - 5000:8080
+      - "3000:8080"
     volumes:
       - open-webui:/app/backend/data
-    depends_on:
-      - ollama
-      - searxng
     environment:
-      WEBUI_AUTH: False
-      OPENAI_API_BASE_URLS: "https://api.openai.com/v1"
+      WEBUI_AUTH: "False"
+      OLLAMA_BASE_URL: "http://192.168.0.2:11434"
       OPENAI_API_KEYS: # This will be injected from the .env file
-      ENABLE_RAG_WEB_SEARCH: True
-      RAG_WEB_SEARCH_ENGINE: "searxng"
-      RAG_WEB_SEARCH_RESULT_COUNT: 3
-      RAG_WEB_SEARCH_CONCURRENT_REQUESTS: 10
-      SEARXNG_QUERY_URL: "http://host.docker.internal:8080/search?q=<query>"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
 
   searxng:
-    image: searxng/searxng:latest
+    image: docker.io/searxng/searxng:latest
     container_name: searxng
+    restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8081:8080"
     volumes:
       - ./searxng:/etc/searxng:rw
+      - searxng-data:/var/cache/searxng:rw
     env_file:
       - searxng.env
-    restart: unless-stopped
     cap_drop:
       - ALL
     cap_add:
@@ -58,6 +54,22 @@ services:
       - SETGID
       - SETUID
       - DAC_OVERRIDE
+      - FOWNER
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+
+  watchtower:
+    image: nickfedor/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: "Asia/Seoul"
+    command: --update-on-start --cleanup --remove-volumes --include-restarting --include-stopped --revive-stopped
+    restart: always
     logging:
       driver: "json-file"
       options:
@@ -69,4 +81,4 @@ volumes:
     external: True
   open-webui:
     external: True
-
+  searxng-data:
