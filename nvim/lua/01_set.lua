@@ -1,4 +1,6 @@
-vim.g.python3_host_prog = jit.os == "Windows" and vim.fn.exepath("python") or vim.fn.exepath("python3")
+vim.g.python3_host_prog = jit.os == "Windows"
+		and vim.fs.joinpath(vim.env.LOCALAPPDATA, "Python", "pythoncore-3.14-64", "python.exe")
+	or vim.fn.exepath("python3")
 vim.g.stdpath_data = vim.fn.stdpath("data")
 
 -- Paste without CRLF in WSL

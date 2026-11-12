@@ -26,6 +26,13 @@ return {
 				},
 			},
 			servers = {
+				pyright = {
+					settings = {
+						python = {
+							pythonPath = vim.g.python3_host_prog,
+						},
+					},
+				},
 				lua_ls = {
 					settings = {
 						Lua = {
